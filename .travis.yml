@@ -5,3 +5,8 @@ jdk:
   - oraclejdk8
 install:
   - cd desappgroupc1hbackend && mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
+deploy:
+  - provider: heroku
+    skip_cleanup: true
+    api_key: 575cd927-b8bc-4e48-97c2-2c47a7640883
+    app: Grupo-C1H-022019
