@@ -10,3 +10,11 @@ deploy:
     skip_cleanup: true
     api_key: c0a1e8e4-dc7b-4bcb-89e4-7a566203acad
     app: app-grupoc1h-2019
+
+notifications:
+  email:
+    recipients:
+      - lisar.3467@gmail.con
+      - miloromiguel@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always
