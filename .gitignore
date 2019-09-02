@@ -192,3 +192,4 @@ buildNumber.properties
 # End of https://www.gitignore.io/api/java,eclipse,intellij,maven
 /.idea/
 /desappgroupc1hbackend/.idea/
+/desappgroupc1hfrontend/.idea/
