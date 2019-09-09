@@ -14,7 +14,7 @@ deploy:
 notifications:
   email:
     recipients:
-      - lisar.3467@gmail.con
+      - lisar.3467@gmail.com
       - miloromiguel@gmail.com
     on_success: never # default: change
     on_failure: always # default: always
