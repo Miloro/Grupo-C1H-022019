@@ -1,0 +1,14 @@
+{
+  "root": "desapp-grupoc1h-frontend/dist",
+  "clean_urls": true,
+  "proxies": {
+    "/api/": {
+      "origin": "https://viandasya-grupoc1h.herokuapp.com/api"
+    }
+  },
+    "headers": {
+    "/**": {
+      "Access-Control-Allow-Origin": "*"
+    }
+  }
+}
