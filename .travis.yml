@@ -16,8 +16,3 @@ notifications:
       - miloromiguel@gmail.com
     on_success: never # default: change
     on_failure: always # default: always
-deploy:
-  - provider: heroku
-    skip_cleanup: true
-    api_key: c0a1e8e4-dc7b-4bcb-89e4-7a566203acad
-    app: viandasya-grupoc1h
