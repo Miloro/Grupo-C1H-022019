@@ -9,8 +9,3 @@ jdk:
 script: 
   - cd desapp-groupc1h-backend 
   - mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
-deploy:
-  - provider: heroku
-    skip_cleanup: true
-    api_key: c0a1e8e4-dc7b-4bcb-89e4-7a566203acad
-    app: viandasya-grupoc1h
