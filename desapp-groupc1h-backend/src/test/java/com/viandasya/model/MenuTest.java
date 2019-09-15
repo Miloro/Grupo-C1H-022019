@@ -1,4 +1,4 @@
-package model;
+package com.viandasya.model;
 
 import org.junit.Test;
 

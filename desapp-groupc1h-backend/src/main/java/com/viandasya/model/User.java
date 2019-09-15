@@ -1,4 +1,4 @@
-package model;
+package com.viandasya.model;
 
 import java.util.List;
 

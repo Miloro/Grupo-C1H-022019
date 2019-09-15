@@ -1,4 +1,4 @@
-package model;
+package com.viandasya.model;
 
 public class Service{
     String name;
