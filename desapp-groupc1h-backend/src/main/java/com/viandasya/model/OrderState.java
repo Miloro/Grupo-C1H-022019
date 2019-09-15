@@ -1,6 +1,6 @@
 package com.viandasya.model;
 
-public enum StateEnum {
+public enum OrderState {
     PENDING,
     CONFIRMED,
     DELIVERED

@@ -3,12 +3,12 @@ package com.viandasya.model;
 import java.util.List;
 
 public class User {
-    String name;
-    String lastName;
-    String email;
-    Integer phoneNumber;
-    String city;
-    String adress;
-    Integer balance;
-    List<Menu> pendingMenusToScore;
+    private String name;
+    private String lastName;
+    private String email;
+    private Integer phoneNumber;
+    private String city;
+    private String adress;
+    private Integer balance;
+    private List<Menu> pendingMenusToScore;
 }

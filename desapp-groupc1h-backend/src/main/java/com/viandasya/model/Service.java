@@ -1,12 +1,12 @@
 package com.viandasya.model;
 
 public class Service{
-    String name;
-    String logo;
-    String adress;
-    String description;
-    String website;
-    String eMail;
-    Integer phoneNumber;
-    String serviceHours;
+    private String name;
+    private String logo;
+    private String adress;
+    private String description;
+    private String website;
+    private String eMail;
+    private Integer phoneNumber;
+    private String serviceHours;
 }

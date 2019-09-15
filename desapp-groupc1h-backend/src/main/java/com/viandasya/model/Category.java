@@ -1,6 +1,6 @@
 package com.viandasya.model;
 
-public enum CategoryEnum {
+public enum Category {
     PIZZA,
     BEER,
     HAMBURGER,

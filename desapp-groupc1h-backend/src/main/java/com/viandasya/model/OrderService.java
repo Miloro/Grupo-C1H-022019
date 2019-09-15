@@ -3,6 +3,6 @@ package com.viandasya.model;
 import java.time.LocalDate;
 
 public class OrderService extends AbstractOrder {
-    LocalDate deliveryDate;
-    Boolean isDelivery;
+    private LocalDate deliveryDate;
+    private Boolean isDelivery;
 }
