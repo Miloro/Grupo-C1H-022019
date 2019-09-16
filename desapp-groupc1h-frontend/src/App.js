@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import './App.css';
 import Login from './js/Login';
+import MapDev from './js/MapDev';
 
 class App extends Component {
 
@@ -23,6 +24,7 @@ class App extends Component {
     return (
         <Router>
             <Route path="/" exact component={Login} />
+            <Route path="/mapdev" component={MapDev} />
         </Router>
     );
   }
