@@ -9,6 +9,11 @@ jdk:
 script: 
   - cd desapp-groupc1h-backend 
   - mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
+before_install:
+  - sudo apt-get install jq
+  - curl -LSs $(curl -LSs https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r '.assets | map({content_type, browser_download_url} | select(.content_type | contains("application/java-archive"))) | .[0].browser_download_url') -o codacy-coverage-reporter-assembly.jar
+after_success:
+  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/jacoco/jacoco.xml
 notifications:
   email:
     recipients:
