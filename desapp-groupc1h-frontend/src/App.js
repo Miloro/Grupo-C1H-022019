@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 import './App.css';
+import Login from './js/Login';
 
 class App extends Component {
 
@@ -20,6 +21,10 @@ class App extends Component {
 
   render() {
     return (
+        <Router>
+            <Route path="/" exact component={Login} />
+        </Router>
+        /*
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo"/>
@@ -29,6 +34,8 @@ class App extends Component {
             To get started, edit <code>src/App.js</code> and save to reload.
           </p>
         </div>
+
+         */
     );
   }
 }
