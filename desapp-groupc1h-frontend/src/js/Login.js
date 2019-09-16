@@ -3,7 +3,7 @@ export default class LogIn  extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className= "App" >
                 <h1>buenas</h1>
             </div>
         )

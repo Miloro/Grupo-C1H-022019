@@ -1,10 +1,10 @@
 import React from 'react'
-export default class LogIn  extends React.Component{
+export default class MapDev  extends React.Component{
 
     render(){
         return(
-            <div>
-                <h1>esto es un mapa</h1>
+            <div className= "App" >
+                <h1>distancia entre dos puntos sin api</h1>
             </div>
         )
     }
