@@ -29,3 +29,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/npm-debug.log
