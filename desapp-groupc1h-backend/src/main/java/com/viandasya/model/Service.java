@@ -8,9 +8,9 @@ public class Service {
     private String website;
     private String eMail;
     private Integer phoneNumber;
-    private String serviceHours;
+    private TimeSlot serviceDays;
 
-    public Service(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber, String serviceHours) {
+    public Service(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber, TimeSlot serviceDays) {
         this.name = name;
         this.logo = logo;
         this.adress = adress;
@@ -18,7 +18,7 @@ public class Service {
         this.website = website;
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
-        this.serviceHours = serviceHours;
+        this.serviceDays = serviceDays;
     }
 
     public Service() {
@@ -80,11 +80,11 @@ public class Service {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getServiceHours() {
-        return serviceHours;
+    public TimeSlot getServiceHours() {
+        return serviceDays;
     }
 
-    public void setServiceHours(String serviceHours) {
-        this.serviceHours = serviceHours;
+    public void setServiceHours(TimeSlot serviceHours) {
+        this.serviceDays = serviceHours;
     }
 }

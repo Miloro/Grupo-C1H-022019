@@ -10,7 +10,7 @@ public class Menu {
     private Integer deliveryPrice;
     private LocalDate validSince;
     private LocalDate validFrom;
-    private List<LocalDate> deliveryTime;
+    private TimeSlot deliveryDays;
     private Integer price;
     private Integer averageDeliveryTime;
     private Integer minAmount;
@@ -20,14 +20,14 @@ public class Menu {
     private Integer maxAmountPerDay;
     private  List<Score> scores;
 
-    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, LocalDate validSince, LocalDate validFrom, List<LocalDate> deliveryTime, Integer price, Integer averageDeliveryTime, Integer minAmount, Integer minAmount2, Integer minAmountPrice, Integer minAmountPrice2, Integer maxAmountPerDay, List<Score> scores) {
+    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, LocalDate validSince, LocalDate validFrom, TimeSlot deliveryDays, Integer price, Integer averageDeliveryTime, Integer minAmount, Integer minAmount2, Integer minAmountPrice, Integer minAmountPrice2, Integer maxAmountPerDay, List<Score> scores) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.deliveryPrice = deliveryPrice;
         this.validSince = validSince;
         this.validFrom = validFrom;
-        this.deliveryTime = deliveryTime;
+        this.deliveryDays = deliveryDays;
         this.price = price;
         this.averageDeliveryTime = averageDeliveryTime;
         this.minAmount = minAmount;
@@ -89,12 +89,12 @@ public class Menu {
         this.validFrom = validFrom;
     }
 
-    public List<LocalDate> getDeliveryTime() {
-        return deliveryTime;
+    public TimeSlot getDeliveryDays() {
+        return deliveryDays;
     }
 
-    public void setDeliveryTime(List<LocalDate> deliveryTime) {
-        this.deliveryTime = deliveryTime;
+    public void setDeliveryDays(TimeSlot deliveryDays) {
+        this.deliveryDays = deliveryDays;
     }
 
     public Integer getPrice() {
