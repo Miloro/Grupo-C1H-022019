@@ -89,4 +89,9 @@ public class User {
     public void setPendingMenusToScore(List<Menu> pendingMenusToScore) {
         this.pendingMenusToScore = pendingMenusToScore;
     }
+
+    public boolean canSubstractBalance(Integer credit) {
+        return this.balance - credit >= 0;
+    }
+
 }
