@@ -1,5 +1,7 @@
 package com.viandasya.model;
 
+import com.viandasya.model.timeslot.TimeSlot;
+
 import java.util.List;
 
 public class Service {

@@ -1,5 +1,8 @@
 package com.viandasya.model;
 
+import com.viandasya.model.order.OrderMenu;
+import com.viandasya.model.timeslot.TimeSlot;
+
 import java.time.LocalDate;
 import java.util.List;
 

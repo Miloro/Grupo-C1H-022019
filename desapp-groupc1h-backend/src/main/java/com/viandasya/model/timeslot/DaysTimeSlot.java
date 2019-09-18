@@ -1,4 +1,4 @@
-package com.viandasya.model;
+package com.viandasya.model.timeslot;
 
 import java.time.DayOfWeek;
 import java.util.List;

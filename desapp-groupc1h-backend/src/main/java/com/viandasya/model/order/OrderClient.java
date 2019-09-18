@@ -1,4 +1,6 @@
-package com.viandasya.model;
+package com.viandasya.model.order;
+
+import com.viandasya.model.Menu;
 
 import java.time.LocalDateTime;
 
