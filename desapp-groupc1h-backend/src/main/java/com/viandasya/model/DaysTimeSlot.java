@@ -1,7 +1,6 @@
 package com.viandasya.model;
 
 import java.time.DayOfWeek;
-import java.time.LocalTime;
 import java.util.List;
 
 public class DaysTimeSlot {
