@@ -10,9 +10,10 @@ public class User {
     private String city;
     private String adress;
     private Integer balance;
-    private List<Menu> pendingMenusToScore;
+    private List<Service> services;
+    private List<OrderClient> orders;
 
-    public User(String name, String lastName, String email, Integer phoneNumber, String city, String adress, Integer balance, List<Menu> pendingMenusToScore) {
+    public User(String name, String lastName, String email, Integer phoneNumber, String city, String adress, Integer balance, List<Service> services, List<OrderClient> orders) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -20,7 +21,8 @@ public class User {
         this.city = city;
         this.adress = adress;
         this.balance = balance;
-        this.pendingMenusToScore = pendingMenusToScore;
+        this.services = services;
+        this.orders = orders;
     }
 
     public User() {
@@ -82,16 +84,24 @@ public class User {
         this.balance = balance;
     }
 
-    public List<Menu> getPendingMenusToScore() {
-        return pendingMenusToScore;
+    public List<OrderClient> getOrders() {
+        return orders;
     }
 
-    public void setPendingMenusToScore(List<Menu> pendingMenusToScore) {
-        this.pendingMenusToScore = pendingMenusToScore;
+    public void setOrders(List<OrderClient> orders) {
+        this.orders = orders;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 
     public boolean canSubstractBalance(Integer credit) {
-        return this.balance - credit >= 0;
+        return this.balance >= credit;
     }
 
 }

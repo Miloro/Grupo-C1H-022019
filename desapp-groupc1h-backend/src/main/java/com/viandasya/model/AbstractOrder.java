@@ -1,20 +1,18 @@
 package com.viandasya.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public abstract class AbstractOrder {
     private OrderState state;
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
     private Integer score;
-    private Menu menu;
     private Integer price;
     private Integer amount;
 
-    public AbstractOrder(OrderState state, LocalDate orderDate, Integer score, Menu menu, Integer price, Integer amount) {
+    public AbstractOrder(OrderState state, LocalDateTime orderDate, Integer score, Integer price, Integer amount) {
         this.state = state;
         this.orderDate = orderDate;
         this.score = score;
-        this.menu = menu;
         this.price = price;
         this.amount = amount;
     }
@@ -30,11 +28,11 @@ public abstract class AbstractOrder {
         this.state = state;
     }
 
-    public LocalDate getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -44,14 +42,6 @@ public abstract class AbstractOrder {
 
     public void setScore(Integer score) {
         this.score = score;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
     }
 
     public Integer getPrice() {

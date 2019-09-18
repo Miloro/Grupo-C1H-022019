@@ -18,9 +18,9 @@ public class Menu {
     private Integer minAmountPrice;
     private Integer minAmountPrice2;
     private Integer maxAmountPerDay;
-    private  List<Score> scores;
+    private List<OrderMenu> orders;
 
-    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, LocalDate validSince, LocalDate validFrom, TimeSlot deliveryDays, Integer price, Integer averageDeliveryTime, Integer minAmount, Integer minAmount2, Integer minAmountPrice, Integer minAmountPrice2, Integer maxAmountPerDay, List<Score> scores) {
+    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, LocalDate validSince, LocalDate validFrom, TimeSlot deliveryDays, Integer price, Integer averageDeliveryTime, Integer minAmount, Integer minAmount2, Integer minAmountPrice, Integer minAmountPrice2, Integer maxAmountPerDay, List<OrderMenu> orders) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -35,7 +35,7 @@ public class Menu {
         this.minAmountPrice = minAmountPrice;
         this.minAmountPrice2 = minAmountPrice2;
         this.maxAmountPerDay = maxAmountPerDay;
-        this.scores = scores;
+        this.orders = orders;
     }
 
     public Menu() {
@@ -153,12 +153,11 @@ public class Menu {
         this.maxAmountPerDay = maxAmountPerDay;
     }
 
-    public List<Score> getScores() {
-        return scores;
+    public List<OrderMenu> getOrders() {
+        return orders;
     }
 
-    public void setScores(List<Score> scores) {
-        this.scores = scores;
+    public void setOrders(List<OrderMenu> orders) {
+        this.orders = orders;
     }
-
 }
