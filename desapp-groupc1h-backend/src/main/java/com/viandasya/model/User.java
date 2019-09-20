@@ -83,7 +83,7 @@ public class User {
             return this;
         }
 
-        public User Build(){
+        public User build(){
             return new User(name, lastName, email, phoneNumber, city, adress, balance, services, orders);
         }
     }

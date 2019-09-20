@@ -25,7 +25,67 @@ public class Service {
         this.menus = menus;
     }
 
-    public Service() {
+    public static class Builder{
+        private String name;
+        private String logo;
+        private String adress;
+        private String description;
+        private String website;
+        private String eMail;
+        private Integer phoneNumber;
+        private TimeSlot serviceDays;
+        private List<Menu> menus;
+
+        public Builder(){}
+
+        public Builder setName(String name){
+            this.name = name;
+            return this;
+        }
+
+        public Builder setLogo(String logo){
+            this.logo = logo;
+            return this;
+        }
+
+        public Builder SetAdress (String adress){
+            this.adress = adress;
+            return this;
+        }
+
+        public Builder SetDescription(String description){
+            this.description = description;
+            return this;
+        }
+
+        public Builder SetWebsite(String website){
+            this.website = website;
+            return this;
+        }
+
+        public Builder SetEMail(String eMail){
+            this.eMail = eMail;
+            return this;
+        }
+
+        public Builder SetPhoneNumber(Integer phoneNumber){
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Builder SetServiceDays(TimeSlot serviceDays){
+            this.serviceDays = serviceDays;
+            return this;
+        }
+
+        public Builder SetMenus(List<Menu> menus){
+            this.menus = menus;
+            return this;
+        }
+
+        public Service build(){
+            return new Service(name,logo,adress,description,website,eMail,phoneNumber,serviceDays,menus);
+        }
     }
 
     public String getName() {
