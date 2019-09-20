@@ -25,8 +25,70 @@ public class User {
         this.orders = orders;
     }
 
-    public User() {
+    public static class Builder{
+        private String name;
+        private String lastName;
+        private String email;
+        private Integer phoneNumber;
+        private String city;
+        private String adress;
+        private Integer balance;
+        private List<Service> services;
+        private List<OrderClient> orders;
+
+        public Builder(){}
+
+        public Builder setName(String name){
+            this.name = name;
+            return this;
+        }
+
+        public Builder setLastName(String lastName){
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Builder setEmail(String email){
+            this.email = email;
+            return this;
+        }
+
+        public Builder setPhoneNumber(Integer phoneNumber){
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Builder setCity(String city){
+            this.city = city;
+            return this;
+        }
+
+        public Builder setAdress(String adress){
+            this.adress = adress;
+            return this;
+        }
+
+        public Builder setBalance(Integer balance){
+            this.balance = balance;
+            return this;
+        }
+
+        public Builder setServices(List<Service> services){
+            this.services = services;
+            return this;
+        }
+
+        public Builder setOrders(List<OrderClient> Orders){
+            this.orders = orders;
+            return this;
+        }
+
+        public User Build(){
+            return new User(name, lastName, email, phoneNumber, city, adress, balance, services, orders);
+        }
     }
+
+
 
     public String getName() {
         return name;
