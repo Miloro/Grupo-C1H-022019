@@ -1,4 +1,4 @@
-package com.viandasya.model;
+package com.viandasya.model.menu;
 
 public enum Category {
     PIZZA,

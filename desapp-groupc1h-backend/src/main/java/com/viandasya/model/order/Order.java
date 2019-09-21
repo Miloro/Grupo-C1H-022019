@@ -1,7 +1,7 @@
 package com.viandasya.model.order;
 
-import com.viandasya.model.ClientProfile;
-import com.viandasya.model.Menu;
+import com.viandasya.model.user.ClientProfile;
+import com.viandasya.model.menu.Menu;
 
 import java.time.LocalDateTime;
 

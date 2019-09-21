@@ -1,5 +1,6 @@
-package com.viandasya.model;
+package com.viandasya.model.user;
 
+import com.viandasya.model.menu.Menu;
 import com.viandasya.model.timeslot.TimeSlot;
 
 import java.util.List;

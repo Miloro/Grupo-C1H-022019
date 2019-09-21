@@ -1,7 +1,7 @@
 package com.viandasya.model.builders;
 
-import com.viandasya.model.ClientProfile;
-import com.viandasya.model.Menu;
+import com.viandasya.model.user.ClientProfile;
+import com.viandasya.model.menu.Menu;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
 

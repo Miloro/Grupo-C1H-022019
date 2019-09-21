@@ -1,4 +1,4 @@
-package com.viandasya.model;
+package com.viandasya.model.menu;
 
 public class Discount {
     private Integer minAmount;
