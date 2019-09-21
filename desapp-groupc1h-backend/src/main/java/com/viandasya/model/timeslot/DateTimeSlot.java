@@ -2,16 +2,16 @@ package com.viandasya.model.timeslot;
 
 import java.time.LocalDateTime;
 
-public class AppointmentSlot implements TimeSlot {
+public class DateTimeSlot implements TimeSlot {
     private LocalDateTime since;
     private LocalDateTime from;
 
-    public AppointmentSlot(LocalDateTime since, LocalDateTime from) {
+    public DateTimeSlot(LocalDateTime since, LocalDateTime from) {
         this.since = since;
         this.from = from;
     }
 
-    public AppointmentSlot() {
+    public DateTimeSlot() {
     }
 
     public LocalDateTime getSince() {
