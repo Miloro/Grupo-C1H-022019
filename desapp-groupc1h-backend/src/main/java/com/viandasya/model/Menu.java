@@ -1,9 +1,6 @@
 package com.viandasya.model;
 
-import com.viandasya.model.order.OrderMenu;
 import com.viandasya.model.timeslot.TimeSlot;
-
-import java.time.LocalDate;
 import java.util.List;
 
 public class Menu {
@@ -11,8 +8,7 @@ public class Menu {
     private String description;
     private List<Category> category;
     private Integer deliveryPrice;
-    private LocalDate validSince;
-    private LocalDate validFrom;
+    private TimeSlot lifeTime;
     private TimeSlot deliveryDays;
     private Integer price;
     private Integer averageDeliveryTime;
@@ -22,13 +18,12 @@ public class Menu {
     private Integer minAmountPrice2;
     private Integer maxAmountPerDay;
 
-    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, LocalDate validSince, LocalDate validFrom, TimeSlot deliveryDays, Integer price, Integer averageDeliveryTime, Integer minAmount, Integer minAmount2, Integer minAmountPrice, Integer minAmountPrice2, Integer maxAmountPerDay) {
+    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, TimeSlot lifeTime, TimeSlot deliveryDays, Integer price, Integer averageDeliveryTime, Integer minAmount, Integer minAmount2, Integer minAmountPrice, Integer minAmountPrice2, Integer maxAmountPerDay) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.deliveryPrice = deliveryPrice;
-        this.validSince = validSince;
-        this.validFrom = validFrom;
+        this.lifeTime = lifeTime;
         this.deliveryDays = deliveryDays;
         this.price = price;
         this.averageDeliveryTime = averageDeliveryTime;
@@ -71,20 +66,12 @@ public class Menu {
         this.deliveryPrice = deliveryPrice;
     }
 
-    public LocalDate getValidSince() {
-        return validSince;
+    public TimeSlot getLifeTime() {
+        return lifeTime;
     }
 
-    public void setValidSince(LocalDate validSince) {
-        this.validSince = validSince;
-    }
-
-    public LocalDate getValidFrom() {
-        return validFrom;
-    }
-
-    public void setValidFrom(LocalDate validFrom) {
-        this.validFrom = validFrom;
+    public void setLifeTime(TimeSlot lifeTime) {
+        this.lifeTime = lifeTime;
     }
 
     public TimeSlot getDeliveryDays() {

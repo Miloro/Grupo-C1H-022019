@@ -4,7 +4,6 @@ import com.viandasya.model.Category;
 import com.viandasya.model.Menu;
 import com.viandasya.model.timeslot.TimeSlot;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class MenuBuilder {
@@ -12,8 +11,7 @@ public class MenuBuilder {
     private String description;
     private List<Category> category;
     private Integer deliveryPrice;
-    private LocalDate validSince;
-    private LocalDate validFrom;
+    private TimeSlot lifeTime;
     private TimeSlot deliveryDays;
     private Integer price;
     private Integer averageDeliveryTime;
@@ -45,13 +43,8 @@ public class MenuBuilder {
         return this;
     }
 
-    public MenuBuilder setValidSince(LocalDate validSince){
-        this.validSince = validSince;
-        return this;
-    }
-
-    public MenuBuilder setValidFrom(LocalDate validFrom){
-        this.validFrom = validFrom;
+    public MenuBuilder setLifeTime(TimeSlot lifeTime){
+        this.lifeTime = lifeTime;
         return this;
     }
 
@@ -95,7 +88,7 @@ public class MenuBuilder {
     }
 
     public Menu build(){
-        return new Menu(name,description,category,deliveryPrice,validSince,validFrom,deliveryDays,price,averageDeliveryTime,minAmount,minAmount2,minAmountPrice,minAmountPrice2,maxAmountPerDay);
+        return new Menu(name,description,category,deliveryPrice,lifeTime,deliveryDays,price,averageDeliveryTime,minAmount,minAmount2,minAmountPrice,minAmountPrice2,maxAmountPerDay);
     }
 }
 

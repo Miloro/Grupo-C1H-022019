@@ -1,23 +1,8 @@
 package com.viandasya.model.timeslot;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
-public class TimeSlot {
-    private List<DaysTimeSlot> daysTimeSlots;
-
-    public TimeSlot(List<DaysTimeSlot> daysTimeSlots) {
-        this.daysTimeSlots = daysTimeSlots;
-    }
-
-    public TimeSlot() {
-    }
-
-    public List<DaysTimeSlot> getDaysTimeSlots() {
-        return daysTimeSlots;
-    }
-
-    public void setDaysTimeSlots(List<DaysTimeSlot> daysTimeSlots) {
-        this.daysTimeSlots = daysTimeSlots;
-    }
-
+public interface TimeSlot {
+    //TODO implement method for all children
+    boolean isValidDate(LocalDateTime date);
 }
