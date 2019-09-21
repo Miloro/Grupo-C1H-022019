@@ -1,6 +1,6 @@
 package com.viandasya.model.builders;
 
-import com.viandasya.model.ClientProfile;
+import com.viandasya.model.user.ClientProfile;
 
 public class ClientProfileBuilder {
     private String name;

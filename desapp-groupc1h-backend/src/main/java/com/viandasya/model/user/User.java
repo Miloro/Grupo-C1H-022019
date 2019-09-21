@@ -1,4 +1,4 @@
-package com.viandasya.model;
+package com.viandasya.model.user;
 
 public class User {
     private Integer balance;

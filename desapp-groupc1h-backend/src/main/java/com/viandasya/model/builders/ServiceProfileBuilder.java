@@ -1,7 +1,7 @@
 package com.viandasya.model.builders;
 
-import com.viandasya.model.Menu;
-import com.viandasya.model.ServiceProfile;
+import com.viandasya.model.menu.Menu;
+import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.model.timeslot.TimeSlot;
 
 import java.util.List;

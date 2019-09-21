@@ -1,5 +1,6 @@
-package com.viandasya.model;
+package com.viandasya.model.menu;
 
+import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.TimeSlot;
 import java.util.List;
 
@@ -8,17 +9,15 @@ public class Menu {
     private String description;
     private List<Category> category;
     private Integer deliveryPrice;
-    private TimeSlot lifeTime;
+    private DateTimeSlot lifeTime;
     private TimeSlot deliveryDays;
     private Integer price;
     private Integer averageDeliveryTime;
-    private Integer minAmount;
-    private Integer minAmount2;
-    private Integer minAmountPrice;
-    private Integer minAmountPrice2;
+    private Discount discount1;
+    private Discount discount2;
     private Integer maxAmountPerDay;
 
-    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, TimeSlot lifeTime, TimeSlot deliveryDays, Integer price, Integer averageDeliveryTime, Integer minAmount, Integer minAmount2, Integer minAmountPrice, Integer minAmountPrice2, Integer maxAmountPerDay) {
+    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, DateTimeSlot lifeTime, TimeSlot deliveryDays, Integer price, Integer averageDeliveryTime, Discount discount1, Discount discount2, Integer maxAmountPerDay) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -27,10 +26,8 @@ public class Menu {
         this.deliveryDays = deliveryDays;
         this.price = price;
         this.averageDeliveryTime = averageDeliveryTime;
-        this.minAmount = minAmount;
-        this.minAmount2 = minAmount2;
-        this.minAmountPrice = minAmountPrice;
-        this.minAmountPrice2 = minAmountPrice2;
+        this.discount1 = discount1;
+        this.discount2 = discount2;
         this.maxAmountPerDay = maxAmountPerDay;
     }
 
@@ -66,11 +63,11 @@ public class Menu {
         this.deliveryPrice = deliveryPrice;
     }
 
-    public TimeSlot getLifeTime() {
+    public DateTimeSlot getLifeTime() {
         return lifeTime;
     }
 
-    public void setLifeTime(TimeSlot lifeTime) {
+    public void setLifeTime(DateTimeSlot lifeTime) {
         this.lifeTime = lifeTime;
     }
 
@@ -98,36 +95,20 @@ public class Menu {
         this.averageDeliveryTime = averageDeliveryTime;
     }
 
-    public Integer getMinAmount() {
-        return minAmount;
+    public Discount getDiscount1() {
+        return discount1;
     }
 
-    public void setMinAmount(Integer minAmount) {
-        this.minAmount = minAmount;
+    public void setDiscount1(Discount discount1) {
+        this.discount1 = discount1;
     }
 
-    public Integer getMinAmount2() {
-        return minAmount2;
+    public Discount getDiscount2() {
+        return discount2;
     }
 
-    public void setMinAmount2(Integer minAmount2) {
-        this.minAmount2 = minAmount2;
-    }
-
-    public Integer getMinAmountPrice() {
-        return minAmountPrice;
-    }
-
-    public void setMinAmountPrice(Integer minAmountPrice) {
-        this.minAmountPrice = minAmountPrice;
-    }
-
-    public Integer getMinAmountPrice2() {
-        return minAmountPrice2;
-    }
-
-    public void setMinAmountPrice2(Integer minAmountPrice2) {
-        this.minAmountPrice2 = minAmountPrice2;
+    public void setDiscount2(Discount discount2) {
+        this.discount2 = discount2;
     }
 
     public Integer getMaxAmountPerDay() {
