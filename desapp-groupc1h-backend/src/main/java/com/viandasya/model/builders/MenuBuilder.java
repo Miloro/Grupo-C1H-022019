@@ -6,20 +6,28 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.TimeSlot;
 
+import java.util.Collections;
 import java.util.List;
 
+import static com.viandasya.model.builders.DateTimeSlotBuilder.anyDateTimeSlot;
+import static com.viandasya.model.builders.DayTimeSlotBuilder.anyDayTimeSlot;
+
 public class MenuBuilder {
-    private String name;
-    private String description;
-    private List<Category> category;
-    private Integer deliveryPrice;
-    private DateTimeSlot lifeTime;
-    private TimeSlot deliveryDays;
-    private Integer price;
-    private Integer averageDeliveryTime;
-    private Discount discount1;
-    private Discount discount2;
-    private Integer maxAmountPerDay;
+    private String name = "Combo Vegetariano";
+    private String description = "Es una ensalada de lechuga, tomate y huevo";
+    private List<Category> category = Collections.singletonList(Category.GREEN);
+    private Integer deliveryPrice = 30;
+    private DateTimeSlot validity = anyDateTimeSlot().createDateTimeSlot();
+    private TimeSlot deliveryDays = anyDayTimeSlot().createDayTimeSlot();
+    private Integer price = 300;
+    private Integer averageDeliveryTime = 48;
+    private Discount discount1 = new Discount(10, 250);
+    private Discount discount2 = new Discount(20, 150);
+    private Integer maxAmountPerDay = 33;
+
+    public static MenuBuilder anyMenu() {
+        return new MenuBuilder();
+    }
 
     public MenuBuilder setName(String name) {
         this.name = name;
@@ -41,8 +49,8 @@ public class MenuBuilder {
         return this;
     }
 
-    public MenuBuilder setLifeTime(DateTimeSlot lifeTime) {
-        this.lifeTime = lifeTime;
+    public MenuBuilder setValidity(DateTimeSlot validity) {
+        this.validity = validity;
         return this;
     }
 
@@ -77,6 +85,6 @@ public class MenuBuilder {
     }
 
     public Menu createMenu() {
-        return new Menu(name, description, category, deliveryPrice, lifeTime, deliveryDays, price, averageDeliveryTime, discount1, discount2, maxAmountPerDay);
+        return new Menu(name, description, category, deliveryPrice, validity, deliveryDays, price, averageDeliveryTime, discount1, discount2, maxAmountPerDay);
     }
 }

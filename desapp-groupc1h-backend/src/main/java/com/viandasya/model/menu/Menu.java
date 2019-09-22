@@ -2,6 +2,8 @@ package com.viandasya.model.menu;
 
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.TimeSlot;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Menu {
@@ -9,7 +11,7 @@ public class Menu {
     private String description;
     private List<Category> category;
     private Integer deliveryPrice;
-    private DateTimeSlot lifeTime;
+    private DateTimeSlot validity;
     private TimeSlot deliveryDays;
     private Integer price;
     private Integer averageDeliveryTime;
@@ -17,12 +19,12 @@ public class Menu {
     private Discount discount2;
     private Integer maxAmountPerDay;
 
-    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, DateTimeSlot lifeTime, TimeSlot deliveryDays, Integer price, Integer averageDeliveryTime, Discount discount1, Discount discount2, Integer maxAmountPerDay) {
+    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, DateTimeSlot validity, TimeSlot deliveryDays, Integer price, Integer averageDeliveryTime, Discount discount1, Discount discount2, Integer maxAmountPerDay) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.deliveryPrice = deliveryPrice;
-        this.lifeTime = lifeTime;
+        this.validity = validity;
         this.deliveryDays = deliveryDays;
         this.price = price;
         this.averageDeliveryTime = averageDeliveryTime;
@@ -63,12 +65,12 @@ public class Menu {
         this.deliveryPrice = deliveryPrice;
     }
 
-    public DateTimeSlot getLifeTime() {
-        return lifeTime;
+    public DateTimeSlot getValidity() {
+        return validity;
     }
 
-    public void setLifeTime(DateTimeSlot lifeTime) {
-        this.lifeTime = lifeTime;
+    public void setValidity(DateTimeSlot validity) {
+        this.validity = validity;
     }
 
     public TimeSlot getDeliveryDays() {
@@ -117,6 +119,10 @@ public class Menu {
 
     public void setMaxAmountPerDay(Integer maxAmountPerDay) {
         this.maxAmountPerDay = maxAmountPerDay;
+    }
+
+    public boolean isValid() {
+        return this.validity.isValidDate(LocalDateTime.now());
     }
 
 }

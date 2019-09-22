@@ -99,4 +99,17 @@ public class ServiceProfile {
     public void setMenus(List<Menu> menus) {
         this.menus = menus;
     }
+
+    public void addMenu(Menu menu) {
+        this.menus.add(menu);
+    }
+
+    public void removeMenu(Menu menu) {
+        this.menus.remove(menu);
+    }
+
+    public boolean has20ValidMenus() {
+        return this.menus.stream().filter(menu -> menu.isValid()).count() == 20;
+    }
+
 }
