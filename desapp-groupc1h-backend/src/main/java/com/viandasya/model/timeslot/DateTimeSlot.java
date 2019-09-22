@@ -32,6 +32,6 @@ public class DateTimeSlot implements TimeSlot {
 
     @Override
     public boolean isValidDate(LocalDateTime date) {
-        return false;
+        return !date.isBefore(since) && !date.isAfter(from);
     }
 }

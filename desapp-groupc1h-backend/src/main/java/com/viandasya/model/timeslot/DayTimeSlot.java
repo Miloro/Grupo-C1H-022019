@@ -8,8 +8,8 @@ public class DayTimeSlot implements TimeSlot{
     private DayOfWeek day;
     private List<HoursTimeSlot> hoursTimeSlots;
 
-    public DayTimeSlot(DayOfWeek days, List<HoursTimeSlot> hoursTimeSlots) {
-        this.day = days;
+    public DayTimeSlot(DayOfWeek day, List<HoursTimeSlot> hoursTimeSlots) {
+        this.day = day;
         this.hoursTimeSlots = hoursTimeSlots;
     }
 
