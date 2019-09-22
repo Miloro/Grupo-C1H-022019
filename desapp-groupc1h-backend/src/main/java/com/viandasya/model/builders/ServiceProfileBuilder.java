@@ -13,7 +13,7 @@ import static com.viandasya.model.builders.MenuBuilder.anyMenu;
 public class ServiceProfileBuilder {
     private String name = "El Rodeo";
     private String logo = ":)";
-    private String adress= "San Martin 675";;
+    private String adress= "San Martin 675";
     private String description = "Proveemos hamburguesas y papas fritas";
     private String website = "www.rodeoquilmes.com.ar";
     private String eMail = "rodeoquilmes01@gmail.com";
@@ -22,7 +22,7 @@ public class ServiceProfileBuilder {
     private List<Menu> menus = Arrays.asList(anyMenu().setName("Comida muy green").createMenu(),
             anyMenu().createMenu());
 
-    public ServiceProfileBuilder(){}
+    private ServiceProfileBuilder(){}
 
     public static ServiceProfileBuilder anyServiceProfile() {
         return new ServiceProfileBuilder();

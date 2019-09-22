@@ -1,6 +1,6 @@
 package com.viandasya.model.user;
 
-public class User {
+class User {
     private Integer balance;
     private ClientProfile clientProfile;
     private ServiceProfile serviceProfile;
