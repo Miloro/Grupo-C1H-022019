@@ -109,7 +109,7 @@ public class ServiceProfile {
     }
 
     public boolean has20ValidMenus() {
-        return this.menus.stream().filter(menu -> menu.isValid()).count() == 20;
+        return this.menus.stream().filter(Menu::isValid).count() == 20;
     }
 
 }

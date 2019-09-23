@@ -1,9 +1,9 @@
 package com.viandasya.model.timeslot;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static com.viandasya.model.builders.DateTimeSlotBuilder.anyDateTimeSlot;
-import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +18,7 @@ public class TimeSlotTest {
 
         LocalDateTime date = LocalDateTime.now().minusDays(3).plusHours(4);
 
-        assertTrue(dateTimeSlot.isValidDate(date));
+        Assert.assertTrue(dateTimeSlot.isValidDate(date));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class TimeSlotTest {
 
         LocalDateTime date = LocalDateTime.now().minusDays(6);
 
-        assertFalse(dateTimeSlot.isValidDate(date));
+        Assert.assertFalse(dateTimeSlot.isValidDate(date));
     }
 
 }
