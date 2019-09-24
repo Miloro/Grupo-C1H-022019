@@ -15,6 +15,7 @@ public class ServiceProfile {
     private Integer phoneNumber;
     private TimeSlot serviceDays;
     private List<Menu> menus;
+    //TODO agregar localidad de entrega
 
     public ServiceProfile(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber, TimeSlot serviceDays, List<Menu> menus) {
         this.name = name;
