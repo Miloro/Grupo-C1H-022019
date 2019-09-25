@@ -15,9 +15,10 @@ public class ServiceProfile {
     private Integer phoneNumber;
     private TimeSlot serviceDays;
     private List<Menu> menus;
+    private Balance balance;
     //TODO agregar localidad de entrega
 
-    public ServiceProfile(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber, TimeSlot serviceDays, List<Menu> menus) {
+    public ServiceProfile(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber, TimeSlot serviceDays, List<Menu> menus, Balance balance) {
         this.name = name;
         this.logo = logo;
         this.adress = adress;
@@ -27,6 +28,7 @@ public class ServiceProfile {
         this.phoneNumber = phoneNumber;
         this.serviceDays = serviceDays;
         this.menus = menus;
+        this.balance = balance;
     }
 
     public String getName() {
@@ -101,6 +103,14 @@ public class ServiceProfile {
         this.menus = menus;
     }
 
+    public Balance getBalance(){
+        return this.balance;
+    }
+
+    public void setBalance(Balance balance){
+        this.balance = balance;
+    }
+
     public void addMenu(Menu menu) {
         this.menus.add(menu);
     }
@@ -112,5 +122,6 @@ public class ServiceProfile {
     public boolean has20ValidMenus() {
         return this.menus.stream().filter(Menu::isValid).count() == 20;
     }
+
 
 }

@@ -1,6 +1,7 @@
 package com.viandasya.model.builders;
 
 import com.viandasya.model.menu.Menu;
+import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.model.timeslot.TimeSlot;
 
@@ -21,6 +22,7 @@ public class ServiceProfileBuilder {
     private TimeSlot serviceDays = anyDateTimeSlot().createDateTimeSlot();
     private List<Menu> menus = Arrays.asList(anyMenu().setName("Comida muy green").createMenu(),
             anyMenu().createMenu());
+    private Balance balance = new Balance(0);
 
     private ServiceProfileBuilder(){}
 
@@ -74,7 +76,7 @@ public class ServiceProfileBuilder {
     }
 
     public ServiceProfile createServiceProfile(){
-        return new ServiceProfile(name,logo,adress,description,website,eMail,phoneNumber,serviceDays,menus);
+        return new ServiceProfile(name,logo,adress,description,website,eMail,phoneNumber,serviceDays,menus,balance);
     }
 }
 
