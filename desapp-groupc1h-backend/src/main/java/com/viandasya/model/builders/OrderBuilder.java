@@ -69,7 +69,7 @@ public class OrderBuilder {
         return this;
     }
 
-    public Order build() {
+    public Order createOrder() {
         return new Order(amount, offers, score, state, orderDate, isDelivery, menu, client);
     }
 }

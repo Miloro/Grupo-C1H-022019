@@ -19,12 +19,6 @@ public class ServiceInfoBuilder {
     private String website = "www.rodeoquilmes.com.ar";
     private String eMail = "rodeoquilmes01@gmail.com";
     private Integer phoneNumber = 42501324;
-    private TimeSlot serviceDays = anyDateTimeSlot().createDateTimeSlot();
-    private List<Menu> menus = Arrays.asList(anyMenu().setName("Comida muy green").createMenu(),
-            anyMenu().createMenu());
-    private Balance balance = new Balance(0);
-
-    private ServiceInfoBuilder(){}
 
     public static ServiceInfoBuilder anyServiceInfo() {
         return new ServiceInfoBuilder();
