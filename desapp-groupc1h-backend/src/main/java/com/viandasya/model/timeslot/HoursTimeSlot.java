@@ -33,6 +33,6 @@ public class HoursTimeSlot implements TimeSlot {
 
     @Override
     public boolean isValidDate(LocalDateTime date) {
-        return false;
+        return !date.toLocalTime().isBefore(since) && !date.toLocalTime().isAfter(from);
     }
 }

@@ -1,4 +1,4 @@
-package com.viandasya.model.builders;
+package com.viandasya.model.builders.user;
 
 
 import com.viandasya.model.user.ServiceInfo;

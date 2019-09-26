@@ -12,7 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.viandasya.model.builders.ServiceProfileBuilder.anyServiceProfile;
+import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyServiceProfile;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceProfileTest {

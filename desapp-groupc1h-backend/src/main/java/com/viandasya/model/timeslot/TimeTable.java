@@ -23,6 +23,6 @@ public class TimeTable implements TimeSlot {
 
     @Override
     public boolean isValidDate(LocalDateTime date) {
-        return false;
+        return this.timeSlots.stream().anyMatch(timeslot -> timeslot.isValidDate(date));
     }
 }

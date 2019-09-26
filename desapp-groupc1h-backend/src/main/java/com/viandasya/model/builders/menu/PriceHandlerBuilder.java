@@ -1,4 +1,4 @@
-package com.viandasya.model.builders;
+package com.viandasya.model.builders.menu;
 
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.menu.PriceHandler;

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.viandasya.model.builders.MenuBuilder.anyMenu;
+import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MenuTest {

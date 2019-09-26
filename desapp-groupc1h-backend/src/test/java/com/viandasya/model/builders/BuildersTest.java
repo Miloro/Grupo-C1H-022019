@@ -1,6 +1,11 @@
 package com.viandasya.model.builders;
 
 
+import com.viandasya.model.builders.timeslot.DateTimeSlotBuilder;
+import com.viandasya.model.builders.timeslot.DayTimeSlotBuilder;
+import com.viandasya.model.builders.user.ClientProfileBuilder;
+import com.viandasya.model.builders.user.ServiceInfoBuilder;
+import com.viandasya.model.builders.user.ServiceProfileBuilder;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
@@ -18,15 +23,14 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 
-import static com.viandasya.model.builders.ClientProfileBuilder.anyClientProfile;
-import static com.viandasya.model.builders.DateTimeSlotBuilder.anyDateTimeSlot;
-import static com.viandasya.model.builders.MenuBuilder.anyMenu;
-import static com.viandasya.model.builders.ServiceInfoBuilder.anyServiceInfo;
+import static com.viandasya.model.builders.user.ClientProfileBuilder.anyClientProfile;
+import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
+import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
+import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInfo;
 import static org.junit.Assert.*;
 
 public class BuildersTest {

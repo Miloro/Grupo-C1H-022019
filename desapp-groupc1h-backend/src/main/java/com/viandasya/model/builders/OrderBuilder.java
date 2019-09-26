@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
-import static com.viandasya.model.builders.ClientProfileBuilder.anyClientProfile;
-import static com.viandasya.model.builders.MenuBuilder.anyMenu;
+import static com.viandasya.model.builders.user.ClientProfileBuilder.anyClientProfile;
+import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
 
 public class OrderBuilder {
     private Integer amount = 1234;

@@ -3,7 +3,7 @@ package com.viandasya.model.menu;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static com.viandasya.model.builders.PriceHandlerBuilder.anyPriceHandler;
+import static com.viandasya.model.builders.menu.PriceHandlerBuilder.anyPriceHandler;
 
 public class PriceHandlerTest {
 
