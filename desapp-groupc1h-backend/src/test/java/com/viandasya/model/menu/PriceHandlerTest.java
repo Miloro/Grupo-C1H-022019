@@ -8,7 +8,7 @@ import static com.viandasya.model.builders.menu.PriceHandlerBuilder.anyPriceHand
 public class PriceHandlerTest {
 
     @Test
-    public void testGetCurrentPrice_With10OrderCountPriceHandlerWithNoNextReturns20() {
+    public void testGetCurrentPriceWith10OrderCountPriceHandlerWithNoNextReturns20() {
         PriceHandler priceHandler = anyPriceHandler()
                 .setOffer(new Offer(0,100))
                 .createPriceHandler();
@@ -17,7 +17,7 @@ public class PriceHandlerTest {
     }
 
     @Test
-    public void testGetCurrentPrice_With10OrderCountPriceHandlerWithNextReturns30() {
+    public void testGetCurrentPriceWith10OrderCountPriceHandlerWithNextReturns30() {
         PriceHandler nextPriceHandler = anyPriceHandler()
                 .setOffer(new Offer(15,170))
                 .createPriceHandler();
