@@ -18,7 +18,7 @@ import static com.viandasya.model.builders.ServiceProfileBuilder.anyServiceProfi
 public class ServiceProfileTest {
 
     @Test
-    public void testHas20ValidMenus_serviceWithValid20MenusGivesTrue() {
+    public void testHas20ValidMenusServiceWithValid20MenusGivesTrue() {
         ServiceProfile serviceProfile = anyServiceProfile().setMenus(this.createNMockValidMenus(20)).createServiceProfile();
 
         Assert.assertTrue(serviceProfile.has20ValidMenus());
@@ -26,7 +26,7 @@ public class ServiceProfileTest {
 
     @Test
 
-    public void testHas20ValidMenus_serviceWith17ValidMenusGivesFalse() {
+    public void testHas20ValidMenusServiceWith17ValidMenusGivesFalse() {
         ServiceProfile serviceProfile = anyServiceProfile().setMenus(this.createNMockValidMenus(17)).createServiceProfile();
 
         Assert.assertFalse(serviceProfile.has20ValidMenus());

@@ -8,7 +8,6 @@ import com.viandasya.model.order.OrderState;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.DayTimeSlot;
 import com.viandasya.model.timeslot.HoursTimeSlot;
-import com.viandasya.model.timeslot.TimeSlot;
 import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.user.ServiceInfo;
@@ -90,7 +89,7 @@ public class BuildersTest {
     public void testIsValid_WhenICanCreateAOrderWithOrderBuilder() {
         Order anyOrder = new OrderBuilder()
                 .setAmount(1234)
-                .setOffers(Arrays.asList(new Offer(30,1)))
+                .setOffers(Collections.singletonList(new Offer(30, 1)))
                 .setScore(2)
                 .setState(OrderState.CONFIRMED)
                 .setIsDelivery(false)
