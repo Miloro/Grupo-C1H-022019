@@ -1,7 +1,7 @@
 package com.viandasya.model.user;
 
 public class Balance {
-     Integer amount;
+     private Integer amount;
 
     public Balance(Integer amount) {
         this.amount = amount;
