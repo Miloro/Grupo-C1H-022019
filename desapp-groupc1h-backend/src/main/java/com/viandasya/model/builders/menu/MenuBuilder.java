@@ -1,4 +1,4 @@
-package com.viandasya.model.builders;
+package com.viandasya.model.builders.menu;
 
 import com.viandasya.model.menu.Category;
 import com.viandasya.model.menu.Menu;
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.viandasya.model.builders.DateTimeSlotBuilder.anyDateTimeSlot;
-import static com.viandasya.model.builders.DayTimeSlotBuilder.anyDayTimeSlot;
+import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
+import static com.viandasya.model.builders.timeslot.DayTimeSlotBuilder.anyDayTimeSlot;
 
 public class MenuBuilder {
     private String name = "Combo Vegetariano";

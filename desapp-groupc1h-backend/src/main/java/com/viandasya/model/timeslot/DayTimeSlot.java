@@ -34,6 +34,10 @@ public class DayTimeSlot implements TimeSlot{
 
     @Override
     public boolean isValidDate(LocalDateTime date) {
-        return false;
+        return date.getDayOfWeek().equals(day) && this.isBetweenHours(date);
+    }
+
+    private boolean isBetweenHours(LocalDateTime date) {
+        return this.hoursTimeSlots.stream().anyMatch(h -> h.isValidDate(date));
     }
 }

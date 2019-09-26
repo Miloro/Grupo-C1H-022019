@@ -1,4 +1,4 @@
-package com.viandasya.model.builders;
+package com.viandasya.model.builders.timeslot;
 
 import com.viandasya.model.timeslot.DateTimeSlot;
 

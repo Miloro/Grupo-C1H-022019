@@ -1,6 +1,11 @@
 package com.viandasya.model.builders;
 
 
+import com.viandasya.model.builders.timeslot.DateTimeSlotBuilder;
+import com.viandasya.model.builders.timeslot.DayTimeSlotBuilder;
+import com.viandasya.model.builders.user.ClientProfileBuilder;
+import com.viandasya.model.builders.user.ServiceInfoBuilder;
+import com.viandasya.model.builders.user.ServiceProfileBuilder;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
@@ -8,7 +13,6 @@ import com.viandasya.model.order.OrderState;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.DayTimeSlot;
 import com.viandasya.model.timeslot.HoursTimeSlot;
-import com.viandasya.model.timeslot.TimeSlot;
 import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.user.ServiceInfo;
@@ -19,15 +23,14 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 
-import static com.viandasya.model.builders.ClientProfileBuilder.anyClientProfile;
-import static com.viandasya.model.builders.DateTimeSlotBuilder.anyDateTimeSlot;
-import static com.viandasya.model.builders.MenuBuilder.anyMenu;
-import static com.viandasya.model.builders.ServiceInfoBuilder.anyServiceInfo;
+import static com.viandasya.model.builders.user.ClientProfileBuilder.anyClientProfile;
+import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
+import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
+import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInfo;
 import static org.junit.Assert.*;
 
 public class BuildersTest {
@@ -90,7 +93,7 @@ public class BuildersTest {
     public void testIsValid_WhenICanCreateAOrderWithOrderBuilder() {
         Order anyOrder = new OrderBuilder()
                 .setAmount(1234)
-                .setOffers(Arrays.asList(new Offer(30,1)))
+                .setOffers(Collections.singletonList(new Offer(30, 1)))
                 .setScore(2)
                 .setState(OrderState.CONFIRMED)
                 .setIsDelivery(false)
