@@ -25,6 +25,7 @@ public class ServiceProfileInfoTest {
     }
 
     @Test
+
     public void testHas20ValidMenus_serviceWith17ValidMenusGivesFalse() {
         ServiceProfile serviceProfile = anyServiceProfile().setMenus(this.createNMockValidMenus(17)).createServiceProfile();
 

@@ -1,5 +1,6 @@
 package com.viandasya.model.menu;
 
+import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.TimeSlot;
 
@@ -10,27 +11,25 @@ public class Menu {
     private String name;
     private String description;
     private List<Category> category;
-    private Integer deliveryPrice;
     private DateTimeSlot validity;
     private TimeSlot deliveryDays;
-    private Integer price;
+    private Integer deliveryPrice;
     private Integer averageDeliveryTime;
-    private Discount discount1;
-    private Discount discount2;
+    private PriceHandler priceHandler;
     private Integer maxAmountPerDay;
+    private List<Order> orders;
 
-    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, DateTimeSlot validity, TimeSlot deliveryDays, Integer price, Integer averageDeliveryTime, Discount discount1, Discount discount2, Integer maxAmountPerDay) {
+    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, DateTimeSlot validity, TimeSlot deliveryDays, Integer averageDeliveryTime, PriceHandler priceHandler, Integer maxAmountPerDay, List<Order> orders) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.deliveryPrice = deliveryPrice;
         this.validity = validity;
         this.deliveryDays = deliveryDays;
-        this.price = price;
         this.averageDeliveryTime = averageDeliveryTime;
-        this.discount1 = discount1;
-        this.discount2 = discount2;
+        this.priceHandler = priceHandler;
         this.maxAmountPerDay = maxAmountPerDay;
+        this.orders = orders;
     }
 
     public String getName() {
@@ -81,36 +80,12 @@ public class Menu {
         this.deliveryDays = deliveryDays;
     }
 
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
     public Integer getAverageDeliveryTime() {
         return averageDeliveryTime;
     }
 
     public void setAverageDeliveryTime(Integer averageDeliveryTime) {
         this.averageDeliveryTime = averageDeliveryTime;
-    }
-
-    public Discount getDiscount1() {
-        return discount1;
-    }
-
-    public void setDiscount1(Discount discount1) {
-        this.discount1 = discount1;
-    }
-
-    public Discount getDiscount2() {
-        return discount2;
-    }
-
-    public void setDiscount2(Discount discount2) {
-        this.discount2 = discount2;
     }
 
     public Integer getMaxAmountPerDay() {
@@ -121,8 +96,32 @@ public class Menu {
         this.maxAmountPerDay = maxAmountPerDay;
     }
 
+    public PriceHandler getPriceHandler() {
+        return priceHandler;
+    }
+
+    public void setPriceHandler(PriceHandler priceHandler) {
+        this.priceHandler = priceHandler;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     public boolean isValid() {
         return this.validity.isValidDate(LocalDateTime.now());
+    }
+
+    public Integer getCurrentPrice() {
+        return this.priceHandler.getCurrentPrice(this.getOrderCount());
+    }
+
+    private int getOrderCount() {
+        return this.orders.stream().mapToInt(Order::getAmount).sum();
     }
 
 }
