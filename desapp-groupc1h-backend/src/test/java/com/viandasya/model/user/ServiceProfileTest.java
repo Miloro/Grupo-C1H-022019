@@ -15,7 +15,7 @@ import java.util.List;
 import static com.viandasya.model.builders.ServiceProfileBuilder.anyServiceProfile;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ServiceProfileInfoTest {
+public class ServiceProfileTest {
 
     @Test
     public void testHas20ValidMenus_serviceWithValid20MenusGivesTrue() {
