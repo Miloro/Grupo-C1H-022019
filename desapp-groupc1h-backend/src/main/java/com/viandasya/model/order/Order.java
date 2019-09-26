@@ -1,13 +1,16 @@
 package com.viandasya.model.order;
 
+import com.viandasya.model.menu.Offer;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.menu.Menu;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
 
 public class Order {
     private Integer amount;
-    private Integer price;
+    private List<Offer> offers;
     private Integer score;
     private OrderState state;
     private LocalDateTime orderDate;
@@ -15,9 +18,9 @@ public class Order {
     private Menu menu;
     private ClientProfile client;
 
-    public Order(Integer amount, Integer price, Integer score, OrderState state, LocalDateTime orderDate, Boolean isDelivery, Menu menu, ClientProfile client) {
+    public Order(Integer amount, List<Offer> offers, Integer score, OrderState state, LocalDateTime orderDate, Boolean isDelivery, Menu menu, ClientProfile client) {
         this.amount = amount;
-        this.price = price;
+        this.offers = offers;
         this.score = score;
         this.state = state;
         this.orderDate = orderDate;
@@ -35,14 +38,6 @@ public class Order {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
     }
 
     public Integer getScore() {
@@ -91,5 +86,9 @@ public class Order {
 
     public void setClient(ClientProfile client) {
         this.client = client;
+    }
+
+    public Integer getCurrentPrice(){
+        return this.offers.stream().min(Comparator.comparingInt(Offer::getPrice)).get().getPrice();
     }
 }

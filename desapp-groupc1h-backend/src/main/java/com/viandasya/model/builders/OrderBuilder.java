@@ -1,15 +1,17 @@
 package com.viandasya.model.builders;
 
+import com.viandasya.model.menu.Offer;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class OrderBuilder {
     private Integer amount;
-    private Integer price;
+    private List<Offer> offers;
     private Integer score;
     private OrderState state;
     private LocalDateTime orderDate;
@@ -22,8 +24,8 @@ public class OrderBuilder {
         return this;
     }
 
-    public OrderBuilder setPrice(Integer price) {
-        this.price = price;
+    public OrderBuilder setOffers(List<Offer> offers) {
+        this.offers = offers;
         return this;
     }
 
@@ -58,6 +60,6 @@ public class OrderBuilder {
     }
 
     public Order build() {
-        return new Order(amount, price, score, state, orderDate, isDelivery, menu, client);
+        return new Order(amount, offers, score, state, orderDate, isDelivery, menu, client);
     }
 }

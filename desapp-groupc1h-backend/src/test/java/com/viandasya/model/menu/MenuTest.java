@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class MenuTest {
 
     @Test
-    public void testIsValid_currentDateIsBetweenValidityRange() {
+    public void testIsValidCurrentDateIsBetweenValidityRange() {
         DateTimeSlot mockDateTimeSlot = Mockito.mock(DateTimeSlot.class);
         Mockito.when(mockDateTimeSlot.isValidDate(ArgumentMatchers.any(LocalDateTime.class))).thenReturn(true);
 
@@ -26,7 +26,7 @@ public class MenuTest {
     }
 
     @Test
-    public void testIsValid_currentDateIsNotBetweenValidityRange() {
+    public void testIsValidCurrentDateIsNotBetweenValidityRange() {
         DateTimeSlot mockDateTimeSlot = Mockito.mock(DateTimeSlot.class);
         Mockito.when(mockDateTimeSlot.isValidDate(ArgumentMatchers.any(LocalDateTime.class))).thenReturn(false);
 
