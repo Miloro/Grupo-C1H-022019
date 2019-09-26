@@ -6,81 +6,64 @@ import com.viandasya.model.timeslot.TimeSlot;
 import java.util.List;
 
 public class ServiceProfile {
-    private String name;
-    private String logo;
-    private String adress;
-    private String description;
-    private String website;
-    private String eMail;
-    private Integer phoneNumber;
-    //TODO agregar localidad de entrega
+    private ServiceInfo serviceInfo;
+    private TimeSlot serviceDays;
+    private List<Menu> menus;
+    private Balance balance;
 
-    public ServiceProfile(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber) {
-        this.name = name;
-        this.logo = logo;
-        this.adress = adress;
-        this.description = description;
-        this.website = website;
-        this.eMail = eMail;
-        this.phoneNumber = phoneNumber;
+
+
+    public ServiceProfile(){}
+
+    public ServiceProfile(ServiceInfo serviceInfo, TimeSlot serviceDays, List<Menu> menus, Balance balance) {
+        this.serviceInfo = serviceInfo;
+        this.serviceDays = serviceDays;
+        this.menus = menus;
+        this.balance = balance;
     }
 
-    public String getName() {
-        return name;
+    public ServiceInfo getServiceInfo() {
+        return serviceInfo;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setServiceInfo(ServiceInfo serviceInfo) {
+        this.serviceInfo = serviceInfo;
     }
 
-    public String getLogo() {
-        return logo;
+    public TimeSlot getServiceHours() {
+        return serviceDays;
     }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
+    public void setServiceHours(TimeSlot serviceHours) {
+        this.serviceDays = serviceHours;
     }
 
-    public String getAdress() {
-        return adress;
+    public List<Menu> getMenus() {
+        return menus;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
     }
 
-    public String getDescription() {
-        return description;
+    public Balance getBalance(){
+        return this.balance;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBalance(Balance balance){
+        this.balance = balance;
     }
 
-    public String getWebsite() {
-        return website;
+    public void addMenu(Menu menu) {
+        this.menus.add(menu);
     }
 
-    public void setWebsite(String website) {
-        this.website = website;
+    public void removeMenu(Menu menu) {
+        this.menus.remove(menu);
     }
 
-    public String geteMail() {
-        return eMail;
+    public boolean has20ValidMenus() {
+        return this.menus.stream().filter(Menu::isValid).count() == 20;
     }
-
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
-    }
-
-    public Integer getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(Integer phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-
 
 }
