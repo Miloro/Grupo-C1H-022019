@@ -1,11 +1,13 @@
 package com.viandasya.model.builders;
 
 import com.viandasya.model.menu.Category;
-import com.viandasya.model.menu.Discount;
 import com.viandasya.model.menu.Menu;
+import com.viandasya.model.menu.PriceHandler;
+import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.TimeSlot;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,11 +21,10 @@ public class MenuBuilder {
     private Integer deliveryPrice = 30;
     private DateTimeSlot validity = anyDateTimeSlot().createDateTimeSlot();
     private TimeSlot deliveryDays = anyDayTimeSlot().createDayTimeSlot();
-    private Integer price = 300;
     private Integer averageDeliveryTime = 48;
-    private Discount discount1 = new Discount(10, 250);
-    private Discount discount2 = new Discount(20, 150);
+    private PriceHandler priceHandler;
     private Integer maxAmountPerDay = 33;
+    private List<Order> orders = new ArrayList<>();
 
     public static MenuBuilder anyMenu() {
         return new MenuBuilder();
@@ -59,23 +60,13 @@ public class MenuBuilder {
         return this;
     }
 
-    public MenuBuilder setPrice(Integer price) {
-        this.price = price;
-        return this;
-    }
-
     public MenuBuilder setAverageDeliveryTime(Integer averageDeliveryTime) {
         this.averageDeliveryTime = averageDeliveryTime;
         return this;
     }
 
-    public MenuBuilder setDiscount1(Discount discount1) {
-        this.discount1 = discount1;
-        return this;
-    }
-
-    public MenuBuilder setDiscount2(Discount discount2) {
-        this.discount2 = discount2;
+    public MenuBuilder setPriceHandler(PriceHandler priceHandler) {
+        this.priceHandler = priceHandler;
         return this;
     }
 
@@ -84,7 +75,12 @@ public class MenuBuilder {
         return this;
     }
 
+    public MenuBuilder setOrders(List<Order> orders) {
+        this.orders = orders;
+        return this;
+    }
+
     public Menu createMenu() {
-        return new Menu(name, description, category, deliveryPrice, validity, deliveryDays, price, averageDeliveryTime, discount1, discount2, maxAmountPerDay);
+        return new Menu(name, description, category, deliveryPrice, validity, deliveryDays, averageDeliveryTime, priceHandler, maxAmountPerDay, orders);
     }
 }
