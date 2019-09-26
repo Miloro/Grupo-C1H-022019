@@ -1,7 +1,5 @@
 package com.viandasya.model.builders;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import com.sun.xml.internal.ws.api.addressing.OneWayFeature;
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.menu.Menu;

@@ -1,15 +1,7 @@
 package com.viandasya.model.builders;
 
-import com.viandasya.model.menu.Menu;
-import com.viandasya.model.user.Balance;
+
 import com.viandasya.model.user.ServiceInfo;
-import com.viandasya.model.timeslot.TimeSlot;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static com.viandasya.model.builders.DateTimeSlotBuilder.anyDateTimeSlot;
-import static com.viandasya.model.builders.MenuBuilder.anyMenu;
 
 public class ServiceInfoBuilder {
     private String name = "El Rodeo";
