@@ -65,18 +65,8 @@ public class ServiceProfileBuilder {
         return this;
     }
 
-    public ServiceProfileBuilder setServiceDays(TimeSlot serviceDays){
-        this.serviceDays = serviceDays;
-        return this;
-    }
-
-    public ServiceProfileBuilder setMenus(List<Menu> menus){
-        this.menus = menus;
-        return this;
-    }
-
     public ServiceProfile createServiceProfile(){
-        return new ServiceProfile(name,logo,adress,description,website,eMail,phoneNumber,serviceDays,menus,balance);
+        return new ServiceProfile(name,logo,adress,description,website,eMail,phoneNumber);
     }
 }
 
