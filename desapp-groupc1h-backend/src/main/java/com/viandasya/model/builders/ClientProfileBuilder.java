@@ -3,14 +3,16 @@ package com.viandasya.model.builders;
 import com.viandasya.model.user.ClientProfile;
 
 public class ClientProfileBuilder {
-    private String name;
-    private String lastName;
-    private String email;
-    private Integer phoneNumber;
-    private String city;
-    private String adress;
+    private String name = "name";
+    private String lastName = "lastName";
+    private String email = "email";
+    private Integer phoneNumber = 12345;
+    private String city = "city";
+    private String adress = "adress";
 
-    public ClientProfileBuilder(){}
+    public static ClientProfileBuilder anyClientProfile(){
+        return new ClientProfileBuilder();
+    }
 
     public ClientProfileBuilder setName(String name){
         this.name = name;
@@ -42,7 +44,7 @@ public class ClientProfileBuilder {
         return this;
     }
 
-    public ClientProfile build(){
+    public ClientProfile createClientProfile(){
         return new ClientProfile(name, lastName, email, phoneNumber, city, adress);
     }
 }
