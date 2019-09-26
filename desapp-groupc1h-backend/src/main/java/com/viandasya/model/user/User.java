@@ -1,11 +1,11 @@
 package com.viandasya.model.user;
 
 class User {
-    private Integer balance;
+    private Balance balance;
     private ClientProfile clientProfile;
     private ServiceProfile serviceProfile;
 
-    public User(Integer balance, ClientProfile clientProfile, ServiceProfile serviceProfile) {
+    public User(Balance balance, ClientProfile clientProfile, ServiceProfile serviceProfile) {
         this.balance = balance;
         this.clientProfile = clientProfile;
         this.serviceProfile = serviceProfile;
@@ -30,11 +30,11 @@ class User {
         this.serviceProfile = serviceProfile;
     }
 
-    public Integer getBalance() {
+    public Balance getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(Balance balance) {
         this.balance = balance;
     }
 

@@ -2,6 +2,7 @@ package com.viandasya.model.user;
 
 import com.viandasya.model.menu.Menu;
 
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,20 +15,21 @@ import java.util.List;
 import static com.viandasya.model.builders.ServiceProfileBuilder.anyServiceProfile;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ServiceProfileTest {
+public class ServiceProfileInfoTest {
 
     @Test
-    public void testHas20ValidMenusServiceWithValid20MenusGivesTrue() {
-        ServiceProfile service = anyServiceProfile().setMenus(this.createNMockValidMenus(20)).createServiceProfile();
+    public void testHas20ValidMenus_serviceWithValid20MenusGivesTrue() {
+        ServiceProfile serviceProfile = anyServiceProfile().setMenus(this.createNMockValidMenus(20)).createServiceProfile();
 
-        Assert.assertTrue(service.has20ValidMenus());
+        Assert.assertTrue(serviceProfile.has20ValidMenus());
     }
 
     @Test
-    public void testHas20ValidMenusServiceWith17ValidMenusGivesFalse() {
-        ServiceProfile service = anyServiceProfile().setMenus(this.createNMockValidMenus(17)).createServiceProfile();
 
-        Assert.assertFalse(service.has20ValidMenus());
+    public void testHas20ValidMenus_serviceWith17ValidMenusGivesFalse() {
+        ServiceProfile serviceProfile = anyServiceProfile().setMenus(this.createNMockValidMenus(17)).createServiceProfile();
+
+        Assert.assertFalse(serviceProfile.has20ValidMenus());
     }
 
     private List<Menu> createNMockValidMenus(int n) {
