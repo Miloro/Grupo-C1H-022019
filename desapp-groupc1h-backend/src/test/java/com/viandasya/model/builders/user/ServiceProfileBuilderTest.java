@@ -1,37 +1,31 @@
 package com.viandasya.model.builders.user;
 
-import com.viandasya.model.menu.Menu;
-import com.viandasya.model.user.Balance;
+import com.viandasya.model.timeslot.DateTimeSlot;
+import com.viandasya.model.user.ServiceInfo;
 import com.viandasya.model.user.ServiceProfile;
+import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
+import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInfo;
 import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyServiceProfile;
-import static org.junit.Assert.assertEquals;
+
 
 public class ServiceProfileBuilderTest {
 
-
     @Test
-    public void testIsValid_WhenICanCreateAServiceProfileWithServiceProfileBuilder() {
-        List<Menu> menus = new ArrayList<>();
-        ServiceProfile anyServiceProfile = anyServiceProfile()
-                .setMenus(menus)
-                .setBalance(new Balance(0))
-                .createServiceProfile();
+    public void testSetServiceInfoSetedInBuilderEqualsToTheOneGettedInServiceProfile() {
+        ServiceInfo serviceInfo = anyServiceInfo().createServiceInfo();
+        ServiceProfile serviceProfile = anyServiceProfile().setServiceInfo(serviceInfo).createServiceProfile();
 
-        assertEquals(anyServiceProfile.getMenus().size(), 0);
+        Assert.assertEquals(serviceInfo, serviceProfile.getServiceInfo());
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAServiceProfileWithServiceProfileBuilder2() {
-        ServiceProfile anyServiceProfile = anyServiceProfile()
-                .setBalance(new Balance(0))
-                .createServiceProfile();
+    public void setServiceDaysSetedInBuilderEqualsToTheOneGettedInServiceProfile() {
+        DateTimeSlot dateTimeSlot = anyDateTimeSlot().createDateTimeSlot();
+        ServiceProfile serviceProfile = anyServiceProfile().setServiceDays(dateTimeSlot).createServiceProfile();
 
-        assertEquals(anyServiceProfile.getBalance().getAmount(),0,0 );
+        Assert.assertEquals(dateTimeSlot, serviceProfile.getServiceDays());
     }
-
 }

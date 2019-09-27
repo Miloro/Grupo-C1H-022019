@@ -28,7 +28,7 @@ public class ServiceProfile {
         this.serviceInfo = serviceInfo;
     }
 
-    public TimeSlot getServiceHours() {
+    public TimeSlot getServiceDays() {
         return serviceDays;
     }
 

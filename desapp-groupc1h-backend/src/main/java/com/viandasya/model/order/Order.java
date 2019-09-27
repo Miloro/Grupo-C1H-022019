@@ -40,6 +40,14 @@ public class Order {
         this.amount = amount;
     }
 
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
+    }
+
     public Integer getScore() {
         return score;
     }
