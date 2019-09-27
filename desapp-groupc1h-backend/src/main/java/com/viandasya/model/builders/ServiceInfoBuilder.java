@@ -12,6 +12,8 @@ public class ServiceInfoBuilder {
     private String eMail = "rodeoquilmes01@gmail.com";
     private Integer phoneNumber = 42501324;
 
+
+
     public static ServiceInfoBuilder anyServiceInfo() {
         return new ServiceInfoBuilder();
     }
