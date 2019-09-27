@@ -24,6 +24,6 @@ public class Balance {
     }
 
     public boolean canWithdraw(Integer amountToWithdraw){
-        return this.amount <= amountToWithdraw;
+        return this.amount >= amountToWithdraw;
     }
 }
