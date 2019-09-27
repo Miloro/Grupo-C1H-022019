@@ -19,20 +19,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
-import static com.viandasya.model.builders.ClientProfileBuilder.anyClientProfile;
-import static com.viandasya.model.builders.DateTimeSlotBuilder.anyDateTimeSlot;
-import static com.viandasya.model.builders.DayTimeSlotBuilder.anyDayTimeSlot;
-import static com.viandasya.model.builders.MenuBuilder.anyMenu;
-import static com.viandasya.model.builders.ServiceInfoBuilder.anyServiceInfo;
-import static com.viandasya.model.builders.ServiceProfileBuilder.anyServiceProfile;
+import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
+import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
+import static com.viandasya.model.builders.timeslot.DayTimeSlotBuilder.anyDayTimeSlot;
+import static com.viandasya.model.builders.user.ClientProfileBuilder.anyClientProfile;
+import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInfo;
+import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyServiceProfile;
 import static org.junit.Assert.*;
 
 public class BuildersTest {
 
     @Test
     public void testIsValid_WhenICanCreateAClientProfileWithServiceClientProfileBuilder() {
-        ClientProfile anyClientProfile  = new ClientProfileBuilder()
+        ClientProfile anyClientProfile  = anyClientProfile()
                 .setName("name")
                 .createClientProfile();
 
@@ -87,7 +86,7 @@ public class BuildersTest {
 
     @Test
     public void testIsValid_WhenICanCreateADateTimeSlotWithDateTimeSlotBuilder() {
-        DateTimeSlot anyDateTimeSlot  = new DateTimeSlotBuilder()
+        DateTimeSlot anyDateTimeSlot  = anyDateTimeSlot()
                 .setSince(LocalDateTime.now().minusDays(12))
                 .setFrom(LocalDateTime.now().minusDays(7))
                 .createDateTimeSlot();

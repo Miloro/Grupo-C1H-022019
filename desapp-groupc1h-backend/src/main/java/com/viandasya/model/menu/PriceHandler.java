@@ -9,7 +9,6 @@ public class PriceHandler {
         this.next = next;
     }
 
-
     public Offer getOffer() {
         return offer;
     }

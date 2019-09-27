@@ -1,4 +1,4 @@
-package com.viandasya.model.builders;
+package com.viandasya.model.builders.user;
 
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.timeslot.TimeSlot;
@@ -9,8 +9,8 @@ import com.viandasya.model.user.ServiceInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.viandasya.model.builders.DateTimeSlotBuilder.anyDateTimeSlot;
-import static com.viandasya.model.builders.ServiceInfoBuilder.anyServiceInfo;
+import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
+import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInfo;
 
 public class ServiceProfileBuilder {
     private ServiceInfo serviceInfo = anyServiceInfo().createServiceInfo();

@@ -11,8 +11,6 @@ public class ServiceProfile {
     private List<Menu> menus;
     private Balance balance;
 
-
-
     public ServiceProfile(){}
 
     public ServiceProfile(ServiceInfo serviceInfo, TimeSlot serviceDays, List<Menu> menus, Balance balance) {
