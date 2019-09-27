@@ -11,7 +11,7 @@ import static com.viandasya.model.builders.menu.PriceHandlerBuilder.anyPriceHand
 public class PriceHandlerBuilderTest {
 
     @Test
-    public void setOfferOfferSetedInBuilderEqualsToTheOneGetted() {
+    public void setOfferSetedInBuilderEqualsToTheOneGettedInPriceHandler() {
         Offer offer = Mockito.mock(Offer.class);
         PriceHandler priceHandler = anyPriceHandler()
                 .setOffer(offer)
@@ -21,7 +21,7 @@ public class PriceHandlerBuilderTest {
     }
 
     @Test
-    public void setNextNextSetedInBuilderEqualsToTheOneGetted() {
+    public void setNextSetedInBuilderEqualsToTheOneGettedInPriceHandler() {
         PriceHandler nextPriceHandler = Mockito.mock(PriceHandler.class);
 
         PriceHandler priceHandler = anyPriceHandler()

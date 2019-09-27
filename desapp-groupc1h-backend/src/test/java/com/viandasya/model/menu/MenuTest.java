@@ -4,10 +4,8 @@ import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
