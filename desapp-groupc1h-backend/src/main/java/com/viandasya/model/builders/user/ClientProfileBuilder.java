@@ -1,5 +1,6 @@
 package com.viandasya.model.builders.user;
 
+import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ClientProfile;
 
 public class ClientProfileBuilder {
@@ -9,6 +10,7 @@ public class ClientProfileBuilder {
     private Integer phoneNumber = 12345;
     private String city = "city";
     private String adress = "adress";
+    private Balance balance = new Balance(0);
 
     public static ClientProfileBuilder anyClientProfile(){
         return new ClientProfileBuilder();
@@ -44,7 +46,12 @@ public class ClientProfileBuilder {
         return this;
     }
 
+    public ClientProfileBuilder setBalance(Balance balance){
+        this.balance = balance;
+        return this;
+    }
+
     public ClientProfile createClientProfile(){
-        return new ClientProfile(name, lastName, email, phoneNumber, city, adress);
+        return new ClientProfile(name, lastName, email, phoneNumber, city, adress, balance);
     }
 }

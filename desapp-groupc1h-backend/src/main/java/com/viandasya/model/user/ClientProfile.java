@@ -7,14 +7,16 @@ public class ClientProfile {
     private Integer phoneNumber;
     private String city;
     private String adress;
+    private Balance balance;
 
-    public ClientProfile(String name, String lastName, String email, Integer phoneNumber, String city, String adress) {
+    public ClientProfile(String name, String lastName, String email, Integer phoneNumber, String city, String adress, Balance balance) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.city = city;
         this.adress = adress;
+        this.balance = balance;
     }
 
     public String getName() {
@@ -63,6 +65,14 @@ public class ClientProfile {
 
     public void setAdress(String adress) {
         this.adress = adress;
+    }
+
+    public Balance getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Balance balance) {
+        this.balance = balance;
     }
 
 }
