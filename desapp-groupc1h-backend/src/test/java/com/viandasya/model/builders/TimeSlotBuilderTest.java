@@ -18,7 +18,7 @@ import static com.viandasya.model.builders.timeslot.DayTimeSlotBuilder.anyDayTim
 public class TimeSlotBuilderTest {
 
     @Test
-    public void setSinceSinceSetedInBuilderEqualsToTheOneGetted() {
+    public void setSinceSetedInBuilderEqualsToTheOneGettedInDateTimeSlot() {
         DateTimeSlot dateTimeSlot = anyDateTimeSlot()
                 .setSince(LocalDateTime.of(2018,2,12,3,15))
                 .createDateTimeSlot();
@@ -28,7 +28,7 @@ public class TimeSlotBuilderTest {
     }
 
     @Test
-    public void setFromFromSetedInBuilderEqualsToTheOneGetted() {
+    public void setFromSetedInBuilderEqualsToTheOneGettedInDateTimeSlot() {
         DateTimeSlot dateTimeSlot = anyDateTimeSlot()
                 .setFrom(LocalDateTime.of(2015,1,6,4,46))
                 .createDateTimeSlot();
@@ -38,14 +38,14 @@ public class TimeSlotBuilderTest {
     }
 
     @Test
-    public void setDayDaySetedInBuilderEqualsToTheOneGetted() {
+    public void setDaySetedInBuilderEqualsToTheOneGettedInDayTimeSlot() {
         DayTimeSlot dayTimeSlot = anyDayTimeSlot().setDay(DayOfWeek.SATURDAY).createDayTimeSlot();
 
         Assert.assertEquals(DayOfWeek.SATURDAY, dayTimeSlot.getDay());
     }
 
     @Test
-    public void setHoursTimeSlotHoursTimeSlotSetedInBuilderEqualsToTheOneGetted() {
+    public void setHoursTimeSlotSetedInBuilderEqualsToTheOneGettedInDayTimeSlot() {
         List<HoursTimeSlot> hoursTimeSlots = new ArrayList<>();
         hoursTimeSlots.add(new HoursTimeSlot(LocalTime.NOON, LocalTime.MIDNIGHT));
         hoursTimeSlots.add(new HoursTimeSlot(LocalTime.of(8,0), LocalTime.of(10,0)));
