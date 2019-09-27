@@ -1,10 +1,10 @@
 import React from 'react'
 import Iframe from 'react-iframe'
-export default class MapDev  extends React.Component{
+export default class MapDev  extends React.Component {
 
-    render(){
-        return(
-            <div className= "App" >
+    render() {
+        return (
+            <div className="App">
                 <h1>distancia entre dos puntos</h1>
                 <h4> con api </h4>
                 <Iframe src="https://image.maps.api.here.com/mia/1.6/routing
@@ -27,6 +27,4 @@ export default class MapDev  extends React.Component{
             </div>
         )
     }
-
-
 }
