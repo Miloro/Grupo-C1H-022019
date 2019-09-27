@@ -8,9 +8,9 @@ public class ServiceInfo {
     private String website;
     private String eMail;
     private Integer phoneNumber;
-    //TODO agregar localidad de entrega
+    private String locality;
 
-    public ServiceInfo(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber) {
+    public ServiceInfo(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber, String locality) {
         this.name = name;
         this.logo = logo;
         this.adress = adress;
@@ -18,6 +18,7 @@ public class ServiceInfo {
         this.website = website;
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
+        this.locality = locality;
     }
 
     public String getName() {
