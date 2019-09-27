@@ -5,17 +5,36 @@ import com.viandasya.model.menu.Menu;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyServiceProfile;
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class ServiceProfileTest {
+
+    @Test
+    public void addMenuAddsMenuToList() {
+        ServiceProfile serviceProfile = anyServiceProfile().setMenus(new ArrayList<>()).createServiceProfile();
+
+        Menu menu = Mockito.mock(Menu.class);
+        serviceProfile.addMenu(menu);
+
+        Assert.assertTrue(serviceProfile.getMenus().contains(menu));
+    }
+
+    @Test
+    public void removesMenuRemovesMenuOfList() {
+        ServiceProfile serviceProfile = anyServiceProfile().setMenus(new ArrayList<>()).createServiceProfile();
+
+        Menu menu = Mockito.mock(Menu.class);
+        serviceProfile.addMenu(menu);
+        serviceProfile.removeMenu(menu);
+
+        Assert.assertFalse(serviceProfile.getMenus().contains(menu));
+    }
 
     @Test
     public void testHas20ValidMenusServiceWithValid20MenusGivesTrue() {
@@ -42,6 +61,5 @@ public class ServiceProfileTest {
         }
         return menus;
     }
-
 
 }

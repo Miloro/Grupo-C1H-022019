@@ -15,7 +15,6 @@ import java.util.List;
 
 import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
 
-@RunWith(MockitoJUnitRunner.class)
 public class MenuTest {
 
     @Test
