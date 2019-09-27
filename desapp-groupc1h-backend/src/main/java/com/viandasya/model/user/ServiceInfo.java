@@ -8,9 +8,9 @@ public class ServiceInfo {
     private String website;
     private String eMail;
     private Integer phoneNumber;
-    private String locality;
+    private String city;
 
-    public ServiceInfo(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber, String locality) {
+    public ServiceInfo(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber, String city) {
         this.name = name;
         this.logo = logo;
         this.adress = adress;
@@ -18,7 +18,7 @@ public class ServiceInfo {
         this.website = website;
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
-        this.locality = locality;
+        this.city = city;
     }
 
     public String getName() {
@@ -75,6 +75,14 @@ public class ServiceInfo {
 
     public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getCity(){
+        return city;
+    }
+
+    public void setCity(String city){
+        this.city = city;
     }
 
 

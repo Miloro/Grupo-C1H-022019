@@ -11,7 +11,7 @@ public class ServiceInfoBuilder {
     private String website = "www.rodeoquilmes.com.ar";
     private String eMail = "rodeoquilmes01@gmail.com";
     private Integer phoneNumber = 42501324;
-    private String locality = "Quilmes";
+    private String city = "Quilmes";
 
 
 
@@ -54,13 +54,13 @@ public class ServiceInfoBuilder {
         return this;
     }
 
-    public ServiceInfoBuilder setlocality(String locality){
-        this.locality = locality;
+    public ServiceInfoBuilder setCity(String city){
+        this.city = city;
         return this;
     }
 
     public ServiceInfo createServiceInfo(){
-        return new ServiceInfo(name,logo,adress,description,website,eMail,phoneNumber,locality);
+        return new ServiceInfo(name,logo,adress,description,website,eMail,phoneNumber,city);
     }
 }
 
