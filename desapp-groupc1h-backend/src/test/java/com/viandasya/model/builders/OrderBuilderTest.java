@@ -82,7 +82,7 @@ public class OrderBuilderTest {
     }
 
     @Test
-    public void setOffersSetedInBuilderEqualsToTheOneGettedInOrder() {
+    public void testSetOffersSetedInBuilderEqualsToTheOneGettedInOrder() {
         List<Offer> offers = new ArrayList<>();
         offers.add(Mockito.mock(Offer.class));
         offers.add(Mockito.mock(Offer.class));
