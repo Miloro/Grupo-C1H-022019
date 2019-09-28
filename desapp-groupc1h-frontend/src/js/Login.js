@@ -5,7 +5,12 @@ export default class LogIn  extends React.Component{
         return(
             <div className= "App" >
                 <h1>buenas</h1>
+
+                <h1 href="#" onclick= {this.props.history.push('/mapdev')}>
+                        Click me
+                </h1>
             </div>
         )
     }
+
 }

@@ -8,10 +8,6 @@ class App extends Component {
 
   state = {};
 
-  componentDidMount() {
-    setInterval(this.hello, 250);
-  }
-
   hello = () => {
     fetch('/api/hello')
         .then(response => response.text())
