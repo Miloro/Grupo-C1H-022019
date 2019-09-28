@@ -1,0 +1,77 @@
+﻿====== RELEASE NOTES  ==========
+	
+
+
+	Universidad Nacional de Quilmes
+	
+
+	Desarrollo de Aplicaciones
+	
+
+	Viandas Ya
+	
+
+
+
+	Grupo H C1
+	
+
+	        - Malena Lisa Romero
+	
+
+	        - Miguel Miloro
+	
+
+	        
+	
+
+	---------------------------------------------------------------------
+	
+
+	TAG ENTREGA 1.0
+	
+
+	---------------------------------------------------------------------
+	
+
+	NEW FEATURES:
+	
+
+	* Configuration of tools for continous integration, continous deploy, etc (travis, heroku, codacy).
+	
+
+	* POC of Google Maps API allows to show a route.
+	
+
+	* Structure of the model.
+	
+
+	*  Unit-testing of the model.
+	
+
+	* Implementation of price calculation of Menu and Order.
+
+
+	*  Minimum structure of web-server.
+	
+
+	NOTES:
+	
+
+	* Calculation of delivery time and delivery distance on next Release. 
+	
+
+	* Calculation of ratings in ServiceProfile and Menu not implemented yet.
+	
+
+	* Implementation of Menu search on next Release.
+	
+
+	
+
+
+
+	KNOWN ISSUES:
+	
+
+	*
