@@ -1,8 +1,9 @@
 package com.viandasya.model.timeslot;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class HoursTimeSlot {
+public class HoursTimeSlot implements TimeSlot {
     private LocalTime since;
     private LocalTime  from;
 
@@ -28,5 +29,10 @@ public class HoursTimeSlot {
 
     public void setFrom(LocalTime from) {
         this.from = from;
+    }
+
+    @Override
+    public boolean isValidDate(LocalDateTime date) {
+        return !date.toLocalTime().isBefore(since) && !date.toLocalTime().isAfter(from);
     }
 }
