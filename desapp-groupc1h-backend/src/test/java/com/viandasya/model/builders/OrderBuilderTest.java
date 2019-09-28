@@ -1,8 +1,6 @@
 package com.viandasya.model.builders;
 
-import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
-import org.junit.Test;
 
 import static org.junit.Assert.*;
 

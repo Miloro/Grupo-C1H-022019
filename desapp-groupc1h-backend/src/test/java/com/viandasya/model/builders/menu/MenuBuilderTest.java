@@ -2,6 +2,7 @@ package com.viandasya.model.builders.menu;
 
 import com.viandasya.model.menu.Category;
 import com.viandasya.model.menu.Menu;
+import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
 import org.junit.Test;
 
@@ -10,16 +11,15 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
+import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 import static org.junit.Assert.assertEquals;
 
-import com.viandasya.model.menu.PriceHandler;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.DayTimeSlot;
 import org.junit.Assert;
 
 import java.time.DayOfWeek;
 
-import static com.viandasya.model.builders.menu.PriceHandlerBuilder.anyPriceHandler;
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
 import static com.viandasya.model.builders.timeslot.DayTimeSlotBuilder.anyDayTimeSlot;
 
@@ -106,12 +106,13 @@ public class MenuBuilderTest {
         Assert.assertEquals(dateTimeSlot, menu.getValidity());
     }
 
+
     @Test
-    public void setPriceHandlerSetedInBuilderEqualsToTheOneGettedInMenu() {
-        PriceHandler priceHandler = anyPriceHandler().createPriceHandler();
-        Menu menu = anyMenu().setPriceHandler(priceHandler).createMenu();
+    public void setOffersSetedInBuilderEqualsToTheOneGettedInMenu() {
+        List<Offer> offers = new ArrayList<>();
+        offers.add(anyOffer().createOffer());
+        Menu menu = anyMenu().setOffers(offers).createMenu();
 
-        Assert.assertEquals(priceHandler, menu.getPriceHandler());
+        Assert.assertEquals(offers, menu.getOffers());
     }
-
 }

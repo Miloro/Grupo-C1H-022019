@@ -2,15 +2,17 @@ package com.viandasya.model.builders.menu;
 
 import com.viandasya.model.menu.Category;
 import com.viandasya.model.menu.Menu;
-import com.viandasya.model.menu.PriceHandler;
+import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.TimeSlot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
 import static com.viandasya.model.builders.timeslot.DayTimeSlotBuilder.anyDayTimeSlot;
 
@@ -22,7 +24,7 @@ public class MenuBuilder {
     private DateTimeSlot validity = anyDateTimeSlot().createDateTimeSlot();
     private TimeSlot deliveryDays = anyDayTimeSlot().createDayTimeSlot();
     private Integer averageDeliveryTime = 48;
-    private PriceHandler priceHandler;
+    private List<Offer> offers = Arrays.asList(anyOffer().setPrice(200).createOffer(), anyOffer().createOffer());
     private Integer maxAmountPerDay = 33;
     private List<Order> orders = new ArrayList<>();
 
@@ -65,10 +67,11 @@ public class MenuBuilder {
         return this;
     }
 
-    public MenuBuilder setPriceHandler(PriceHandler priceHandler) {
-        this.priceHandler = priceHandler;
+    public MenuBuilder setOffers(List<Offer> offers) {
+        this.offers = offers;
         return this;
     }
+
 
     public MenuBuilder setMaxAmountPerDay(Integer maxAmountPerDay) {
         this.maxAmountPerDay = maxAmountPerDay;
@@ -81,6 +84,6 @@ public class MenuBuilder {
     }
 
     public Menu createMenu() {
-        return new Menu(name, description, category, deliveryPrice, validity, deliveryDays, averageDeliveryTime, priceHandler, maxAmountPerDay, orders);
+        return new Menu(name, description, category, deliveryPrice, validity, deliveryDays, averageDeliveryTime, offers, maxAmountPerDay, orders);
     }
 }
