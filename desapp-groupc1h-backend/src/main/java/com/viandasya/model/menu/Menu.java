@@ -15,11 +15,12 @@ public class Menu {
     private TimeSlot deliveryDays;
     private Integer deliveryPrice;
     private Integer averageDeliveryTime;
-    private PriceHandler priceHandler;
+    //order by price asc
+    private List<Offer> offers;
     private Integer maxAmountPerDay;
     private List<Order> orders;
 
-    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, DateTimeSlot validity, TimeSlot deliveryDays, Integer averageDeliveryTime, PriceHandler priceHandler, Integer maxAmountPerDay, List<Order> orders) {
+    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, DateTimeSlot validity, TimeSlot deliveryDays, Integer averageDeliveryTime, List<Offer> offers, Integer maxAmountPerDay, List<Order> orders) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -27,7 +28,7 @@ public class Menu {
         this.validity = validity;
         this.deliveryDays = deliveryDays;
         this.averageDeliveryTime = averageDeliveryTime;
-        this.priceHandler = priceHandler;
+        this.offers = offers;
         this.maxAmountPerDay = maxAmountPerDay;
         this.orders = orders;
     }
@@ -88,20 +89,20 @@ public class Menu {
         this.averageDeliveryTime = averageDeliveryTime;
     }
 
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
+    }
+
     public Integer getMaxAmountPerDay() {
         return maxAmountPerDay;
     }
 
     public void setMaxAmountPerDay(Integer maxAmountPerDay) {
         this.maxAmountPerDay = maxAmountPerDay;
-    }
-
-    public PriceHandler getPriceHandler() {
-        return priceHandler;
-    }
-
-    public void setPriceHandler(PriceHandler priceHandler) {
-        this.priceHandler = priceHandler;
     }
 
     public List<Order> getOrders() {
@@ -117,7 +118,8 @@ public class Menu {
     }
 
     public Integer getCurrentPrice() {
-        return this.priceHandler.getCurrentPrice(this.getOrderCount());
+        int orderCount = this.getOrderCount();
+        return this.offers.stream().filter(o -> orderCount >= o.getMinAmount()).findFirst().get().getPrice();
     }
 
     private int getOrderCount() {
