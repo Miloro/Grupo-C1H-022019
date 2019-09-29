@@ -1,6 +1,7 @@
 package com.viandasya.model.builders.menu;
 
 import com.viandasya.model.menu.Category;
+import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
@@ -14,13 +15,10 @@ import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
 import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 
 import com.viandasya.model.timeslot.DateTimeSlot;
-import com.viandasya.model.timeslot.DayTimeSlot;
 import org.junit.Assert;
-
-import java.time.DayOfWeek;
+import org.mockito.Mockito;
 
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
-import static com.viandasya.model.builders.timeslot.DayTimeSlotBuilder.anyDayTimeSlot;
 
 public class MenuBuilderTest {
 
@@ -51,27 +49,9 @@ public class MenuBuilderTest {
         Assert.assertEquals(anyMenu.getCategory().get(0),Category.GREEN);
     }
 
-    @Test
-    public void testIsValidWhenICanCreateAMenuWithMenuBuilder4() {
-        Menu anyMenu = anyMenu()
-                .setDeliveryPrice(30)
-                .createMenu();
-
-        Assert.assertEquals(anyMenu.getDeliveryPrice(),30,0);
-    }
-
 
     @Test
-    public void testIsValidWhenICanCreateAMenuWithMenuBuilder5() {
-        Menu anyMenu = anyMenu()
-                .setAverageDeliveryTime(48)
-                .createMenu();
-
-        Assert.assertEquals(anyMenu.getAverageDeliveryTime(),48,0);
-    }
-
-    @Test
-    public void testIsValidWhenICanCreateAMenuWithMenuBuilder8() {
+    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder8() {
         Menu anyMenu = anyMenu()
                 .setMaxAmountPerDay(33)
                 .createMenu();
@@ -90,15 +70,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testSetDeliveryDaysSetedInBuilderEqualsToTheOneGettedInMenu() {
-        DayTimeSlot dayTimeSlot = anyDayTimeSlot().setDay(DayOfWeek.FRIDAY).createDayTimeSlot();
-        Menu menu = anyMenu().setDeliveryDays(dayTimeSlot).createMenu();
-
-        Assert.assertEquals(dayTimeSlot, menu.getDeliveryDays());
-    }
-
-    @Test
-    public void setValiditySetedInBuilderEqualsToTheOneGettedInMenu() {
+    public void testSetValiditySetedInBuilderEqualsToTheOneGettedInMenu() {
         DateTimeSlot dateTimeSlot = anyDateTimeSlot().createDateTimeSlot();
         Menu menu = anyMenu().setValidity(dateTimeSlot).createMenu();
 
@@ -107,11 +79,19 @@ public class MenuBuilderTest {
 
 
     @Test
-    public void setOffersSetedInBuilderEqualsToTheOneGettedInMenu() {
+    public void testSetOffersSetedInBuilderEqualsToTheOneGettedInMenu() {
         List<Offer> offers = new ArrayList<>();
         offers.add(anyOffer().createOffer());
         Menu menu = anyMenu().setOffers(offers).createMenu();
 
         Assert.assertEquals(offers, menu.getOffers());
+    }
+
+    @Test
+    public void testSetDeliveryInfoSetedInBuilderEqualsToTheOneGettedInMenu() {
+        DeliveryInfo deliveryInfo = Mockito.mock(DeliveryInfo.class);
+        Menu menu = anyMenu().setDeliveryInfo(deliveryInfo).createMenu();
+
+        Assert.assertEquals(deliveryInfo, menu.getDeliveryInfo());
     }
 }

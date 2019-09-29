@@ -9,14 +9,14 @@ import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 public class OfferBuilderTest {
 
     @Test
-    public void setMinAmountSetedInBuilderEqualsToTheOneGettedInOffer() {
+    public void testSetMinAmountSetedInBuilderEqualsToTheOneGettedInOffer() {
         Offer offer = anyOffer().setMinAmount(12).createOffer();
 
         Assert.assertEquals(12, offer.getMinAmount(), 0.0);
     }
 
     @Test
-    public void setPriceSetedInBuilderEqualsToTheOneGettedInOffer() {
+    public void testSetPriceSetedInBuilderEqualsToTheOneGettedInOffer() {
         Offer offer = anyOffer().setPrice(200).createOffer();
 
         Assert.assertEquals(200, offer.getPrice(), 0.0);

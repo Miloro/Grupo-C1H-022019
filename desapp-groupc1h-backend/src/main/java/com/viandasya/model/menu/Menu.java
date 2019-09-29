@@ -2,7 +2,6 @@ package com.viandasya.model.menu;
 
 import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
-import com.viandasya.model.timeslot.TimeSlot;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,22 +11,17 @@ public class Menu {
     private String description;
     private List<Category> category;
     private DateTimeSlot validity;
-    private TimeSlot deliveryDays;
-    private Integer deliveryPrice;
-    private Integer averageDeliveryTime;
-    //order by price asc
-    private List<Offer> offers;
+    private DeliveryInfo deliveryInfo;
+    private List<Offer> offers; //order by price asc
     private Integer maxAmountPerDay;
     private List<Order> orders;
 
-    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, DateTimeSlot validity, TimeSlot deliveryDays, Integer averageDeliveryTime, List<Offer> offers, Integer maxAmountPerDay, List<Order> orders) {
+    public Menu(String name, String description, List<Category> category, DateTimeSlot validity, DeliveryInfo deliveryInfo, List<Offer> offers, Integer maxAmountPerDay, List<Order> orders) {
         this.name = name;
         this.description = description;
         this.category = category;
-        this.deliveryPrice = deliveryPrice;
         this.validity = validity;
-        this.deliveryDays = deliveryDays;
-        this.averageDeliveryTime = averageDeliveryTime;
+        this.deliveryInfo = deliveryInfo;
         this.offers = offers;
         this.maxAmountPerDay = maxAmountPerDay;
         this.orders = orders;
@@ -57,14 +51,6 @@ public class Menu {
         this.category = category;
     }
 
-    public Integer getDeliveryPrice() {
-        return deliveryPrice;
-    }
-
-    public void setDeliveryPrice(Integer deliveryPrice) {
-        this.deliveryPrice = deliveryPrice;
-    }
-
     public DateTimeSlot getValidity() {
         return validity;
     }
@@ -73,20 +59,12 @@ public class Menu {
         this.validity = validity;
     }
 
-    public TimeSlot getDeliveryDays() {
-        return deliveryDays;
+    public DeliveryInfo getDeliveryInfo() {
+        return deliveryInfo;
     }
 
-    public void setDeliveryDays(TimeSlot deliveryDays) {
-        this.deliveryDays = deliveryDays;
-    }
-
-    public Integer getAverageDeliveryTime() {
-        return averageDeliveryTime;
-    }
-
-    public void setAverageDeliveryTime(Integer averageDeliveryTime) {
-        this.averageDeliveryTime = averageDeliveryTime;
+    public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
+        this.deliveryInfo = deliveryInfo;
     }
 
     public List<Offer> getOffers() {
