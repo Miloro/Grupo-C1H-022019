@@ -12,7 +12,6 @@ import java.util.List;
 
 import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
 import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
-import static org.junit.Assert.assertEquals;
 
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.DayTimeSlot;
@@ -26,68 +25,68 @@ import static com.viandasya.model.builders.timeslot.DayTimeSlotBuilder.anyDayTim
 public class MenuBuilderTest {
 
     @Test
-    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder() {
+    public void testIsValidWhenICanCreateAMenuWithMenuBuilder() {
         Menu anyMenu = anyMenu()
                 .setName("aaaaa")
                 .createMenu();
 
-        assertEquals(anyMenu.getName(),"aaaaa");
+        Assert.assertEquals(anyMenu.getName(),"aaaaa");
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder2() {
+    public void testIsValidWhenICanCreateAMenuWithMenuBuilder2() {
         Menu anyMenu = anyMenu()
                 .setDescription("aaaaaaaaaaaaaaaaaaaaaaa")
                 .createMenu();
 
-        assertEquals(anyMenu.getDescription(),"aaaaaaaaaaaaaaaaaaaaaaa");
+        Assert.assertEquals(anyMenu.getDescription(),"aaaaaaaaaaaaaaaaaaaaaaa");
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder3() {
+    public void testIsValidWhenICanCreateAMenuWithMenuBuilder3() {
         Menu anyMenu = anyMenu()
                 .setCategory(Collections.singletonList(Category.GREEN))
                 .createMenu();
 
-        assertEquals(anyMenu.getCategory().get(0),Category.GREEN);
+        Assert.assertEquals(anyMenu.getCategory().get(0),Category.GREEN);
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder4() {
+    public void testIsValidWhenICanCreateAMenuWithMenuBuilder4() {
         Menu anyMenu = anyMenu()
                 .setDeliveryPrice(30)
                 .createMenu();
 
-        assertEquals(anyMenu.getDeliveryPrice(),30,0);
+        Assert.assertEquals(anyMenu.getDeliveryPrice(),30,0);
     }
 
 
     @Test
-    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder5() {
+    public void testIsValidWhenICanCreateAMenuWithMenuBuilder5() {
         Menu anyMenu = anyMenu()
                 .setAverageDeliveryTime(48)
                 .createMenu();
 
-        assertEquals(anyMenu.getAverageDeliveryTime(),48,0);
+        Assert.assertEquals(anyMenu.getAverageDeliveryTime(),48,0);
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder8() {
+    public void testIsValidWhenICanCreateAMenuWithMenuBuilder8() {
         Menu anyMenu = anyMenu()
                 .setMaxAmountPerDay(33)
                 .createMenu();
 
-        assertEquals(anyMenu.getMaxAmountPerDay(),33,0);
+        Assert.assertEquals(anyMenu.getMaxAmountPerDay(),33,0);
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder9() {
+    public void testIsValidWhenICanCreateAMenuWithMenuBuilder9() {
         List<Order> orders = new ArrayList<>();
         Menu anyMenu = anyMenu()
                 .setOrders(orders)
                 .createMenu();
 
-        assertEquals(anyMenu.getOrders().size(),0);
+        Assert.assertEquals(anyMenu.getOrders().size(),0);
     }
 
     @Test

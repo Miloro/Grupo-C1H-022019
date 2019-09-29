@@ -1,63 +1,63 @@
 package com.viandasya.model.builders.user;
 
 import com.viandasya.model.user.ClientProfile;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static com.viandasya.model.builders.user.ClientProfileBuilder.anyClientProfile;
-import static org.junit.Assert.assertEquals;
 
 public class ClientProfileBuilderTest {
     @Test
-    public void testIsValid_WhenICanCreateAClientProfileWithServiceClientProfileBuilder() {
+    public void testIsValidWhenICanCreateAClientProfileWithServiceClientProfileBuilder() {
         ClientProfile anyClientProfile  = anyClientProfile()
                 .setName("name")
                 .createClientProfile();
 
-        assertEquals(anyClientProfile.getName(), "name");
+        Assert.assertEquals(anyClientProfile.getName(), "name");
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAClientProfileWithServiceClientProfileBuilder2() {
+    public void testIsValidWhenICanCreateAClientProfileWithServiceClientProfileBuilder2() {
         ClientProfile anyClientProfile  =  anyClientProfile()
                 .setLastName("lastName")
                 .createClientProfile();
 
-        assertEquals(anyClientProfile.getLastName(), "lastName");
+        Assert.assertEquals(anyClientProfile.getLastName(), "lastName");
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAClientProfileWithServiceClientProfileBuilder3() {
+    public void testIsValidWhenICanCreateAClientProfileWithServiceClientProfileBuilder3() {
         ClientProfile anyClientProfile  = anyClientProfile()
                 .setEmail("email")
                 .createClientProfile();
 
-        assertEquals(anyClientProfile.getEmail(), "email");
+        Assert.assertEquals(anyClientProfile.getEmail(), "email");
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAClientProfileWithServiceClientProfileBuilder4() {
+    public void testIsValidWhenICanCreateAClientProfileWithServiceClientProfileBuilder4() {
         ClientProfile anyClientProfile  = anyClientProfile()
                 .setPhoneNumber(12345)
                 .createClientProfile();
 
-        assertEquals(anyClientProfile.getPhoneNumber(), 12345,0);
+        Assert.assertEquals(anyClientProfile.getPhoneNumber(), 12345,0);
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAClientProfileWithServiceClientProfileBuilder5() {
+    public void testIsValidWhenICanCreateAClientProfileWithServiceClientProfileBuilder5() {
         ClientProfile anyClientProfile  = anyClientProfile()
                 .setCity("city")
                 .createClientProfile();
 
-        assertEquals(anyClientProfile.getCity(), "city");
+        Assert.assertEquals(anyClientProfile.getCity(), "city");
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAClientProfileWithServiceClientProfileBuilder6() {
+    public void testIsValidWhenICanCreateAClientProfileWithServiceClientProfileBuilder6() {
         ClientProfile anyClientProfile  = anyClientProfile()
                 .setAdress("adress")
                 .createClientProfile();
 
-        assertEquals(anyClientProfile.getAdress(), "adress");
+        Assert.assertEquals(anyClientProfile.getAdress(), "adress");
     }
 }

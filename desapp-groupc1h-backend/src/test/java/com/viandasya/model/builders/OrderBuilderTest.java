@@ -2,8 +2,6 @@ package com.viandasya.model.builders;
 
 import com.viandasya.model.order.OrderState;
 
-import static org.junit.Assert.*;
-
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
@@ -22,39 +20,39 @@ import static com.viandasya.model.builders.OrderBuilder.anyOrder;
 public class OrderBuilderTest {
 
     @Test
-    public void testIsValid_WhenICanCreateAOrderWithOrderBuilder() {
+    public void testIsValidWhenICanCreateAOrderWithOrderBuilder() {
         Order anyOrder = new OrderBuilder()
                 .setAmount(1234)
                 .createOrder();
 
-        assertEquals(anyOrder.getAmount(), 1234, 0);
+        Assert.assertEquals(anyOrder.getAmount(), 1234, 0);
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAOrderWithOrderBuilder2() {
+    public void testIsValidWhenICanCreateAOrderWithOrderBuilder2() {
         Order anyOrder = new OrderBuilder()
                 .setScore(2)
                 .createOrder();
 
-        assertEquals(anyOrder.getScore(), 2,0);
+        Assert.assertEquals(anyOrder.getScore(), 2,0);
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAOrderWithOrderBuilder3() {
+    public void testIsValidWhenICanCreateAOrderWithOrderBuilder3() {
         Order anyOrder = new OrderBuilder()
                 .setState(OrderState.CONFIRMED)
                 .createOrder();
 
-        assertEquals(anyOrder.getState(), OrderState.CONFIRMED);
+        Assert.assertEquals(anyOrder.getState(), OrderState.CONFIRMED);
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAOrderWithOrderBuilder4() {
+    public void testIsValidWhenICanCreateAOrderWithOrderBuilder4() {
         Order anyOrder = new OrderBuilder()
                 .setIsDelivery(false)
                 .createOrder();
 
-        assertEquals(anyOrder.getDelivery(), false);
+        Assert.assertEquals(anyOrder.getDelivery(), false);
     }
 
     @Test
