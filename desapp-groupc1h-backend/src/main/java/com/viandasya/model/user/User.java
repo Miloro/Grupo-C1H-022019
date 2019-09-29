@@ -1,12 +1,10 @@
 package com.viandasya.model.user;
 
 class User {
-
     private ClientProfile clientProfile;
     private ServiceProfile serviceProfile;
 
-    public User(Balance balance, ClientProfile clientProfile, ServiceProfile serviceProfile) {
-
+    public User(ClientProfile clientProfile, ServiceProfile serviceProfile) {
         this.clientProfile = clientProfile;
         this.serviceProfile = serviceProfile;
     }

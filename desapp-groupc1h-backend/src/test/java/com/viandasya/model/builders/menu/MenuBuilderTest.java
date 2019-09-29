@@ -23,7 +23,7 @@ import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateT
 public class MenuBuilderTest {
 
     @Test
-    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder() {
+    public void testIsValidWhenICanCreateAMenuWithMenuBuilder() {
         Menu anyMenu = anyMenu()
                 .setName("aaaaa")
                 .createMenu();
@@ -32,7 +32,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder2() {
+    public void testIsValidWhenICanCreateAMenuWithMenuBuilder2() {
         Menu anyMenu = anyMenu()
                 .setDescription("aaaaaaaaaaaaaaaaaaaaaaa")
                 .createMenu();
@@ -41,7 +41,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder3() {
+    public void testIsValidWhenICanCreateAMenuWithMenuBuilder3() {
         Menu anyMenu = anyMenu()
                 .setCategory(Collections.singletonList(Category.GREEN))
                 .createMenu();
@@ -60,7 +60,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAMenuWithMenuBuilder9() {
+    public void testIsValidWhenICanCreateAMenuWithMenuBuilder9() {
         List<Order> orders = new ArrayList<>();
         Menu anyMenu = anyMenu()
                 .setOrders(orders)

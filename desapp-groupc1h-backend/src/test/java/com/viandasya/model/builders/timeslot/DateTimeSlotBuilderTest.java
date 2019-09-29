@@ -1,12 +1,12 @@
 package com.viandasya.model.builders.timeslot;
 
 import com.viandasya.model.timeslot.DateTimeSlot;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
-import static org.junit.Assert.assertTrue;
 
 public class DateTimeSlotBuilderTest {
 
@@ -17,7 +17,7 @@ public class DateTimeSlotBuilderTest {
                 .setFrom(LocalDateTime.now().minusDays(7))
                 .createDateTimeSlot();
 
-        assertTrue(anyDateTimeSlot.getSince().isBefore(anyDateTimeSlot.getFrom()));
+        Assert.assertTrue(anyDateTimeSlot.getSince().isBefore(anyDateTimeSlot.getFrom()));
     }
 
 }
