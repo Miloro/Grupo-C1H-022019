@@ -1,11 +1,11 @@
 package com.viandasya.model.builders.menu;
 
 import com.viandasya.model.menu.Category;
+import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
-import com.viandasya.model.timeslot.TimeSlot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,10 +20,8 @@ public class MenuBuilder {
     private String name = "Combo Vegetariano";
     private String description = "Es una ensalada de lechuga, tomate y huevo";
     private List<Category> category = Collections.singletonList(Category.GREEN);
-    private Integer deliveryPrice = 30;
     private DateTimeSlot validity = anyDateTimeSlot().createDateTimeSlot();
-    private TimeSlot deliveryDays = anyDayTimeSlot().createDayTimeSlot();
-    private Integer averageDeliveryTime = 48;
+    private DeliveryInfo deliveryInfo = new DeliveryInfo(anyDayTimeSlot().createDayTimeSlot(), 20, 60);
     private List<Offer> offers = Arrays.asList(anyOffer().setPrice(200).createOffer(), anyOffer().createOffer());
     private Integer maxAmountPerDay = 33;
     private List<Order> orders = new ArrayList<>();
@@ -47,23 +45,13 @@ public class MenuBuilder {
         return this;
     }
 
-    public MenuBuilder setDeliveryPrice(Integer deliveryPrice) {
-        this.deliveryPrice = deliveryPrice;
-        return this;
-    }
-
     public MenuBuilder setValidity(DateTimeSlot validity) {
         this.validity = validity;
         return this;
     }
 
-    public MenuBuilder setDeliveryDays(TimeSlot deliveryDays) {
-        this.deliveryDays = deliveryDays;
-        return this;
-    }
-
-    public MenuBuilder setAverageDeliveryTime(Integer averageDeliveryTime) {
-        this.averageDeliveryTime = averageDeliveryTime;
+    public MenuBuilder setDeliveryInfo(DeliveryInfo deliveryInfo) {
+        this.deliveryInfo = deliveryInfo;
         return this;
     }
 
@@ -84,6 +72,6 @@ public class MenuBuilder {
     }
 
     public Menu createMenu() {
-        return new Menu(name, description, category, deliveryPrice, validity, deliveryDays, averageDeliveryTime, offers, maxAmountPerDay, orders);
+        return new Menu(name, description, category, validity, deliveryInfo, offers, maxAmountPerDay, orders);
     }
 }
