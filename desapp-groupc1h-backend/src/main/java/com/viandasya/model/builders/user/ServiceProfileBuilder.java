@@ -6,6 +6,7 @@ import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.model.user.ServiceInfo;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class ServiceProfileBuilder {
     private ServiceInfo serviceInfo = anyServiceInfo().createServiceInfo();
     private TimeSlot serviceDays = anyDateTimeSlot().createDateTimeSlot();
     private List<Menu> menus = new ArrayList<>();
-    private Balance balance = new Balance(0);
+    private Balance balance = new Balance(new BigDecimal("0"));
 
     public static ServiceProfileBuilder anyServiceProfile(){
         return new ServiceProfileBuilder();

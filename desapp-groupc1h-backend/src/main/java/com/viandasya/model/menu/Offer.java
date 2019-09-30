@@ -1,10 +1,12 @@
 package com.viandasya.model.menu;
 
+import java.math.BigDecimal;
+
 public class Offer {
     private Integer minAmount;
-    private Integer price;
+    private BigDecimal price;
 
-    public Offer(Integer minAmount, Integer price) {
+    public Offer(Integer minAmount, BigDecimal price) {
         this.minAmount = minAmount;
         this.price = price;
     }
@@ -20,11 +22,11 @@ public class Offer {
         this.minAmount = minAmount;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

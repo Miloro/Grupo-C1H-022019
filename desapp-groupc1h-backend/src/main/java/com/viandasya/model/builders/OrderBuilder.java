@@ -7,6 +7,7 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +17,7 @@ import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
 
 public class OrderBuilder {
     private Integer amount = 1234;
-    private List<Offer> offers = Collections.singletonList(new OfferBuilder().setMinAmount(30).setPrice(1).createOffer());
+    private List<Offer> offers = Collections.singletonList(new OfferBuilder().setMinAmount(30).setPrice(new BigDecimal("1")).createOffer());
     private Integer score = 2;
     private OrderState state = OrderState.CONFIRMED;
     private LocalDateTime orderDate = LocalDateTime.now();

@@ -4,6 +4,7 @@ import com.viandasya.model.menu.Offer;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.menu.Menu;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
@@ -96,7 +97,7 @@ public class Order {
         this.client = client;
     }
 
-    public Integer getCurrentPrice(){
-        return this.offers.stream().min(Comparator.comparingInt(Offer::getPrice)).get().getPrice();
+    public BigDecimal getCurrentPrice(){
+        return this.offers.stream().min(Comparator.comparing(Offer::getPrice)).get().getPrice();
     }
 }

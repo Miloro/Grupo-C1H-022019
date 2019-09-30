@@ -1,35 +1,36 @@
 package com.viandasya.model.user;
 
 import javax.persistence.Embeddable;
+import java.math.BigDecimal;
 
 @Embeddable
 public class Balance {
-    private Integer amount;
+    private BigDecimal amount;
 
-    public Balance(Integer amount) {
+    public Balance(BigDecimal amount) {
         this.amount = amount;
     }
 
     public Balance() {
     }
 
-    public Integer getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    public void withdraw(Integer amountToWithdraw){
-        this.amount =- amount;
+    public void withdraw(BigDecimal amountToWithdraw){
+        this.amount = this.amount.subtract(amountToWithdraw);
     }
 
-    public void deposit(Integer amountToDeposit){
-        this.amount =+ amountToDeposit;
+    public void deposit(BigDecimal amountToDeposit){
+        this.amount = this.amount.add(amountToDeposit);
     }
 
-    public boolean canWithdraw(Integer amountToWithdraw){
-        return this.amount >= amountToWithdraw;
+    public boolean canWithdraw(BigDecimal amountToWithdraw){
+        return this.amount.compareTo(amountToWithdraw) > -1 ;
     }
 }

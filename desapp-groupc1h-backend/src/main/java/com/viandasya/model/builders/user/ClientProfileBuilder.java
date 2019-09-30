@@ -3,6 +3,8 @@ package com.viandasya.model.builders.user;
 import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ClientProfile;
 
+import java.math.BigDecimal;
+
 public class ClientProfileBuilder {
     private String name = "name";
     private String lastName = "lastName";
@@ -10,7 +12,7 @@ public class ClientProfileBuilder {
     private Integer phoneNumber = 12345;
     private String city = "city";
     private String adress = "adress";
-    private Balance balance = new Balance(0);
+    private Balance balance = new Balance(new BigDecimal("0"));
 
     public static ClientProfileBuilder anyClientProfile(){
         return new ClientProfileBuilder();
