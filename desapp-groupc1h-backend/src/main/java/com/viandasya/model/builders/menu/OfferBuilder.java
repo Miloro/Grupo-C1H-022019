@@ -2,9 +2,11 @@ package com.viandasya.model.builders.menu;
 
 import com.viandasya.model.menu.Offer;
 
+import java.math.BigDecimal;
+
 public class OfferBuilder {
     private Integer minAmount;
-    private Integer price;
+    private BigDecimal price;
 
     public static OfferBuilder anyOffer() {
         return new OfferBuilder();
@@ -15,7 +17,7 @@ public class OfferBuilder {
         return this;
     }
 
-    public OfferBuilder setPrice(Integer price) {
+    public OfferBuilder setPrice(BigDecimal price) {
         this.price = price;
         return this;
     }

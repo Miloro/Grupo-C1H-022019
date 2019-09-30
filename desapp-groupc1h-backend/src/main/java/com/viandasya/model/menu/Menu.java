@@ -3,6 +3,7 @@ package com.viandasya.model.menu;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -95,7 +96,7 @@ public class Menu {
         return this.validity.isValidDate(LocalDateTime.now());
     }
 
-    public Integer getCurrentPrice() {
+    public BigDecimal getCurrentPrice() {
         int orderCount = this.getOrderCount();
         return this.offers.stream().filter(o -> orderCount >= o.getMinAmount()).findFirst().get().getPrice();
     }

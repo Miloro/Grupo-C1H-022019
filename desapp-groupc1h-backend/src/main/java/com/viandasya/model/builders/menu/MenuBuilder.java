@@ -7,6 +7,7 @@ import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,8 +22,8 @@ public class MenuBuilder {
     private String description = "Es una ensalada de lechuga, tomate y huevo";
     private List<Category> category = Collections.singletonList(Category.GREEN);
     private DateTimeSlot validity = anyDateTimeSlot().createDateTimeSlot();
-    private DeliveryInfo deliveryInfo = new DeliveryInfo(anyDayTimeSlot().createDayTimeSlot(), 20, 60);
-    private List<Offer> offers = Arrays.asList(anyOffer().setPrice(200).createOffer(), anyOffer().createOffer());
+    private DeliveryInfo deliveryInfo = new DeliveryInfo(anyDayTimeSlot().createDayTimeSlot(), new BigDecimal("20"), 60);
+    private List<Offer> offers = Arrays.asList(anyOffer().setPrice(new BigDecimal("200")).createOffer(), anyOffer().createOffer());
     private Integer maxAmountPerDay = 33;
     private List<Order> orders = new ArrayList<>();
 

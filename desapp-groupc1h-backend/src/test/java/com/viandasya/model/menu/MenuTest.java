@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,16 +41,16 @@ public class MenuTest {
     @Test
     public void testCurrentPriceMenuWith10OrderCountReturn100() {
         List<Offer> offers = new ArrayList<>();
-        offers.add(anyOffer().setPrice(175).setMinAmount(25).createOffer());
-        offers.add(anyOffer().setPrice(180).setMinAmount(20).createOffer());
-        offers.add(anyOffer().setPrice(200).setMinAmount(0).createOffer());
+        offers.add(anyOffer().setPrice(new BigDecimal("175")).setMinAmount(25).createOffer());
+        offers.add(anyOffer().setPrice(new BigDecimal("180")).setMinAmount(20).createOffer());
+        offers.add(anyOffer().setPrice(new BigDecimal("200")).setMinAmount(0).createOffer());
 
         Menu menu = anyMenu()
                 .setOrders(Arrays.asList(anyOrder().setAmount(10).createOrder(),
                         anyOrder().setAmount(11).createOrder()))
                 .setOffers(offers).createMenu();
 
-        Assert.assertEquals(180, menu.getCurrentPrice(), 0.0);
+        Assert.assertEquals(new BigDecimal("180"), menu.getCurrentPrice());
     }
 
 }

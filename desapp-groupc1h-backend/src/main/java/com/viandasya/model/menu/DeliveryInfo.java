@@ -2,13 +2,15 @@ package com.viandasya.model.menu;
 
 import com.viandasya.model.timeslot.TimeSlot;
 
+import java.math.BigDecimal;
+
 public class DeliveryInfo {
     private TimeSlot timeslot;
-    private Integer price;
+    private BigDecimal price;
     private Integer averageTime;
 
 
-    public DeliveryInfo(TimeSlot timeslot, Integer price, Integer averageTime) {
+    public DeliveryInfo(TimeSlot timeslot, BigDecimal price, Integer averageTime) {
         this.timeslot = timeslot;
         this.price = price;
         this.averageTime = averageTime;
@@ -22,11 +24,11 @@ public class DeliveryInfo {
         this.timeslot = timeslot;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
