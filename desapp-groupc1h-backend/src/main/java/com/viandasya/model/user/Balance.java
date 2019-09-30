@@ -1,10 +1,16 @@
 package com.viandasya.model.user;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Balance {
-     private Integer amount;
+    private Integer amount;
 
     public Balance(Integer amount) {
         this.amount = amount;
+    }
+
+    public Balance() {
     }
 
     public Integer getAmount() {
