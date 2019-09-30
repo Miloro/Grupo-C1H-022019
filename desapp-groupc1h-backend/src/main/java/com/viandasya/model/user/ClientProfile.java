@@ -1,6 +1,12 @@
 package com.viandasya.model.user;
 
+import javax.persistence.*;
+
+@Entity
 public class ClientProfile {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String name;
     private String lastName;
     private String email;
@@ -17,6 +23,9 @@ public class ClientProfile {
         this.city = city;
         this.adress = adress;
         this.balance = balance;
+    }
+
+    public ClientProfile() {
     }
 
     public String getName() {
