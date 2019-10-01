@@ -16,8 +16,9 @@ public class Menu {
     private List<Offer> offers; //order by price asc
     private Integer maxAmountPerDay;
     private List<Order> orders;
+    private Integer cookingTime;
 
-    public Menu(String name, String description, List<Category> category, DateTimeSlot validity, DeliveryInfo deliveryInfo, List<Offer> offers, Integer maxAmountPerDay, List<Order> orders) {
+    public Menu(String name, String description, List<Category> category, DateTimeSlot validity, DeliveryInfo deliveryInfo, List<Offer> offers, Integer maxAmountPerDay, List<Order> orders, Integer cookingTime) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -26,6 +27,7 @@ public class Menu {
         this.offers = offers;
         this.maxAmountPerDay = maxAmountPerDay;
         this.orders = orders;
+        this.cookingTime = cookingTime;
     }
 
     public String getName() {
@@ -90,6 +92,14 @@ public class Menu {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public Integer getCookingTime(){
+        return cookingTime;
+    }
+
+    public void setCookingTime(Integer cookingTime){
+        this.cookingTime = cookingTime;
     }
 
     public boolean isValid() {

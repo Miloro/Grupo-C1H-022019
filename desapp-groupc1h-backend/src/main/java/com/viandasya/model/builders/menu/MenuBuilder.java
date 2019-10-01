@@ -26,6 +26,7 @@ public class MenuBuilder {
     private List<Offer> offers = Arrays.asList(anyOffer().setPrice(new BigDecimal("200")).createOffer(), anyOffer().createOffer());
     private Integer maxAmountPerDay = 33;
     private List<Order> orders = new ArrayList<>();
+    private Integer cookingTime = 15;
 
     public static MenuBuilder anyMenu() {
         return new MenuBuilder();
@@ -72,7 +73,12 @@ public class MenuBuilder {
         return this;
     }
 
+    public MenuBuilder setCookingTime(Integer cookingTime){
+        this.cookingTime = cookingTime;
+        return this;
+    }
+
     public Menu createMenu() {
-        return new Menu(name, description, category, validity, deliveryInfo, offers, maxAmountPerDay, orders);
+        return new Menu(name, description, category, validity, deliveryInfo, offers, maxAmountPerDay, orders, cookingTime);
     }
 }
