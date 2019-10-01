@@ -5,6 +5,7 @@ import com.viandasya.model.order.OrderState;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
+import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ClientProfile;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.viandasya.model.builders.OrderBuilder.anyOrder;
+import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.*;
 
 
 public class OrderBuilderTest {
@@ -57,7 +59,10 @@ public class OrderBuilderTest {
 
     @Test
     public void testSetOrderDateSetedInBuilderEqualsToTheOneGettedInOrder() {
-        LocalDateTime date = LocalDateTime.of(2019,3,21,4,0);
+        DateTimeSlot date = anyDateTimeSlot()
+                .setSince(LocalDateTime.of(2019,9,20,12,0))
+                .setFrom(LocalDateTime.of(2019,9,20,13,0))
+                .createDateTimeSlot();
         Order order = anyOrder().setOrderDate(date).createOrder();
 
         Assert.assertEquals(date, order.getOrderDate());

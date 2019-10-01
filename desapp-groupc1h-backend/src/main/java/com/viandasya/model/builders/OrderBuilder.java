@@ -2,16 +2,17 @@ package com.viandasya.model.builders;
 
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.builders.menu.OfferBuilder;
+import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
+import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
 import static com.viandasya.model.builders.user.ClientProfileBuilder.anyClientProfile;
 import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
 
@@ -20,7 +21,7 @@ public class OrderBuilder {
     private List<Offer> offers = Collections.singletonList(new OfferBuilder().setMinAmount(30).setPrice(new BigDecimal("1")).createOffer());
     private Integer score = 2;
     private OrderState state = OrderState.CONFIRMED;
-    private LocalDateTime orderDate = LocalDateTime.now();
+    private DateTimeSlot orderDate = anyDateTimeSlot().createDateTimeSlot();
     private Boolean isDelivery = false;
     private Menu menu = anyMenu().createMenu();
     private ClientProfile client = anyClientProfile().createClientProfile();
@@ -49,7 +50,7 @@ public class OrderBuilder {
         return this;
     }
 
-    public OrderBuilder setOrderDate(LocalDateTime orderDate) {
+    public OrderBuilder setOrderDate(DateTimeSlot orderDate) {
         this.orderDate = orderDate;
         return this;
     }

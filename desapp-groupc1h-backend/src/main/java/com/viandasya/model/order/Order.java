@@ -1,11 +1,11 @@
 package com.viandasya.model.order;
 
 import com.viandasya.model.menu.Offer;
+import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.menu.Menu;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 
@@ -14,12 +14,12 @@ public class Order {
     private List<Offer> offers;
     private Integer score;
     private OrderState state;
-    private LocalDateTime orderDate;
+    private DateTimeSlot orderDate;
     private Boolean isDelivery;
     private Menu menu;
     private ClientProfile client;
 
-    public Order(Integer amount, List<Offer> offers, Integer score, OrderState state, LocalDateTime orderDate, Boolean isDelivery, Menu menu, ClientProfile client) {
+    public Order(Integer amount, List<Offer> offers, Integer score, OrderState state, DateTimeSlot orderDate, Boolean isDelivery, Menu menu, ClientProfile client) {
         this.amount = amount;
         this.offers = offers;
         this.score = score;
@@ -65,11 +65,11 @@ public class Order {
         this.state = state;
     }
 
-    public LocalDateTime getOrderDate() {
+    public DateTimeSlot getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
+    public void setOrderDate(DateTimeSlot orderDate) {
         this.orderDate = orderDate;
     }
 
