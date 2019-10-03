@@ -4,25 +4,25 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class TimeTable implements TimeSlot {
-    private List<TimeSlot> timeSlots;
+    private List<DayTimeSlot> dayTimeSlots;
 
-    public TimeTable(List<TimeSlot> timeSlots) {
-        this.timeSlots = timeSlots;
+    public TimeTable(List<DayTimeSlot> dayTimeSlots) {
+        this.dayTimeSlots = dayTimeSlots;
     }
 
     public TimeTable() {
     }
 
-    public List<TimeSlot> getTimeSlots() {
-        return timeSlots;
+    public List<DayTimeSlot> getDayTimeSlots() {
+        return dayTimeSlots;
     }
 
-    public void setTimeSlots(List<TimeSlot> timeSlots) {
-        this.timeSlots = timeSlots;
+    public void setDayTimeSlots(List<DayTimeSlot> dayTimeSlots) {
+        this.dayTimeSlots = dayTimeSlots;
     }
 
     @Override
     public boolean isValidDate(LocalDateTime date) {
-        return this.timeSlots.stream().anyMatch(timeslot -> timeslot.isValidDate(date));
+        return this.dayTimeSlots.stream().anyMatch(timeslot -> timeslot.isValidDate(date));
     }
 }

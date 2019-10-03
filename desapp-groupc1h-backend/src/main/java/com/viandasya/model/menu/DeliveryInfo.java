@@ -1,27 +1,27 @@
 package com.viandasya.model.menu;
 
-import com.viandasya.model.timeslot.TimeSlot;
+import com.viandasya.model.timeslot.TimeTable;
 
 import java.math.BigDecimal;
 
 public class DeliveryInfo {
-    private TimeSlot timeslot;
+    private TimeTable timetable;
     private BigDecimal price;
     private Integer averageTime;
 
 
-    public DeliveryInfo(TimeSlot timeslot, BigDecimal price, Integer averageTime) {
-        this.timeslot = timeslot;
+    public DeliveryInfo(TimeTable timetable, BigDecimal price, Integer averageTime) {
+        this.timetable = timetable;
         this.price = price;
         this.averageTime = averageTime;
     }
 
-    public TimeSlot getTimeslot() {
-        return timeslot;
+    public TimeTable getTimetable() {
+        return timetable;
     }
 
-    public void setTimeslot(TimeSlot timeslot) {
-        this.timeslot = timeslot;
+    public void setTimetable(TimeTable timetable) {
+        this.timetable = timetable;
     }
 
     public BigDecimal getPrice() {

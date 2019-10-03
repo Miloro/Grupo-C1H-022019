@@ -15,15 +15,17 @@ import java.util.List;
 
 import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
-import static com.viandasya.model.builders.timeslot.DayTimeSlotBuilder.anyDayTimeSlot;
+import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTable;
 
 public class MenuBuilder {
     private String name = "Combo Vegetariano";
     private String description = "Es una ensalada de lechuga, tomate y huevo";
     private List<Category> category = Collections.singletonList(Category.GREEN);
     private DateTimeSlot validity = anyDateTimeSlot().createDateTimeSlot();
-    private DeliveryInfo deliveryInfo = new DeliveryInfo(anyDayTimeSlot().createDayTimeSlot(), new BigDecimal("20"), 60);
-    private List<Offer> offers = Arrays.asList(anyOffer().setPrice(new BigDecimal("200")).createOffer(), anyOffer().createOffer());
+    private DeliveryInfo deliveryInfo = new DeliveryInfo(anyTimeTable().createTimeTable(),
+            new BigDecimal("20"), 60);
+    private List<Offer> offers = Arrays.asList(anyOffer().setPrice(new BigDecimal("200")).createOffer(),
+            anyOffer().createOffer());
     private Integer maxAmountPerDay = 33;
     private List<Order> orders = new ArrayList<>();
     private Integer cookingTime = 15;
