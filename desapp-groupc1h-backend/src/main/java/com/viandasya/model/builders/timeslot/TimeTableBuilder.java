@@ -5,7 +5,6 @@ import com.viandasya.model.timeslot.HoursTimeSlot;
 import com.viandasya.model.timeslot.TimeTable;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;

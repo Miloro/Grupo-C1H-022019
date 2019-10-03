@@ -1,6 +1,5 @@
 package com.viandasya.model.builders.user;
 
-import com.viandasya.model.builders.timeslot.TimeTableBuilder;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.timeslot.TimeTable;
 import com.viandasya.model.user.Balance;
@@ -11,7 +10,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
 import static com.viandasya.model.builders.timeslot.TimeTableBuilder.*;
 import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInfo;
 
