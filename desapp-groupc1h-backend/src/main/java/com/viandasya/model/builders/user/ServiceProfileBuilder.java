@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.viandasya.model.builders.timeslot.TimeTableBuilder.*;
+import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTable;
 import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInfo;
 
 public class ServiceProfileBuilder {
