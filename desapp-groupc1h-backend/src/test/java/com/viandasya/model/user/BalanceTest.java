@@ -36,10 +36,10 @@ public class BalanceTest {
 
     @Test
     public void testIfIWithdraw100InABalanceWith100IKeep0(){
-        Balance balance = new Balance(new BigDecimal("0"));
-        balance.deposit(new BigDecimal("100"));
+        Balance balance = new Balance(new BigDecimal("100"));
+        balance.withdraw(new BigDecimal("100"));
 
-        Assert.assertEquals(balance.getAmount(),new BigDecimal("100"));
+        Assert.assertEquals(balance.getAmount(),new BigDecimal("0"));
     }
 
 }

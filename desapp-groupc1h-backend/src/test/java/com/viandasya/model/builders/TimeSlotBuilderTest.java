@@ -2,18 +2,15 @@ package com.viandasya.model.builders;
 
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.DayTimeSlot;
-import com.viandasya.model.timeslot.HoursTimeSlot;
+import com.viandasya.model.timeslot.TimeTable;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
-import static com.viandasya.model.builders.timeslot.DayTimeSlotBuilder.anyDayTimeSlot;
 
 public class TimeSlotBuilderTest {
 
@@ -38,23 +35,11 @@ public class TimeSlotBuilderTest {
     }
 
     @Test
-    public void testSetDaySetedInBuilderEqualsToTheOneGettedInDayTimeSlot() {
-        DayTimeSlot dayTimeSlot = anyDayTimeSlot().setDay(DayOfWeek.SATURDAY).createDayTimeSlot();
+    public void testSetDayTimeSlotsSetedInBuilderEqualsToTheOneGettedInTimeTable() {
+        List<DayTimeSlot> dayTimeSlots = new ArrayList<>();
+        TimeTable timeTable = new TimeTable(dayTimeSlots);
 
-        Assert.assertEquals(DayOfWeek.SATURDAY, dayTimeSlot.getDay());
-    }
-
-    @Test
-    public void testSetHoursTimeSlotSetedInBuilderEqualsToTheOneGettedInDayTimeSlot() {
-        List<HoursTimeSlot> hoursTimeSlots = new ArrayList<>();
-        hoursTimeSlots.add(new HoursTimeSlot(LocalTime.NOON, LocalTime.MIDNIGHT));
-        hoursTimeSlots.add(new HoursTimeSlot(LocalTime.of(8,0), LocalTime.of(10,0)));
-
-        DayTimeSlot dayTimeSlot = anyDayTimeSlot()
-                .setHoursTimeSlots(hoursTimeSlots)
-                .createDayTimeSlot();
-
-        Assert.assertEquals(hoursTimeSlots, dayTimeSlot.getHoursTimeSlots());
+        Assert.assertEquals(dayTimeSlots, timeTable.getDayTimeSlots());
     }
 
 }

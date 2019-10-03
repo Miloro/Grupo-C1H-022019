@@ -1,21 +1,21 @@
 package com.viandasya.model.user;
 
 import com.viandasya.model.menu.Menu;
-import com.viandasya.model.timeslot.TimeSlot;
+import com.viandasya.model.timeslot.TimeTable;
 
 import java.util.List;
 
 public class ServiceProfile {
     private ServiceInfo serviceInfo;
-    private TimeSlot serviceDays;
+    private TimeTable timetable;
     private List<Menu> menus;
     private Balance balance;
 
     public ServiceProfile(){}
 
-    public ServiceProfile(ServiceInfo serviceInfo, TimeSlot serviceDays, List<Menu> menus, Balance balance) {
+    public ServiceProfile(ServiceInfo serviceInfo, TimeTable timetable, List<Menu> menus, Balance balance) {
         this.serviceInfo = serviceInfo;
-        this.serviceDays = serviceDays;
+        this.timetable = timetable;
         this.menus = menus;
         this.balance = balance;
     }
@@ -28,12 +28,12 @@ public class ServiceProfile {
         this.serviceInfo = serviceInfo;
     }
 
-    public TimeSlot getServiceDays() {
-        return serviceDays;
+    public TimeTable getTimetable() {
+        return timetable;
     }
 
-    public void setServiceHours(TimeSlot serviceHours) {
-        this.serviceDays = serviceHours;
+    public void setServiceHours(TimeTable serviceHours) {
+        this.timetable = serviceHours;
     }
 
     public List<Menu> getMenus() {

@@ -1,8 +1,11 @@
 package com.viandasya.model.builders.user;
 
+import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ClientProfile;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.math.BigDecimal;
 
 import static com.viandasya.model.builders.user.ClientProfileBuilder.anyClientProfile;
 
@@ -59,5 +62,15 @@ public class ClientProfileBuilderTest {
                 .createClientProfile();
 
         Assert.assertEquals(anyClientProfile.getAdress(), "adress");
+    }
+
+    @Test
+    public void testSetBalanceSetedInBuilderEqualsToTheOneGettedInClientProfile() {
+        Balance balance = new Balance(new BigDecimal("100.50"));
+        ClientProfile clientProfile = anyClientProfile()
+                .setBalance(balance)
+                .createClientProfile();
+
+        Assert.assertEquals(balance, clientProfile.getBalance());
     }
 }
