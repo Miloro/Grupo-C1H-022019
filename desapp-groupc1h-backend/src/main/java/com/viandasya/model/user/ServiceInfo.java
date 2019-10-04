@@ -1,6 +1,13 @@
 package com.viandasya.model.user;
 
+import javax.persistence.*;
+
+@Entity
 public class ServiceInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private String name;
     private String logo;
     private String adress;
@@ -9,6 +16,9 @@ public class ServiceInfo {
     private String eMail;
     private Integer phoneNumber;
     private String city;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private ServiceProfile serviceProfile;
 
     public ServiceInfo(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber, String city) {
         this.name = name;
@@ -85,6 +95,12 @@ public class ServiceInfo {
         this.city = city;
     }
 
+    public ServiceProfile getServiceProfile() {
+        return serviceProfile;
+    }
 
+    public void setServiceProfile(ServiceProfile serviceProfile) {
+        this.serviceProfile = serviceProfile;
+    }
 
 }

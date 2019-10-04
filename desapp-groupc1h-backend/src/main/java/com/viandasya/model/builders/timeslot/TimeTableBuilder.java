@@ -14,10 +14,10 @@ public class TimeTableBuilder {
     private List<DayTimeSlot> dayTimeSlots = Arrays.asList(
             new DayTimeSlot(DayOfWeek.MONDAY,
                     Collections.singletonList(new HoursTimeSlot(LocalTime.of(9, 0),
-                            LocalTime.of(5, 0)))),
+                            LocalTime.of(5, 0))), null),
             new DayTimeSlot(DayOfWeek.THURSDAY,
                     Collections.singletonList(new HoursTimeSlot(LocalTime.of(9, 0),
-                            LocalTime.of(5, 0))))
+                            LocalTime.of(5, 0))), null)
     );
 
     public static TimeTableBuilder anyTimeTable() {

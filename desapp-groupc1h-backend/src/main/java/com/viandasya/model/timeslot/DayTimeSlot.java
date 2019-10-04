@@ -1,16 +1,28 @@
 package com.viandasya.model.timeslot;
 
+import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class DayTimeSlot implements TimeSlot{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private DayOfWeek day;
-    private List<HoursTimeSlot> hoursTimeSlots;
 
-    public DayTimeSlot(DayOfWeek day, List<HoursTimeSlot> hoursTimeSlots) {
+    @ElementCollection
+    private List<HoursTimeSlot> hoursTimeSlots = new ArrayList<>();
+
+    @ManyToOne
+    private TimeTable timeTable;
+
+    public DayTimeSlot(DayOfWeek day, List<HoursTimeSlot> hoursTimeSlots, TimeTable timeTable) {
         this.day = day;
         this.hoursTimeSlots = hoursTimeSlots;
+        this.timeTable = timeTable;
     }
 
     public DayTimeSlot() {
@@ -39,5 +51,13 @@ public class DayTimeSlot implements TimeSlot{
 
     private boolean isBetweenHours(LocalDateTime date) {
         return this.hoursTimeSlots.stream().anyMatch(h -> h.isValidDate(date));
+    }
+
+    public TimeTable getTimeTable() {
+        return timeTable;
+    }
+
+    public void setTimeTable(TimeTable timeTable) {
+        this.timeTable = timeTable;
     }
 }

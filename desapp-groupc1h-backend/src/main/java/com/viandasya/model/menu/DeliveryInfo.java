@@ -2,18 +2,33 @@ package com.viandasya.model.menu;
 
 import com.viandasya.model.timeslot.TimeTable;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
 public class DeliveryInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @OneToOne
+    @MapsId
     private TimeTable timetable;
+
     private BigDecimal price;
     private Integer averageTime;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Menu menu;
 
 
     public DeliveryInfo(TimeTable timetable, BigDecimal price, Integer averageTime) {
         this.timetable = timetable;
         this.price = price;
         this.averageTime = averageTime;
+    }
+
+    public DeliveryInfo() {
     }
 
     public TimeTable getTimetable() {
@@ -38,5 +53,13 @@ public class DeliveryInfo {
 
     public void setAverageTime(Integer averageTime) {
         this.averageTime = averageTime;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 }

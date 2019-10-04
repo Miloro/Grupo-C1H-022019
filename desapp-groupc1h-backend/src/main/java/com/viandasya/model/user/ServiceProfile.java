@@ -3,13 +3,29 @@ package com.viandasya.model.user;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.timeslot.TimeTable;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class ServiceProfile {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @OneToOne(mappedBy = "serviceProfile", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private ServiceInfo serviceInfo;
+
+    @OneToOne
+    @MapsId
     private TimeTable timetable;
+
+    @OneToMany(mappedBy = "serviceProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Menu> menus;
+
     private Balance balance;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private User user;
 
     public ServiceProfile(){}
 
@@ -64,4 +80,11 @@ public class ServiceProfile {
         return this.menus.stream().filter(Menu::isValid).count() == 20;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

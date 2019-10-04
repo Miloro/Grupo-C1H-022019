@@ -2,21 +2,44 @@ package com.viandasya.model.menu;
 
 import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
+import com.viandasya.model.user.ServiceProfile;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Menu {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private String name;
     private String description;
+
+    @ElementCollection
     private List<Category> category;
+
     private DateTimeSlot validity;
+
+    @OneToOne(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private DeliveryInfo deliveryInfo;
-    private List<Offer> offers; //order by price asc
+
+    @ElementCollection
+    @OrderBy(value = "price asc")
+    private List<Offer> offers = new ArrayList<>();
+
     private Integer maxAmountPerDay;
-    private List<Order> orders;
+
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
+
     private Integer cookingTime;
+
+    @ManyToOne
+    private ServiceProfile serviceProfile;
 
     public Menu(String name, String description, List<Category> category, DateTimeSlot validity, DeliveryInfo deliveryInfo, List<Offer> offers, Integer maxAmountPerDay, List<Order> orders, Integer cookingTime) {
         this.name = name;
@@ -28,6 +51,9 @@ public class Menu {
         this.maxAmountPerDay = maxAmountPerDay;
         this.orders = orders;
         this.cookingTime = cookingTime;
+    }
+
+    public Menu() {
     }
 
     public String getName() {
@@ -102,10 +128,19 @@ public class Menu {
         this.cookingTime = cookingTime;
     }
 
+    public ServiceProfile getServiceProfile() {
+        return serviceProfile;
+    }
+
+    public void setServiceProfile(ServiceProfile serviceProfile) {
+        this.serviceProfile = serviceProfile;
+    }
+
     public boolean isValid() {
         return this.validity.isValidDate(LocalDateTime.now());
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public BigDecimal getCurrentPrice() {
         int orderCount = this.getOrderCount();
         return this.offers.stream().filter(o -> orderCount >= o.getMinAmount()).findFirst().get().getPrice();
@@ -113,6 +148,11 @@ public class Menu {
 
     private int getOrderCount() {
         return this.orders.stream().mapToInt(Order::getAmount).sum();
+    }
+
+    public void addOrder(Order order) {
+        order.setMenu(this);
+        this.orders.add(order);
     }
 
 }
