@@ -1,7 +1,9 @@
 package com.viandasya.model.menu;
 
+import javax.persistence.Embeddable;
 import java.math.BigDecimal;
 
+@Embeddable
 public class Offer {
     private Integer minAmount;
     private BigDecimal price;

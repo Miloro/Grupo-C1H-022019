@@ -31,7 +31,7 @@ public class TimeSlotBuilderTest {
                 .createDateTimeSlot();
 
         Assert.assertEquals(LocalDateTime.of(2015,1,6,4,46),
-                dateTimeSlot.getFrom());
+                dateTimeSlot.getUntil());
     }
 
     @Test

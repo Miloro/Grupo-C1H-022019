@@ -15,6 +15,10 @@ public class ClientProfile {
     private String adress;
     private Balance balance;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private User user;
+
+
     public ClientProfile(String name, String lastName, String email, Integer phoneNumber, String city, String adress, Balance balance) {
         this.name = name;
         this.lastName = lastName;
@@ -84,4 +88,11 @@ public class ClientProfile {
         this.balance = balance;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

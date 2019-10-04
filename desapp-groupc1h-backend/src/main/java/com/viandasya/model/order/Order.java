@@ -5,18 +5,35 @@ import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.menu.Menu;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+@Entity(name = "order_info")
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private Integer amount;
-    private List<Offer> offers;
+
+    @ElementCollection
+    private List<Offer> offers = new ArrayList<>();
     private Integer score;
+
+    @Enumerated(value = EnumType.STRING)
     private OrderState state;
+
     private DateTimeSlot orderDate;
     private Boolean isDelivery;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Menu menu;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
     private ClientProfile client;
 
     public Order(Integer amount, List<Offer> offers, Integer score, OrderState state, DateTimeSlot orderDate, Boolean isDelivery, Menu menu, ClientProfile client) {
@@ -97,6 +114,7 @@ public class Order {
         this.client = client;
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public BigDecimal getCurrentPrice(){
         return this.offers.stream().min(Comparator.comparing(Offer::getPrice)).get().getPrice();
     }

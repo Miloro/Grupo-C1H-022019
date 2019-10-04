@@ -1,7 +1,6 @@
 package com.viandasya.model.builders;
 
 import com.viandasya.model.menu.Offer;
-import com.viandasya.model.builders.menu.OfferBuilder;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.menu.Menu;
@@ -12,13 +11,15 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
+import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
 import static com.viandasya.model.builders.user.ClientProfileBuilder.anyClientProfile;
 import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
 
 public class OrderBuilder {
     private Integer amount = 1234;
-    private List<Offer> offers = Collections.singletonList(new OfferBuilder().setMinAmount(30).setPrice(new BigDecimal("1")).createOffer());
+    private List<Offer> offers = Collections.singletonList(anyOffer().setMinAmount(30)
+            .setPrice(new BigDecimal("1")).createOffer());
     private Integer score = 2;
     private OrderState state = OrderState.CONFIRMED;
     private DateTimeSlot orderDate = anyDateTimeSlot().createDateTimeSlot();

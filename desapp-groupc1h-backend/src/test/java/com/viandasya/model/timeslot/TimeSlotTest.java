@@ -42,14 +42,14 @@ public class TimeSlotTest {
 
     @Test
     public void testIsValidDateTheDateIsBetweenTheDayTimeSlot() {
-        DayTimeSlot dayTimeSlot = new DayTimeSlot(DayOfWeek.THURSDAY, this.getMockedHourTimeSlots());
+        DayTimeSlot dayTimeSlot = new DayTimeSlot(DayOfWeek.THURSDAY, this.getMockedHourTimeSlots(), null);
 
         Assert.assertTrue(dayTimeSlot.isValidDate(LocalDateTime.of(2019,9,26,9,0)));
     }
 
     @Test
     public void testIsValidDateTheDateIsNotBetweenTheDayTimeSlot() {
-        DayTimeSlot dayTimeSlot = new DayTimeSlot(DayOfWeek.MONDAY, this.getMockedHourTimeSlots());
+        DayTimeSlot dayTimeSlot = new DayTimeSlot(DayOfWeek.MONDAY, this.getMockedHourTimeSlots(), null);
 
         Assert.assertFalse(dayTimeSlot.isValidDate(LocalDateTime.of(2019,9,26,9,0)));
     }
