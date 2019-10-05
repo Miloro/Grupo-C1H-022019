@@ -81,6 +81,9 @@ public class MenuBuilder {
     }
 
     public Menu createMenu() {
-        return new Menu(name, description, category, validity, deliveryInfo, offers, maxAmountPerDay, orders, cookingTime);
+        Menu menu = new Menu(name, description, category, validity, offers, maxAmountPerDay, cookingTime);
+        menu.addDeliveryInfo(deliveryInfo);
+        orders.forEach(menu::addOrder);
+        return menu;
     }
 }

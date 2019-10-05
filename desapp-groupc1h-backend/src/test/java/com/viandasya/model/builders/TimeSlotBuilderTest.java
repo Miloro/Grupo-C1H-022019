@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
+import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTable;
 
 public class TimeSlotBuilderTest {
 
@@ -37,7 +38,7 @@ public class TimeSlotBuilderTest {
     @Test
     public void testSetDayTimeSlotsSetedInBuilderEqualsToTheOneGettedInTimeTable() {
         List<DayTimeSlot> dayTimeSlots = new ArrayList<>();
-        TimeTable timeTable = new TimeTable(dayTimeSlots);
+        TimeTable timeTable = anyTimeTable().setDayTimeSlots(dayTimeSlots).createTimeTable();
 
         Assert.assertEquals(dayTimeSlots, timeTable.getDayTimeSlots());
     }
