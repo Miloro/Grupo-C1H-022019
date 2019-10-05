@@ -14,10 +14,6 @@ public class TimeTable implements TimeSlot {
     @OneToMany(mappedBy = "timeTable", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DayTimeSlot> dayTimeSlots = new ArrayList<>();
 
-    public TimeTable(List<DayTimeSlot> dayTimeSlots) {
-        this.dayTimeSlots = dayTimeSlots;
-    }
-
     public TimeTable() {
     }
 
@@ -25,8 +21,9 @@ public class TimeTable implements TimeSlot {
         return dayTimeSlots;
     }
 
-    public void setDayTimeSlots(List<DayTimeSlot> dayTimeSlots) {
-        this.dayTimeSlots = dayTimeSlots;
+    public void addDayTimeSlot(DayTimeSlot dayTimeSlot) {
+        dayTimeSlot.setTimeTable(this);
+        this.dayTimeSlots.add(dayTimeSlot);
     }
 
     @Override

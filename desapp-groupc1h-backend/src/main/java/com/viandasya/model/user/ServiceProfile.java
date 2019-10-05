@@ -4,6 +4,7 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.model.timeslot.TimeTable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,7 @@ public class ServiceProfile {
     private TimeTable timetable;
 
     @OneToMany(mappedBy = "serviceProfile", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Menu> menus;
+    private List<Menu> menus = new ArrayList<>();
 
     private Balance balance;
 
@@ -29,10 +30,8 @@ public class ServiceProfile {
 
     public ServiceProfile(){}
 
-    public ServiceProfile(ServiceInfo serviceInfo, TimeTable timetable, List<Menu> menus, Balance balance) {
-        this.serviceInfo = serviceInfo;
+    public ServiceProfile(TimeTable timetable, Balance balance) {
         this.timetable = timetable;
-        this.menus = menus;
         this.balance = balance;
     }
 
@@ -40,7 +39,8 @@ public class ServiceProfile {
         return serviceInfo;
     }
 
-    public void setServiceInfo(ServiceInfo serviceInfo) {
+    public void addServiceInfo(ServiceInfo serviceInfo) {
+        serviceInfo.setServiceProfile(this);
         this.serviceInfo = serviceInfo;
     }
 
@@ -56,10 +56,6 @@ public class ServiceProfile {
         return menus;
     }
 
-    public void setMenus(List<Menu> menus) {
-        this.menus = menus;
-    }
-
     public Balance getBalance(){
         return this.balance;
     }
@@ -69,11 +65,8 @@ public class ServiceProfile {
     }
 
     public void addMenu(Menu menu) {
+        menu.setServiceProfile(this);
         this.menus.add(menu);
-    }
-
-    public void removeMenu(Menu menu) {
-        this.menus.remove(menu);
     }
 
     public boolean has20ValidMenus() {

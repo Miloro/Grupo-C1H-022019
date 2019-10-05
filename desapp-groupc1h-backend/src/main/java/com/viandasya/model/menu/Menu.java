@@ -41,15 +41,13 @@ public class Menu {
     @ManyToOne
     private ServiceProfile serviceProfile;
 
-    public Menu(String name, String description, List<Category> category, DateTimeSlot validity, DeliveryInfo deliveryInfo, List<Offer> offers, Integer maxAmountPerDay, List<Order> orders, Integer cookingTime) {
+    public Menu(String name, String description, List<Category> category, DateTimeSlot validity, List<Offer> offers, Integer maxAmountPerDay, Integer cookingTime) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.validity = validity;
-        this.deliveryInfo = deliveryInfo;
         this.offers = offers;
         this.maxAmountPerDay = maxAmountPerDay;
-        this.orders = orders;
         this.cookingTime = cookingTime;
     }
 
@@ -92,7 +90,8 @@ public class Menu {
         return deliveryInfo;
     }
 
-    public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
+    public void addDeliveryInfo(DeliveryInfo deliveryInfo) {
+        deliveryInfo.setMenu(this);
         this.deliveryInfo = deliveryInfo;
     }
 
@@ -116,8 +115,9 @@ public class Menu {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void addOrder(Order order) {
+        order.setMenu(this);
+        this.orders.add(order);
     }
 
     public Integer getCookingTime(){
@@ -148,11 +148,6 @@ public class Menu {
 
     private int getOrderCount() {
         return this.orders.stream().mapToInt(Order::getAmount).sum();
-    }
-
-    public void addOrder(Order order) {
-        order.setMenu(this);
-        this.orders.add(order);
     }
 
 }

@@ -29,7 +29,7 @@ public class ServiceInfoBuilder {
         return this;
     }
 
-    public ServiceInfoBuilder setAdress (String adress){
+    public ServiceInfoBuilder setAdress(String adress){
         this.adress = adress;
         return this;
     }

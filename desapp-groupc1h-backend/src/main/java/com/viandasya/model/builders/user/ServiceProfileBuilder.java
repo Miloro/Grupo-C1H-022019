@@ -44,6 +44,10 @@ public class ServiceProfileBuilder {
     }
 
     public ServiceProfile createServiceProfile(){
-        return new ServiceProfile(serviceInfo, timeTable, menus, balance);
+        ServiceProfile serviceProfile =  new ServiceProfile(timeTable, balance);
+        serviceProfile.addServiceInfo(serviceInfo);
+        menus.forEach(serviceProfile::addMenu);
+        return serviceProfile;
     }
+
 }

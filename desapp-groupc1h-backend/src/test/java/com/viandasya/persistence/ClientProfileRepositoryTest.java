@@ -22,14 +22,14 @@ public class ClientProfileRepositoryTest {
     private ClientProfileRepository clientProfileRepository;
 
     @Test
-    public void whenFindingCustomerById_thenCorrect() {
+    public void whenFindingCustomerByIdThenCorrect() {
         clientProfileRepository.save(anyClientProfile().createClientProfile());
 
         Assert.assertTrue(clientProfileRepository.findById(7L).isPresent());
     }
 
     @Test
-    public void whenFindingAllCustomers_thenCorrect() {
+    public void whenFindingAllCustomersThenCorrect() {
         clientProfileRepository.save(anyClientProfile().createClientProfile());
         clientProfileRepository.save(anyClientProfile().createClientProfile());
 
@@ -37,7 +37,7 @@ public class ClientProfileRepositoryTest {
     }
 
     @Test
-    public void whenSavingCustomer_thenCorrect() {
+    public void whenSavingCustomerThenCorrect() {
         clientProfileRepository.save(anyClientProfile()
                 .setName("Alberto").setLastName("Segado").createClientProfile());
         ClientProfile clientProfile = clientProfileRepository.findById(7L)

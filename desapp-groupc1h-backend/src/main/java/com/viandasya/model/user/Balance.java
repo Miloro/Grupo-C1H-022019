@@ -1,10 +1,12 @@
 package com.viandasya.model.user;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.math.BigDecimal;
 
 @Embeddable
 public class Balance {
+    @Column(name = "balance")
     private BigDecimal amount;
 
     public Balance(BigDecimal amount) {
