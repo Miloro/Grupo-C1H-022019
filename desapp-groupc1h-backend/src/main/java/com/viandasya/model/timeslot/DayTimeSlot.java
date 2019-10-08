@@ -19,10 +19,9 @@ public class DayTimeSlot implements TimeSlot{
     @ManyToOne
     private TimeTable timeTable;
 
-    public DayTimeSlot(DayOfWeek day, List<HoursTimeSlot> hoursTimeSlots, TimeTable timeTable) {
+    public DayTimeSlot(DayOfWeek day, List<HoursTimeSlot> hoursTimeSlots) {
         this.day = day;
         this.hoursTimeSlots = hoursTimeSlots;
-        this.timeTable = timeTable;
     }
 
     public DayTimeSlot() {

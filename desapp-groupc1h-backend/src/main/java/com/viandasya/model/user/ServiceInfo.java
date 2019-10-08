@@ -31,6 +31,9 @@ public class ServiceInfo {
         this.city = city;
     }
 
+    public ServiceInfo() {
+    }
+
     public String getName() {
         return name;
     }

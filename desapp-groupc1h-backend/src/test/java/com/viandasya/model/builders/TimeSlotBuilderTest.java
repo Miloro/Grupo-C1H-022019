@@ -28,7 +28,7 @@ public class TimeSlotBuilderTest {
     @Test
     public void testSetFromSetedInBuilderEqualsToTheOneGettedInDateTimeSlot() {
         DateTimeSlot dateTimeSlot = anyDateTimeSlot()
-                .setFrom(LocalDateTime.of(2015,1,6,4,46))
+                .setUntil(LocalDateTime.of(2015,1,6,4,46))
                 .createDateTimeSlot();
 
         Assert.assertEquals(LocalDateTime.of(2015,1,6,4,46),
