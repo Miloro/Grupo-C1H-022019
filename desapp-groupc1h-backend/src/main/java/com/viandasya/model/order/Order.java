@@ -7,6 +7,7 @@ import com.viandasya.model.menu.Menu;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -117,5 +118,14 @@ public class Order {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     public BigDecimal getCurrentPrice(){
         return this.offers.stream().min(Comparator.comparing(Offer::getPrice)).get().getPrice();
+    }
+
+    public LocalDateTime averageTime(){
+        if(isDelivery){
+            return this.orderDate.getSince().plusMinutes(this.menu.getCookingTime() + 15 ); //cambiar 15 por cuanto tarda en llegar en moto desde la api
+        }
+        else{
+            return this.orderDate.getSince().plusSeconds(this.menu.getCookingTime());
+        }
     }
 }
