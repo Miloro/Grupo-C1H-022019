@@ -20,7 +20,7 @@ public class TimeSlotTest {
     public void testIsValidDateTheDateIsBetweenTwoLocalDateTimes() {
         DateTimeSlot dateTimeSlot = anyDateTimeSlot()
                 .setSince(LocalDateTime.now().minusDays(3))
-                .setFrom(LocalDateTime.now().minusDays(2))
+                .setUntil(LocalDateTime.now().minusDays(2))
                 .createDateTimeSlot();
 
         LocalDateTime date = LocalDateTime.now().minusDays(3).plusHours(4);
@@ -32,7 +32,7 @@ public class TimeSlotTest {
     public void testIsValidDateTheDateIsNotBetweenTwoLocalDateTimes() {
         DateTimeSlot dateTimeSlot = anyDateTimeSlot()
                 .setSince(LocalDateTime.now().minusDays(3))
-                .setFrom(LocalDateTime.now().minusDays(2))
+                .setUntil(LocalDateTime.now().minusDays(2))
                 .createDateTimeSlot();
 
         LocalDateTime date = LocalDateTime.now().minusDays(6);
@@ -42,14 +42,14 @@ public class TimeSlotTest {
 
     @Test
     public void testIsValidDateTheDateIsBetweenTheDayTimeSlot() {
-        DayTimeSlot dayTimeSlot = new DayTimeSlot(DayOfWeek.THURSDAY, this.getMockedHourTimeSlots(), null);
+        DayTimeSlot dayTimeSlot = new DayTimeSlot(DayOfWeek.THURSDAY, this.getMockedHourTimeSlots());
 
         Assert.assertTrue(dayTimeSlot.isValidDate(LocalDateTime.of(2019,9,26,9,0)));
     }
 
     @Test
     public void testIsValidDateTheDateIsNotBetweenTheDayTimeSlot() {
-        DayTimeSlot dayTimeSlot = new DayTimeSlot(DayOfWeek.MONDAY, this.getMockedHourTimeSlots(), null);
+        DayTimeSlot dayTimeSlot = new DayTimeSlot(DayOfWeek.MONDAY, this.getMockedHourTimeSlots());
 
         Assert.assertFalse(dayTimeSlot.isValidDate(LocalDateTime.of(2019,9,26,9,0)));
     }
