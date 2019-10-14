@@ -6,15 +6,15 @@ class LogIn  extends React.Component{
     render(){
         const language = navigator.language
         const intl = this.props.intl
-        const demo = intl.formatMessage({
-          id: 'Saludar',
+        const greet = intl.formatMessage({
+          id: 'Greet',
           defaultMessage: 'no se mando'
         })
         return(
             <div className= "App" >
                 <h1>buenas</h1>
                 <h1>{language}</h1>
-                <h1>{demo}</h1>
+                <h1>{greet}</h1>
             </div>
         )
     }

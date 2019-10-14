@@ -1,4 +1,12 @@
 {
-  "Saludar": "hello",
-  "Demo" : "this is a demo"
+  "Greet": "hello",
+  "Service" : "bervice",
+  "Buy" : "buy",
+  "UnratedOrderds" : "unrated orderds",
+  "Cart" : "cart",
+  "CreateMenu" : "create menu",
+  "Menus" : "menus",
+  "ServiceOrders" : "service orders",
+  "Home" : "home",
+  "Orders" : "orders"
 }
