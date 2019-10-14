@@ -1,4 +1,13 @@
 {
-  "Saludar": "holaaaa",
-  "Demo" : "esto es una demo"
+  "Greet": "hola",
+  "Service" : "servicio",
+  "Buy": "comprar",
+  "UnratedOrderds" : "ordenes sin calificar",
+  "Cart" : "carro de compra",
+  "CreateMenu" : "crear menu",
+  "Menus" : "menus",
+  "ServiceOrders" : "ordenes del servicio",
+  "Home": "pagina principal",
+  "Orders" : "ordenes"
+
 }
