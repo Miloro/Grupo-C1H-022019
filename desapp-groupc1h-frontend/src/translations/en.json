@@ -1,5 +1,6 @@
 {
-  "Greet": "hello",
+  "Greet": "welcome",
+  "LoginMessage": "LOGIN WITH FACEBOOK OR GOOGLE",
   "Service" : "bervice",
   "Buy" : "buy",
   "UnratedOrderds" : "unrated orderds",

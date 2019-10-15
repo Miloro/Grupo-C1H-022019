@@ -1,5 +1,6 @@
 {
-  "Greet": "hola",
+  "Greet": "bienvenido",
+  "LoginMessage": "INGRESA CON GOOGLE O FACEBOOK",
   "Service" : "servicio",
   "Buy": "comprar",
   "UnratedOrderds" : "ordenes sin calificar",
