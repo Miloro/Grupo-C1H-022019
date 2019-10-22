@@ -29,13 +29,12 @@ class App extends Component {
   
 
   render() {
-    const intl = this.props.intl
+    //const intl = this.props.intl
     return (
       <BrowserRouter>
         <Suspense fallback={Login}>
         <Route exact path="/" component={Login}/> 
           <Switch>
-            <Route exact path="/" component={Login}/>
             <Route exact path="/home" component={Home}/>
             <Route exact path="/mapdev" component={MapDev}/>
             <Route exact path="/buy" component={Buy}/>

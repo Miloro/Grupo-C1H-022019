@@ -1,5 +1,5 @@
 import React from 'react'
-import { injectIntl, intlShape } from 'react-intl'
+import { injectIntl} from 'react-intl'
 
 class Cart  extends React.Component{
 
