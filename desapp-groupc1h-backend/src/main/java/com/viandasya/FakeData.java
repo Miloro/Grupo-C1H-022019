@@ -17,6 +17,7 @@ import com.viandasya.model.user.User;
 import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -42,6 +43,7 @@ import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyService
 @Component
 public class FakeData implements ApplicationRunner {
 
+    @Qualifier("userRepository")
     @Autowired
     private UserRepository userRepository;
 
