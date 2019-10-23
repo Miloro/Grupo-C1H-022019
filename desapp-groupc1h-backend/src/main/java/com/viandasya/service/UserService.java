@@ -2,15 +2,15 @@ package com.viandasya.service;
 
 import com.viandasya.model.user.User;
 import com.viandasya.persistence.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service("userService")
+@Service
 public class UserService {
-    @Autowired
-    @Qualifier("userRepository")
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public boolean createUser(User user){
         userRepository.save(user);

@@ -2,23 +2,18 @@ package com.viandasya.service;
 
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.persistence.ClientProfileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service("clientProfileService")
+@Service
 public class ClientProfileService {
-    @Autowired
-    @Qualifier("clientProfileRepository")
-    private ClientProfileRepository clientProfileRepository;
+    private final ClientProfileRepository clientProfileRepository;
 
-    public boolean createClientProfile(ClientProfile clientProfile){
-        clientProfileRepository.save(clientProfile);
-        try{
-            return true;
-        }
-        catch(Exception e){
-            return false;
-        }
+    public ClientProfileService(ClientProfileRepository clientProfileRepository) {
+        this.clientProfileRepository = clientProfileRepository;
+    }
+
+    public ClientProfile createClientProfile(ClientProfile clientProfile){
+        return clientProfileRepository.save(clientProfile);
+
     }
 }

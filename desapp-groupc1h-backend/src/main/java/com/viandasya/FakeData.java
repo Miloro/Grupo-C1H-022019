@@ -43,7 +43,6 @@ import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyService
 @Component
 public class FakeData implements ApplicationRunner {
 
-    @Qualifier("userRepository")
     @Autowired
     private UserRepository userRepository;
 
