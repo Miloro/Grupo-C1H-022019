@@ -17,7 +17,7 @@ public class UserControler {
     }
 
     @PutMapping("/usuario")
-    public boolean addUser(@RequestBody @Valid User user){
+    public boolean addUser(User user){
         return userService.createUser(user);
     }
 }

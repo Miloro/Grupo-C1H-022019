@@ -1,5 +1,7 @@
 package com.viandasya.model.timeslot;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -17,6 +19,7 @@ public class DayTimeSlot implements TimeSlot{
     private List<HoursTimeSlot> hoursTimeSlots = new ArrayList<>();
 
     @ManyToOne
+    @JsonIgnore
     private TimeTable timeTable;
 
     public DayTimeSlot(DayOfWeek day, List<HoursTimeSlot> hoursTimeSlots) {
