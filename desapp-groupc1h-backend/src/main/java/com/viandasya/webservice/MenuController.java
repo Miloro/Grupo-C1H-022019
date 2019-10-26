@@ -7,10 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.modelmapper.spi.MatchingStrategy;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MenuController {
@@ -25,6 +22,11 @@ public class MenuController {
     @PostMapping("/service/{id}/menu")
     public MenuDTO addMenu(@PathVariable Long id, @RequestBody MenuDTO menuDTO){
         return convertToDto(menuService.createMenu(convertToEntity(menuDTO),id));
+    }
+
+    @GetMapping("/menu/{id}")
+    public MenuDTO getMenu(@PathVariable Long id){
+        return convertToDto(menuService.getMenu(id));
     }
 
     private MenuDTO convertToDto(Menu menu) {
