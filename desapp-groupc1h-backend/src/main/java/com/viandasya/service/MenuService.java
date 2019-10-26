@@ -25,4 +25,10 @@ public class MenuService {
         service.addMenu(menu);
         return menuRepository.save(menu);
     }
+
+    @Transactional
+    public Menu getMenu(Long id){
+        Menu menu = menuRepository.findById(id).get();
+        return menu;
+    }
 }
