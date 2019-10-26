@@ -1,11 +1,15 @@
 import React from "react";
-import {InputNumber,Form, Input, SubmitButton} from "@jbuschke/formik-antd";
-import {Formik} from "formik";
+import {Form, Input, SubmitButton} from "@jbuschke/formik-antd";
+import {ErrorMessage, Formik} from "formik";
 import ServiceSchema from "./ServiceSchema";
 import {Col, Row} from "antd";
 import axios from 'axios';
+import {useIntl} from "react-intl";
+import es from "./es";
+import en from "./en";
 
-function ServiceForm(props) {
+function ServiceForm() {
+    const {formatMessage, locale} = useIntl();
     const formItemLayout = {
         wrapperCol: {
             xs: {span: 24},
@@ -13,15 +17,15 @@ function ServiceForm(props) {
         }
     };
     
-    const initialValues = {Name: "", Description: "", WebSite: "", Email: "", PhoneNumber: undefined};
-    
+    const initialValues = {name: "", description: "", website: "", eMail: "", phoneNumber: undefined};
+
     function onSubmit(values, actions) {
-        const id= 1;
+        const id= 11;
         setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             actions.setSubmitting(false);
         }, 400);
-        axios.post('/api/user/'+ id, {service: values})
+        axios.post(`/api/user/${id}/service`, values)
             .then(function (response) {
                 console.log(response);
             })
@@ -30,24 +34,37 @@ function ServiceForm(props) {
             });
     }
 
-    function createServiceForm(isSubmitting) {
+    function createServiceForm(isSubmitting, errors) {
         return(
         <Form {...formItemLayout}>
-            <Form.Item name="Name">
-                <Input name="Name" placeholder="Name*"/>
+            {formatMessage({id:'min'}, {min: 2})}
+            <Form.Item name="name">
+                <Input name="name" placeholder="Name*"/>
             </Form.Item>
-            <Form.Item name="Description">
-                <Input.TextArea rows={6} name="Description" placeholder="Description*"/>
+            <Form.Item name="description">
+                <Input.TextArea rows={6} name="description" placeholder="Description*"/>
             </Form.Item>
-            <Form.Item name="WebSite">
-                <Input name="WebSite" addonBefore="Http://" addonAfter=".com" placeholder="My Website"/>
+            <Form.Item name="website">
+                <Input name="website" addonBefore="Http://" addonAfter=".com" placeholder="My Website"/>
             </Form.Item>
-            <Form.Item name="Email">
-                <Input name="Email" placeholder="Email*"/>
+            <Form.Item name="eMail">
+                <Input name="eMail" placeholder="Email*"/>
+                <ErrorMessage name="eMail" />
             </Form.Item>
-            <Form.Item name="PhoneNumber">
-                <Input name="PhoneNumber" placeholder="Phone Number*"/>
+            <Form.Item name="phoneNumber">
+                <Input name="phoneNumber" placeholder="Phone Number*"/>
             </Form.Item>
+            {/*<Form.Item name="timetable-day">*/}
+            {/*    <Radio name="timetable"> Monday </Radio>*/}
+            {/*</Form.Item>*/}
+            {/* <Form.Item name="timetable-hourRange">*/}
+            {/*    <DatePicker.RangePicker*/}
+            {/*        name="timetable-hourRange"*/}
+            {/*        mode={['time','time']}*/}
+            {/*        showTime*/}
+            {/*        format="YYYY"*/}
+            {/*    />*/}
+            {/*</Form.Item>*/}
             <Form.Item name="SubmitButton">
                 <SubmitButton disabled={isSubmitting}>
                     Create
@@ -56,6 +73,10 @@ function ServiceForm(props) {
         </Form>
     );}
 
+    function getCurrentLocaleDict() {
+        return locale === 'es'? es: en;
+    }
+
     return (
         <Row type="flex" justify="space-around" align="middle">
             <Col span={24}  offset={8}>
@@ -63,7 +84,7 @@ function ServiceForm(props) {
                     initialValues={initialValues}
                     onSubmit={onSubmit}
                     render={createServiceForm}
-                    validationSchema={ServiceSchema}
+                    validationSchema={ServiceSchema(getCurrentLocaleDict())}
                 />
             </Col>
         </Row>

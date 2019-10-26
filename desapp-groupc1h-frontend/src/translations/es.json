@@ -9,6 +9,6 @@
   "Menus" : "menus",
   "ServiceOrders" : "ordenes del servicio",
   "Home": "pagina principal",
-  "Orders" : "ordenes"
-
+  "Orders" : "ordenes",
+   "Required" : "requerido"
 }

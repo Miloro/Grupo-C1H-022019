@@ -9,5 +9,6 @@
   "Menus" : "menus",
   "ServiceOrders" : "service orders",
   "Home" : "home",
-  "Orders" : "orders"
+  "Orders" : "orders",
+  "Required" : "required"
 }

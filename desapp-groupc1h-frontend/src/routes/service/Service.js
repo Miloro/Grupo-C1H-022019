@@ -1,5 +1,4 @@
 import React from 'react'
-import {FormattedMessage} from 'react-intl'
 import ServiceForm from "./ServiceForm";
 import {Col, Layout, Menu, Row} from "antd";
 import "./Service.css";
