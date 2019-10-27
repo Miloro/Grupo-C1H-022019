@@ -20,6 +20,13 @@ function ServiceSchema(t) {
                 phoneNumber: Yup.number()
                     .max(8, 'Too Long!')
                     .required('Required'),
+                timetable: Yup.array().of(Yup.object().shape({
+                        checked: Yup.boolean(),
+                        from: Yup.date(),
+                        to: Yup.date().when('from', (st, schema) => {
+                                return Yup.date().min(st);
+                        })
+                }))
         });
 }
 
