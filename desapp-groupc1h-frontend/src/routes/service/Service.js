@@ -2,6 +2,7 @@ import React from 'react'
 import ServiceForm from "./ServiceForm";
 import {Col, Layout, Menu, Row} from "antd";
 import "./Service.css";
+import AdressSearcher from "./AdressSearcher";
 
 
 class Service  extends React.Component{
@@ -23,7 +24,8 @@ class Service  extends React.Component{
                     <Layout.Content>
                         <Row type="flex" justify="space-around" align="middle">
                             <Col span={16} style={{ background: '#fff', padding: 40, minHeight: 400 }}>
-                                <ServiceForm/>
+                                {/*<ServiceForm/>*/}
+                                <AdressSearcher/>
                             </Col>
                         </Row>
                     </Layout.Content>
