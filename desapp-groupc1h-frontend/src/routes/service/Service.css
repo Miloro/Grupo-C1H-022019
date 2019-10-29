@@ -5,3 +5,18 @@
     margin: 16px 24px 16px 0;
     float: left;
 }
+Title {
+    text-align: left;
+}
+
+.padding-botton-5 {
+    padding-bottom: 5%;
+}
+
+.padding-top-4 {
+    padding-top: 4%;
+}
+
+.width-100 {
+    width: 100%;
+}
