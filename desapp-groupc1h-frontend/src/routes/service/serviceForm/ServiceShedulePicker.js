@@ -1,6 +1,7 @@
 import React from 'react';
 import {Col, Row} from "antd";
 import {Checkbox, Form, TimePicker} from "@jbuschke/formik-antd";
+const {Item} = Form;
 
 function ServiceShedulePicker({timetable}) {
     const format = 'HH:mm';
@@ -9,19 +10,19 @@ function ServiceShedulePicker({timetable}) {
         timetable.map((slot, index) =>
             <Row key={slot.name}>
                 <Col span={6}>
-                    <Form.Item name={`timetable[${index}].checked`}>
+                    <Item name={`timetable[${index}].checked`}>
                         <Checkbox name={`timetable[${index}].checked`}> {slot.name}</Checkbox>
-                    </Form.Item>
+                    </Item>
                 </Col>
                 <Col span={4}>
-                    <Form.Item name={`timetable[${index}].from`}>
+                    <Item name={`timetable[${index}].from`}>
                         <TimePicker name={`timetable[${index}].from`} format={format} disabled={!slot.checked}/>
-                    </Form.Item>
+                    </Item>
                 </Col>
                 <Col span={4}>
-                    <Form.Item name={`timetable[${index}].to`}>
+                    <Item name={`timetable[${index}].to`}>
                         <TimePicker name={`timetable[${index}].to`} format={format} disabled={!slot.checked}/>
-                    </Form.Item>
+                    </Item>
                 </Col>
             </Row>
         )

@@ -3,6 +3,7 @@
   "LoginMessage": "LOGIN WITH FACEBOOK OR GOOGLE",
   "Service" : "service",
   "Buy" : "buy",
+  "min": "less than {n}",
   "UnratedOrderds" : "unrated orderds",
   "Cart" : "cart",
   "CreateMenu" : "create menu",

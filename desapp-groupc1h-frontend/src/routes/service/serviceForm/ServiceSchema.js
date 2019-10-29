@@ -1,12 +1,12 @@
 import * as Yup from 'yup';
 
-function ServiceSchema(t) {
+function ServiceSchema(formatMessage) {
 
     return Yup.object().shape({
         name: Yup.string()
             .min(2, 'Too Short!')
             .max(50, 'Too Long!')
-            .required(t.required),
+            .required(formatMessage({id: 'min'}, {n: 3})),
         description: Yup.string()
             .min(30, 'Too Short!')
             .max(200, 'Too Long!')
@@ -22,10 +22,10 @@ function ServiceSchema(t) {
             .required('Required'),
         timetable: Yup.array().of(Yup.object().shape({
             checked: Yup.boolean(),
-            from: Yup.date(),
-            to: Yup.date().when('from', (st, schema) => {
-                return Yup.date().min(st);
-            })
+            // from: Yup.date(),
+            // to: Yup.date().when('from', (st, schema) => {
+            //     return schema.min(st);
+            // })
         })),
         query: Yup.string()
             .min(6, 'Too Short!')

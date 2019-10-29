@@ -6,11 +6,7 @@ const {Item} = Form;
 function AddressSearcher({suggestions, setFieldValue}) {
     const url = 'https://autocomplete.geocoder.api.here.com/6.2/suggest.json';
 
-    function renderSuggestions() {
-        return suggestions.map((s) => (s.address));
-    }
-
-    function createLocation(address, locationId) {
+    function createSuggestion(address, locationId) {
         return {
             id: locationId, address:
                 `${address.street} ${address.houseNumber}, ${address.city}, ${address.state}`
@@ -33,7 +29,7 @@ function AddressSearcher({suggestions, setFieldValue}) {
             axios.get(url, createParams(query)).then((response) => {
                 const suggestions = response.data.suggestions
                     .filter((s) => s.matchLevel === 'houseNumber')
-                    .map((s) => (createLocation(s.address, s.locationId)));
+                    .map((s) => (createSuggestion(s.address, s.locationId)));
                 setFieldValue('suggestions', suggestions);
             });
         }
@@ -46,20 +42,15 @@ function AddressSearcher({suggestions, setFieldValue}) {
     }
 
     return (
-        <div>
         <Item name="query">
             <AutoComplete
                 name="query"
-                dataSource={renderSuggestions}
+                dataSource={suggestions.map((s) => (s.address))}
                 onSearch={(query) => onSearch(query)}
                 onSelect={(selected) => onSelect(selected)}
                 placeholder="Street Number City"
             />
-        </Item>
-            <Item name="maxDistanceDeliveryInKms">
-                <Input name="maxDistanceDeliveryInKms" placeholder="Maximum distance to make a delivery in Kms*"/>
-            </Item>
-        </div>);
+        </Item>);
 
 }
 

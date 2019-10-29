@@ -2,6 +2,7 @@
   "Greet": "bienvenido",
   "LoginMessage": "INGRESA CON GOOGLE O FACEBOOK",
   "Service" : "servicio",
+  "min": "menos de {n}",
   "Buy": "comprar",
   "UnratedOrderds" : "ordenes sin calificar",
   "Cart" : "carro de compra",

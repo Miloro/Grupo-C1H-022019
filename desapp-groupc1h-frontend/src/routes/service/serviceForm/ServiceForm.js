@@ -1,15 +1,18 @@
 import React from 'react';
 import {Col, Row, Typography} from "antd";
 import {Formik} from "formik";
-import {Form, SubmitButton} from "@jbuschke/formik-antd";
+import {Form, Input, SubmitButton} from "@jbuschke/formik-antd";
 import ServiceInfoInputs from "./ServiceInfoInputs";
 import ServiceShedulePicker from "./ServiceShedulePicker";
 import AddressSearcher from "./AddressSearcher";
 import axios from "axios";
+import ServiceSchema from "./ServiceSchema";
+import {useIntl} from "react-intl";
 const {Item} = Form;
 const {Title} = Typography;
 
 function ServiceForm({userId}) {
+    const {formatMessage} = useIntl();
     const geocoderUrl = 'https://geocoder.api.here.com/6.2/geocode.json';
     const formItemLayout = {
         wrapperCol: {
@@ -60,8 +63,9 @@ function ServiceForm({userId}) {
                     }
                 };
                 alert(JSON.stringify(location, null, 2));
-                const id = 11;
-                return axios.post(`/api/user/${id}/service`, values);
+                alert(JSON.stringify(values, null, 2));
+                // const id = 11;
+                // return axios.post(`/api/user/${id}/service`, values);
             });
     }
 
@@ -70,18 +74,22 @@ function ServiceForm({userId}) {
             <Col span={24}  offset={8}>
                 <Formik
                     initialValues={initialValues}
+                    validationSchema={ServiceSchema(formatMessage)}
                     onSubmit={onSubmit}
-                    component={ ({ values, setFieldValue }) => (
+                    component={ ({values, setFieldValue}) => (
                         <Form {...formItemLayout}>
-                            <Title level={3} className='padding-botton-5'>Crear Servicio</Title>
-                            <Title level={4}>Información del Servicio*</Title>
+                            <Title level={3} className='padding-botton-5 align-left'>Crear Servicio</Title>
+                            <Title level={4} className='align-left'>Información del Servicio*</Title>
                             <ServiceInfoInputs/>
-                            <Title level={4} className='padding-botton-4'>Horario y días de atención*</Title>
+                            <Title level={4} className='padding-top-4 align-left'>Horario y días de atención*</Title>
                             <ServiceShedulePicker timetable={values.timetable}/>
-                            <Title level={4} className='padding-botton-5'>Ubicación*</Title>
+                            <Title level={4} className='padding-top-4 align-left'>Ubicación*</Title>
                             <AddressSearcher suggestions={values.suggestions} setFieldValue={setFieldValue}/>
+                            <Item name="maxDistanceDeliveryInKms">
+                                <Input name="maxDistanceDeliveryInKms" placeholder="Maximum distance to make a delivery in Kms*"/>
+                            </Item>
                             <Item name="SubmitButton" >
-                                <SubmitButton aria-label="Create"/>
+                                <SubmitButton size="large">Create</SubmitButton>
                             </Item>
                         </Form>
 
