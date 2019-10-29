@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Row, Typography} from "antd";
 import {Formik} from "formik";
-import {Form, Input, SubmitButton} from "@jbuschke/formik-antd";
+import {Form, InputNumber, SubmitButton} from "@jbuschke/formik-antd";
 import ServiceInfoInputs from "./ServiceInfoInputs";
 import ServiceShedulePicker from "./ServiceShedulePicker";
 import AddressSearcher from "./AddressSearcher";
@@ -34,6 +34,16 @@ function ServiceForm({userId}) {
         maxDistanceDeliveryInKms: undefined
     };
 
+
+    function createService(values, location) {
+        return {
+            name: values.name, description: values.description, website: values.website,
+            eMail: values.eMail, phoneNumber: values.phoneNumber, timetable: values.timetable,
+            location: location, maxDistanceDeliveryInKms: values.maxDistanceDeliveryInKms
+        };
+    }
+
+
     function createTimeTable() {
         const days = ['monday', 'tuesday', 'wednesday',
             'thursday', 'friday', 'saturday', 'sunday'];
@@ -62,9 +72,8 @@ function ServiceForm({userId}) {
                         'lon': checkedLocation.DisplayPosition.Longitude
                     }
                 };
-                alert(JSON.stringify(location, null, 2));
-                alert(JSON.stringify(values, null, 2));
-                // const id = 11;
+                const service = createService(values, location);
+                alert(JSON.stringify(service, null, 2));
                 // return axios.post(`/api/user/${id}/service`, values);
             });
     }
@@ -94,7 +103,7 @@ function ServiceForm({userId}) {
                             </Title>
                             <AddressSearcher suggestions={values.suggestions} setFieldValue={setFieldValue}/>
                             <Item name="maxDistanceDeliveryInKms">
-                                <Input name="maxDistanceDeliveryInKms"
+                                <InputNumber className="width-100" type="number" name="maxDistanceDeliveryInKms"
                                        placeholder={formatMessage({id:"service.deliveryDistance"})}/>
                             </Item>
                             <Item name="SubmitButton" >

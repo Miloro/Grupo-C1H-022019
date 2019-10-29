@@ -50,7 +50,7 @@ function AddressSearcher({suggestions, setFieldValue}) {
                 dataSource={suggestions.map((s) => (s.address))}
                 onSearch={(query) => onSearch(query)}
                 onSelect={(selected) => onSelect(selected)}
-                placeholder={formatMessage({id:"adress"})}
+                placeholder={formatMessage({id:"address"})}
             />
         </Item>);
 

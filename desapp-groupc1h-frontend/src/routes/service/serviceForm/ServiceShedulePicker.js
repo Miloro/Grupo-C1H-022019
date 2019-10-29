@@ -18,12 +18,14 @@ function ServiceShedulePicker({timetable}) {
                 </Col>
                 <Col span={4}>
                     <Item name={`timetable[${index}].from`}>
-                        <TimePicker name={`timetable[${index}].from`} format={format} disabled={!slot.checked}/>
+                        <TimePicker name={`timetable[${index}].from`} placeholder={formatMessage({id:"selectTime"})}
+                                    format={format} disabled={!slot.checked}/>
                     </Item>
                 </Col>
                 <Col span={4}>
                     <Item name={`timetable[${index}].to`}>
-                        <TimePicker name={`timetable[${index}].to`} format={format} disabled={!slot.checked}/>
+                        <TimePicker name={`timetable[${index}].to`} placeholder={formatMessage({id:"selectTime"})}
+                                    format={format} disabled={!slot.checked}/>
                     </Item>
                 </Col>
             </Row>

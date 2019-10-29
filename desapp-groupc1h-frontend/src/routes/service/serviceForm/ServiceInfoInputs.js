@@ -15,7 +15,7 @@ function ServiceInfoInputs(props) {
                 <Input.TextArea rows={6} name="description" placeholder={formatMessage({id:"description"})}/>
             </Item>
             <Item name="website">
-                <Input name="website" addonBefore="Http://" addonAfter=".com" placeholder={formatMessage({id:"website"})}/>
+                <Input name="website" placeholder={formatMessage({id:"website"})}/>
             </Item>
             <Item name="eMail">
                 <Input name="eMail" placeholder="Email*"/>
