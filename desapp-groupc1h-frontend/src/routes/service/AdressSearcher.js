@@ -10,27 +10,30 @@ const {Item} = Form;
 function AdressSearcher() {
 
     function onSubmit(values) {
-        const location = values.suggestions.find((l) => l.address === values.location);
         axios.get('https://geocoder.api.here.com/6.2/geocode.json', {
             'params': {
                 'app_id': 'B3ZYLI1mKHNO6Qt871t6',
                 'app_code': 'xibhrih8Kcvp0bcijbEBqA',
-                'locationId': location.id
-            }}).then((response) => {
+                'locationId': values.selected.id
+            }
+        }).then((response) => {
             const checkedLocation = response.data.Response.View[0].Result[0].Location;
-            const finalLocation = {
-                address: location.address,
+            const location = {
+                address:  values.selected.address,
                 coords: {
                     'lat': checkedLocation.DisplayPosition.Latitude,
                     'lon': checkedLocation.DisplayPosition.Longitude
-                }};
-            alert(JSON.stringify(finalLocation, null, 2));
-    });
+                }
+            };
+            alert(JSON.stringify(location, null, 2));
+        });
     }
 
     function createLocation(address, locationId) {
-        return {id: locationId, address:
-                `${address.street} ${address.houseNumber}, ${address.city}, ${address.state}`};
+        return {
+            id: locationId, address:
+                `${address.street} ${address.houseNumber}, ${address.city}, ${address.state}`
+        };
     }
 
     function onSearch(query, setFieldValue) {
@@ -51,37 +54,54 @@ function AdressSearcher() {
         }
     }
 
-    function renderOptions(locations) {
+    function onSelect(selected, setFieldValue, suggestions) {
+        const selectedLocation = suggestions.find((l) => l.address === selected);
+        setFieldValue('selected', selectedLocation);
+    }
+
+    function renderSuggestions(locations) {
         return locations.map((location) => (location.address));
+    }
+
+    function AdressAutocomplete(suggestions, setFieldValue) {
+        return <Item name="query">
+            <AutoComplete
+                name="query"
+                dataSource={renderSuggestions(suggestions)}
+                onSearch={(query) => onSearch(query, setFieldValue)}
+                onSelect={(selected) => onSelect(selected, setFieldValue, suggestions)}
+                style={{width: '180%'}}
+                placeholder="Street Number City"
+            />
+        </Item>
     }
 
     function exampleForm(props) {
         const {values, setFieldValue} = props;
         return <Form>
-            <Item name="location">
-                <AutoComplete
-                    name="location"
-                    dataSource={renderOptions(values.suggestions)}
-                    onSearch={(query) => onSearch(query, setFieldValue)}
-                    style={{width: '180%'}}
-                    placeholder="Street Number City"
-                />
-            </Item>
+            {AdressAutocomplete(values.suggestions, setFieldValue)}
             <SubmitButton size='large' type='primary'> Submit </SubmitButton>
         </Form>
     }
 
     return (
         <Row type="flex" justify="space-around" align="middle">
-            <Col >
+            <Col>
                 <Formik
-                    initialValues={{location: '', suggestions: []}}
+                    initialValues={{query: '', selected: {id: '', address: ''}, suggestions: []}}
                     onSubmit={onSubmit}
                     component={exampleForm}
                     validationSchema={Yup.object().shape({
-                        location: Yup.string()
+                        query: Yup.string()
                             .min(6, 'Too Short!')
-                            .required('Required')})}
+                            .required('Required'),
+                        selected: Yup.object().shape({
+                            id: Yup.string()
+                                .required('Select an address from the options'),
+                            address: Yup.string()
+                                .required('Required')
+                        })
+                    })}
                 />
             </Col>
         </Row>
