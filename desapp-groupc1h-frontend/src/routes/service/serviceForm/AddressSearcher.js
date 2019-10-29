@@ -1,9 +1,11 @@
 import React from 'react';
-import {Form, AutoComplete, Input} from "@jbuschke/formik-antd";
+import {Form, AutoComplete} from "@jbuschke/formik-antd";
 import axios from "axios";
+import {useIntl} from "react-intl";
 const {Item} = Form;
 
 function AddressSearcher({suggestions, setFieldValue}) {
+    const {formatMessage} = useIntl();
     const url = 'https://autocomplete.geocoder.api.here.com/6.2/suggest.json';
 
     function createSuggestion(address, locationId) {
@@ -48,7 +50,7 @@ function AddressSearcher({suggestions, setFieldValue}) {
                 dataSource={suggestions.map((s) => (s.address))}
                 onSearch={(query) => onSearch(query)}
                 onSelect={(selected) => onSelect(selected)}
-                placeholder="Street Number City"
+                placeholder={formatMessage({id:"adress"})}
             />
         </Item>);
 

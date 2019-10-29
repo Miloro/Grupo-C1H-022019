@@ -7,7 +7,7 @@ import ServiceShedulePicker from "./ServiceShedulePicker";
 import AddressSearcher from "./AddressSearcher";
 import axios from "axios";
 import ServiceSchema from "./ServiceSchema";
-import {useIntl} from "react-intl";
+import {FormattedMessage, useIntl} from "react-intl";
 const {Item} = Form;
 const {Title} = Typography;
 
@@ -35,8 +35,8 @@ function ServiceForm({userId}) {
     };
 
     function createTimeTable() {
-        const days = ['Monday', 'Tuesday', 'Wednesday',
-            'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        const days = ['monday', 'tuesday', 'wednesday',
+            'thursday', 'friday', 'saturday', 'sunday'];
         const createDay = (day) => ({ name: day, checked: false, from: undefined, to: undefined});
         return days.map((day) => createDay(day));
     }
@@ -78,18 +78,29 @@ function ServiceForm({userId}) {
                     onSubmit={onSubmit}
                     component={ ({values, setFieldValue}) => (
                         <Form {...formItemLayout}>
-                            <Title level={3} className='padding-botton-5 align-left'>Crear Servicio</Title>
-                            <Title level={4} className='align-left'>Información del Servicio*</Title>
+                            <Title level={3} className='padding-botton-5 align-left'>
+                                <FormattedMessage id="service.create"/>
+                            </Title>
+                            <Title level={4} className='align-left'>
+                                <FormattedMessage id="service.info"/>
+                            </Title>
                             <ServiceInfoInputs/>
-                            <Title level={4} className='padding-top-4 align-left'>Horario y días de atención*</Title>
+                            <Title level={4} className='padding-top-4 align-left'>
+                                <FormattedMessage id="service.timetable"/>
+                            </Title>
                             <ServiceShedulePicker timetable={values.timetable}/>
-                            <Title level={4} className='padding-top-4 align-left'>Ubicación*</Title>
+                            <Title level={4} className='padding-top-4 align-left'>
+                                <FormattedMessage id="service.location"/>
+                            </Title>
                             <AddressSearcher suggestions={values.suggestions} setFieldValue={setFieldValue}/>
                             <Item name="maxDistanceDeliveryInKms">
-                                <Input name="maxDistanceDeliveryInKms" placeholder="Maximum distance to make a delivery in Kms*"/>
+                                <Input name="maxDistanceDeliveryInKms"
+                                       placeholder={formatMessage({id:"service.deliveryDistance"})}/>
                             </Item>
                             <Item name="SubmitButton" >
-                                <SubmitButton size="large">Create</SubmitButton>
+                                <SubmitButton size="large">
+                                    <FormattedMessage id="create"/>
+                                </SubmitButton>
                             </Item>
                         </Form>
 

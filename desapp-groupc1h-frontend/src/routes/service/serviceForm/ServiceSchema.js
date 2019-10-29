@@ -4,22 +4,22 @@ function ServiceSchema(formatMessage) {
 
     return Yup.object().shape({
         name: Yup.string()
-            .min(2, 'Too Short!')
-            .max(50, 'Too Long!')
-            .required(formatMessage({id: 'min'}, {n: 3})),
+            .min(2, formatMessage({id: 'string.min'}, {n: 2}))
+            .max(30, formatMessage({id: 'string.max'}, {n: 30}))
+            .required(formatMessage({id: 'required'})),
         description: Yup.string()
-            .min(30, 'Too Short!')
-            .max(200, 'Too Long!')
-            .required('Required'),
+            .min(30, formatMessage({id: 'string.min'}, {n: 30}))
+            .max(200, formatMessage({id: 'string.max'}, { n: 200}))
+            .required(formatMessage({id: 'required'})),
         eMail: Yup.string()
-            .email('Invalid email')
-            .required('Required'),
+            .email(formatMessage({id:'email'}))
+            .required(formatMessage({id: 'required'})),
         website: Yup.string()
-            .min(2, 'Too Short!')
-            .max(50, 'Too Long!'),
+            .min(2, formatMessage({id: 'string.min'}, {n: 2}))
+            .max(30, formatMessage({id: 'string.max'}, {n: 30})),
         phoneNumber: Yup.number()
-            .max(8, 'Too Long!')
-            .required('Required'),
+            .min(8, formatMessage({id: 'num.min'}, {n: 8}))
+            .required(formatMessage({id: 'required'})),
         timetable: Yup.array().of(Yup.object().shape({
             checked: Yup.boolean(),
             // from: Yup.date(),
@@ -28,13 +28,13 @@ function ServiceSchema(formatMessage) {
             // })
         })),
         query: Yup.string()
-            .min(6, 'Too Short!')
-            .required('Required'),
+            .min(10, formatMessage({id: 'string.min'}, {field: 'Website', n: 10}))
+            .required(formatMessage({id: 'required'}, {field: 'Adress'})),
         selected: Yup.object().shape({
             id: Yup.string()
-                .required('Select an address from the options'),
+                .required(),
             address: Yup.string()
-                .required('Required')
+                .required(formatMessage({id: 'required'}, {field: 'Adress'}))
         })
     });
 }
