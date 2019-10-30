@@ -4,9 +4,6 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.service.MenuService;
 import com.viandasya.webservice.dtos.MenuDTO;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,6 +24,11 @@ public class MenuController {
     @GetMapping("/menu/{id}")
     public MenuDTO getMenu(@PathVariable Long id){
         return convertToDto(menuService.getMenu(id));
+    }
+
+    @PutMapping("/menu/{id}")
+    public MenuDTO updateMenu(@PathVariable Long id, @RequestBody MenuDTO menuDTO){
+        return convertToDto(menuService.updateMenu(convertToEntity(menuDTO),id));
     }
 
     private MenuDTO convertToDto(Menu menu) {
