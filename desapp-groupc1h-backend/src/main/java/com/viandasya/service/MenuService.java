@@ -31,4 +31,18 @@ public class MenuService {
         Menu menu = menuRepository.findById(id).get();
         return menu;
     }
+
+    @Transactional
+    public Menu updateMenu(Menu convertToEntity, Long id) {
+        Menu menu = menuRepository.findById(id).get();
+        menu.setName(convertToEntity.getName());
+        menu.setDescription(convertToEntity.getDescription());
+        menu.setCategory(convertToEntity.getCategory());
+        menu.setValidity(convertToEntity.getValidity());
+        menu.setOffers(convertToEntity.getOffers());
+        menu.setMaxAmountPerDay(convertToEntity.getMaxAmountPerDay());
+        menu.setCookingTime(convertToEntity.getCookingTime());
+        menuRepository.save(menu);
+        return menuRepository.findById(id).get();
+    }
 }
