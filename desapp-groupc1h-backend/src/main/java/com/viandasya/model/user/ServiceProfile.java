@@ -4,6 +4,7 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.model.timeslot.TimeTable;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +24,24 @@ public class ServiceProfile {
     @OneToMany(mappedBy = "serviceProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Menu> menus = new ArrayList<>();
 
-    private Balance balance;
+    private Balance balance = new Balance(new BigDecimal("0"));
 
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
-    public ServiceProfile(){}
+    private Location location;
 
-    public ServiceProfile(TimeTable timetable, Balance balance) {
+    private double maxDistanceOfDeliveryInKms;
+
+    public ServiceProfile(ServiceInfo serviceInfo, TimeTable timetable,
+                          Location location, double maxDistanceOfDeliveryInKms) {
+        this.addServiceInfo(serviceInfo);
         this.timetable = timetable;
-        this.balance = balance;
+        this.location = location;
+        this.maxDistanceOfDeliveryInKms = maxDistanceOfDeliveryInKms;
     }
+
+    public ServiceProfile(){}
 
     public ServiceInfo getServiceInfo() {
         return serviceInfo;
@@ -48,8 +56,8 @@ public class ServiceProfile {
         return timetable;
     }
 
-    public void setServiceHours(TimeTable serviceHours) {
-        this.timetable = serviceHours;
+    public void setTimetable(TimeTable timetable) {
+        this.timetable = timetable;
     }
 
     public List<Menu> getMenus() {
@@ -79,5 +87,21 @@ public class ServiceProfile {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public double getMaxDistanceOfDeliveryInKms() {
+        return maxDistanceOfDeliveryInKms;
+    }
+
+    public void setMaxDistanceOfDeliveryInKms(double maxDistanceOfDeliveryInKms) {
+        this.maxDistanceOfDeliveryInKms = maxDistanceOfDeliveryInKms;
     }
 }

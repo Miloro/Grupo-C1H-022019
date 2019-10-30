@@ -10,10 +10,7 @@ import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.DayTimeSlot;
 import com.viandasya.model.timeslot.HoursTimeSlot;
 import com.viandasya.model.timeslot.TimeTable;
-import com.viandasya.model.user.Balance;
-import com.viandasya.model.user.ClientProfile;
-import com.viandasya.model.user.ServiceProfile;
-import com.viandasya.model.user.User;
+import com.viandasya.model.user.*;
 import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +38,13 @@ import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyService
 
 @Component
 public class FakeData implements ApplicationRunner {
+    private final UserRepository userRepository;
+    private final MenuRepository menuRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private MenuRepository menuRepository;
+    public FakeData(UserRepository userRepository, MenuRepository menuRepository) {
+        this.userRepository = userRepository;
+        this.menuRepository = menuRepository;
+    }
 
     @Override
     @Transactional
@@ -90,9 +88,13 @@ public class FakeData implements ApplicationRunner {
                 .createMenu();
 
         ServiceProfile serviceProfile1 = anyServiceProfile()
-                .setBalance(new Balance(new BigDecimal("20")))
-                .setMenus(new ArrayList<>(Arrays.asList(menu1, menu2)))
+                .setBalance("20")
+                .setLocation(new Location("Alsina 654, Quilmes, Quilmes",
+                        -34.71688, -58.24964))
+                .setMaxDistanceOfDeliveryInKms(5)
                 .createServiceProfile();
+        new ArrayList<>(Arrays.asList(menu1, menu2)).forEach(serviceProfile1::addMenu);
+
 
 
         ClientProfile clientProfile1 = anyClientProfile()
@@ -162,9 +164,12 @@ public class FakeData implements ApplicationRunner {
                                 .setCity("Quilmes")
                                 .createServiceInfo()
                 )
-                .setBalance(new Balance(new BigDecimal("300")))
-                .setMenus(new ArrayList<>(Arrays.asList(menua, menub)))
+                .setBalance("300")
+                .setLocation(new Location("Avenida Calchaquí 1233, Quilmes Oeste, Quilmes",
+                        -34.7394801, -58.2923969))
+                .setMaxDistanceOfDeliveryInKms(10)
                 .createServiceProfile();
+        new ArrayList<>(Arrays.asList(menua, menub)).forEach(serviceProfilea::addMenu);
 
         ClientProfile clientProfilea = anyClientProfile()
                 .setName("Miguel")
