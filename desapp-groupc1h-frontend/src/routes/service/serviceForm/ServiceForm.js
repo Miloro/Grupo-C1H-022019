@@ -34,20 +34,10 @@ function ServiceForm({userId}) {
         maxDistanceDeliveryInKms: undefined
     };
 
-
-    function createService(values, location) {
-        return {
-            name: values.name, description: values.description, website: values.website,
-            eMail: values.eMail, phoneNumber: values.phoneNumber, timetable: values.timetable,
-            location: location, maxDistanceDeliveryInKms: values.maxDistanceDeliveryInKms
-        };
-    }
-
-
     function createTimeTable() {
         const days = ['monday', 'tuesday', 'wednesday',
             'thursday', 'friday', 'saturday', 'sunday'];
-        const createDay = (day) => ({ name: day, checked: false, from: undefined, to: undefined});
+        const createDay = (day) => ({ day: day, checked: false, from: undefined, to: undefined});
         return days.map((day) => createDay(day));
     }
 
@@ -61,19 +51,41 @@ function ServiceForm({userId}) {
         };
     }
 
+    function convertTimetable(timetable) {
+        const converToString = (range) => (range === undefined? undefined: range.format('HH:mm'));
+        return timetable.map((slot) => ({
+            day: slot.day.toUpperCase(),
+            checked: slot.checked,
+            from: converToString(slot.from),
+            to: converToString(slot.to),
+        }));
+    }
+
+    function createService(values, location) {
+        return {
+            serviceInfo: {
+                name: values.name,
+                description: values.description,
+                website: values.website,
+                eMail: values.eMail,
+                phoneNumber: values.phoneNumber},
+            timetable: convertTimetable(values.timetable),
+            location: location,
+            maxDistanceOfDeliveryInKms: values.maxDistanceDeliveryInKms
+        };
+    }
+
     function onSubmit(values) {
         axios.get(geocoderUrl,createParams(values.selected.id))
             .then((response) => {
                 const checkedLocation = response.data.Response.View[0].Result[0].Location;
                 const location = {
                     address:  values.selected.address,
-                    coords: {
-                        'lat': checkedLocation.DisplayPosition.Latitude,
-                        'lon': checkedLocation.DisplayPosition.Longitude
-                    }
-                };
+                    latitude: checkedLocation.DisplayPosition.Latitude,
+                    longitude: checkedLocation.DisplayPosition.Longitude
+                }
                 const service = createService(values, location);
-                alert(JSON.stringify(service, null, 2));
+                console.log(JSON.stringify(service, null, 2));
                 // return axios.post(`/api/user/${id}/service`, values);
             });
     }
@@ -97,7 +109,7 @@ function ServiceForm({userId}) {
                             <Title level={4} className='padding-top-4 align-left'>
                                 <FormattedMessage id="service.timetable"/>
                             </Title>
-                            <ServiceShedulePicker timetable={values.timetable}/>
+                            <ServiceShedulePicker timetable={values.timetable} setFieldValue={setFieldValue}/>
                             <Title level={4} className='padding-top-4 align-left'>
                                 <FormattedMessage id="service.location"/>
                             </Title>

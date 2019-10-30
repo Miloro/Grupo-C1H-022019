@@ -13,7 +13,6 @@ import com.viandasya.model.timeslot.TimeTable;
 import com.viandasya.model.user.*;
 import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -61,8 +60,8 @@ public class FakeData implements ApplicationRunner {
                                 new BigDecimal("40"), 30
                         ))
                 .setValidity(anyDateTimeSlot()
-                        .setSince(LocalDateTime.now().minusDays(10))
-                        .setUntil(LocalDateTime.now().plusDays(10))
+                        .setFrom(LocalDateTime.now().minusDays(10))
+                        .setTo(LocalDateTime.now().plusDays(10))
                         .createDateTimeSlot()
                 )
                 .setCategory(new ArrayList<>(Arrays.asList(Category.PIZZA, Category.HAMBURGER)))
@@ -78,8 +77,8 @@ public class FakeData implements ApplicationRunner {
                                 new BigDecimal("50.5"), 23
                         ))
                 .setValidity(anyDateTimeSlot()
-                        .setSince(LocalDateTime.now())
-                        .setUntil(LocalDateTime.now().plusDays(15))
+                        .setFrom(LocalDateTime.now())
+                        .setTo(LocalDateTime.now().plusDays(15))
                         .createDateTimeSlot()
                 )
                 .setCategory(new ArrayList<>(Arrays.asList(Category.EMPANADAS, Category.BEER, Category.SHSHI)))
@@ -125,8 +124,8 @@ public class FakeData implements ApplicationRunner {
                                 new BigDecimal("40"), 15
                         ))
                 .setValidity(anyDateTimeSlot()
-                        .setSince(LocalDateTime.now().minusDays(25))
-                        .setUntil(LocalDateTime.now())
+                        .setFrom(LocalDateTime.now().minusDays(25))
+                        .setTo(LocalDateTime.now())
                         .createDateTimeSlot()
                 )
                 .setCategory(new ArrayList<>(Arrays.asList(Category.GREEN, Category.VEGAN)))
@@ -142,8 +141,8 @@ public class FakeData implements ApplicationRunner {
                                 new BigDecimal("50.5"), 23
                         ))
                 .setValidity(anyDateTimeSlot()
-                        .setSince(LocalDateTime.now().minusDays(2))
-                        .setUntil(LocalDateTime.now().plusDays(10))
+                        .setFrom(LocalDateTime.now().minusDays(2))
+                        .setTo(LocalDateTime.now().plusDays(10))
                         .createDateTimeSlot()
                 )
                 .setCategory(new ArrayList<>(Collections.singletonList(Category.PIZZA)))
@@ -155,18 +154,16 @@ public class FakeData implements ApplicationRunner {
                 .setServiceInfo(
                         anyServiceInfo()
                                 .setName("Los Arandanos")
-                                .setAdress("Lavalle 412")
                                 .setLogo("xp")
                                 .setEMail("arandanos.viandas.quilmes@gmail.com")
                                 .setDescription("A veces, los sentimientos son difíciles de explicar," +
                                         " y qué sentimiento más fuerte que nuestro amor por la comida")
                                 .setPhoneNumber(1143238310)
-                                .setCity("Quilmes")
                                 .createServiceInfo()
                 )
                 .setBalance("300")
                 .setLocation(new Location("Avenida Calchaquí 1233, Quilmes Oeste, Quilmes",
-                        -34.7394801, -58.2923969))
+                         -34.7394801, -58.2923969))
                 .setMaxDistanceOfDeliveryInKms(10)
                 .createServiceProfile();
         new ArrayList<>(Arrays.asList(menua, menub)).forEach(serviceProfilea::addMenu);

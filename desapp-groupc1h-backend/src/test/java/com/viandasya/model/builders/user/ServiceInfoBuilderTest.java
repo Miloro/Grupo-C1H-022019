@@ -27,15 +27,6 @@ public class ServiceInfoBuilderTest {
     }
 
     @Test
-    public void testIsValidWhenICanCreateAServiceInfoWithServiceInfoBuilder3() {
-        ServiceInfo anyServiceInfo = anyServiceInfo()
-                .setAdress("San Martin 675")
-                .createServiceInfo();
-
-        Assert.assertEquals(anyServiceInfo.getAdress(), "San Martin 675");
-    }
-
-    @Test
     public void testIsValidWhenICanCreateAServiceInfoWithServiceInfoBuilder4() {
         ServiceInfo anyServiceInfo = anyServiceInfo()
                 .setDescription("Proveemos hamburguesas y papas fritas")

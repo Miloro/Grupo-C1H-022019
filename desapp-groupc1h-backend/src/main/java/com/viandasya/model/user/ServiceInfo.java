@@ -7,28 +7,23 @@ public class ServiceInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String name;
     private String logo;
-    private String adress;
     private String description;
     private String website;
     private String eMail;
     private Integer phoneNumber;
-    private String city;
 
     @OneToOne(fetch = FetchType.LAZY)
     private ServiceProfile serviceProfile;
 
-    public ServiceInfo(String name, String logo, String adress, String description, String website, String eMail, Integer phoneNumber, String city) {
+    public ServiceInfo(String name, String logo, String description, String website, String eMail, Integer phoneNumber) {
         this.name = name;
         this.logo = logo;
-        this.adress = adress;
         this.description = description;
         this.website = website;
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
-        this.city = city;
     }
 
     public ServiceInfo() {
@@ -48,14 +43,6 @@ public class ServiceInfo {
 
     public void setLogo(String logo) {
         this.logo = logo;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
     }
 
     public String getDescription() {
@@ -88,14 +75,6 @@ public class ServiceInfo {
 
     public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getCity(){
-        return city;
-    }
-
-    public void setCity(String city){
-        this.city = city;
     }
 
     public ServiceProfile getServiceProfile() {

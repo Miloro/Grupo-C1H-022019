@@ -1,8 +1,8 @@
 package com.viandasya.webservice;
 
-import com.viandasya.model.user.ServiceInfo;
+import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.service.ServiceProfileService;
-import com.viandasya.webservice.dtos.ServiceInfoDTO;
+import com.viandasya.webservice.dtos.ServiceProfileDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +18,17 @@ public class UserController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("/{id}/service")
+    @PostMapping("/{userId}/service")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createService(@PathVariable Long id, @RequestBody ServiceInfoDTO serviceInfoDTO) {
-        ServiceInfo serviceInfo = modelMapper.map(serviceInfoDTO, ServiceInfo.class);
-        serviceProfileService.createService(id, serviceInfo);
+    public long createService(@PathVariable Long userId, @RequestBody ServiceProfileDTO serviceProfileDTO) {
+        ServiceProfile serviceProfile = convertToEntity(serviceProfileDTO);
+        return serviceProfileService.createServiceProfile(userId, serviceProfile);
+    }
+
+    private ServiceProfile convertToEntity(@RequestBody ServiceProfileDTO serviceProfileDTO) {
+        ServiceProfile serviceProfile = modelMapper.map(serviceProfileDTO, ServiceProfile.class);
+        serviceProfile.setTimetable(serviceProfileDTO.getTimeTableConverted());
+        return serviceProfile;
     }
 
 }

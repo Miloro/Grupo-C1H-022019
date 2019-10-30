@@ -18,21 +18,21 @@ public class TimeSlotBuilderTest {
     @Test
     public void testSetSinceSetedInBuilderEqualsToTheOneGettedInDateTimeSlot() {
         DateTimeSlot dateTimeSlot = anyDateTimeSlot()
-                .setSince(LocalDateTime.of(2018,2,12,3,15))
+                .setFrom(LocalDateTime.of(2018,2,12,3,15))
                 .createDateTimeSlot();
 
         Assert.assertEquals(LocalDateTime.of(2018,2,12,3,15),
-                dateTimeSlot.getSince());
+                dateTimeSlot.getFrom());
     }
 
     @Test
     public void testSetFromSetedInBuilderEqualsToTheOneGettedInDateTimeSlot() {
         DateTimeSlot dateTimeSlot = anyDateTimeSlot()
-                .setUntil(LocalDateTime.of(2015,1,6,4,46))
+                .setTo(LocalDateTime.of(2015,1,6,4,46))
                 .createDateTimeSlot();
 
         Assert.assertEquals(LocalDateTime.of(2015,1,6,4,46),
-                dateTimeSlot.getUntil());
+                dateTimeSlot.getTo());
     }
 
     @Test

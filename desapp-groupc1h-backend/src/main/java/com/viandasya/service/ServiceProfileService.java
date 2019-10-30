@@ -1,6 +1,5 @@
 package com.viandasya.service;
 
-import com.viandasya.model.user.ServiceInfo;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.model.user.User;
 import com.viandasya.persistence.ServiceProfileRepository;
@@ -8,8 +7,6 @@ import com.viandasya.persistence.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-
-import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyServiceProfile;
 
 @Service
 public class ServiceProfileService {
@@ -22,13 +19,9 @@ public class ServiceProfileService {
     }
 
     @Transactional
-    public void createService(Long id, ServiceInfo serviceInfo) {
-        User user = userRepository.findById(id).get();
-        ServiceProfile serviceProfile = anyServiceProfile()
-                .setServiceInfo(serviceInfo)
-                .createServiceProfile();
+    public long createServiceProfile(Long userId, ServiceProfile serviceProfile) {
+        User user = userRepository.findById(userId).get();
         user.addServiceProfile(serviceProfile);
-        serviceProfileRepository.save(serviceProfile);
+        return serviceProfileRepository.save(serviceProfile).getId();
     }
-
 }

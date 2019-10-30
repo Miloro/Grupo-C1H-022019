@@ -35,7 +35,7 @@ public class ServiceProfile {
 
     public ServiceProfile(ServiceInfo serviceInfo, TimeTable timetable,
                           Location location, double maxDistanceOfDeliveryInKms) {
-        this.addServiceInfo(serviceInfo);
+        this.setServiceInfo(serviceInfo);
         this.timetable = timetable;
         this.location = location;
         this.maxDistanceOfDeliveryInKms = maxDistanceOfDeliveryInKms;
@@ -43,11 +43,15 @@ public class ServiceProfile {
 
     public ServiceProfile(){}
 
+    public long getId() {
+        return id;
+    }
+
     public ServiceInfo getServiceInfo() {
         return serviceInfo;
     }
 
-    public void addServiceInfo(ServiceInfo serviceInfo) {
+    public void setServiceInfo(ServiceInfo serviceInfo) {
         serviceInfo.setServiceProfile(this);
         this.serviceInfo = serviceInfo;
     }
@@ -70,15 +74,6 @@ public class ServiceProfile {
 
     public void setBalance(Balance balance){
         this.balance = balance;
-    }
-
-    public void addMenu(Menu menu) {
-        menu.setServiceProfile(this);
-        this.menus.add(menu);
-    }
-
-    public boolean has20ValidMenus() {
-        return this.menus.stream().filter(Menu::isValid).count() == 20;
     }
 
     public User getUser() {
@@ -104,4 +99,14 @@ public class ServiceProfile {
     public void setMaxDistanceOfDeliveryInKms(double maxDistanceOfDeliveryInKms) {
         this.maxDistanceOfDeliveryInKms = maxDistanceOfDeliveryInKms;
     }
+
+    public void addMenu(Menu menu) {
+        menu.setServiceProfile(this);
+        this.menus.add(menu);
+    }
+
+    public boolean has20ValidMenus() {
+        return this.menus.stream().filter(Menu::isValid).count() == 20;
+    }
+
 }

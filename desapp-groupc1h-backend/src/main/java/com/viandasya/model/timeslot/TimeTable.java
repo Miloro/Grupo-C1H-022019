@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class TimeTable implements TimeSlot {
+public class TimeTable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -26,7 +26,6 @@ public class TimeTable implements TimeSlot {
         this.dayTimeSlots.add(dayTimeSlot);
     }
 
-    @Override
     public boolean isValidDate(LocalDateTime date) {
         return this.dayTimeSlots.stream().anyMatch(timeslot -> timeslot.isValidDate(date));
     }

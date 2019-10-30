@@ -19,8 +19,8 @@ public class TimeSlotTest {
     @Test
     public void testIsValidDateTheDateIsBetweenTwoLocalDateTimes() {
         DateTimeSlot dateTimeSlot = anyDateTimeSlot()
-                .setSince(LocalDateTime.now().minusDays(3))
-                .setUntil(LocalDateTime.now().minusDays(2))
+                .setFrom(LocalDateTime.now().minusDays(3))
+                .setTo(LocalDateTime.now().minusDays(2))
                 .createDateTimeSlot();
 
         LocalDateTime date = LocalDateTime.now().minusDays(3).plusHours(4);
@@ -31,8 +31,8 @@ public class TimeSlotTest {
     @Test
     public void testIsValidDateTheDateIsNotBetweenTwoLocalDateTimes() {
         DateTimeSlot dateTimeSlot = anyDateTimeSlot()
-                .setSince(LocalDateTime.now().minusDays(3))
-                .setUntil(LocalDateTime.now().minusDays(2))
+                .setFrom(LocalDateTime.now().minusDays(3))
+                .setTo(LocalDateTime.now().minusDays(2))
                 .createDateTimeSlot();
 
         LocalDateTime date = LocalDateTime.now().minusDays(6);
