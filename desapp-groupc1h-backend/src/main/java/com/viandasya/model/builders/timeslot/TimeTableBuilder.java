@@ -30,9 +30,7 @@ public class TimeTableBuilder {
     }
 
     public TimeTable createTimeTable() {
-        TimeTable timeTable = new TimeTable();
-        dayTimeSlots.forEach(timeTable::addDayTimeSlot);
-        return timeTable;
+        return  new TimeTable(dayTimeSlots);
     }
 
 }

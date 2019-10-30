@@ -280,8 +280,8 @@ public class FakeData implements ApplicationRunner {
         List<DayOfWeek> weekdays = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.THURSDAY, DayOfWeek.WEDNESDAY,
                 DayOfWeek.TUESDAY, DayOfWeek.FRIDAY));
         List<DayTimeSlot> dayTimeSlots = new ArrayList<>();
-        weekdays.forEach(weekday -> new DayTimeSlot(weekday,
-                new ArrayList<>(Collections.singletonList(new HoursTimeSlot(from, to)))));
+        weekdays.forEach(weekday -> dayTimeSlots.add(new DayTimeSlot(weekday,
+                new ArrayList<>(Collections.singletonList(new HoursTimeSlot(from, to))))));
 
         return anyTimeTable().setDayTimeSlots(dayTimeSlots).createTimeTable();
     }

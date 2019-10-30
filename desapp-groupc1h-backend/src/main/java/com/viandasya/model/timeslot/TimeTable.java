@@ -14,6 +14,10 @@ public class TimeTable {
     @OneToMany(mappedBy = "timeTable", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DayTimeSlot> dayTimeSlots = new ArrayList<>();
 
+    public TimeTable(List<DayTimeSlot> dayTimeSlots) {
+        dayTimeSlots.forEach(this::addDayTimeSlot);
+    }
+
     public TimeTable() {
     }
 
