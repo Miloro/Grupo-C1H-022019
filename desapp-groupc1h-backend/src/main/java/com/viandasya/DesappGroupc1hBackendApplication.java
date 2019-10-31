@@ -18,10 +18,4 @@ public class DesappGroupc1hBackendApplication {
 		return new ModelMapper();
 	}
 
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
-
-
 }
