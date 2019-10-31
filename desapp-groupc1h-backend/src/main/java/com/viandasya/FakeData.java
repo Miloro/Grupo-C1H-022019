@@ -10,14 +10,9 @@ import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.DayTimeSlot;
 import com.viandasya.model.timeslot.HoursTimeSlot;
 import com.viandasya.model.timeslot.TimeTable;
-import com.viandasya.model.user.Balance;
-import com.viandasya.model.user.ClientProfile;
-import com.viandasya.model.user.ServiceProfile;
-import com.viandasya.model.user.User;
+import com.viandasya.model.user.*;
 import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -42,12 +37,13 @@ import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyService
 
 @Component
 public class FakeData implements ApplicationRunner {
+    private final UserRepository userRepository;
+    private final MenuRepository menuRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private MenuRepository menuRepository;
+    public FakeData(UserRepository userRepository, MenuRepository menuRepository) {
+        this.userRepository = userRepository;
+        this.menuRepository = menuRepository;
+    }
 
     @Override
     @Transactional
@@ -64,8 +60,8 @@ public class FakeData implements ApplicationRunner {
                                 new BigDecimal("40"), 30
                         ))
                 .setValidity(anyDateTimeSlot()
-                        .setSince(LocalDateTime.now().minusDays(10))
-                        .setUntil(LocalDateTime.now().plusDays(10))
+                        .setFrom(LocalDateTime.now().minusDays(10))
+                        .setTo(LocalDateTime.now().plusDays(10))
                         .createDateTimeSlot()
                 )
                 .setCategory(new ArrayList<>(Arrays.asList(Category.PIZZA, Category.HAMBURGER)))
@@ -81,8 +77,8 @@ public class FakeData implements ApplicationRunner {
                                 new BigDecimal("50.5"), 23
                         ))
                 .setValidity(anyDateTimeSlot()
-                        .setSince(LocalDateTime.now())
-                        .setUntil(LocalDateTime.now().plusDays(15))
+                        .setFrom(LocalDateTime.now())
+                        .setTo(LocalDateTime.now().plusDays(15))
                         .createDateTimeSlot()
                 )
                 .setCategory(new ArrayList<>(Arrays.asList(Category.EMPANADAS, Category.BEER, Category.SHSHI)))
@@ -91,9 +87,13 @@ public class FakeData implements ApplicationRunner {
                 .createMenu();
 
         ServiceProfile serviceProfile1 = anyServiceProfile()
-                .setBalance(new Balance(new BigDecimal("20")))
-                .setMenus(new ArrayList<>(Arrays.asList(menu1, menu2)))
+                .setBalance("20")
+                .setLocation(new Location("Alsina 654, Quilmes, Quilmes",
+                        -34.71688, -58.24964))
+                .setMaxDistanceOfDeliveryInKms(5)
                 .createServiceProfile();
+        new ArrayList<>(Arrays.asList(menu1, menu2)).forEach(serviceProfile1::addMenu);
+
 
 
         ClientProfile clientProfile1 = anyClientProfile()
@@ -124,8 +124,8 @@ public class FakeData implements ApplicationRunner {
                                 new BigDecimal("40"), 15
                         ))
                 .setValidity(anyDateTimeSlot()
-                        .setSince(LocalDateTime.now().minusDays(25))
-                        .setUntil(LocalDateTime.now())
+                        .setFrom(LocalDateTime.now().minusDays(25))
+                        .setTo(LocalDateTime.now())
                         .createDateTimeSlot()
                 )
                 .setCategory(new ArrayList<>(Arrays.asList(Category.GREEN, Category.VEGAN)))
@@ -141,8 +141,8 @@ public class FakeData implements ApplicationRunner {
                                 new BigDecimal("50.5"), 23
                         ))
                 .setValidity(anyDateTimeSlot()
-                        .setSince(LocalDateTime.now().minusDays(2))
-                        .setUntil(LocalDateTime.now().plusDays(10))
+                        .setFrom(LocalDateTime.now().minusDays(2))
+                        .setTo(LocalDateTime.now().plusDays(10))
                         .createDateTimeSlot()
                 )
                 .setCategory(new ArrayList<>(Collections.singletonList(Category.PIZZA)))
@@ -154,18 +154,19 @@ public class FakeData implements ApplicationRunner {
                 .setServiceInfo(
                         anyServiceInfo()
                                 .setName("Los Arandanos")
-                                .setAdress("Lavalle 412")
                                 .setLogo("xp")
                                 .setEMail("arandanos.viandas.quilmes@gmail.com")
                                 .setDescription("A veces, los sentimientos son difíciles de explicar," +
                                         " y qué sentimiento más fuerte que nuestro amor por la comida")
                                 .setPhoneNumber(1143238310)
-                                .setCity("Quilmes")
                                 .createServiceInfo()
                 )
-                .setBalance(new Balance(new BigDecimal("300")))
-                .setMenus(new ArrayList<>(Arrays.asList(menua, menub)))
+                .setBalance("300")
+                .setLocation(new Location("Avenida Calchaquí 1233, Quilmes Oeste, Quilmes",
+                         -34.7394801, -58.2923969))
+                .setMaxDistanceOfDeliveryInKms(10)
                 .createServiceProfile();
+        new ArrayList<>(Arrays.asList(menua, menub)).forEach(serviceProfilea::addMenu);
 
         ClientProfile clientProfilea = anyClientProfile()
                 .setName("Miguel")
@@ -279,8 +280,8 @@ public class FakeData implements ApplicationRunner {
         List<DayOfWeek> weekdays = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.THURSDAY, DayOfWeek.WEDNESDAY,
                 DayOfWeek.TUESDAY, DayOfWeek.FRIDAY));
         List<DayTimeSlot> dayTimeSlots = new ArrayList<>();
-        weekdays.forEach(weekday -> new DayTimeSlot(weekday,
-                new ArrayList<>(Collections.singletonList(new HoursTimeSlot(from, to)))));
+        weekdays.forEach(weekday -> dayTimeSlots.add(new DayTimeSlot(weekday,
+                new ArrayList<>(Collections.singletonList(new HoursTimeSlot(from, to))))));
 
         return anyTimeTable().setDayTimeSlots(dayTimeSlots).createTimeTable();
     }

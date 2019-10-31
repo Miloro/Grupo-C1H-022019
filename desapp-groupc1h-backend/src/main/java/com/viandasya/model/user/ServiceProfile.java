@@ -4,6 +4,7 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.model.timeslot.TimeTable;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,23 +24,34 @@ public class ServiceProfile {
     @OneToMany(mappedBy = "serviceProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Menu> menus = new ArrayList<>();
 
-    private Balance balance;
+    private Balance balance = new Balance(new BigDecimal("0"));
 
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
+    private Location location;
+
+    private double maxDistanceOfDeliveryInKms;
+
+    public ServiceProfile(ServiceInfo serviceInfo, TimeTable timetable,
+                          Location location, double maxDistanceOfDeliveryInKms) {
+        this.setServiceInfo(serviceInfo);
+        this.timetable = timetable;
+        this.location = location;
+        this.maxDistanceOfDeliveryInKms = maxDistanceOfDeliveryInKms;
+    }
+
     public ServiceProfile(){}
 
-    public ServiceProfile(TimeTable timetable, Balance balance) {
-        this.timetable = timetable;
-        this.balance = balance;
+    public long getId() {
+        return id;
     }
 
     public ServiceInfo getServiceInfo() {
         return serviceInfo;
     }
 
-    public void addServiceInfo(ServiceInfo serviceInfo) {
+    public void setServiceInfo(ServiceInfo serviceInfo) {
         serviceInfo.setServiceProfile(this);
         this.serviceInfo = serviceInfo;
     }
@@ -48,8 +60,8 @@ public class ServiceProfile {
         return timetable;
     }
 
-    public void setServiceHours(TimeTable serviceHours) {
-        this.timetable = serviceHours;
+    public void setTimetable(TimeTable timetable) {
+        this.timetable = timetable;
     }
 
     public List<Menu> getMenus() {
@@ -64,6 +76,30 @@ public class ServiceProfile {
         this.balance = balance;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public double getMaxDistanceOfDeliveryInKms() {
+        return maxDistanceOfDeliveryInKms;
+    }
+
+    public void setMaxDistanceOfDeliveryInKms(double maxDistanceOfDeliveryInKms) {
+        this.maxDistanceOfDeliveryInKms = maxDistanceOfDeliveryInKms;
+    }
+
     public void addMenu(Menu menu) {
         menu.setServiceProfile(this);
         this.menus.add(menu);
@@ -73,11 +109,4 @@ public class ServiceProfile {
         return this.menus.stream().filter(Menu::isValid).count() == 20;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

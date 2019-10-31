@@ -5,40 +5,39 @@ import javax.persistence.Embeddable;
 import java.time.LocalDateTime;
 
 @Embeddable
-public class DateTimeSlot implements TimeSlot {
+public class DateTimeSlot {
 
-    @Column(name = "since_date")
-    private LocalDateTime since;
+    @Column(name = "from_date")
+    private LocalDateTime from;
 
-    @Column(name = "until_date")
-    private LocalDateTime until;
+    @Column(name = "to_date")
+    private LocalDateTime to;
 
-    public DateTimeSlot(LocalDateTime since, LocalDateTime until) {
-        this.since = since;
-        this.until = until;
+    public DateTimeSlot(LocalDateTime from, LocalDateTime to) {
+        this.from = from;
+        this.to = to;
     }
 
     public DateTimeSlot() {
     }
 
-    public LocalDateTime getSince() {
-        return since;
+    public LocalDateTime getFrom() {
+        return from;
     }
 
-    public void setSince(LocalDateTime since) {
-        this.since = since;
+    public void setFrom(LocalDateTime from) {
+        this.from = from;
     }
 
-    public LocalDateTime getUntil() {
-        return until;
+    public LocalDateTime getTo() {
+        return to;
     }
 
-    public void setUntil(LocalDateTime until) {
-        this.until = until;
+    public void setTo(LocalDateTime to) {
+        this.to = to;
     }
 
-    @Override
     public boolean isValidDate(LocalDateTime date) {
-        return !date.isBefore(since) && !date.isAfter(until);
+        return !date.isBefore(from) && !date.isAfter(to);
     }
 }

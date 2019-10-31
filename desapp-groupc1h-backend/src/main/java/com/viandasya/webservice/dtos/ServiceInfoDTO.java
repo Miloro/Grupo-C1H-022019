@@ -1,32 +1,21 @@
-package com.viandasya.model.user;
+package com.viandasya.webservice.dtos;
 
-import javax.persistence.*;
-
-@Entity
-public class ServiceInfo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class ServiceInfoDTO {
     private String name;
-    private String logo;
     private String description;
     private String website;
     private String eMail;
     private Integer phoneNumber;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private ServiceProfile serviceProfile;
-
-    public ServiceInfo(String name, String logo, String description, String website, String eMail, Integer phoneNumber) {
+    public ServiceInfoDTO(String name, String description, String website, String eMail, Integer phoneNumber) {
         this.name = name;
-        this.logo = logo;
         this.description = description;
         this.website = website;
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
     }
 
-    public ServiceInfo() {
+    public ServiceInfoDTO() {
     }
 
     public String getName() {
@@ -35,14 +24,6 @@ public class ServiceInfo {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
     }
 
     public String getDescription() {
@@ -76,13 +57,4 @@ public class ServiceInfo {
     public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    public ServiceProfile getServiceProfile() {
-        return serviceProfile;
-    }
-
-    public void setServiceProfile(ServiceProfile serviceProfile) {
-        this.serviceProfile = serviceProfile;
-    }
-
 }

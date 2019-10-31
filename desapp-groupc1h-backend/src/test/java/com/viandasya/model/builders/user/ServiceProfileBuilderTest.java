@@ -1,13 +1,12 @@
 package com.viandasya.model.builders.user;
 
 import com.viandasya.model.timeslot.TimeTable;
-import com.viandasya.model.user.Balance;
+import com.viandasya.model.user.Location;
 import com.viandasya.model.user.ServiceInfo;
 import com.viandasya.model.user.ServiceProfile;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.math.BigDecimal;
+import org.mockito.Mockito;
 
 import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTable;
 import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInfo;
@@ -27,18 +26,38 @@ public class ServiceProfileBuilderTest {
     @Test
     public void setServiceDaysSetedInBuilderEqualsToTheOneGettedInServiceProfile() {
         TimeTable timeTable = anyTimeTable().createTimeTable();
-        ServiceProfile serviceProfile = anyServiceProfile().setTimeTable(timeTable).createServiceProfile();
+        ServiceProfile serviceProfile = anyServiceProfile().setTimetable(timeTable).createServiceProfile();
 
         Assert.assertEquals(timeTable, serviceProfile.getTimetable());
     }
 
     @Test
     public void testSetBalanceSetedInBuilderEqualsToTheOneGettedInServiceProfile() {
-        Balance balance = new Balance(new BigDecimal("100.50"));
+        String balance = "100.50";
         ServiceProfile serviceProfile = anyServiceProfile()
                 .setBalance(balance)
                 .createServiceProfile();
 
-        Assert.assertEquals(balance, serviceProfile.getBalance());
+        Assert.assertEquals(balance, serviceProfile.getBalance().getAmount().toString());
+    }
+
+    @Test
+    public void testSetLocationSetedInBuilderEqualsToTheOneGettedInServiceProfile() {
+        Location location = Mockito.mock(Location.class);
+        ServiceProfile serviceProfile = anyServiceProfile()
+                .setLocation(location)
+                .createServiceProfile();
+
+        Assert.assertEquals(location, serviceProfile.getLocation());
+    }
+
+    @Test
+    public void testSetMaxDistanceOfDeliveryInKmsSetedInBuilderEqualsToTheOneGettedInServiceProfile() {
+        double maxDistanceOfDeliveryInKms = 3.23;
+        ServiceProfile serviceProfile = anyServiceProfile()
+                .setMaxDistanceOfDeliveryInKms(maxDistanceOfDeliveryInKms)
+                .createServiceProfile();
+
+        Assert.assertEquals(0, Double.compare(maxDistanceOfDeliveryInKms, serviceProfile.getMaxDistanceOfDeliveryInKms()));
     }
 }

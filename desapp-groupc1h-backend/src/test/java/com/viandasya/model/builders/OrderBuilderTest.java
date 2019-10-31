@@ -60,8 +60,8 @@ public class OrderBuilderTest {
     @Test
     public void testSetOrderDateSetedInBuilderEqualsToTheOneGettedInOrder() {
         DateTimeSlot date = anyDateTimeSlot()
-                .setSince(LocalDateTime.of(2019,9,20,12,0))
-                .setUntil(LocalDateTime.of(2019,9,20,13,0))
+                .setFrom(LocalDateTime.of(2019,9,20,12,0))
+                .setTo(LocalDateTime.of(2019,9,20,13,0))
                 .createDateTimeSlot();
         Order order = anyOrder().setOrderDate(date).createOrder();
 

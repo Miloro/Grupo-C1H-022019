@@ -122,10 +122,10 @@ public class Order {
 
     public LocalDateTime averageTime(){
         if(isDelivery){
-            return this.orderDate.getSince().plusMinutes(this.menu.getCookingTime() + 15 ); //cambiar 15 por cuanto tarda en llegar en moto desde la api
+            return this.orderDate.getFrom().plusMinutes(this.menu.getCookingTime() + 15 ); //cambiar 15 por cuanto tarda en llegar en moto desde la api
         }
         else{
-            return this.orderDate.getSince().plusSeconds(this.menu.getCookingTime());
+            return this.orderDate.getFrom().plusSeconds(this.menu.getCookingTime());
         }
     }
 }

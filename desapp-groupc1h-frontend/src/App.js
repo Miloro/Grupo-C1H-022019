@@ -4,7 +4,7 @@ import './App.css';
 import Login from './routes/Login';
 import Home from './routes/Home';
 import MapDev from './routes/MapDev';
-import Service from './routes/Service';
+import Service from './routes/service/Service';
 import Buy from './routes/Buy';
 import UnratedOrderds from './routes/UnratedOrderds';
 import Cart from './routes/Cart';
@@ -18,15 +18,6 @@ import { injectIntl } from 'react-intl';
 class App extends Component {
 
   state = {};
-
-  hello = () => {
-    fetch('/api/hello')
-        .then(response => response.text())
-        .then(message => {
-          this.setState({message: message});
-        });
-  };
-  
 
   render() {
     //const intl = this.props.intl
@@ -52,6 +43,6 @@ class App extends Component {
   }
 }
 
-App = injectIntl(App)
+App = injectIntl(App);
 
 export default App;

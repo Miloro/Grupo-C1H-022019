@@ -6,39 +6,38 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Embeddable
-public class HoursTimeSlot implements TimeSlot {
-    @Column(name = "since_hour")
-    private LocalTime since;
+public class HoursTimeSlot {
+    @Column(name = "from_hour")
+    private LocalTime from;
 
-    @Column(name = "until_hour")
-    private LocalTime until;
+    @Column(name = "to_hour")
+    private LocalTime to;
 
-    public HoursTimeSlot(LocalTime since, LocalTime until) {
-        this.since = since;
-        this.until = until;
+    public HoursTimeSlot(LocalTime from, LocalTime to) {
+        this.from = from;
+        this.to = to;
     }
 
     public HoursTimeSlot() {
     }
 
-    public LocalTime getSince() {
-        return since;
+    public LocalTime getFrom() {
+        return from;
     }
 
-    public void setSince(LocalTime since) {
-        this.since = since;
+    public void setFrom(LocalTime from) {
+        this.from = from;
     }
 
-    public LocalTime getUntil() {
-        return until;
+    public LocalTime getTo() {
+        return to;
     }
 
-    public void setUntil(LocalTime until) {
-        this.until = until;
+    public void setTo(LocalTime to) {
+        this.to = to;
     }
 
-    @Override
     public boolean isValidDate(LocalDateTime date) {
-        return !date.toLocalTime().isBefore(since) && !date.toLocalTime().isAfter(until);
+        return !date.toLocalTime().isBefore(from) && !date.toLocalTime().isAfter(to);
     }
 }

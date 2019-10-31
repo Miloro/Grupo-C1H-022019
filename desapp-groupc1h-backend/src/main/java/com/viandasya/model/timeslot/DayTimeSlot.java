@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class DayTimeSlot implements TimeSlot{
+public class DayTimeSlot {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -46,7 +46,6 @@ public class DayTimeSlot implements TimeSlot{
         this.hoursTimeSlots = hoursTimeSlots;
     }
 
-    @Override
     public boolean isValidDate(LocalDateTime date) {
         return date.getDayOfWeek().equals(day) && this.isBetweenHours(date);
     }
