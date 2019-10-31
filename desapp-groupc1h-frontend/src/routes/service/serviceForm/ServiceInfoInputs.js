@@ -3,7 +3,7 @@ import {Form, Input, InputNumber} from "@jbuschke/formik-antd";
 import {useIntl} from "react-intl";
 const {Item} = Form;
 
-function ServiceInfoInputs(props) {
+function ServiceInfoInputs() {
     const {formatMessage} = useIntl();
 
     return (
@@ -21,7 +21,8 @@ function ServiceInfoInputs(props) {
                 <Input name="eMail" placeholder="Email*"/>
             </Item>
             <Item name="phoneNumber">
-                <InputNumber className="width-100" type="number" name="phoneNumber" placeholder={formatMessage({id:"phoneNumber"})}/>
+                <InputNumber className="width-100" type="number" name="phoneNumber"
+                             placeholder={formatMessage({id:"phoneNumber"})}/>
             </Item>
         </div>
     );

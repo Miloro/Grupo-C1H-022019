@@ -1,13 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Col, Layout, Menu, Row} from "antd";
 import "./Service.css";
 import ServiceForm from "./serviceForm/ServiceForm";
 
+function Service(props) {
+    const userId = 21;
+    const [service, setService] = useState(null);
 
-class Service  extends React.Component{
-
-    render(){
-        return(
+    return(
             <div className= "App" >
                 <Layout className="layout">
                     <Layout.Header>
@@ -23,16 +23,14 @@ class Service  extends React.Component{
                     <Layout.Content>
                         <Row type="flex" justify="space-around" align="middle">
                             <Col span={16} style={{ background: '#fff', padding: 40, minHeight: 400 }}>
-                                <ServiceForm/>
-                                {/*<AdressSearcher/>*/}
+                                {!service && <ServiceForm userId={userId} setService={setService}/>}
                             </Col>
                         </Row>
                     </Layout.Content>
                     <Layout.Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Layout.Footer>
                 </Layout>
             </div>
-        )
-    }
+        );
 
 }
 

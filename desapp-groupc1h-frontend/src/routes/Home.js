@@ -10,7 +10,7 @@ class Home  extends React.Component{
           defaultMessage: 'hello'
         })
         const home = intl.formatMessage({
-            id: 'Home',
+            id: 'home',
             defaultMessage: 'home'
           })
         return(
