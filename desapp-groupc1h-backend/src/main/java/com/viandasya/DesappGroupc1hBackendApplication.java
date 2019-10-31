@@ -10,6 +10,12 @@ public class DesappGroupc1hBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DesappGroupc1hBackendApplication.class, args);
+
+	}
+
+	@Bean
+	public ModelMapper modelMapper(){
+		return new ModelMapper();
 	}
 
 	@Bean

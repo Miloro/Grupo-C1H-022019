@@ -1,5 +1,6 @@
 package com.viandasya.model.menu;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.viandasya.model.timeslot.TimeTable;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class DeliveryInfo {
     private Integer averageTime;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Menu menu;
 
 

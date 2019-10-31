@@ -2,27 +2,29 @@ package com.viandasya.webservice;
 
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.persistence.ClientProfileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.viandasya.service.ClientProfileService;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
-@Controller
+@RestController
 public class ClientProfileController {
-
+    private final  ClientProfileService clientProfileService;
     private final ClientProfileRepository clientProfileRepository;
 
-    @Autowired
-    public ClientProfileController(ClientProfileRepository clientProfileRepository) {
+    public ClientProfileController(ClientProfileService clientProfileService, ClientProfileRepository clientProfileRepository) {
+        this.clientProfileService = clientProfileService;
         this.clientProfileRepository = clientProfileRepository;
     }
 
+    @PutMapping("/client")
+    public ClientProfile addUser(@RequestBody @Valid ClientProfile clientProfile){
+        return clientProfileService.createClientProfile(clientProfile);
+    }
+
     @GetMapping("/clients")
-    @ResponseBody
-    public List<ClientProfile> getCustomers() {
-        return (List<ClientProfile>) clientProfileRepository.findAll();
+    public Iterable<ClientProfile> findAll(){
+        return clientProfileRepository.findAll();
     }
 
 }
