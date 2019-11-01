@@ -6,7 +6,7 @@ import ServiceInfoInputs from "./ServiceInfoInputs";
 import ServiceShedulePicker from "./ServiceShedulePicker";
 import AddressSearcher from "./AddressSearcher";
 import axios from "axios";
-import ServiceSchema from "./ServiceSchema";
+import ServiceSchema from "../ServiceSchema";
 import {FormattedMessage, useIntl} from "react-intl";
 
 const {Item} = Form;

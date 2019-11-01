@@ -2,7 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Login from './routes/Login';
-import Home from './routes/Home';
+import Home from './routes/home/Home';
 import MapDev from './routes/MapDev';
 import Service from './routes/service/Service';
 import Buy from './routes/Buy';
