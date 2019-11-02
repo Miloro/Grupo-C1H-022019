@@ -7,23 +7,23 @@ import GoogleLogin from 'react-google-login';
 class LogIn  extends React.Component{
 
     render(){
-        const intl = this.props.intl
+        const intl = this.props.intl;
         const greet = intl.formatMessage({
           id: 'Greet',
           defaultMessage: 'welcome'
-        })
+        });
         const loginMessage = intl.formatMessage({
             id: 'LoginMessage',
             defaultMessage: 'LOGIN WITH FACEBOOK OR GOOGLE'
-          })
+          });
 
         const responseFacebook = (response) => {
             console.log(response);
-          }
+          };
       
         const responseGoogle = (response) => {
           console.log(response);
-        }
+        };
 
         return(
             <div className= "App" >
@@ -52,6 +52,6 @@ class LogIn  extends React.Component{
                     
 }
              
-LogIn = injectIntl(LogIn)
+LogIn = injectIntl(LogIn);
 
 export default LogIn;

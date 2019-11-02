@@ -4,15 +4,15 @@ import { injectIntl} from 'react-intl'
 class ServiceOrders  extends React.Component{
 
     render(){
-        const intl = this.props.intl
+        const intl = this.props.intl;
         const greet = intl.formatMessage({
           id: 'Greet',
           defaultMessage: 'hello'
-        })
+        });
         const serviceOrders = intl.formatMessage({
             id: 'ServiceOrders',
             defaultMessage: 'Service orders'
-          })
+          });
         return(
             <div className= "App" >
                 <h1>{greet}</h1>
@@ -23,6 +23,6 @@ class ServiceOrders  extends React.Component{
 
 }
 
-ServiceOrders = injectIntl(ServiceOrders)
+ServiceOrders = injectIntl(ServiceOrders);
 
 export default ServiceOrders;

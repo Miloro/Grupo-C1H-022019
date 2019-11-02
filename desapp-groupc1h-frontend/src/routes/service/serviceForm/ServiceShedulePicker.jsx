@@ -1,6 +1,6 @@
 import React from 'react';
 import {Col, Row} from "antd";
-import {Checkbox, Form, TimePicker} from "@jbuschke/formik-antd";
+import {Checkbox, Form, TimePicker} from "formik-antd";
 import {useIntl} from "react-intl";
 const {Item} = Form;
 

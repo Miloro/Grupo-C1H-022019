@@ -1,28 +1,28 @@
 import React from 'react'
 import { injectIntl} from 'react-intl'
 
-class Buy  extends React.Component{
+class Orders  extends React.Component{
 
     render(){
-        const intl = this.props.intl
+        const intl = this.props.intl;
         const greet = intl.formatMessage({
           id: 'Greet',
           defaultMessage: 'hello'
-        })
-        const service = intl.formatMessage({
-            id: 'Buy',
-            defaultMessage: 'Buy'
-          })
+        });
+        const orders = intl.formatMessage({
+            id: 'Orders',
+            defaultMessage: 'orders'
+          });
         return(
             <div className= "App" >
                 <h1>{greet}</h1>
-                <h1>{service}</h1>
+                <h1>{orders}</h1>
             </div>
         )
     }
 
 }
 
-Buy = injectIntl(Buy)
+Orders = injectIntl(Orders);
 
-export default Buy;
+export default Orders;
