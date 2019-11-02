@@ -11,15 +11,15 @@ import messagesEs from './translations/es.json'
 const messages = {
   'en': messagesEn,
   'es': messagesEs
-}
+};
 
-const language = navigator.language.split(/[-_]/)[0] // language without region code
+const language = navigator.language.split(/[-_]/)[0]; // language without region code
 
 ReactDOM.render(
   <IntlProvider locale={language} messages={messages[language]}>
     <App />
   </IntlProvider>
-  , document.getElementById('root'))
+  , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

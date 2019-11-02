@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, AutoComplete} from "@jbuschke/formik-antd";
+import {Form, AutoComplete} from "formik-antd";
 import axios from "axios";
 import {useIntl} from "react-intl";
 const {Item} = Form;
@@ -9,6 +9,7 @@ function AddressSearcher({suggestions, setFieldValue}) {
     const url = 'https://autocomplete.geocoder.api.here.com/6.2/suggest.json';
 
     function createSuggestion(address, locationId) {
+        // noinspection JSUnresolvedVariable,JSUnresolvedVariable
         return {
             id: locationId, address:
                 `${address.street} ${address.houseNumber}, ${address.city}, ${address.state}`
@@ -29,6 +30,7 @@ function AddressSearcher({suggestions, setFieldValue}) {
     function onSearch(query) {
         if (query.length > 10) {
             axios.get(url, createParams(query)).then((response) => {
+                // noinspection JSUnresolvedVariable
                 const suggestions = response.data.suggestions
                     .filter((s) => s.matchLevel === 'houseNumber')
                     .map((s) => (createSuggestion(s.address, s.locationId)));

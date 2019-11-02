@@ -1,10 +1,13 @@
 import React from 'react';
-import {Form, Input, InputNumber} from "@jbuschke/formik-antd";
+import {Form, Input, InputNumber} from "formik-antd";
 import {useIntl} from "react-intl";
 const {Item} = Form;
 
 function ServiceInfoInputs() {
     const {formatMessage} = useIntl();
+    const inputNumberProps = {
+        style: {width: '100%'}
+    };
 
     return (
         <div>
@@ -21,7 +24,7 @@ function ServiceInfoInputs() {
                 <Input name="eMail" placeholder="Email*"/>
             </Item>
             <Item name="phoneNumber">
-                <InputNumber className="width-100" type="number" name="phoneNumber"
+                <InputNumber type="number" name="phoneNumber" {...inputNumberProps}
                              placeholder={formatMessage({id:"phoneNumber"})}/>
             </Item>
         </div>

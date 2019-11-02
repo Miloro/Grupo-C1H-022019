@@ -1,16 +1,21 @@
 {
   "name": "desapp-groupc1h-frontend",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@csstools/normalize.css": "github:csstools/normalize.css",
-    "@jbuschke/formik-antd": "^1.5.4",
     "antd": "^3.24.2",
     "axios": "^0.19.0",
+    "babel-plugin-import": "^1.12.2",
+    "customize-cra": "^0.8.0",
     "formik": "^1.5.8",
+    "formik-antd": "^1.6.0",
     "http-proxy-middleware": "^0.20.0",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
     "moment": "^2.24.0",
     "react": "^16.9.0",
+    "react-app-rewired": "^2.1.4",
     "react-dom": "^16.9.0",
     "react-facebook-login": "latest",
     "react-google-login": "latest",
@@ -22,10 +27,9 @@
     "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,5 +45,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "license": "none"
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Modal, Row, Typography} from "antd";
 import {Formik} from "formik";
-import {Form, InputNumber, SubmitButton} from "@jbuschke/formik-antd";
+import {Form, InputNumber, SubmitButton} from "formik-antd";
 import ServiceInfoInputs from "./ServiceInfoInputs";
 import ServiceShedulePicker from "./ServiceShedulePicker";
 import AddressSearcher from "./AddressSearcher";
@@ -17,11 +17,14 @@ const {success} = Modal;
 function ServiceForm({userId, setService}) {
     const {formatMessage} = useIntl();
     const geocoderUrl = 'https://geocoder.api.here.com/6.2/geocode.json';
-    const formItemLayout = {
+    const formLayout = {
         wrapperCol: {
-            xs: {span: 24},
-            sm: {span: 16},
-        }
+            xs: {span: 20},
+            sm: {span: 20},
+        },
+    };
+    const inputNumberProps = {
+        style: {width: '100%'}
     };
 
     const initialValues = {
@@ -84,7 +87,9 @@ function ServiceForm({userId, setService}) {
         let service;
         axios.get(geocoderUrl, createParams(values.selected.id))
             .then((response) => {
+                // noinspection JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable
                 const checkedLocation = response.data.Response.View[0].Result[0].Location;
+                // noinspection JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable
                 const location = {
                     address: values.selected.address,
                     latitude: checkedLocation.DisplayPosition.Latitude,
@@ -109,43 +114,43 @@ function ServiceForm({userId, setService}) {
     }
 
     return (
-        <Row type="flex" justify="space-around" align="middle">
-            <Col span={24} offset={8}>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={ServiceSchema(formatMessage)}
-                    onSubmit={onSubmit}
-                    component={({values, setFieldValue}) => (
-                        <Form {...formItemLayout}>
-                            <Title level={3} className='padding-botton-5 align-left'>
-                                <FormattedMessage id="service.create"/>
-                            </Title>
-                            <Title level={4} className='align-left'>
-                                <FormattedMessage id="service.info"/>
-                            </Title>
-                            <ServiceInfoInputs/>
-                            <Title level={4} className='padding-top-4 align-left'>
-                                <FormattedMessage id="service.timetable"/>
-                            </Title>
-                            <ServiceShedulePicker timetable={values.timetable} setFieldValue={setFieldValue}/>
-                            <Title level={4} className='padding-top-4 align-left'>
-                                <FormattedMessage id="service.location"/>
-                            </Title>
-                            <AddressSearcher suggestions={values.suggestions} setFieldValue={setFieldValue}/>
-                            <Item name="maxDistanceDeliveryInKms">
-                                <InputNumber className="width-100" type="number" name="maxDistanceDeliveryInKms"
-                                             placeholder={formatMessage({id: "service.deliveryDistance"})}/>
-                            </Item>
-                            <Item name="SubmitButton">
-                                <SubmitButton size="large">
-                                    <FormattedMessage id="create"/>
-                                </SubmitButton>
-                            </Item>
-                        </Form>
-                    )}
-                />
-            </Col>
-        </Row>
+        <Formik
+            initialValues={initialValues}
+            validationSchema={ServiceSchema(formatMessage)}
+            onSubmit={onSubmit}
+            component={({values, setFieldValue}) => (
+                <Row type="flex" justify="space-around" align="middle">
+                    <Col span={20}>
+                <Form {...formLayout}>
+                    <Title level={2} className='padding-botton-5 align-left'>
+                        <FormattedMessage id="service.create"/>
+                    </Title>
+                    <Title level={4} className='align-left'>
+                        <FormattedMessage id="service.info"/>
+                    </Title>
+                    <ServiceInfoInputs/>
+                    <Title level={4} className='padding-top-4 align-left'>
+                        <FormattedMessage id="service.timetable"/>
+                    </Title>
+                    <ServiceShedulePicker timetable={values.timetable} setFieldValue={setFieldValue}/>
+                    <Title level={4} className='padding-top-4 align-left'>
+                        <FormattedMessage id="service.location"/>
+                    </Title>
+                    <AddressSearcher suggestions={values.suggestions} setFieldValue={setFieldValue}/>
+                    <Item name="maxDistanceDeliveryInKms">
+                        <InputNumber type="number" name="maxDistanceDeliveryInKms" {...inputNumberProps}
+                                     placeholder={formatMessage({id: "service.deliveryDistance"})}/>
+                    </Item>
+                    <Item name="SubmitButton">
+                        <SubmitButton size="large">
+                            <FormattedMessage id="create"/>
+                        </SubmitButton>
+                    </Item>
+                </Form>
+                    </Col>
+                </Row>
+            )}
+        />
     );
 
 }
