@@ -23,7 +23,7 @@ function SearchMenuInput() {
                 <InputGroup compact size="large">
                     <Select defaultValue="city" onSelect={onSelect} {...widthStyleProp('15%')}>
                         {["city", "name", "category"].map ((s) =>(
-                        <Option value={s}>
+                        <Option key={s} value={s}>
                             <FormattedMessage id={s}/>
                         </Option>
                         ))}

@@ -15,12 +15,13 @@ import Orders from './routes/Ordes';
 import { injectIntl } from 'react-intl';
 import {Col, Layout, Menu, Row} from 'antd';
 import Background from "./resources/background.jpg";
+import SearchMenuInput from "./routes/menu/SearchMenuInput";
 const { Header, Content, Footer } = Layout;
 
 const menuProps = {
   mode: "horizontal",
   defaultSelectedKeys: ['2'],
-  style: {lineHeight: '64px'},
+  style: {lineHeight: '62px'},
 };
 
 const contentProps = {
@@ -28,7 +29,7 @@ const contentProps = {
     backgroundImage: `url(${Background})`,
     minHeight: '500px',
     height: '100%',
-    padding: '4%'
+    padding: '2%'
   }
 };
 
@@ -36,14 +37,14 @@ const rowProps = {
   type: "flex",
   justify: "space-around",
   align: "middle",
-  style:{paddingTop: '2%' }
+  style:{paddingTop: '2%'}
 };
 
 const colProps = {
     span: 20,
     style:{
-      background: '#f5f5f5',
-      borderRadius: '25px'
+      background: '#ffffff',
+      minHeight: "500px"
     }
 };
 
@@ -54,11 +55,17 @@ class App extends Component {
       <BrowserRouter>
         <Layout>
           <Header>
-            <Menu {...menuProps}>
-              <Menu.Item key="1">nav 1</Menu.Item>
-              <Menu.Item key="2">nav 2</Menu.Item>
-              <Menu.Item key="3">nav 3</Menu.Item>
-            </Menu>
+            <Row>
+              <Col span={8}>
+                <Menu {...menuProps}>
+                  <Menu.Item key="1">nav 1</Menu.Item>
+                  <Menu.Item key="2">nav 2</Menu.Item>
+                </Menu>
+              </Col>
+              <Col span={14} style={{ paddingTop: '1%' }}>
+                <SearchMenuInput/>
+              </Col>
+            </Row>
           </Header>
           <Content>
             <div {...contentProps}>
