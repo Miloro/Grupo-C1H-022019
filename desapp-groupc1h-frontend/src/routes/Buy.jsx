@@ -10,8 +10,8 @@ class Buy  extends React.Component{
           defaultMessage: 'hello'
         });
         const service = intl.formatMessage({
-            id: 'Buy',
-            defaultMessage: 'Buy'
+            id: 'buy',
+            defaultMessage: 'buy'
           });
         return(
             <div className= "App" >

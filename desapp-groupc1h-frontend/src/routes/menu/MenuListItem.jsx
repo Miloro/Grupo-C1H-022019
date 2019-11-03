@@ -1,9 +1,12 @@
 import React from 'react';
-import {Avatar, Button, List, Popover, Rate, Statistic, Tag, Typography} from "antd";
+import {Avatar, Button, List, Popover, Rate, Statistic, Table, Tag, Typography} from "antd";
+import {useIntl} from "react-intl";
 const {Title, Text, Paragraph} = Typography;
 const {Item} = List;
+const {Column} = Table;
 
 function MenuListItem({item}) {
+    const {formatMessage} = useIntl();
 
     function CategoryTags({categories}) {
         return categories.map((category) => (
@@ -12,25 +15,29 @@ function MenuListItem({item}) {
     }
 
     function Prices({price, offers}) {
-        const content = (
-            <div>
-                {offers.map((offer, index) => (
-                    <p key={index}>{offer.price} {offer.minAmount}</p>
-                ))}
-            </div>
-        );
         return <div>
             <Statistic
-                title="Price"
+                title={formatMessage({id: "price"})}
                 prefix="$"
                 value={price}
                 valueStyle={{fontSize: 45}}
             />
             <br/>
-            <Popover placement="bottom" content={content} trigger="click">
-                <Button>Ofertas!</Button>
+            <Popover placement="left" content={<OffersTable offers={offers}/>} trigger="click">
+                <Button>{formatMessage({id: "offers"})}!</Button>
             </Popover>
         </div>
+    }
+
+    function OffersTable({offers}) {
+        const data = offers.map((offer, index) =>(
+            {key: index, ...offer}
+        ));
+
+        return <Table dataSource={data} size="small" pagination={false}>
+            <Column title={formatMessage({id: "price"})} dataIndex="price" key="price" />
+            <Column title={formatMessage({id: "minAmount"})} dataIndex="minAmount" key="minAmount"/>
+        </Table>;
     }
 
     function Location({service}) {
@@ -44,12 +51,15 @@ function MenuListItem({item}) {
         </div>
     }
 
+
     return (
         <Item
             key={item.id}
             actions={[
                 <Rate disabled defaultValue={item.reputation} style={{marginRight: 6}}/>,
-                <CategoryTags categories={item.categories}/>
+                <CategoryTags categories={item.categories}/>,
+                <Button size="large"  style={{marginLeft: 15}}>{formatMessage({id: "view"})}</Button>,
+                <Button size="large" type="danger">{formatMessage({id: "buy"})}</Button>,
             ]}
             extra={
                 <Prices price={item.price} offers={item.offers}/>

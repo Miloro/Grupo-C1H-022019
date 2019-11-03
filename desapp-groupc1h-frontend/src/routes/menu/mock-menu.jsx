@@ -24,4 +24,17 @@ const menu = {
     }
 };
 
+const search ={
+    page: 2,
+    size: 20,
+    sort: {
+        field: 'city',
+        asc: true
+    },
+    filter: {
+        field: "name",
+        value: "Menu de pizza, bebida y tacos"
+    }
+};
+
 export default menu;
