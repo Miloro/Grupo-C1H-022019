@@ -1,25 +1,35 @@
 import React from 'react'
 import { injectIntl} from 'react-intl'
+import {Button} from 'react-bootstrap'
+import {GetMenu} from "../api.jsx"
 
 class Buy  extends React.Component{
 
     render(){
-        const intl = this.props.intl;
-        const greet = intl.formatMessage({
-          id: 'Greet',
-          defaultMessage: 'hello'
-        });
-        const service = intl.formatMessage({
-            id: 'Buy',
-            defaultMessage: 'Buy'
-          });
         return(
             <div className= "App" >
-                <h1>{greet}</h1>
-                <h1>{service}</h1>
+                <h2>menu:</h2>
+                <h2>cantidad:</h2> 
+                <h2>delivery:</h2>
+                <h2>desde:</h2>
+                <h2>hasta:</h2>
+                <Button variant="primary" onClick ={() => this.GetMenu()}>aceptar</Button>
             </div>
         )
     }
+
+    GetMenu(){
+        GetMenu(6).then(res => {
+        
+            if (res.status === 200){
+                console.log("hola")
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+    }
+
 
 }
 

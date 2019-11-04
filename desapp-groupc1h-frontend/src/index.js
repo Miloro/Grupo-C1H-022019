@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker'
 import { IntlProvider } from 'react-intl'
+import 'bootstrap/dist/css/bootstrap.min.css';
+//import $ from 'jquery';
+//import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import messagesEn from './translations/en.json'
 import messagesEs from './translations/es.json'
