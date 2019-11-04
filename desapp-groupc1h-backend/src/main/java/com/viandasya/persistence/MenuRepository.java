@@ -11,7 +11,7 @@ public interface MenuRepository extends JpaRepository<Menu, Long> {
 
     Page<Menu> findByNameContaining(String name, Pageable pageable);
 
-    Page<Menu> findByCategoryContaining(String category, Pageable pageable);
+    Page<Menu> findByCategoriesContaining(String category, Pageable pageable);
 
     Page<Menu> findByServiceProfileLocationCityContaining(String city, Pageable pageable);
 }

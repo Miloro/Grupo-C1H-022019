@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Entity
 public class ServiceProfile {
@@ -32,6 +33,8 @@ public class ServiceProfile {
     private Location location;
 
     private double maxDistanceOfDeliveryInKms;
+
+    private Integer score;
 
     public ServiceProfile(ServiceInfo serviceInfo, TimeTable timetable,
                           Location location, double maxDistanceOfDeliveryInKms) {
@@ -109,4 +112,11 @@ public class ServiceProfile {
         return this.menus.stream().filter(Menu::isValid).count() == 20;
     }
 
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
 }

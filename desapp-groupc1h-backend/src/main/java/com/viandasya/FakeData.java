@@ -64,7 +64,7 @@ public class FakeData implements ApplicationRunner {
                         .setTo(LocalDateTime.now().plusDays(10))
                         .createDateTimeSlot()
                 )
-                .setCategory(new ArrayList<>(Arrays.asList(Category.PIZZA, Category.HAMBURGER)))
+                .setCategories(new ArrayList<>(Arrays.asList(Category.PIZZA, Category.HAMBURGER)))
                 .setName("Menu para cumpleaños")
                 .setCookingTime(30)
                 .createMenu();
@@ -81,7 +81,7 @@ public class FakeData implements ApplicationRunner {
                         .setTo(LocalDateTime.now().plusDays(15))
                         .createDateTimeSlot()
                 )
-                .setCategory(new ArrayList<>(Arrays.asList(Category.EMPANADAS, Category.BEER, Category.SHSHI)))
+                .setCategories(new ArrayList<>(Arrays.asList(Category.EMPANADAS, Category.BEER, Category.SHSHI)))
                 .setName("Menu con empanadas de pollo y carne, y tabla de sushi")
                 .setCookingTime(40)
                 .createMenu();
@@ -128,7 +128,7 @@ public class FakeData implements ApplicationRunner {
                         .setTo(LocalDateTime.now())
                         .createDateTimeSlot()
                 )
-                .setCategory(new ArrayList<>(Arrays.asList(Category.GREEN, Category.VEGAN)))
+                .setCategories(new ArrayList<>(Arrays.asList(Category.GREEN, Category.VEGAN)))
                 .setName("Menu muy green y sin tacc!")
                 .setCookingTime(17)
                 .createMenu();
@@ -145,7 +145,7 @@ public class FakeData implements ApplicationRunner {
                         .setTo(LocalDateTime.now().plusDays(10))
                         .createDateTimeSlot()
                 )
-                .setCategory(new ArrayList<>(Collections.singletonList(Category.PIZZA)))
+                .setCategories(new ArrayList<>(Collections.singletonList(Category.PIZZA)))
                 .setName("Pizza especial con jamon, muzarrella y morron")
                 .setCookingTime(25)
                 .createMenu();

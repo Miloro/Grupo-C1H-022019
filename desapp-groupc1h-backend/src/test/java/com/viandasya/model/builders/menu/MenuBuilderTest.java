@@ -43,10 +43,10 @@ public class MenuBuilderTest {
     @Test
     public void testIsValidWhenICanCreateAMenuWithMenuBuilder3() {
         Menu anyMenu = anyMenu()
-                .setCategory(Collections.singletonList(Category.GREEN))
+                .setCategories(Collections.singletonList(Category.GREEN))
                 .createMenu();
 
-        Assert.assertEquals(anyMenu.getCategory().get(0),Category.GREEN);
+        Assert.assertEquals(anyMenu.getCategories().get(0),Category.GREEN);
     }
 
 

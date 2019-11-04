@@ -4,7 +4,7 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.ServiceProfileRepository;
-import com.viandasya.webservice.Search;
+import com.viandasya.webservice.dtos.Search;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,7 @@ public class MenuService {
         Menu menu = menuRepository.findById(id).get();
         menu.setName(convertToEntity.getName());
         menu.setDescription(convertToEntity.getDescription());
-        menu.setCategory(convertToEntity.getCategory());
+        menu.setCategories(convertToEntity.getCategories());
         menu.setValidity(convertToEntity.getValidity());
         menu.setOffers(convertToEntity.getOffers());
         menu.setMaxAmountPerDay(convertToEntity.getMaxAmountPerDay());
@@ -62,7 +62,7 @@ public class MenuService {
         this.pageMenusFunctions.put("name",(search ->
                 this.menuRepository.findByNameContaining(search.getFilterQuery(), search.getPageRequest())));
         this.pageMenusFunctions.put("category",(search ->
-                this.menuRepository.findByCategoryContaining(search.getFilterQuery(), search.getPageRequest())));
+                this.menuRepository.findByCategoriesContaining(search.getFilterQuery(), search.getPageRequest())));
         this.pageMenusFunctions.put("city",(search ->
                 this.menuRepository.findByServiceProfileLocationCityContaining(search.getFilterQuery(), search.getPageRequest())));
 

@@ -1,4 +1,4 @@
-package com.viandasya.webservice;
+package com.viandasya.webservice.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.domain.PageRequest;
@@ -32,10 +32,11 @@ public class Search {
                 PageRequest.of(current, size, Sort.by("price")));
         pageRequestsFunction.put("highestPrice", (current, size) ->
                 PageRequest.of(current, size, Sort.by("price").ascending()));
-        pageRequestsFunction.put("lowestRating", (current, size) ->
-                PageRequest.of(current, size, Sort.by("rating")));
-        pageRequestsFunction.put("highestRating", (current, size) ->
-                PageRequest.of(current, size, Sort.by("rating").ascending()));
+        pageRequestsFunction.put("lowestScore", (current, size) ->
+                PageRequest.of(current, size, Sort.by("score")));
+        pageRequestsFunction.put("highestScore", (current, size) ->
+                PageRequest.of(current, size, Sort.by("score").ascending()));
+        pageRequestsFunction.put(null, PageRequest::of);
     }
 
     public int getPageCurrent() {

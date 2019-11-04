@@ -8,10 +8,7 @@ import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
@@ -20,7 +17,7 @@ import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTabl
 public class MenuBuilder {
     private String name = "Combo Vegetariano";
     private String description = "Es una ensalada de lechuga, tomate y huevo";
-    private List<Category> category = Collections.singletonList(Category.GREEN);
+    private List<Category> categories = Collections.singletonList(Category.GREEN);
     private DateTimeSlot validity = anyDateTimeSlot().createDateTimeSlot();
     private DeliveryInfo deliveryInfo = new DeliveryInfo(anyTimeTable().createTimeTable(),
             new BigDecimal("20"), 60);
@@ -44,8 +41,8 @@ public class MenuBuilder {
         return this;
     }
 
-    public MenuBuilder setCategory(List<Category> category) {
-        this.category = category;
+    public MenuBuilder setCategories(List<Category> categories) {
+        this.categories = categories;
         return this;
     }
 
@@ -81,9 +78,12 @@ public class MenuBuilder {
     }
 
     public Menu createMenu() {
-        Menu menu = new Menu(name, description, category, validity, offers, maxAmountPerDay, cookingTime);
+        Random random = new Random();
+        Menu menu = new Menu(name, description, categories, validity, offers, maxAmountPerDay, cookingTime);
         menu.addDeliveryInfo(deliveryInfo);
         orders.forEach(menu::addOrder);
+        menu.setPrice(random.nextInt(300));
+        menu.setScore(random.nextInt(300));
         return menu;
     }
 }
