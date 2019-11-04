@@ -1,5 +1,5 @@
-import React, { Component, Suspense } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import './App.css';
 import Login from './routes/Login';
 import Home from './routes/home/Home';
@@ -9,13 +9,13 @@ import Buy from './routes/Buy';
 import UnratedOrders from './routes/UnratedOrders';
 import Cart from './routes/Cart';
 import CreateMenu from './routes/CreateMenu';
-import Menus from './routes/Menus';
+import Menus from './routes/menus/Menus';
 import ServiceOrders from './routes/ServiceOrders';
 import Orders from './routes/Ordes';
 import { injectIntl } from 'react-intl';
 import {Col, Layout, Menu, Row} from 'antd';
 import Background from "./resources/background.jpg";
-import SearchMenuInput from "./routes/menu/SearchMenuInput";
+import SearchMenuInput from "./routes/menus/list/SearchMenuInput";
 const { Header, Content, Footer } = Layout;
 
 const menuProps = {
@@ -52,7 +52,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <Router>
         <Layout>
           <Header>
             <Row>
@@ -71,28 +71,26 @@ class App extends Component {
             <div {...contentProps}>
               <Row {...rowProps}>
                   <Col {...colProps}>
-                  <Suspense fallback={Home}>
-                    <Route exact path="/" component={Home}/>
-                    <Switch>
+                  <Switch>
                       <Route exact path="/login" component={Login}/>
                       <Route exact path="/mapdev" component={MapDev}/>
                       <Route exact path="/buy" component={Buy}/>
                       <Route exact path="/unrated-orderds" component={UnratedOrders}/>
                       <Route exact path="/cart" component={Cart}/>
                       <Route exact path="/orders" component={Orders}/>
-                      <Route exact path="/service" component={Service}/>
                       <Route exact path="/service/create-menu" component={CreateMenu}/>
-                      <Route exact path="/service/menus" component={Menus}/>
+                      <Route exact path="/service" component={Service}/>
+                      <Route exact path="/menus/:query" component={Menus}/>
                       <Route exact path="/service/orders" component={ServiceOrders}/>
+                      <Route exact path="/" component={Home}/>
                     </Switch>
-                  </Suspense>
                   </Col>
               </Row>
             </div>
           </Content>
           <Footer/>
         </Layout>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

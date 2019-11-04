@@ -11,7 +11,7 @@ class CreateMenu  extends React.Component{
         });
         const createMenu = intl.formatMessage({
             id: 'CreateMenu',
-            defaultMessage: 'create menu'
+            defaultMessage: 'create menus'
           });
         return(
             <div className= "App" >
