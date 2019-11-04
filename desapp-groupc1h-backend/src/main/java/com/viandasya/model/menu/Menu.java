@@ -143,7 +143,8 @@ public class Menu {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     public BigDecimal calculateCurrentPrice() {
         int orderCount = this.getOrderCount();
-        return this.offers.stream().filter(o -> orderCount >= o.getMinAmount()).findFirst().get().getPrice();
+        return this.offers.stream()
+                .filter(o -> orderCount >= o.getMinAmount()).findFirst().get().getPrice();
     }
 
     private int getOrderCount() {

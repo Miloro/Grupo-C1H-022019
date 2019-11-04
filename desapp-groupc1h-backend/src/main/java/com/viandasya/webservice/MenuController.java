@@ -4,6 +4,7 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.service.MenuService;
 import com.viandasya.webservice.dtos.MenuDTO;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -41,6 +42,11 @@ public class MenuController {
         Menu menu = modelMapper.map(menuDTO, Menu.class);
         menu.addDeliveryInfo(menuDTO.getDeliveryInfoConverted());
         return menu;
+    }
+
+    @PostMapping("/menus/search")
+    public Page<Menu> search(@RequestBody Search search){
+        return menuService.search(search);
     }
 
 }

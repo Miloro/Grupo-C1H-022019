@@ -88,8 +88,8 @@ public class FakeData implements ApplicationRunner {
 
         ServiceProfile serviceProfile1 = anyServiceProfile()
                 .setBalance("20")
-                .setLocation(new Location("Alsina 654, Quilmes, Quilmes",
-                        -34.71688, -58.24964))
+                .setLocation(new Location("Alsina 654",
+                        "Quilmes", -34.71688, -58.24964))
                 .setMaxDistanceOfDeliveryInKms(5)
                 .createServiceProfile();
         new ArrayList<>(Arrays.asList(menu1, menu2)).forEach(serviceProfile1::addMenu);
@@ -162,8 +162,8 @@ public class FakeData implements ApplicationRunner {
                                 .createServiceInfo()
                 )
                 .setBalance("300")
-                .setLocation(new Location("Avenida Calchaquí 1233, Quilmes Oeste, Quilmes",
-                         -34.7394801, -58.2923969))
+                .setLocation(new Location("Avenida Calchaquí 1233",
+                        "Quilmes Oeste", -34.7394801, -58.2923969))
                 .setMaxDistanceOfDeliveryInKms(10)
                 .createServiceProfile();
         new ArrayList<>(Arrays.asList(menua, menub)).forEach(serviceProfilea::addMenu);
@@ -252,7 +252,7 @@ public class FakeData implements ApplicationRunner {
                 .createOrder();
 
 
-        List<Menu> menus = (List<Menu>) menuRepository.findAll();
+        List<Menu> menus = menuRepository.findAll();
         Menu menuGreen = menus.stream()
                 .filter(menu -> menu.getName().equals("Menu muy green y sin tacc!"))
                 .findFirst().get();

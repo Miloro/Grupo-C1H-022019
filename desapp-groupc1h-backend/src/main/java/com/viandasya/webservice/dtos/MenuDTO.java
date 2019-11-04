@@ -3,13 +3,10 @@ package com.viandasya.webservice.dtos;
 import com.viandasya.model.menu.Category;
 import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Offer;
-import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.TimeTable;
-import com.viandasya.model.user.ServiceProfile;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MenuDTO {

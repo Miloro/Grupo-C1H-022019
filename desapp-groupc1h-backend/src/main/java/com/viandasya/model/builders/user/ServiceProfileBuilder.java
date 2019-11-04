@@ -13,9 +13,9 @@ import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInf
 
 public class ServiceProfileBuilder {
     private ServiceInfo serviceInfo = anyServiceInfo().createServiceInfo();
-    private TimeTable timetable = anyTimeTable().createTimeTable();;
+    private TimeTable timetable = anyTimeTable().createTimeTable();
     private String balance = "0";
-    private Location location = new Location("Viamonte 266, Ciudad de Buenos Aires, Ciudad de Buenos Aires",
+    private Location location = new Location("Viamonte 266","Ciudad de Buenos Aires",
             -34.5996841, -58.3711918);
     private double maxDistanceOfDeliveryInKms = 3;
 

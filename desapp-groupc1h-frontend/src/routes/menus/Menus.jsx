@@ -18,29 +18,23 @@ function Menus(props) {
     let query = useQuery();
     const {formatMessage} = useIntl();
 
-    const orders = {
-        "lowestPrice": {field: "price", isAsc: true},
-        "highestPrice": {field: "price", isAsc: false},
-        "lowestRating": {field: "rating", isAsc: true},
-        "highestRating": {field: "rating", isAsc: false}
-    };
-
     const [layout, setLayout] = useState("list");
     const [search, setSearch] = useState({
-        page: {current: 1, size: 20,},
+        page: null,
         filter: {field: query.get("field"), q: query.get("q")},
-        order: {field: "price", isAsc: true}
+        order: null
     });
 
     useEffect(() => {
-        console.log(search);
+        axios.post("api/menus", search)
+            .then((response) => console.log(response.data));
     });
-
 
     function MenuPagination() {
         return <Pagination
             current={search.page.current}
             pageSize={search.page.size}
+            showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
         />
     }
 
