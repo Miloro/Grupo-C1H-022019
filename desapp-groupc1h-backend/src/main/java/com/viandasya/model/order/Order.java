@@ -28,7 +28,7 @@ public class Order {
     private OrderState state;
 
     private DateTimeSlot orderDate;
-    private Boolean isDelivery;
+    private Boolean delivery;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Menu menu;
@@ -37,18 +37,21 @@ public class Order {
     @JoinColumn(name = "client_id")
     private ClientProfile client;
 
-    public Order(Integer amount, List<Offer> offers, Integer score, OrderState state, DateTimeSlot orderDate, Boolean isDelivery, Menu menu, ClientProfile client) {
+    public Order(Integer amount, List<Offer> offers, Integer score, OrderState state, DateTimeSlot orderDate, Boolean delivery, Menu menu, ClientProfile client) {
         this.amount = amount;
         this.offers = offers;
         this.score = score;
         this.state = state;
         this.orderDate = orderDate;
-        this.isDelivery = isDelivery;
+        this.delivery = delivery;
         this.menu = menu;
         this.client = client;
     }
 
     public Order() {
+    }
+    public long getId(){
+        return id;
     }
 
     public Integer getAmount() {
@@ -92,11 +95,11 @@ public class Order {
     }
 
     public Boolean getDelivery() {
-        return isDelivery;
+        return delivery;
     }
 
     public void setDelivery(Boolean delivery) {
-        isDelivery = delivery;
+        this.delivery = delivery;
     }
 
     public Menu getMenu() {
@@ -121,7 +124,7 @@ public class Order {
     }
 
     public LocalDateTime averageTime(){
-        if(isDelivery){
+        if(delivery){
             return this.orderDate.getFrom().plusMinutes(this.menu.getCookingTime() + 15 ); //cambiar 15 por cuanto tarda en llegar en moto desde la api
         }
         else{
