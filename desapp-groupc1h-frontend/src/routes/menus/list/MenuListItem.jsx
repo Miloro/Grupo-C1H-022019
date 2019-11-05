@@ -56,7 +56,7 @@ function MenuListItem({item}) {
         <Item
             key={item.id}
             actions={[
-                <Rate disabled defaultValue={item.rating} style={{marginRight: 6}}/>,
+                <Rate disabled defaultValue={item.score} style={{marginRight: 6}}/>,
                 <CategoryTags categories={item.categories}/>,
                 <Button size="large"  style={{marginLeft: 15}}>{formatMessage({id: "view"})}</Button>,
                 <Button size="large" type="danger">{formatMessage({id: "buy"})}</Button>,

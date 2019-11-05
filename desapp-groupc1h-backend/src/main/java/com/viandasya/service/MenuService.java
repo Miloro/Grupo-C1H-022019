@@ -4,7 +4,7 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.ServiceProfileRepository;
-import com.viandasya.webservice.dtos.Search;
+import com.viandasya.webservice.dtos.SearchDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class MenuService {
 
     private final MenuRepository menuRepository;
     private final ServiceProfileRepository serviceProfileRepository;
-    private Map<String, Function<Search,Page<Menu>>> pageMenusFunctions;
+    private Map<String, Function<SearchDTO,Page<Menu>>> pageMenusFunctions;
 
     public MenuService(MenuRepository menuRepository, ServiceProfileRepository servicerepository) {
         this.menuRepository = menuRepository;
@@ -53,18 +53,18 @@ public class MenuService {
     }
 
     @Transactional
-    public Page<Menu> search(Search search) {
-        return this.pageMenusFunctions.get(search.getFilterField()).apply(search);
+    public Page<Menu> search(SearchDTO searchDTO) {
+        return this.pageMenusFunctions.get(searchDTO.getFilterField()).apply(searchDTO);
     }
 
     private void setPageMenusFunctions() {
         this.pageMenusFunctions = new HashMap<>();
-        this.pageMenusFunctions.put("name",(search ->
-                this.menuRepository.findByNameContaining(search.getFilterQuery(), search.getPageRequest())));
-        this.pageMenusFunctions.put("category",(search ->
-                this.menuRepository.findByCategoriesContaining(search.getFilterQuery(), search.getPageRequest())));
-        this.pageMenusFunctions.put("city",(search ->
-                this.menuRepository.findByServiceProfileLocationCityContaining(search.getFilterQuery(), search.getPageRequest())));
+        this.pageMenusFunctions.put("name",(searchDTO ->
+                this.menuRepository.findByNameContaining(searchDTO.getFilterQuery(), searchDTO.getPageRequest())));
+        this.pageMenusFunctions.put("category",(searchDTO ->
+                this.menuRepository.findByCategoriesContaining(searchDTO.getFilterQuery(), searchDTO.getPageRequest())));
+        this.pageMenusFunctions.put("city",(searchDTO ->
+                this.menuRepository.findByServiceProfileLocationCityContaining(searchDTO.getFilterQuery(), searchDTO.getPageRequest())));
 
     }
 }

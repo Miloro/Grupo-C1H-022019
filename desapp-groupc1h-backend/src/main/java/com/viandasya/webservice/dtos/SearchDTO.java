@@ -8,18 +8,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-public class Search {
+public class SearchDTO {
     private int pageCurrent;
-    private int pageSize;
     private String filterField;
     private String filterQuery;
     private String order;
     @JsonIgnore
+    private int pageSize = 20;
+    @JsonIgnore
     private Map<String, BiFunction<Integer, Integer, PageRequest>> pageRequestsFunction;
 
-    public Search(int pageCurrent, int pageSize, String filterField, String filterQuery, String order) {
+    public SearchDTO(int pageCurrent, String filterField, String filterQuery, String order) {
         this.pageCurrent = pageCurrent;
-        this.pageSize = pageSize;
         this.filterField = filterField;
         this.filterQuery = filterQuery;
         this.order = order;

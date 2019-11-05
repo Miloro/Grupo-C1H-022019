@@ -22,7 +22,7 @@ public class Menu {
     private Integer score;
 
     @ElementCollection
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
 
     private DateTimeSlot validity;
 
@@ -166,5 +166,9 @@ public class Menu {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public long getId() {
+        return id;
     }
 }

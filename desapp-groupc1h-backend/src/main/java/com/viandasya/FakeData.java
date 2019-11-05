@@ -66,6 +66,7 @@ public class FakeData implements ApplicationRunner {
                 )
                 .setCategories(new ArrayList<>(Arrays.asList(Category.PIZZA, Category.HAMBURGER)))
                 .setName("Menu para cumpleaños")
+                .setDescription(" Para los chicos un exquisito menú de pizza libre de muzzarella, con agua mineral y gaseosas libres de primera marca")
                 .setCookingTime(30)
                 .createMenu();
 
@@ -83,6 +84,7 @@ public class FakeData implements ApplicationRunner {
                 )
                 .setCategories(new ArrayList<>(Arrays.asList(Category.EMPANADAS, Category.BEER, Category.SHSHI)))
                 .setName("Menu con empanadas de pollo y carne, y tabla de sushi")
+                .setDescription("Exquisitos sabores que harán de tus almuerzos y cenas momentos únicos.")
                 .setCookingTime(40)
                 .createMenu();
 
@@ -130,6 +132,7 @@ public class FakeData implements ApplicationRunner {
                 )
                 .setCategories(new ArrayList<>(Arrays.asList(Category.GREEN, Category.VEGAN)))
                 .setName("Menu muy green y sin tacc!")
+                .setDescription("Somos rico y sano. Somos sabores honestos. Somos fast good. Somos un menu muy green y sin tacc!")
                 .setCookingTime(17)
                 .createMenu();
 
@@ -147,6 +150,7 @@ public class FakeData implements ApplicationRunner {
                 )
                 .setCategories(new ArrayList<>(Collections.singletonList(Category.PIZZA)))
                 .setName("Pizza especial con jamon, muzarrella y morron")
+                .setDescription("En este menu conocerás auténticas pizzas hechas a mano, no podrá resistirse el suave aroma a comida")
                 .setCookingTime(25)
                 .createMenu();
 
@@ -154,7 +158,7 @@ public class FakeData implements ApplicationRunner {
                 .setServiceInfo(
                         anyServiceInfo()
                                 .setName("Los Arandanos")
-                                .setLogo("xp")
+                                .setLogo("https://basket.com/wp-content/uploads/2017/11/android-chrome-256x256.png")
                                 .setEMail("arandanos.viandas.quilmes@gmail.com")
                                 .setDescription("A veces, los sentimientos son difíciles de explicar," +
                                         " y qué sentimiento más fuerte que nuestro amor por la comida")

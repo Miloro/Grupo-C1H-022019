@@ -3,8 +3,8 @@ const menu = {
     id: 101,
     name: "Menu de pizza, bebida y tacos",
     description: "Soy un menus mejor que el de macdonalds",
-    categories: ["pizza", "beverages", "tacos"],
-    rating: 3,
+    categories: ["PIZZA", "BEER", "HAMBURGER"],
+    score: 3,
     price: 270,
     offers: [
         {price: 250, minAmount: 15},

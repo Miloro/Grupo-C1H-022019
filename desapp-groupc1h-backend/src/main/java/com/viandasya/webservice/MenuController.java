@@ -4,7 +4,7 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.service.MenuService;
 import com.viandasya.webservice.dtos.MenuDTO;
 import com.viandasya.webservice.dtos.MenuPreviewDTO;
-import com.viandasya.webservice.dtos.Search;
+import com.viandasya.webservice.dtos.SearchDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -47,8 +47,8 @@ public class MenuController {
     }
 
     @PostMapping("api/menus/search")
-    public Page<MenuPreviewDTO> search(@RequestBody Search search){
-        Page<Menu> pagedMenus = menuService.search(search);
+    public Page<MenuPreviewDTO> search(@RequestBody SearchDTO searchDTO){
+        Page<Menu> pagedMenus = menuService.search(searchDTO);
         return pagedMenus.map(menu -> modelMapper.map(menu, MenuPreviewDTO.class));
     }
 

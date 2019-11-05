@@ -17,23 +17,33 @@ function useQuery() {
 function Menus(props) {
     let query = useQuery();
     const {formatMessage} = useIntl();
-
     const [layout, setLayout] = useState("list");
+    const [page, setPage] = useState({
+        current: 0,
+        size: null,
+    });
     const [search, setSearch] = useState({
-        page: null,
-        filter: {field: query.get("field"), q: query.get("q")},
+        filterField: query.get("field"),
+        filterQuery: query.get("q"),
         order: null
     });
+    const [results, setResults] = useState(null);
 
     useEffect(() => {
-        axios.post("api/menus", search)
-            .then((response) => console.log(response.data));
+        axios.post("api/menus", {pageSize: page.size, ...search})
+            .then((response) => {
+                setResults(response.data.content);
+                setPage({
+                    current: response.data.content.pageable.pageNumber,
+                    size: response.data.content.pageable.pageSize
+                });
+            });
     });
 
     function MenuPagination() {
         return <Pagination
-            current={search.page.current}
-            pageSize={search.page.size}
+            current={page.current}
+            pageSize={page.size}
             showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
         />
     }
@@ -67,7 +77,7 @@ function Menus(props) {
                     itemLayout="vertical"
                     bordered={true}
                     pagination={<MenuPagination/>}
-                    dataSource={[menu, menu, menu]}
+                    dataSource={results}
                     renderItem={(item) => (<MenuListItem item={item}/>)}
                 />
             </Content>

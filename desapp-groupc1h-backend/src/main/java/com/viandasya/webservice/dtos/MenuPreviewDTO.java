@@ -15,22 +15,10 @@ public class MenuPreviewDTO {
     private List<Category> categories;
     private BigDecimal price;
     private List<Offer> offers;
+    private String serviceLogo;
     private String serviceName;
     private Double serviceScore;
     private Location serviceLocation;
-
-    public MenuPreviewDTO(long id, String name, String description, List<Category> categories,
-                          BigDecimal price, List<Offer> offers, String serviceName, Double serviceScore, Location serviceLocation) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.categories = categories;
-        this.price = price;
-        this.offers = offers;
-        this.serviceName = serviceName;
-        this.serviceScore = serviceScore;
-        this.serviceLocation = serviceLocation;
-    }
 
     public MenuPreviewDTO() {
     }
@@ -113,5 +101,13 @@ public class MenuPreviewDTO {
 
     public void setScore(Double score) {
         this.score = score;
+    }
+
+    public String getServiceLogo() {
+        return serviceLogo;
+    }
+
+    public void setServiceLogo(String serviceLogo) {
+        this.serviceLogo = serviceLogo;
     }
 }
