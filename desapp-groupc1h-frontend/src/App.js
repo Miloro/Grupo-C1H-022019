@@ -19,16 +19,18 @@ const { Header, Content, Footer } = Layout;
 
 const menuProps = {
   mode: "horizontal",
-  defaultSelectedKeys: ['2'],
+  defaultSelectedKeys: ['28'],
   style: {lineHeight: '64px'},
 };
 
 const contentProps = {
   style: {
     backgroundImage: `url(${Background})`,
-    minHeight: '500px',
+    center : 0,
+    minHeight: '100%',
     height: '100%',
-    padding: '4%'
+    padding: '100px'
+    
   }
 };
 
@@ -36,7 +38,7 @@ const rowProps = {
   type: "flex",
   justify: "space-around",
   align: "middle",
-  style:{paddingTop: '2%' }
+  style:{paddingTop: '2%', }
 };
 
 const colProps = {
@@ -52,12 +54,13 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Layout>
+        <Layout style={{minHeight:"100vh"}}>
           <Header>
             <Menu {...menuProps}>
               <Menu.Item key="1">nav 1</Menu.Item>
               <Menu.Item key="2">nav 2</Menu.Item>
               <Menu.Item key="3">nav 3</Menu.Item>
+              <Menu.Item key="4">nav 4</Menu.Item>
             </Menu>
           </Header>
           <Content>
@@ -83,7 +86,7 @@ class App extends Component {
               </Row>
             </div>
           </Content>
-          <Footer/>
+          <Footer style={{ textAlign: 'center',  position: "sticky", bottom: "" }}>comidas muy ricas</Footer>
         </Layout>
       </BrowserRouter>
     );
