@@ -14,39 +14,36 @@ function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
-function Menus(props) {
+function Menus() {
     let query = useQuery();
     const {formatMessage} = useIntl();
     const [layout, setLayout] = useState("list");
     const [page, setPage] = useState({
-        current: 0,
-        size: null,
+        current: 1,
+        size: 5,
+        total: null
     });
     const [search, setSearch] = useState({
         filterField: query.get("field"),
         filterQuery: query.get("q"),
         order: null
     });
-    const [results, setResults] = useState(null);
+    const [results, setResults] = useState([]);
 
     useEffect(() => {
-        axios.post("api/menus", {pageSize: page.size, ...search})
+        const toSearch = {pageSize: page.size, pageCurrent: page.current, ...search};
+        console.log(JSON.stringify(toSearch));
+        axios.post("/api/menus/search", toSearch)
             .then((response) => {
+                console.log(response.data);
                 setResults(response.data.content);
                 setPage({
-                    current: response.data.content.pageable.pageNumber,
-                    size: response.data.content.pageable.pageSize
+                    ...page,
+                    current: response.data.number,
+                    total: response.data.totalElements
                 });
             });
     });
-
-    function MenuPagination() {
-        return <Pagination
-            current={page.current}
-            pageSize={page.size}
-            showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
-        />
-    }
 
     function onLayoutChange(e) {
         setLayout(e.target.value);
@@ -56,6 +53,13 @@ function Menus(props) {
         setSearch({
             ...search,
             order: e.target.value
+        });
+    }
+
+    function onPageChange(current, pageSize) {
+        setPage({
+            ...page,
+            current: current
         });
     }
 
@@ -76,7 +80,7 @@ function Menus(props) {
                 <List
                     itemLayout="vertical"
                     bordered={true}
-                    pagination={<MenuPagination/>}
+                    footer={<Pagination defaultPageSize={page.size} total={page.total} current={page.current} onChange={onPageChange}/>}
                     dataSource={results}
                     renderItem={(item) => (<MenuListItem item={item}/>)}
                 />

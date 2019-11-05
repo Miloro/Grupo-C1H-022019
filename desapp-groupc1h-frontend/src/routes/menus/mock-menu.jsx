@@ -11,17 +11,15 @@ const menu = {
         {price: 190, minAmount: 30},
     ],
     minAmountIn10Days: 0,
-    service: {
-        logo: "https://images.freshop.com/1898840097940308805/abb47d1a38cb534368bd6362da5c5dd4_medium.png",
-        name: "Viandas Las Eugenias",
-        rating: 3,
-        location: {
+    serviceLogo: "https://images.freshop.com/1898840097940308805/abb47d1a38cb534368bd6362da5c5dd4_medium.png",
+    serviceName: "Viandas Las Eugenias",
+    serviceScore: 3,
+    serviceLocation: {
             address: "Alsina 233",
             city: "Quilmes",
             latitude: 41.88432,
             longitude: -87.6387699
-        }
-    }
+     }
 };
 
 export default menu;

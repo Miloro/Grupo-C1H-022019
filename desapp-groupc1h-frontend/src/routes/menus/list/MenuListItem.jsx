@@ -40,11 +40,11 @@ function MenuListItem({item}) {
         </Table>;
     }
 
-    function Location({service}) {
-        const location = `${service.location.address}, ${service.location.city}`;
+    function Location({serviceLocation, serviceName}) {
+        const location = `${serviceLocation.address}, ${serviceLocation.city}`;
         return <div>
             <span>
-                <Text underline>{service.name}</Text>
+                <Text underline>{serviceName}</Text>
             <Rate disabled defaultValue={2} style={{ fontSize: 15, marginLeft: 6 }}/>
             </span>
             <Paragraph underline>{location}</Paragraph>
@@ -66,9 +66,9 @@ function MenuListItem({item}) {
             }
         >
             <Item.Meta
-                avatar={<Avatar size={100} src={item.service.logo}/>}
+                avatar={<Avatar size={100} src={item.serviceLogo}/>}
                 title={<Title level={4}>{item.name}</Title>}
-                description={<Location service={item.service}/>}
+                description={<Location serviceLocation={item.serviceLocation} serviceName={item.serviceName}/>}
             />
             {item.description}
         </Item>

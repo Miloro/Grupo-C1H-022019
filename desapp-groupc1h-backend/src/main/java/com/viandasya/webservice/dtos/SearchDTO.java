@@ -10,11 +10,10 @@ import java.util.function.BiFunction;
 
 public class SearchDTO {
     private int pageCurrent;
+    private int pageSize;
     private String filterField;
     private String filterQuery;
     private String order;
-    @JsonIgnore
-    private int pageSize = 20;
     @JsonIgnore
     private Map<String, BiFunction<Integer, Integer, PageRequest>> pageRequestsFunction;
 
