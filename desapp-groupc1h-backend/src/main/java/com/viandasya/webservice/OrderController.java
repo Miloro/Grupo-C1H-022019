@@ -18,7 +18,7 @@ public class OrderController {
 
     @PostMapping("api/menu/{idMenu}/client/{idClient}/order")
     public long addMenu(@PathVariable("idMenu") long idMenu,@PathVariable("idClient") long idClient , Long id, @RequestBody Order order){
-        return orderService.CreateOrder(order,idMenu,idClient).getId();
+        return orderService.createOrder(order,idMenu,idClient).getId();
     }
 
 }

@@ -19,7 +19,6 @@
     "popper.js": "^1.16.0",
     "react": "^16.9.0",
     "react-app-rewired": "^2.1.4",
-    "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.9.0",
     "react-facebook-login": "latest",
     "react-google-login": "latest",

@@ -5,7 +5,7 @@ import Login from './routes/Login';
 import Home from './routes/home/Home';
 import MapDev from './routes/MapDev';
 import Service from './routes/service/Service';
-import Buy from './routes/Buy';
+import Buy from './routes/buy/Buy';
 import UnratedOrders from './routes/UnratedOrders';
 import Cart from './routes/Cart';
 import CreateMenu from './routes/CreateMenu';

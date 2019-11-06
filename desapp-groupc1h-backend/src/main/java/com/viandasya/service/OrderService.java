@@ -24,7 +24,7 @@ public class OrderService {
     }
 
     @Transactional
-    public Order CreateOrder(Order order, long idMenu, long idClient){
+    public Order createOrder(Order order, long idMenu, long idClient){
         ClientProfile clientProfile = this.clientProfileRepository.findById(idClient).get();
         Menu menu = this.menuRepository.findById(idMenu).get();
         order.setMenu(menu);

@@ -4,17 +4,24 @@ export function GetMenu(idMenu){
     return axios.get('api/menu/' + idMenu)
 }
 
-export function CreateOrder(){
-    return axios.post("api/menu/13/client/22/order",
-    {
-	    "amount" : 100,
+export function CreateOrder(object){
+    const body = {
+        "amount" : object.amount,
         "offers" : [],
         "state" : "PENDING",
-        "delivery" : true,
-		"orderDate": {
-					"from":"2019-01-25T21:34:55",
-					"to":"2019-01-25T23:34:55" 
-	            	}
+        "delivery" : object.delivery,
+        "orderDate": {
+                    "from":object.date+ "T" + object.orderTimeFrom,
+                    "to": object.date+ "T" + object.orderTimeTo
+                    }
     }
-    )
+    return axios.post("api/menu/13/client/22/order",body).then(
+        res => {
+            if (res.status === 200){
+                console.log(res)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        });
 }
