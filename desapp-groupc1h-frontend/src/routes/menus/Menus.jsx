@@ -1,73 +1,76 @@
 import React, {useEffect, useState} from 'react';
-import menu from "./mock-menu";
-import MenuOrderRadio from "./list/MenuOrderRadio";
-import MenuListItem from "./list/MenuListItem";
-import {Col, Layout, List, Pagination, Radio, Row} from "antd";
+import {Col, Layout, Pagination, Radio, Row} from "antd";
 import {useLocation} from "react-router-dom";
 import {useIntl} from "react-intl";
 import axios from "axios";
+import MenuList from "./list/MenuList";
+import menu from "./mock-menu";
 
-const {Header, Content} = Layout;
+const {Header, Content, Footer} = Layout;
 const {Group} = Radio;
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
-function Menus() {
+function Menus(props) {
     let query = useQuery();
     const {formatMessage} = useIntl();
+
+    const pageSize = 5;
     const [layout, setLayout] = useState("list");
-    const [page, setPage] = useState({
-        current: 1,
-        size: 5,
-        total: null
-    });
-    const [search, setSearch] = useState({
-        filterField: query.get("field"),
-        filterQuery: query.get("q"),
-        order: null
-    });
+
+    const [order, setOrder] = useState(null);
+    const filterField = query.get("field");
+    const filterQuery = query.get("q");
+
+    const [pageCurrent, setPageCurrent] = useState(1);
+    const [pageTotal, setPageTotal] = useState(null);
+
     const [results, setResults] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const toSearch = {pageSize: page.size, pageCurrent: page.current, ...search};
-        console.log(JSON.stringify(toSearch));
-        axios.post("/api/menus/search", toSearch)
-            .then((response) => {
-                console.log(response.data);
-                setResults(response.data.content);
-                setPage({
-                    ...page,
-                    current: response.data.number,
-                    total: response.data.totalElements
-                });
-            });
-    });
+        const fetchMenus = async () => {
+            setIsLoading(true);
+            const searchDTO = {
+                filterField: filterField, filterQuery: filterQuery, order: order,
+                pageCurrent: pageCurrent, pageSize: pageSize
+            };
+            const response = await axios.post("/api/menus/search", searchDTO);
+            setResults(response.data.content);
+            setPageTotal(response.data.totalElements);
+            setIsLoading(false);
+        };
+        fetchMenus();
+    }, [filterField, filterQuery, order, pageCurrent]);
 
-    function onLayoutChange(e) {
+
+    const onLayoutChange = e => {
         setLayout(e.target.value);
-    }
+    };
 
-    function onOrderChange(e) {
-        setSearch({
-            ...search,
-            order: e.target.value
-        });
-    }
+    const onOrderChange = e => {
+        setOrder(e.target.value);
+    };
 
-    function onPageChange(current, pageSize) {
-        setPage({
-            ...page,
-            current: current
-        });
-    }
+    const onPageChange = (current) => {
+        setPageCurrent(current);
+    };
+
 
     return (
         <Layout>
             <Header>
                 <Row type="flex" justify="space-around" align="middle">
-                    <Col span={14}> <MenuOrderRadio onChange={onOrderChange} value={search.order}/> </Col>
+                    <Col span={14}>
+                        <Group onChange={onOrderChange} name="orders" size="large" value={order}>
+                            <Radio value="lowestPrice">{formatMessage({id: "lowestPrice"})}</Radio>
+                            <Radio value="highestPrice">{formatMessage({id: "highestPrice"})}</Radio>
+                            <Radio value="lowestRating">{formatMessage({id: "lowestRating"})}</Radio>
+                            <Radio value="highestRating">{formatMessage({id: "highestRating"})}</Radio>
+                        </Group>
+                    </Col>
                     <Col span={6}>
                         <Group onChange={onLayoutChange} name="layout" buttonStyle="solid" value={layout}>
                             <Radio.Button value={"map"}>{formatMessage({id: "map"})}</Radio.Button>
@@ -77,14 +80,14 @@ function Menus() {
                 </Row>
             </Header>
             <Content>
-                <List
-                    itemLayout="vertical"
-                    bordered={true}
-                    footer={<Pagination defaultPageSize={page.size} total={page.total} current={page.current} onChange={onPageChange}/>}
-                    dataSource={results}
-                    renderItem={(item) => (<MenuListItem item={item}/>)}
-                />
+                <MenuList dataSource={results} isLoading={isLoading}/>
             </Content>
+            <Footer>
+                <Pagination defaultPageSize={pageSize}
+                            total={pageTotal}
+                            current={pageCurrent}
+                            onChange={onPageChange}/>
+            </Footer>
         </Layout>
 
     );

@@ -15,7 +15,7 @@ import Orders from './routes/Ordes';
 import { injectIntl } from 'react-intl';
 import {Col, Layout, Menu, Row} from 'antd';
 import Background from "./resources/background.jpg";
-import SearchMenuInput from "./routes/menus/list/SearchMenuInput";
+import SearchMenuInput from "./routes/menus/SearchMenuInput";
 const { Header, Content, Footer } = Layout;
 
 const menuProps = {
