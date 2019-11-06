@@ -11,6 +11,7 @@ function MenuList({dataSource, isLoading}) {
             dataSource={dataSource}
             renderItem={(item) => (<MenuListItem item={item}/>)}
             loading={isLoading}
+            style={{minHeight: "400px"}}
         />
     );
 }

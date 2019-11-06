@@ -25,21 +25,22 @@ public class SearchDTO {
         this.setPageRequestsFunction();
     }
 
+    private void addPageRequestFunction(String key, Sort.Direction direction, String sortField) {
+        this.pageRequestsFunction.put(key, (current, size) ->
+                PageRequest.of(current, size, Sort.by(direction, sortField)));
+    }
+
     private void setPageRequestsFunction() {
         this.pageRequestsFunction = new HashMap<>();
-        pageRequestsFunction.put("lowestPrice", (current, size) ->
-                PageRequest.of(current, size, Sort.by("price")));
-        pageRequestsFunction.put("highestPrice", (current, size) ->
-                PageRequest.of(current, size, Sort.by("price").ascending()));
-        pageRequestsFunction.put("lowestScore", (current, size) ->
-                PageRequest.of(current, size, Sort.by("score")));
-        pageRequestsFunction.put("highestScore", (current, size) ->
-                PageRequest.of(current, size, Sort.by("score").ascending()));
+        this.addPageRequestFunction("lowestPrice", Sort.Direction.ASC, "price");
+        this.addPageRequestFunction("highestPrice", Sort.Direction.DESC, "price");
+        this.addPageRequestFunction("lowestScore", Sort.Direction.ASC, "score");
+        this.addPageRequestFunction("highestScore", Sort.Direction.DESC, "score");
         pageRequestsFunction.put(null, PageRequest::of);
     }
 
     public int getPageCurrent() {
-        return pageCurrent;
+        return pageCurrent - 1;
     }
 
     public void setPageCurrent(int pageCurrent) {
@@ -79,7 +80,8 @@ public class SearchDTO {
     }
 
     public PageRequest getPageRequest() {
-        return this.pageRequestsFunction.get(this.order).apply(pageCurrent, pageSize);
+        return this.pageRequestsFunction.get(this.order)
+                .apply(this.getPageCurrent(), pageSize);
     }
 
 }

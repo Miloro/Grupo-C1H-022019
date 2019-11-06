@@ -83,7 +83,7 @@ public class MenuBuilder {
         menu.addDeliveryInfo(deliveryInfo);
         orders.forEach(menu::addOrder);
         menu.setPrice(random.nextInt(300));
-        menu.setScore(random.nextInt(300));
+        menu.setScore(random.nextInt(5));
         return menu;
     }
 }

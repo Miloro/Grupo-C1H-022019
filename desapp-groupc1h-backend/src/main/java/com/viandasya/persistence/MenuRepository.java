@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Long> {
 
-    Page<Menu> findByNameContaining(String name, Pageable pageable);
+    Page<Menu> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
-    Page<Menu> findByCategoriesContaining(String category, Pageable pageable);
+    Page<Menu> findByCategoriesContains(String category, Pageable pageable);
 
-    Page<Menu> findByServiceProfileLocationCityContaining(String city, Pageable pageable);
+    Page<Menu> findByServiceProfileLocationCityContainsIgnoreCase(String city, Pageable pageable);
 }

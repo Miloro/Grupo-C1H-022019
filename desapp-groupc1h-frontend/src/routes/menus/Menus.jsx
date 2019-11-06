@@ -4,7 +4,6 @@ import {useLocation} from "react-router-dom";
 import {useIntl} from "react-intl";
 import axios from "axios";
 import MenuList from "./list/MenuList";
-import menu from "./mock-menu";
 
 const {Header, Content, Footer} = Layout;
 const {Group} = Radio;
@@ -43,6 +42,7 @@ function Menus(props) {
             setIsLoading(false);
         };
         fetchMenus();
+        window.scrollTo(0, 0);
     }, [filterField, filterQuery, order, pageCurrent]);
 
 
@@ -52,6 +52,7 @@ function Menus(props) {
 
     const onOrderChange = e => {
         setOrder(e.target.value);
+        setPageCurrent(1);
     };
 
     const onPageChange = (current) => {
@@ -67,8 +68,8 @@ function Menus(props) {
                         <Group onChange={onOrderChange} name="orders" size="large" value={order}>
                             <Radio value="lowestPrice">{formatMessage({id: "lowestPrice"})}</Radio>
                             <Radio value="highestPrice">{formatMessage({id: "highestPrice"})}</Radio>
-                            <Radio value="lowestRating">{formatMessage({id: "lowestRating"})}</Radio>
-                            <Radio value="highestRating">{formatMessage({id: "highestRating"})}</Radio>
+                            <Radio value="lowestScore">{formatMessage({id: "lowestScore"})}</Radio>
+                            <Radio value="highestScore">{formatMessage({id: "highestScore"})}</Radio>
                         </Group>
                     </Col>
                     <Col span={6}>
