@@ -24,49 +24,49 @@ class Buy  extends React.Component{
             <div className= "App" >
                 <Row gutter={1} type="flex" justify="center" align="top">
 
-                        <Col span={8}>
-                            <h2>menu:</h2>
-                        </Col>
-                        <Col span={8}>
-                            <h2>Menu muy green y sin tacc!</h2>
-                        </Col>
-                </Row>                
-                
+                    <Col span={8}>
+                        <h2>menu:</h2>
+                    </Col>
+                    <Col span={8}>
+                        <h2>Menu muy green y sin tacc!</h2>
+                    </Col>
+                </Row>
+
                 <Row gutter={1} type="flex" justify="center" align="top">
 
-                        <Col span={8}>
-                            <h2>cantidad:</h2>
-                        </Col>
-                        <Col span={8}>
-                            <InputNumber onChange={this.onChangeInputNumber} type="number" justify="center" defaultValue="0" />
-                        </Col>
+                    <Col span={8}>
+                        <h2>cantidad:</h2>
+                    </Col>
+                    <Col span={8}>
+                        <InputNumber defaultValue={1}  size={'large'} min={1} max={100} onChange={this.onChangeInputNumber} />
+                    </Col>
                 </Row>
                 <Row gutter={1} type="flex" justify="center" align="top">
-                        <Col span={8}>
-                            <h2>delivery:</h2>
-                        </Col>
-                        <Col span={8}>
-                            <Checkbox onChange={this.onChangeCheckBox}/>
-                        </Col>
+                    <Col span={8}>
+                        <h2>delivery:</h2>
+                    </Col>
+                    <Col span={8}>
+                        <Checkbox onChange={this.onChangeCheckBox}/>
+                    </Col>
                 </Row>
                 <Row gutter={1} type="flex" justify="center" align="top">
-                        <Col span={8}>
-                            <h2>dia:</h2>
-                        </Col>
-                        <Col span={8}>
-                            <DatePicker onChange={this.onChangeDatePicker} />
-                        </Col>
+                    <Col span={8}>
+                        <h2>dia:</h2>
+                    </Col>
+                    <Col span={8}>
+                        <DatePicker  disabledDate={this.disabledDate} onChange={this.onChangeDatePicker} />
+                    </Col>
                 </Row>
                 <Row gutter={1} type="flex" justify="center" align="top">
-                        <Col span={8}>
-                            <h2>rango:</h2>
-                        </Col>
-                        <Col span={4}>
-                            <TimePicker onChange={this.onChangeTimePickerFrom} defaultValue={moment('00:00', format)} format={format} />
-                        </Col>
-                        <Col span={4}>
-                            <TimePicker onChange={this.onChangeTimePickerto} defaultValue={moment('00:00', format)} format={format} />
-                        </Col>
+                    <Col span={8}>
+                        <h2>rango:</h2>
+                    </Col>
+                    <Col span={4}>
+                        <TimePicker minuteStep={15} onChange={this.onChangeTimePickerFrom} defaultValue={moment('00:00', format)} format={format} />
+                    </Col>
+                    <Col span={4}>
+                        <TimePicker minuteStep={15} onChange={this.onChangeTimePickerto} defaultValue={moment('00:00', format)} format={format} />
+                    </Col>
                 </Row>
                 <Button variant="primary" onClick ={() => this.confirmOrder()}>aceptar</Button>
             </div>
@@ -92,7 +92,11 @@ class Buy  extends React.Component{
     onChangeTimePickerto(x,timeTo){
         this.setState({...this.state, orderTimeTo : timeTo})
     }
-      
+
+    disabledDate(current) {
+        // Can not select days before today and today
+        return current && current < moment(new Date()).add(2,'days');
+    }
 
     confirmOrder(){
         CreateOrder(this.state)
