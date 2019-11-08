@@ -7,15 +7,16 @@ import com.viandasya.model.user.ServiceInfo;
 import com.viandasya.model.user.ServiceProfile;
 
 import java.math.BigDecimal;
+import java.util.Random;
 
 import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTable;
 import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInfo;
 
 public class ServiceProfileBuilder {
     private ServiceInfo serviceInfo = anyServiceInfo().createServiceInfo();
-    private TimeTable timetable = anyTimeTable().createTimeTable();;
+    private TimeTable timetable = anyTimeTable().createTimeTable();
     private String balance = "0";
-    private Location location = new Location("Viamonte 266, Ciudad de Buenos Aires, Ciudad de Buenos Aires",
+    private Location location = new Location("Viamonte 266","Ciudad de Buenos Aires",
             -34.5996841, -58.3711918);
     private double maxDistanceOfDeliveryInKms = 3;
 
@@ -52,6 +53,7 @@ public class ServiceProfileBuilder {
         ServiceProfile serviceProfile = new ServiceProfile(serviceInfo, timetable,
                 location, maxDistanceOfDeliveryInKms);
         serviceProfile.setBalance(new Balance(new BigDecimal(balance)));
+        serviceProfile.setScore(new Random().nextInt(5));
         return serviceProfile;
     }
 }

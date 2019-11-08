@@ -18,9 +18,11 @@ public class Menu {
 
     private String name;
     private String description;
+    private Integer price;
+    private Integer score;
 
     @ElementCollection
-    private List<Category> category;
+    private List<Category> categories = new ArrayList<>();
 
     private DateTimeSlot validity;
 
@@ -28,7 +30,6 @@ public class Menu {
     private DeliveryInfo deliveryInfo;
 
     @ElementCollection
-    @OrderBy(value = "price asc")
     private List<Offer> offers = new ArrayList<>();
 
     private Integer maxAmountPerDay;
@@ -41,10 +42,10 @@ public class Menu {
     @ManyToOne
     private ServiceProfile serviceProfile;
 
-    public Menu(String name, String description, List<Category> category, DateTimeSlot validity, List<Offer> offers, Integer maxAmountPerDay, Integer cookingTime) {
+    public Menu(String name, String description, List<Category> categories, DateTimeSlot validity, List<Offer> offers, Integer maxAmountPerDay, Integer cookingTime) {
         this.name = name;
         this.description = description;
-        this.category = category;
+        this.categories = categories;
         this.validity = validity;
         this.offers = offers;
         this.maxAmountPerDay = maxAmountPerDay;
@@ -70,12 +71,12 @@ public class Menu {
         this.description = description;
     }
 
-    public List<Category> getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(List<Category> category) {
-        this.category = category;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public DateTimeSlot getValidity() {
@@ -150,4 +151,23 @@ public class Menu {
         return this.orders.stream().mapToInt(Order::getAmount).sum();
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public long getId() {
+        return id;
+    }
 }

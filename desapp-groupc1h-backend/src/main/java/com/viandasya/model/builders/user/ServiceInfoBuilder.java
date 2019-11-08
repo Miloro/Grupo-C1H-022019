@@ -5,7 +5,7 @@ import com.viandasya.model.user.ServiceInfo;
 
 public class ServiceInfoBuilder {
     private String name = "El Rodeo";
-    private String logo = ":)";
+    private String logo = "https://codeclerks.com/pics/677-1wfYPM1479834803.jpg";
     private String description = "Proveemos hamburguesas y papas fritas";
     private String website = "www.rodeoquilmes.com.ar";
     private String eMail = "rodeoquilmes01@gmail.com";
