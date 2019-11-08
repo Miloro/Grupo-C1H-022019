@@ -6,22 +6,22 @@ const InputGroup = Input.Group;
 const {Search} = Input;
 const {Option} = Select;
 
-function SearchMenuInput() {
+function MenuSearchInput() {
     const {formatMessage} = useIntl();
     const [selection, setSelection] = useState('city');
     const widthStyleProp = (w) => ({style: {width: w}});
     let history = useHistory();
 
 
-    function onSelect(selection) {
+    const onSelect = selection => {
         setSelection(selection);
-    }
+    };
 
-    function onSearch(query) {
+    const onSearch = query => {
         if(query !== undefined) {
             history.push(`/menus/search?field=${selection}&q=${query}`);
         }
-    }
+    };
 
     return (
         <InputGroup compact size="large">
@@ -43,4 +43,4 @@ function SearchMenuInput() {
     );
 }
 
-export default SearchMenuInput;
+export default MenuSearchInput;

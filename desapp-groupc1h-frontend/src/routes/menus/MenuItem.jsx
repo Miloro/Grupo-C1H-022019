@@ -1,11 +1,11 @@
 import React from 'react';
 import {Avatar, Button, List, Popover, Rate, Statistic, Table, Tag, Typography} from "antd";
 import {useIntl} from "react-intl";
-const {Title, Text, Paragraph} = Typography;
+const {Text, Paragraph} = Typography;
 const {Item} = List;
 const {Column} = Table;
 
-function MenuListItem({item}) {
+function MenuItem({item, onOpenMap}) {
     const {formatMessage} = useIntl();
 
     function CategoryTags({categories}) {
@@ -58,7 +58,8 @@ function MenuListItem({item}) {
             actions={[
                 <Rate disabled defaultValue={item.score} style={{marginRight: 6}}/>,
                 <CategoryTags categories={item.categories}/>,
-                <Button size="large"  style={{marginLeft: 15}}>{formatMessage({id: "view"})}</Button>,
+                <Button size="large"  style={{marginLeft: 15}} onClick={() => onOpenMap(item)}>
+                    {formatMessage({id: "location"})}</Button>,
                 <Button size="large" type="danger">{formatMessage({id: "buy"})}</Button>,
             ]}
             extra={
@@ -67,7 +68,7 @@ function MenuListItem({item}) {
         >
             <Item.Meta
                 avatar={<Avatar size={100} src={item.serviceLogo}/>}
-                title={<Title level={4}>{item.name}</Title>}
+                title={<div style={{fontSize: 20}}>{item.name}</div>}
                 description={<Location serviceLocation={item.serviceLocation} serviceName={item.serviceName}/>}
             />
             {item.description}
@@ -75,4 +76,4 @@ function MenuListItem({item}) {
     );
 }
 
-export default MenuListItem;
+export default MenuItem;

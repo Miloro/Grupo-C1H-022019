@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Col, Layout, Pagination, Radio, Row} from "antd";
+import {Col, Layout, List, Pagination, Radio, Row} from "antd";
 import {useLocation} from "react-router-dom";
 import {useIntl} from "react-intl";
 import axios from "axios";
-import MenuList from "./list/MenuList";
+import MenuItem from "./MenuItem";
+import MenuMap from "./MenuMap";
+import menu from "./mock-menu";
 
 const {Header, Content, Footer} = Layout;
 const {Group} = Radio;
@@ -16,18 +18,19 @@ function Menus(props) {
     let query = useQuery();
     const {formatMessage} = useIntl();
 
-    const pageSize = 5;
-    const [layout, setLayout] = useState("list");
-
     const [order, setOrder] = useState(null);
     const filterField = query.get("field");
     const filterQuery = query.get("q");
 
+    const pageSize = 20;
     const [pageCurrent, setPageCurrent] = useState(1);
     const [pageTotal, setPageTotal] = useState(null);
 
     const [results, setResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
+    const [selectedMenuMap, setSelectedMenuMap] = useState(menu);
+    const [isVisibleMenuMap, setIsVisibleMenuMap] = useState(false);
 
     useEffect(() => {
         const fetchMenus = async () => {
@@ -45,11 +48,6 @@ function Menus(props) {
         window.scrollTo(0, 0);
     }, [filterField, filterQuery, order, pageCurrent]);
 
-
-    const onLayoutChange = e => {
-        setLayout(e.target.value);
-    };
-
     const onOrderChange = e => {
         setOrder(e.target.value);
         setPageCurrent(1);
@@ -59,12 +57,21 @@ function Menus(props) {
         setPageCurrent(current);
     };
 
+    const onOpenMenuMap = (item) => {
+        setSelectedMenuMap(item);
+        setIsVisibleMenuMap(true);
+    };
+
+    const onCloseMenuMap = () => {
+      setSelectedMenuMap(menu);
+      setIsVisibleMenuMap(false);
+    };
 
     return (
         <Layout>
             <Header>
                 <Row type="flex" justify="space-around" align="middle">
-                    <Col span={14}>
+                    <Col span={20}>
                         <Group onChange={onOrderChange} name="orders" size="large" value={order}>
                             <Radio value="lowestPrice">{formatMessage({id: "lowestPrice"})}</Radio>
                             <Radio value="highestPrice">{formatMessage({id: "highestPrice"})}</Radio>
@@ -72,16 +79,18 @@ function Menus(props) {
                             <Radio value="highestScore">{formatMessage({id: "highestScore"})}</Radio>
                         </Group>
                     </Col>
-                    <Col span={6}>
-                        <Group onChange={onLayoutChange} name="layout" buttonStyle="solid" value={layout}>
-                            <Radio.Button value={"map"}>{formatMessage({id: "map"})}</Radio.Button>
-                            <Radio.Button value={"list"}>{formatMessage({id: "list"})}</Radio.Button>
-                        </Group>
-                    </Col>
                 </Row>
             </Header>
             <Content>
-                <MenuList dataSource={results} isLoading={isLoading}/>
+                <List
+                    itemLayout="vertical"
+                    bordered={true}
+                    dataSource={results}
+                    renderItem={(item) => (<MenuItem item={item} onOpenMap={onOpenMenuMap}/>)}
+                    loading={isLoading}
+                    style={{minHeight: "400px"}}
+                />
+                <MenuMap item={selectedMenuMap} visible={isVisibleMenuMap} onClose={onCloseMenuMap}/>
             </Content>
             <Footer>
                 <Pagination defaultPageSize={pageSize}

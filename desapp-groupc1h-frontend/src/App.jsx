@@ -14,8 +14,8 @@ import Orders from './routes/Ordes';
 import { injectIntl } from 'react-intl';
 import {Col, Layout, Menu, Row} from 'antd';
 import Background from "./resources/background.jpg";
-import SearchMenuInput from "./routes/menus/SearchMenuInput";
-import MenuMap from "./routes/home/MenuMap";
+import MenuSearchInput from "./routes/menus/MenuSearchInput";
+import MenuMap from "./routes/menus/MenuMap";
 const { Header, Content, Footer } = Layout;
 
 const menuProps = {
@@ -63,7 +63,7 @@ class App extends Component {
                 </Menu>
               </Col>
               <Col span={14} style={{ paddingTop: '1%' }}>
-                <SearchMenuInput/>
+                <MenuSearchInput/>
               </Col>
             </Row>
           </Header>
