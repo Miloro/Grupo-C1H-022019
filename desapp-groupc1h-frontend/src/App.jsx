@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import './App.css';
 import Login from './routes/Login';
 import Home from './routes/home/Home';
-import MapDev from './routes/MapDev';
 import Service from './routes/service/Service';
 import Buy from './routes/Buy';
 import UnratedOrders from './routes/UnratedOrders';
@@ -16,6 +15,7 @@ import { injectIntl } from 'react-intl';
 import {Col, Layout, Menu, Row} from 'antd';
 import Background from "./resources/background.jpg";
 import SearchMenuInput from "./routes/menus/SearchMenuInput";
+import MenuMap from "./routes/home/MenuMap";
 const { Header, Content, Footer } = Layout;
 
 const menuProps = {
@@ -73,7 +73,7 @@ class App extends Component {
                   <Col {...colProps}>
                   <Switch>
                       <Route exact path="/login" component={Login}/>
-                      <Route exact path="/mapdev" component={MapDev}/>
+                      <Route exact path="/map" component={MenuMap}/>
                       <Route exact path="/buy" component={Buy}/>
                       <Route exact path="/unrated-orderds" component={UnratedOrders}/>
                       <Route exact path="/cart" component={Cart}/>
