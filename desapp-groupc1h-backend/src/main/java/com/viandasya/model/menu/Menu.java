@@ -5,7 +5,6 @@ import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ServiceProfile;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

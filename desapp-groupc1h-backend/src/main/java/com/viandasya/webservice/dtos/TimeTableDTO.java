@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public class TimeTableDTO {
 
+    private LocalDateTime date;
+
     public TimeTableDTO() {
     }
 
@@ -15,9 +17,6 @@ public class TimeTableDTO {
         this.date = date;
     }
 
-    private LocalDateTime date;
 
-    public TimeTableDTO(LocalDateTime date) {
-        this.date = date;
-    }
+
 }

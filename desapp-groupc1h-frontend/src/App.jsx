@@ -53,7 +53,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <Router>
         <Layout style={{minHeight:"100vh"}}>
           <Header>
             <Menu {...menuProps}>
@@ -86,7 +86,7 @@ class App extends Component {
           </Content>
           <Footer style={{ textAlign: 'center',  position: "sticky", bottom: "" }}>comidas muy ricas</Footer>
         </Layout>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
