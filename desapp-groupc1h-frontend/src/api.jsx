@@ -25,3 +25,15 @@ export function CreateOrder(object){
             console.log(error)
         });
 }
+
+export function IsNotHoliday(day,month,year){
+    const res = axios.get("http://nolaborables.com.ar/api/v2/feriados/"+year+"?formato=mensual").then(
+        res => {
+            if (res.status === 200){
+                console.log(res.data[month][day] === undefined)
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+}

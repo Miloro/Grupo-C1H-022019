@@ -9,6 +9,7 @@ import com.viandasya.persistence.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 
 @Service
 public class OrderService {
@@ -27,8 +28,12 @@ public class OrderService {
     public Order createOrder(Order order, long idMenu, long idClient){
         ClientProfile clientProfile = this.clientProfileRepository.findById(idClient).get();
         Menu menu = this.menuRepository.findById(idMenu).get();
-        order.setMenu(menu);
+        menu.addOrder(order);
         order.setClient(clientProfile);
+        order.getOffers().add(menu.getCurrentOffer());
+        BigDecimal price = order.getCurrentPrice();
+        clientProfile.getBalance().withdraw(price);
+        menu.getServiceProfile().getBalance().deposit(price);
         return orderRepository.save(order);
     }
 }

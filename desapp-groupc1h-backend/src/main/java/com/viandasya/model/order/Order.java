@@ -120,7 +120,7 @@ public class Order {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     public BigDecimal getCurrentPrice(){
-        return this.offers.stream().min(Comparator.comparing(Offer::getPrice)).get().getPrice();
+        return (this.offers.stream().min(Comparator.comparing(Offer::getPrice)).get().getPrice()).multiply(BigDecimal.valueOf(amount));
     }
 
     public LocalDateTime averageTime(){

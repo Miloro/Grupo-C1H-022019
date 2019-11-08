@@ -50,7 +50,7 @@ public class MenuTest {
                         anyOrder().setAmount(11).createOrder()))
                 .setOffers(offers).createMenu();
 
-        Assert.assertEquals(new BigDecimal("180"), menu.calculateCurrentPrice());
+        Assert.assertEquals(new BigDecimal("180"), menu.getCurrentOffer().getPrice());
     }
 
 }
