@@ -12,7 +12,7 @@ function ServiceInfoInputs() {
     return (
         <div>
             <Item name="name">
-                <Input name="name" placeholder={formatMessage({id:"name"})}/>
+                <Input name="name" placeholder={`${formatMessage({id:"name"})}*`}/>
             </Item>
             <Item name="description">
                 <Input.TextArea rows={6} name="description" placeholder={formatMessage({id:"description"})}/>

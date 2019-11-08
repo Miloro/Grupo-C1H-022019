@@ -5,11 +5,13 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Location {
     private String address;
+    private String city;
     private double latitude;
     private double longitude;
 
-    public Location(String address, double latitude, double longitude) {
+    public Location(String address, String city, double latitude, double longitude) {
         this.address = address;
+        this.city = city;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -39,5 +41,13 @@ public class Location {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

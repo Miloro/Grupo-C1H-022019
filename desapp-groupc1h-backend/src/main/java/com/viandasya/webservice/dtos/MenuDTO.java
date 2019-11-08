@@ -3,19 +3,16 @@ package com.viandasya.webservice.dtos;
 import com.viandasya.model.menu.Category;
 import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Offer;
-import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.TimeTable;
-import com.viandasya.model.user.ServiceProfile;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MenuDTO {
     private String name;
     private String description;
-    private List<Category> category;
+    private List<Category> categories;
     private DateTimeSlot validity;
 
     // deliveryInfo;
@@ -29,10 +26,10 @@ public class MenuDTO {
 
     private Integer cookingTime;
 
-    public MenuDTO(String name, String description, List<Category> category, DateTimeSlot validity, TimeTable deliveryInfoTimetable, BigDecimal deliveryInfoPrice, Integer deliveryInfoAverageTime, List<Offer> offers, Integer maxAmountPerDay, Integer cookingTime) {
+    public MenuDTO(String name, String description, List<Category> categories, DateTimeSlot validity, TimeTable deliveryInfoTimetable, BigDecimal deliveryInfoPrice, Integer deliveryInfoAverageTime, List<Offer> offers, Integer maxAmountPerDay, Integer cookingTime) {
         this.name = name;
         this.description = description;
-        this.category = category;
+        this.categories = categories;
         this.validity = validity;
         this.deliveryInfoTimetable = deliveryInfoTimetable;
         this.deliveryInfoPrice = deliveryInfoPrice;
@@ -62,12 +59,12 @@ public class MenuDTO {
         this.description = description;
     }
 
-    public List<Category> getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(List<Category> category) {
-        this.category = category;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public DateTimeSlot getValidity() {

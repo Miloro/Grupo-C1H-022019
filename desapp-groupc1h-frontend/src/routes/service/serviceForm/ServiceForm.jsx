@@ -134,7 +134,7 @@ function ServiceForm({userId, setService}) {
                     </Title>
                     <ServiceShedulePicker timetable={values.timetable} setFieldValue={setFieldValue}/>
                     <Title level={4} className='padding-top-4 align-left'>
-                        <FormattedMessage id="service.location"/>
+                        <FormattedMessage id="location"/>*
                     </Title>
                     <AddressSearcher suggestions={values.suggestions} setFieldValue={setFieldValue}/>
                     <Item name="maxDistanceDeliveryInKms">

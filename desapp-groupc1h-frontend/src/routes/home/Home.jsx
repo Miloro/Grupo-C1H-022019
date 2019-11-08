@@ -1,20 +1,28 @@
-import React from 'react';
-import {Button, Result} from 'antd';
+import React from 'react'
+import { injectIntl} from 'react-intl'
 
-function Home() {
-    return (
-        <Result
-                status="success"
-                title="Successfully Purchased Cloud Server ECS!"
-                subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
-                extra={[
-                    <Button type="primary" key="console">
-                        Go Console
-                    </Button>,
-                    <Button key="buy">Buy Again</Button>,
-                ]}
-        />
-    );
+class Home  extends React.Component{
+
+    render(){
+        const intl = this.props.intl;
+        const greet = intl.formatMessage({
+          id: 'Greet',
+          defaultMessage: 'hello'
+        });
+        const home = intl.formatMessage({
+            id: 'Home',
+            defaultMessage: 'home'
+          });
+        return(
+            <div className= "App" >
+                <h1>{greet}</h1>
+                <h1>{home}</h1>
+            </div>
+        )
+    }
+
 }
+
+Home = injectIntl(Home);
 
 export default Home;
