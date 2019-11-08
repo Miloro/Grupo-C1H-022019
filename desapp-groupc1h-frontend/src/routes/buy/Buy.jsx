@@ -1,7 +1,7 @@
-import React from "react"
+import React from "react";
 import {injectIntl} from "react-intl";
 import {Button, InputNumber, Col, Row, Checkbox, DatePicker, TimePicker, Alert} from "antd";
-import {CreateOrder, IsNotHoliday} from "../../api.jsx";
+import {createOrder, isNotHoliday} from "../../api.jsx";
 import moment from "moment";
 
 const format = "HH:mm";
@@ -16,7 +16,7 @@ class Buy extends React.Component {
         this.onChangeTimePickerto = this.onChangeTimePickerto.bind(this);
         this.disabledDate = this.disabledDate.bind(this);
         this.state = {amount: 0, delivery: false, date: "", orderTimeFrom: "00:00", orderTimeTo: "00:00"};
-        this.alert = React.createRef()
+        this.alert = React.createRef();
 
 
     }
@@ -76,7 +76,7 @@ class Buy extends React.Component {
                 </Row>
                 <Button variant="primary" onClick={() => this.confirmOrder()}>aceptar</Button>
             </div>
-        )
+        );
     }
 
     onChangeInputNumber(amount) {
@@ -89,8 +89,8 @@ class Buy extends React.Component {
 
     onChangeDatePicker(x, dateString) {
         if (x != null) {
-            IsNotHoliday(x._d.getDate(), x._d.getMonth(), 2019);
-            this.setState({...this.state, date: dateString})
+            isNotHoliday(x._d.getDate(), x._d.getMonth(), 2019);
+            this.setState({...this.state, date: dateString});
         }
 
     }
@@ -105,11 +105,11 @@ class Buy extends React.Component {
 
     disabledDate(current) {
         // Can not select days before today and today
-        return current && current < moment(new Date()).add(2, 'days');
+        return current && current < moment(new Date()).add(2, "days");
     }
 
     confirmOrder() {
-        CreateOrder(this.state);
+        createOrder(this.state);
     }
 
 }
