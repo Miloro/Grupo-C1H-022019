@@ -1,21 +1,21 @@
-import React from 'react'
-import {injectIntl} from 'react-intl'
-import {Button, InputNumber, Col, Row, Checkbox, DatePicker, TimePicker, Alert} from 'antd';
-import {CreateOrder, IsNotHoliday} from "../../api.jsx"
-import moment from 'moment';
+import React from "react"
+import {injectIntl} from "react-intl";
+import {Button, InputNumber, Col, Row, Checkbox, DatePicker, TimePicker, Alert} from "antd";
+import {CreateOrder, IsNotHoliday} from "../../api.jsx";
+import moment from "moment";
 
-const format = 'HH:mm';
+const format = "HH:mm";
 
 class Buy extends React.Component {
     constructor(props) {
-        super(props)
-        this.onChangeInputNumber = this.onChangeInputNumber.bind(this)
-        this.onChangeCheckBox = this.onChangeCheckBox.bind(this)
-        this.onChangeDatePicker = this.onChangeDatePicker.bind(this)
-        this.onChangeTimePickerFrom = this.onChangeTimePickerFrom.bind(this)
-        this.onChangeTimePickerto = this.onChangeTimePickerto.bind(this)
-        this.disabledDate = this.disabledDate.bind(this)
-        this.state = {amount: 0, delivery: false, date: "", orderTimeFrom: "00:00", orderTimeTo: "00:00"}
+        super(props);
+        this.onChangeInputNumber = this.onChangeInputNumber.bind(this);
+        this.onChangeCheckBox = this.onChangeCheckBox.bind(this);
+        this.onChangeDatePicker = this.onChangeDatePicker.bind(this);
+        this.onChangeTimePickerFrom = this.onChangeTimePickerFrom.bind(this);
+        this.onChangeTimePickerto = this.onChangeTimePickerto.bind(this);
+        this.disabledDate = this.disabledDate.bind(this);
+        this.state = {amount: 0, delivery: false, date: "", orderTimeFrom: "00:00", orderTimeTo: "00:00"};
         this.alert = React.createRef()
 
 
@@ -41,7 +41,7 @@ class Buy extends React.Component {
                         <h2>cantidad:</h2>
                     </Col>
                     <Col span={8}>
-                        <InputNumber defaultValue={1} size={'large'} min={1} max={100}
+                        <InputNumber defaultValue={1} size={"large"} min={1} max={100}
                                      onChange={this.onChangeInputNumber}/>
                     </Col>
                 </Row>
@@ -67,11 +67,11 @@ class Buy extends React.Component {
                     </Col>
                     <Col span={4}>
                         <TimePicker minuteStep={15} onChange={this.onChangeTimePickerFrom}
-                                    defaultValue={moment('00:00', format)} format={format}/>
+                                    defaultValue={moment("00:00", format)} format={format}/>
                     </Col>
                     <Col span={4}>
                         <TimePicker minuteStep={15} onChange={this.onChangeTimePickerto}
-                                    defaultValue={moment('00:00', format)} format={format}/>
+                                    defaultValue={moment("00:00", format)} format={format}/>
                     </Col>
                 </Row>
                 <Button variant="primary" onClick={() => this.confirmOrder()}>aceptar</Button>
@@ -80,27 +80,27 @@ class Buy extends React.Component {
     }
 
     onChangeInputNumber(amount) {
-        this.setState({...this.state, amount: amount})
+        this.setState({...this.state, amount: amount});
     }
 
     onChangeCheckBox(isDelivert) {
-        this.setState({...this.state, delivery: isDelivert.target.checked})
+        this.setState({...this.state, delivery: isDelivert.target.checked});
     }
 
     onChangeDatePicker(x, dateString) {
         if (x != null) {
-            IsNotHoliday(x._d.getDate(), x._d.getMonth(), 2019)
+            IsNotHoliday(x._d.getDate(), x._d.getMonth(), 2019);
             this.setState({...this.state, date: dateString})
         }
 
     }
 
     onChangeTimePickerFrom(x, timeFrom) {
-        this.setState({...this.state, orderTimeFrom: timeFrom})
+        this.setState({...this.state, orderTimeFrom: timeFrom});
     }
 
     onChangeTimePickerto(x, timeTo) {
-        this.setState({...this.state, orderTimeTo: timeTo})
+        this.setState({...this.state, orderTimeTo: timeTo});
     }
 
     disabledDate(current) {
@@ -109,7 +109,7 @@ class Buy extends React.Component {
     }
 
     confirmOrder() {
-        CreateOrder(this.state)
+        CreateOrder(this.state);
     }
 
 }

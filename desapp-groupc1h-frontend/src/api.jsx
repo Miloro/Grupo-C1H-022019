@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
 export function GetMenu(idMenu){
-    return axios.get('api/menu/' + idMenu)
+    return axios.get("api/menu/" + idMenu);
 }
 
 export function CreateOrder(object){
@@ -14,15 +14,15 @@ export function CreateOrder(object){
                     "from":object.date+ "T" + object.orderTimeFrom,
                     "to": object.date+ "T" + object.orderTimeTo
                     }
-    }
+    };
     return axios.post("api/menu/13/client/22/order",body).then(
-        res => {
+        (res) => {
             if (res.status === 200){
-                console.log(res)
+                Console.log(res);
             }
         })
         .catch((error) => {
-            console.log(error)
+            Console.log(error);
         });
 }
 
@@ -30,10 +30,10 @@ export function IsNotHoliday(day,month,year){
     const res = axios.get("http://nolaborables.com.ar/api/v2/feriados/"+year+"?formato=mensual").then(
         res => {
             if (res.status === 200){
-                console.log(res.data[month][day] === undefined)
+                Console.log(res.data[month][day] === undefined);
             }
         })
         .catch((error) => {
-            console.log(error)
+            Console.log(error);
         });
 }
