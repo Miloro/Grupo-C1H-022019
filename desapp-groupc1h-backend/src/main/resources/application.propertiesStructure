@@ -1,8 +1,8 @@
-spring.datasource.driver-class-name=org.hsqldb.jdbc.JDBCDriver
-spring.datasource.url=jdbc:hsqldb:hsql://localhost/viandasyadb
-spring.datasource.username=
-spring.datasource.password=
-spring.jpa.hibernate.ddl-auto=create
+#spring.datasource.driver-class-name=org.hsqldb.jdbc.JDBCDriver
+#spring.datasource.url=jdbc:hsqldb:hsql://localhost/viandasyadb
+#spring.datasource.username=
+#spring.datasource.password=
+#spring.jpa.hibernate.ddl-auto=create
 
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
