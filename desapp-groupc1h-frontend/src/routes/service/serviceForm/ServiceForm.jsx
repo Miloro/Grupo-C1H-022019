@@ -84,16 +84,21 @@ function ServiceForm({userId, setService}) {
         };
     }
 
+    function createLocation(response) {
+        const location = response.data.Response.View[0].Result[0].Location;
+        return {
+            address: `${location.Address.Street} ${location.Address.HouseNumber}`,
+            city: `${location.Address.City}`,
+            latitude: location.DisplayPosition.Latitude,
+            longitude: location.DisplayPosition.Longitude
+        };
+    }
+
     function onSubmit(values) {
         let service;
         axios.get(geocoderUrl, createParams(values.selected.id))
             .then((response) => {
-                const checkedLocation = response.data.Response.View[0].Result[0].Location;
-                const location = {
-                    address: values.selected.address,
-                    latitude: checkedLocation.DisplayPosition.Latitude,
-                    longitude: checkedLocation.DisplayPosition.Longitude
-                };
+                const location = createLocation(response);
                 service = createService(values, location);
                 return axios.post(`/api/user/${userId}/service`, service);
             }).then((response) => {
