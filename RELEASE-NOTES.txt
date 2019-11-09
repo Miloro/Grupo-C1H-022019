@@ -1,77 +1,50 @@
-﻿====== RELEASE NOTES  ==========
-	
+﻿===============  RELEASE NOTES  ==================
 
 
-	Universidad Nacional de Quilmes
-	
-
-	Desarrollo de Aplicaciones
-	
-
-	Viandas Ya
-	
+Viandas Ya
+Universidad De Quilmes
+Desarrollo de Aplicaciones
 
 
-
-	Grupo H C1
-	
-
-	        - Malena Lisa Romero
-	
-
-	        - Miguel Miloro
-	
-
-	        
-	
-
-	---------------------------------------------------------------------
-	
-
-	TAG ENTREGA 1.0
-	
-
-	---------------------------------------------------------------------
-	
-
-	NEW FEATURES:
-	
-
-	* Configuration of tools for continous integration, continous deploy, etc (travis, heroku, codacy).
-	
-
-	* POC of Google Maps API allows to show a route.
-	
-
-	* Structure of the model.
-	
-
-	*  Unit-testing of the model.
-	
-
-	* Implementation of price calculation of Menu and Order.
+Grupo H C1
+Integrantes:  Lisa Romero - Miguel Miloro
 
 
-	*  Minimum structure of web-server.
-	
+---------------------------------------------------------------------
+TAG ENTREGA 2.0
+---------------------------------------------------------------------
+NEW FEATURES:
 
-	NOTES:
-	
 
-	* Calculation of delivery time and delivery distance on next Release. 
-	
+BACKEND
+* Menu search and paging Strategy implemented.
+* Hibernate Mappings: Service Profile, Client Profile, Location, Menu, Order, Timetable, and more. 
+* Repositories: Menu, Service Profile, Order.
+* Services: Menu , Service Profile, Order, MailSender.
+* Creation of Service implemented.
+* Fake Data to test the application.
+* CRUD operations with Menu.
 
-	* Calculation of ratings in ServiceProfile and Menu not implemented yet.
-	
 
-	* Implementation of Menu search on next Release.
-	
+FRONTEND:
+* i18n implemented.
+* Home Page
+* Search Menus Page
+* Create Service Page
+* Buy page
 
-	
+
+NOTES:
+* Deposit or withdraw money
+* Validation time order (from < to)
+* Holidays not allowed (can be connected to the api holidays but not validated in the front)
+* User can’t create service with logo
+* Server errors handling in frontend not implemented yet.
+* Validation in backend not implemented yet.
+* CRUD operations with Service not implemented yet.
 
 
 
-	KNOWN ISSUES:
-	
 
-	*
+KNOWN ISSUES:
+* Search by category not working
