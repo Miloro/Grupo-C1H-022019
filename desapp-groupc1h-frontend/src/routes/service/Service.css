@@ -1,0 +1,22 @@
+#components-layout-demo-top .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+}
+.align-left {
+    text-align: left;
+}
+
+.padding-botton-5 {
+    padding-bottom: 5%;
+}
+
+.padding-top-4 {
+    padding-top: 4%;
+}
+
+.width-100 {
+    width: 100%;
+}

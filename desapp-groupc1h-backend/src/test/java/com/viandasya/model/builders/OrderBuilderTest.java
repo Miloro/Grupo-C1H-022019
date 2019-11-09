@@ -1,14 +1,11 @@
 package com.viandasya.model.builders;
 
-import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
+import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ClientProfile;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,49 +16,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.viandasya.model.builders.OrderBuilder.anyOrder;
+import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.*;
 
 
 public class OrderBuilderTest {
 
     @Test
-    public void testIsValid_WhenICanCreateAOrderWithOrderBuilder() {
+    public void testIsValidWhenICanCreateAOrderWithOrderBuilder() {
         Order anyOrder = new OrderBuilder()
                 .setAmount(1234)
                 .createOrder();
 
-        assertEquals(anyOrder.getAmount(), 1234, 0);
+        Assert.assertEquals(anyOrder.getAmount(), 1234, 0);
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAOrderWithOrderBuilder2() {
+    public void testIsValidWhenICanCreateAOrderWithOrderBuilder2() {
         Order anyOrder = new OrderBuilder()
                 .setScore(2)
                 .createOrder();
 
-        assertEquals(anyOrder.getScore(), 2,0);
+        Assert.assertEquals(anyOrder.getScore(), 2,0);
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAOrderWithOrderBuilder3() {
+    public void testIsValidWhenICanCreateAOrderWithOrderBuilder3() {
         Order anyOrder = new OrderBuilder()
                 .setState(OrderState.CONFIRMED)
                 .createOrder();
 
-        assertEquals(anyOrder.getState(), OrderState.CONFIRMED);
+        Assert.assertEquals(anyOrder.getState(), OrderState.CONFIRMED);
     }
 
     @Test
-    public void testIsValid_WhenICanCreateAOrderWithOrderBuilder4() {
+    public void testIsValidWhenICanCreateAOrderWithOrderBuilder4() {
         Order anyOrder = new OrderBuilder()
                 .setIsDelivery(false)
                 .createOrder();
 
-        assertEquals(anyOrder.getDelivery(), false);
+        Assert.assertEquals(anyOrder.getDelivery(), false);
     }
 
     @Test
     public void testSetOrderDateSetedInBuilderEqualsToTheOneGettedInOrder() {
-        LocalDateTime date = LocalDateTime.of(2019,3,21,4,0);
+        DateTimeSlot date = anyDateTimeSlot()
+                .setFrom(LocalDateTime.of(2019,9,20,12,0))
+                .setTo(LocalDateTime.of(2019,9,20,13,0))
+                .createDateTimeSlot();
         Order order = anyOrder().setOrderDate(date).createOrder();
 
         Assert.assertEquals(date, order.getOrderDate());
@@ -84,7 +85,7 @@ public class OrderBuilderTest {
     }
 
     @Test
-    public void setOffersSetedInBuilderEqualsToTheOneGettedInOrder() {
+    public void testSetOffersSetedInBuilderEqualsToTheOneGettedInOrder() {
         List<Offer> offers = new ArrayList<>();
         offers.add(Mockito.mock(Offer.class));
         offers.add(Mockito.mock(Offer.class));

@@ -5,15 +5,11 @@ import com.viandasya.model.user.ServiceInfo;
 
 public class ServiceInfoBuilder {
     private String name = "El Rodeo";
-    private String logo = ":)";
-    private String adress= "San Martin 675";
+    private String logo = "https://codeclerks.com/pics/677-1wfYPM1479834803.jpg";
     private String description = "Proveemos hamburguesas y papas fritas";
     private String website = "www.rodeoquilmes.com.ar";
     private String eMail = "rodeoquilmes01@gmail.com";
     private Integer phoneNumber = 42501324;
-    private String city = "Quilmes";
-
-
 
     public static ServiceInfoBuilder anyServiceInfo() {
         return new ServiceInfoBuilder();
@@ -26,11 +22,6 @@ public class ServiceInfoBuilder {
 
     public ServiceInfoBuilder setLogo(String logo){
         this.logo = logo;
-        return this;
-    }
-
-    public ServiceInfoBuilder setAdress (String adress){
-        this.adress = adress;
         return this;
     }
 
@@ -54,13 +45,8 @@ public class ServiceInfoBuilder {
         return this;
     }
 
-    public ServiceInfoBuilder setCity(String city){
-        this.city = city;
-        return this;
-    }
-
     public ServiceInfo createServiceInfo(){
-        return new ServiceInfo(name,logo,adress,description,website,eMail,phoneNumber,city);
+        return new ServiceInfo(name,logo,description,website,eMail,phoneNumber);
     }
 }
 

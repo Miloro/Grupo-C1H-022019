@@ -1,6 +1,12 @@
 package com.viandasya.model.user;
 
+import javax.persistence.*;
+
+@Entity
 public class ClientProfile {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String name;
     private String lastName;
     private String email;
@@ -8,6 +14,10 @@ public class ClientProfile {
     private String city;
     private String adress;
     private Balance balance;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private User user;
+
 
     public ClientProfile(String name, String lastName, String email, Integer phoneNumber, String city, String adress, Balance balance) {
         this.name = name;
@@ -17,6 +27,9 @@ public class ClientProfile {
         this.city = city;
         this.adress = adress;
         this.balance = balance;
+    }
+
+    public ClientProfile() {
     }
 
     public String getName() {
@@ -75,4 +88,11 @@ public class ClientProfile {
         this.balance = balance;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -1,17 +1,20 @@
 package com.viandasya.model.menu;
 
-import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.viandasya.model.builders.OrderBuilder.anyOrder;
 import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
+import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 
 public class MenuTest {
 
@@ -37,24 +40,17 @@ public class MenuTest {
 
     @Test
     public void testCurrentPriceMenuWith10OrderCountReturn100() {
-        PriceHandler mockPriceHandler = Mockito.mock(PriceHandler.class);
-        Mockito.when(mockPriceHandler.getCurrentPrice(10)).thenReturn(100);
+        List<Offer> offers = new ArrayList<>();
+        offers.add(anyOffer().setPrice(new BigDecimal("175")).setMinAmount(25).createOffer());
+        offers.add(anyOffer().setPrice(new BigDecimal("180")).setMinAmount(20).createOffer());
+        offers.add(anyOffer().setPrice(new BigDecimal("200")).setMinAmount(0).createOffer());
 
         Menu menu = anyMenu()
-                .setOrders(this.create10MockOrders())
-                .setPriceHandler(mockPriceHandler).createMenu();
+                .setOrders(Arrays.asList(anyOrder().setAmount(10).createOrder(),
+                        anyOrder().setAmount(11).createOrder()))
+                .setOffers(offers).createMenu();
 
-        Assert.assertEquals(100, menu.getCurrentPrice(), 0.0);
-    }
-
-    private List<Order> create10MockOrders() {
-        Order mockOrder1 = Mockito.mock(Order.class);
-        Order mockOrder2 = Mockito.mock(Order.class);
-
-        Mockito.when(mockOrder1.getAmount()).thenReturn(5);
-        Mockito.when(mockOrder2.getAmount()).thenReturn(5);
-
-        return Arrays.asList(mockOrder1, mockOrder2);
+        Assert.assertEquals(new BigDecimal("180"), menu.getCurrentOffer().getPrice());
     }
 
 }

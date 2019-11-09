@@ -1,23 +1,53 @@
 package com.viandasya.model.user;
 
 import com.viandasya.model.menu.Menu;
-import com.viandasya.model.timeslot.TimeSlot;
+import com.viandasya.model.timeslot.TimeTable;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+@Entity
 public class ServiceProfile {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @OneToOne(mappedBy = "serviceProfile", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private ServiceInfo serviceInfo;
-    private TimeSlot serviceDays;
-    private List<Menu> menus;
-    private Balance balance;
+
+    @OneToOne
+    @MapsId
+    private TimeTable timetable;
+
+    @OneToMany(mappedBy = "serviceProfile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Menu> menus = new ArrayList<>();
+
+    private Balance balance = new Balance(new BigDecimal("0"));
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    private Location location;
+
+    private double maxDistanceOfDeliveryInKms;
+
+    private Integer score;
+
+    public ServiceProfile(ServiceInfo serviceInfo, TimeTable timetable,
+                          Location location, double maxDistanceOfDeliveryInKms) {
+        this.setServiceInfo(serviceInfo);
+        this.timetable = timetable;
+        this.location = location;
+        this.maxDistanceOfDeliveryInKms = maxDistanceOfDeliveryInKms;
+    }
 
     public ServiceProfile(){}
 
-    public ServiceProfile(ServiceInfo serviceInfo, TimeSlot serviceDays, List<Menu> menus, Balance balance) {
-        this.serviceInfo = serviceInfo;
-        this.serviceDays = serviceDays;
-        this.menus = menus;
-        this.balance = balance;
+    public long getId() {
+        return id;
     }
 
     public ServiceInfo getServiceInfo() {
@@ -25,23 +55,20 @@ public class ServiceProfile {
     }
 
     public void setServiceInfo(ServiceInfo serviceInfo) {
+        serviceInfo.setServiceProfile(this);
         this.serviceInfo = serviceInfo;
     }
 
-    public TimeSlot getServiceDays() {
-        return serviceDays;
+    public TimeTable getTimetable() {
+        return timetable;
     }
 
-    public void setServiceHours(TimeSlot serviceHours) {
-        this.serviceDays = serviceHours;
+    public void setTimetable(TimeTable timetable) {
+        this.timetable = timetable;
     }
 
     public List<Menu> getMenus() {
         return menus;
-    }
-
-    public void setMenus(List<Menu> menus) {
-        this.menus = menus;
     }
 
     public Balance getBalance(){
@@ -52,16 +79,44 @@ public class ServiceProfile {
         this.balance = balance;
     }
 
-    public void addMenu(Menu menu) {
-        this.menus.add(menu);
+    public User getUser() {
+        return user;
     }
 
-    public void removeMenu(Menu menu) {
-        this.menus.remove(menu);
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public double getMaxDistanceOfDeliveryInKms() {
+        return maxDistanceOfDeliveryInKms;
+    }
+
+    public void setMaxDistanceOfDeliveryInKms(double maxDistanceOfDeliveryInKms) {
+        this.maxDistanceOfDeliveryInKms = maxDistanceOfDeliveryInKms;
+    }
+
+    public void addMenu(Menu menu) {
+        menu.setServiceProfile(this);
+        this.menus.add(menu);
     }
 
     public boolean has20ValidMenus() {
         return this.menus.stream().filter(Menu::isValid).count() == 20;
     }
 
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
 }

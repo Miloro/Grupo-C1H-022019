@@ -1,19 +1,39 @@
 {
   "name": "desapp-groupc1h-frontend",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
+    "@csstools/normalize.css": "github:csstools/normalize.css",
+    "antd": "^3.24.3",
+    "axios": "^0.19.0",
+    "babel-plugin-import": "^1.12.2",
+    "bootstrap": "^4.3.1",
+    "customize-cra": "^0.8.0",
+    "formik": "^2.0.3",
+    "formik-antd": "^1.6.0",
+    "here-maps-react": "^1.0.0-beta.2",
     "http-proxy-middleware": "^0.20.0",
+    "jquery": "^3.4.1",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "moment": "^2.24.0",
+    "popper.js": "^1.16.0",
     "react": "^16.9.0",
+    "react-app-rewired": "^2.1.4",
     "react-dom": "^16.9.0",
-    "react-router-dom": "^4.3.1",
+    "react-facebook-login": "latest",
+    "react-google-login": "latest",
+    "react-iframe": "^1.8.0",
+    "react-intl": "^3.4.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.1",
-    "react-iframe": "^1.8.0"
+    "typescript": "^3.6.4",
+    "yup": "^0.27.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -30,5 +50,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "license": "none"
 }

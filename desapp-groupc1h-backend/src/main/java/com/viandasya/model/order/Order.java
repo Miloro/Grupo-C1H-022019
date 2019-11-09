@@ -1,35 +1,57 @@
 package com.viandasya.model.order;
 
 import com.viandasya.model.menu.Offer;
+import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.menu.Menu;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+@Entity(name = "order_info")
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private Integer amount;
-    private List<Offer> offers;
+
+    @ElementCollection
+    private List<Offer> offers = new ArrayList<>();
     private Integer score;
+
+    @Enumerated(value = EnumType.STRING)
     private OrderState state;
-    private LocalDateTime orderDate;
-    private Boolean isDelivery;
+
+    private DateTimeSlot orderDate;
+    private Boolean delivery;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Menu menu;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
     private ClientProfile client;
 
-    public Order(Integer amount, List<Offer> offers, Integer score, OrderState state, LocalDateTime orderDate, Boolean isDelivery, Menu menu, ClientProfile client) {
+    public Order(Integer amount, List<Offer> offers, Integer score, OrderState state, DateTimeSlot orderDate, Boolean delivery, Menu menu, ClientProfile client) {
         this.amount = amount;
         this.offers = offers;
         this.score = score;
         this.state = state;
         this.orderDate = orderDate;
-        this.isDelivery = isDelivery;
+        this.delivery = delivery;
         this.menu = menu;
         this.client = client;
     }
 
     public Order() {
+    }
+    public long getId(){
+        return id;
     }
 
     public Integer getAmount() {
@@ -64,20 +86,20 @@ public class Order {
         this.state = state;
     }
 
-    public LocalDateTime getOrderDate() {
+    public DateTimeSlot getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
+    public void setOrderDate(DateTimeSlot orderDate) {
         this.orderDate = orderDate;
     }
 
     public Boolean getDelivery() {
-        return isDelivery;
+        return delivery;
     }
 
     public void setDelivery(Boolean delivery) {
-        isDelivery = delivery;
+        this.delivery = delivery;
     }
 
     public Menu getMenu() {
@@ -96,7 +118,17 @@ public class Order {
         this.client = client;
     }
 
-    public Integer getCurrentPrice(){
-        return this.offers.stream().min(Comparator.comparingInt(Offer::getPrice)).get().getPrice();
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
+    public BigDecimal getCurrentPrice(){
+        return (this.offers.stream().min(Comparator.comparing(Offer::getPrice)).get().getPrice()).multiply(BigDecimal.valueOf(amount));
+    }
+
+    public LocalDateTime averageTime(){
+        if(delivery){
+            return this.orderDate.getFrom().plusMinutes(this.menu.getCookingTime() + 15 ); //cambiar 15 por cuanto tarda en llegar en moto desde la api
+        }
+        else{
+            return this.orderDate.getFrom().plusSeconds(this.menu.getCookingTime());
+        }
     }
 }

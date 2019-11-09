@@ -17,7 +17,7 @@ public class ServiceProfileTest {
 
     @Test
     public void addMenuAddsMenuToList() {
-        ServiceProfile serviceProfile = anyServiceProfile().setMenus(new ArrayList<>()).createServiceProfile();
+        ServiceProfile serviceProfile = anyServiceProfile().createServiceProfile();
 
         Menu menu = Mockito.mock(Menu.class);
         serviceProfile.addMenu(menu);
@@ -25,20 +25,11 @@ public class ServiceProfileTest {
         Assert.assertTrue(serviceProfile.getMenus().contains(menu));
     }
 
-    @Test
-    public void removesMenuRemovesMenuOfList() {
-        ServiceProfile serviceProfile = anyServiceProfile().setMenus(new ArrayList<>()).createServiceProfile();
-
-        Menu menu = Mockito.mock(Menu.class);
-        serviceProfile.addMenu(menu);
-        serviceProfile.removeMenu(menu);
-
-        Assert.assertFalse(serviceProfile.getMenus().contains(menu));
-    }
 
     @Test
     public void testHas20ValidMenusServiceWithValid20MenusGivesTrue() {
-        ServiceProfile serviceProfile = anyServiceProfile().setMenus(this.createNMockValidMenus(20)).createServiceProfile();
+        ServiceProfile serviceProfile = anyServiceProfile().createServiceProfile();
+        this.createNMockValidMenus(20).forEach(serviceProfile::addMenu);
 
         Assert.assertTrue(serviceProfile.has20ValidMenus());
     }
@@ -46,7 +37,8 @@ public class ServiceProfileTest {
     @Test
 
     public void testHas20ValidMenusServiceWith17ValidMenusGivesFalse() {
-        ServiceProfile serviceProfile = anyServiceProfile().setMenus(this.createNMockValidMenus(17)).createServiceProfile();
+        ServiceProfile serviceProfile = anyServiceProfile().createServiceProfile();
+        this.createNMockValidMenus(17).forEach(serviceProfile::addMenu);
 
         Assert.assertFalse(serviceProfile.has20ValidMenus());
     }

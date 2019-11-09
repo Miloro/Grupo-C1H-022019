@@ -1,26 +1,24 @@
 package com.viandasya.model.timeslot;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class HoursTimeSlot implements TimeSlot {
-    private LocalTime since;
-    private LocalTime  from;
+@Embeddable
+public class HoursTimeSlot {
+    @Column(name = "from_hour")
+    private LocalTime from;
 
-    public HoursTimeSlot(LocalTime since, LocalTime from) {
-        this.since = since;
+    @Column(name = "to_hour")
+    private LocalTime to;
+
+    public HoursTimeSlot(LocalTime from, LocalTime to) {
         this.from = from;
+        this.to = to;
     }
 
     public HoursTimeSlot() {
-    }
-
-    public LocalTime getSince() {
-        return since;
-    }
-
-    public void setSince(LocalTime since) {
-        this.since = since;
     }
 
     public LocalTime getFrom() {
@@ -31,8 +29,15 @@ public class HoursTimeSlot implements TimeSlot {
         this.from = from;
     }
 
-    @Override
+    public LocalTime getTo() {
+        return to;
+    }
+
+    public void setTo(LocalTime to) {
+        this.to = to;
+    }
+
     public boolean isValidDate(LocalDateTime date) {
-        return !date.toLocalTime().isBefore(since) && !date.toLocalTime().isAfter(from);
+        return !date.toLocalTime().isBefore(from) && !date.toLocalTime().isAfter(to);
     }
 }

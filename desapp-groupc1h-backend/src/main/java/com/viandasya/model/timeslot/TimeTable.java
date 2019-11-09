@@ -1,28 +1,36 @@
 package com.viandasya.model.timeslot;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-public class TimeTable implements TimeSlot {
-    private List<TimeSlot> timeSlots;
+@Entity
+public class TimeTable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    public TimeTable(List<TimeSlot> timeSlots) {
-        this.timeSlots = timeSlots;
+    @OneToMany(mappedBy = "timeTable", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DayTimeSlot> dayTimeSlots = new ArrayList<>();
+
+    public TimeTable(List<DayTimeSlot> dayTimeSlots) {
+        dayTimeSlots.forEach(this::addDayTimeSlot);
     }
 
     public TimeTable() {
     }
 
-    public List<TimeSlot> getTimeSlots() {
-        return timeSlots;
+    public List<DayTimeSlot> getDayTimeSlots() {
+        return dayTimeSlots;
     }
 
-    public void setTimeSlots(List<TimeSlot> timeSlots) {
-        this.timeSlots = timeSlots;
+    public void addDayTimeSlot(DayTimeSlot dayTimeSlot) {
+        dayTimeSlot.setTimeTable(this);
+        this.dayTimeSlots.add(dayTimeSlot);
     }
 
-    @Override
     public boolean isValidDate(LocalDateTime date) {
-        return this.timeSlots.stream().anyMatch(timeslot -> timeslot.isValidDate(date));
+        return this.dayTimeSlots.stream().anyMatch(timeslot -> timeslot.isValidDate(date));
     }
 }

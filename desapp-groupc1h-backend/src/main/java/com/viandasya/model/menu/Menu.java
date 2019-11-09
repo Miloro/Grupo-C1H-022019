@@ -2,34 +2,56 @@ package com.viandasya.model.menu;
 
 import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
-import com.viandasya.model.timeslot.TimeSlot;
+import com.viandasya.model.user.ServiceProfile;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Menu {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private String name;
     private String description;
-    private List<Category> category;
-    private DateTimeSlot validity;
-    private TimeSlot deliveryDays;
-    private Integer deliveryPrice;
-    private Integer averageDeliveryTime;
-    private PriceHandler priceHandler;
-    private Integer maxAmountPerDay;
-    private List<Order> orders;
+    private Integer price;
+    private Integer score;
 
-    public Menu(String name, String description, List<Category> category, Integer deliveryPrice, DateTimeSlot validity, TimeSlot deliveryDays, Integer averageDeliveryTime, PriceHandler priceHandler, Integer maxAmountPerDay, List<Order> orders) {
+    @ElementCollection
+    private List<Category> categories = new ArrayList<>();
+
+    private DateTimeSlot validity;
+
+    @OneToOne(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private DeliveryInfo deliveryInfo;
+
+    @ElementCollection
+    private List<Offer> offers = new ArrayList<>();
+
+    private Integer maxAmountPerDay;
+
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
+
+    private Integer cookingTime;
+
+    @ManyToOne
+    private ServiceProfile serviceProfile;
+
+    public Menu(String name, String description, List<Category> categories, DateTimeSlot validity, List<Offer> offers, Integer maxAmountPerDay, Integer cookingTime) {
         this.name = name;
         this.description = description;
-        this.category = category;
-        this.deliveryPrice = deliveryPrice;
+        this.categories = categories;
         this.validity = validity;
-        this.deliveryDays = deliveryDays;
-        this.averageDeliveryTime = averageDeliveryTime;
-        this.priceHandler = priceHandler;
+        this.offers = offers;
         this.maxAmountPerDay = maxAmountPerDay;
-        this.orders = orders;
+        this.cookingTime = cookingTime;
+    }
+
+    public Menu() {
     }
 
     public String getName() {
@@ -48,20 +70,12 @@ public class Menu {
         this.description = description;
     }
 
-    public List<Category> getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(List<Category> category) {
-        this.category = category;
-    }
-
-    public Integer getDeliveryPrice() {
-        return deliveryPrice;
-    }
-
-    public void setDeliveryPrice(Integer deliveryPrice) {
-        this.deliveryPrice = deliveryPrice;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public DateTimeSlot getValidity() {
@@ -72,20 +86,21 @@ public class Menu {
         this.validity = validity;
     }
 
-    public TimeSlot getDeliveryDays() {
-        return deliveryDays;
+    public DeliveryInfo getDeliveryInfo() {
+        return deliveryInfo;
     }
 
-    public void setDeliveryDays(TimeSlot deliveryDays) {
-        this.deliveryDays = deliveryDays;
+    public void addDeliveryInfo(DeliveryInfo deliveryInfo) {
+        deliveryInfo.setMenu(this);
+        this.deliveryInfo = deliveryInfo;
     }
 
-    public Integer getAverageDeliveryTime() {
-        return averageDeliveryTime;
+    public List<Offer> getOffers() {
+        return offers;
     }
 
-    public void setAverageDeliveryTime(Integer averageDeliveryTime) {
-        this.averageDeliveryTime = averageDeliveryTime;
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 
     public Integer getMaxAmountPerDay() {
@@ -96,32 +111,62 @@ public class Menu {
         this.maxAmountPerDay = maxAmountPerDay;
     }
 
-    public PriceHandler getPriceHandler() {
-        return priceHandler;
-    }
-
-    public void setPriceHandler(PriceHandler priceHandler) {
-        this.priceHandler = priceHandler;
-    }
-
     public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void addOrder(Order order) {
+        order.setMenu(this);
+        this.orders.add(order);
+    }
+
+    public Integer getCookingTime(){
+        return cookingTime;
+    }
+
+    public void setCookingTime(Integer cookingTime){
+        this.cookingTime = cookingTime;
+    }
+
+    public ServiceProfile getServiceProfile() {
+        return serviceProfile;
+    }
+
+    public void setServiceProfile(ServiceProfile serviceProfile) {
+        this.serviceProfile = serviceProfile;
     }
 
     public boolean isValid() {
         return this.validity.isValidDate(LocalDateTime.now());
     }
 
-    public Integer getCurrentPrice() {
-        return this.priceHandler.getCurrentPrice(this.getOrderCount());
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
+    public Offer getCurrentOffer() {
+        int orderCount = this.getOrderCount();
+        return this.offers.stream().filter(o -> orderCount >= o.getMinAmount()).findFirst().get();
     }
 
     private int getOrderCount() {
         return this.orders.stream().mapToInt(Order::getAmount).sum();
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public long getId() {
+        return id;
+    }
 }
