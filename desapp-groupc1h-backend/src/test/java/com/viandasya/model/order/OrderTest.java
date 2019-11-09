@@ -17,7 +17,7 @@ public class OrderTest {
     public void testGetCurrentPriceAnOrderWithOffersOfPrices100And170Returns100() {
         List<Offer> offers = Arrays.asList(new OfferBuilder().setMinAmount(0).setPrice(new BigDecimal("170")).createOffer(),
                                            new OfferBuilder().setMinAmount(30).setPrice(new BigDecimal("100")).createOffer());
-        Order order = anyOrder().setOffers(offers).createOrder();
+        Order order = anyOrder().setOffers(offers).setAmount(1).createOrder();
 
         Assert.assertEquals(new BigDecimal("100"), order.getCurrentPrice());
     }

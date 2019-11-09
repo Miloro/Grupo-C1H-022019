@@ -19,17 +19,17 @@ public class MenuController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("/service/{id}/menu")
+    @PostMapping("api/service/{id}/menu")
     public MenuDTO addMenu(@PathVariable Long id, @RequestBody MenuDTO menuDTO){
         return convertToDto(menuService.createMenu(convertToEntity(menuDTO),id));
     }
 
-    @GetMapping("/menu/{id}")
+    @GetMapping("api/menu/{id}")
     public MenuDTO getMenu(@PathVariable Long id){
         return convertToDto(menuService.getMenu(id));
     }
 
-    @PutMapping("/menu/{id}")
+    @PutMapping("api/menu/{id}")
     public MenuDTO updateMenu(@PathVariable Long id, @RequestBody MenuDTO menuDTO){
         return convertToDto(menuService.updateMenu(convertToEntity(menuDTO),id));
     }

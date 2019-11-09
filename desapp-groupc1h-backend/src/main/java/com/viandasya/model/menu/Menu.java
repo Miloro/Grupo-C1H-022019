@@ -5,7 +5,6 @@ import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ServiceProfile;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -142,10 +141,9 @@ public class Menu {
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public BigDecimal calculateCurrentPrice() {
+    public Offer getCurrentOffer() {
         int orderCount = this.getOrderCount();
-        return this.offers.stream()
-                .filter(o -> orderCount >= o.getMinAmount()).findFirst().get().getPrice();
+        return this.offers.stream().filter(o -> orderCount >= o.getMinAmount()).findFirst().get();
     }
 
     private int getOrderCount() {
