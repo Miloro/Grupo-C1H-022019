@@ -8,6 +8,9 @@ function ServiceSchema(formatMessage) {
             .min(2, formatMessage({id: 'string.min'}, {n: 2}))
             .max(30, formatMessage({id: 'string.max'}, {n: 30}))
             .required(formatMessage({id: 'required'})),
+        logo: Yup.string()
+            .url(formatMessage({id:'invalidFormat'}))
+            .required(formatMessage({id: 'required'})),
         description: Yup.string()
             .min(30, formatMessage({id: 'string.min'}, {n: 30}))
             .max(200, formatMessage({id: 'string.max'}, { n: 200}))

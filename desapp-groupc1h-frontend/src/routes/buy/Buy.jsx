@@ -18,7 +18,6 @@ class Buy extends React.Component {
         this.state = {amount: 0, delivery: false, date: "", orderTimeFrom: "00:00", orderTimeTo: "00:00"};
         this.alert = React.createRef();
 
-
     }
 
 

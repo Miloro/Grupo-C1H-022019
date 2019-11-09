@@ -19,8 +19,8 @@ function ServiceForm({userId, setService}) {
     const geocoderUrl = 'https://geocoder.api.here.com/6.2/geocode.json';
     const formLayout = {
         wrapperCol: {
-            xs: {span: 20},
-            sm: {span: 20},
+            xs: {span: 24},
+            sm: {span: 24},
         },
     };
     const inputNumberProps = {
@@ -29,6 +29,7 @@ function ServiceForm({userId, setService}) {
 
     const initialValues = {
         name: '',
+        logo: '',
         description: '',
         website: '',
         eMail: '',
@@ -69,9 +70,9 @@ function ServiceForm({userId, setService}) {
 
     function createService(values, location) {
         return {
-            id: undefined,
             serviceInfo: {
                 name: values.name,
+                logo: values.logo,
                 description: values.description,
                 website: values.website,
                 eMail: values.eMail,
@@ -87,9 +88,7 @@ function ServiceForm({userId, setService}) {
         let service;
         axios.get(geocoderUrl, createParams(values.selected.id))
             .then((response) => {
-                // noinspection JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable
                 const checkedLocation = response.data.Response.View[0].Result[0].Location;
-                // noinspection JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable
                 const location = {
                     address: values.selected.address,
                     latitude: checkedLocation.DisplayPosition.Latitude,
@@ -128,7 +127,7 @@ function ServiceForm({userId, setService}) {
                     <Title level={4} className='align-left'>
                         <FormattedMessage id="service.info"/>
                     </Title>
-                    <ServiceInfoInputs/>
+                    <ServiceInfoInputs logo={values.logo}/>
                     <Title level={4} className='padding-top-4 align-left'>
                         <FormattedMessage id="service.timetable"/>
                     </Title>
