@@ -1,6 +1,6 @@
 import React from "react";
 import {injectIntl} from "react-intl";
-import {Button, InputNumber, Col, Row, Checkbox, DatePicker, TimePicker, Alert} from "antd";
+import {Button, InputNumber, Col, Row, Checkbox, DatePicker, TimePicker} from "antd";
 import {createOrder, isNotHoliday} from "../../api.jsx";
 import moment from "moment";
 
@@ -17,7 +17,6 @@ class Buy extends React.Component {
         this.disabledDate = this.disabledDate.bind(this);
         this.state = {amount: 0, delivery: false, date: "", orderTimeFrom: "00:00", orderTimeTo: "00:00"};
         this.alert = React.createRef();
-
 
     }
 
