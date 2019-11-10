@@ -4,7 +4,7 @@ import {useIntl} from "react-intl";
 import {Avatar, Col, Row} from "antd";
 const {Item} = Form;
 
-function ServiceInfoInputs({logo}) {
+const ServiceInfoInputs = ({logo}) => {
     const {formatMessage} = useIntl();
     const inputNumberProps = {
         style: {width: '100%'}
@@ -40,6 +40,6 @@ function ServiceInfoInputs({logo}) {
             </Item>
         </div>
     );
-}
+};
 
 export default ServiceInfoInputs;

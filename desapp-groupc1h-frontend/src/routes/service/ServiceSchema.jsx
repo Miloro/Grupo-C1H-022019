@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-function ServiceSchema(formatMessage) {
+const ServiceSchema = formatMessage => {
     const regex = /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/;
 
     return Yup.object().shape({
@@ -40,7 +40,7 @@ function ServiceSchema(formatMessage) {
             .typeError(formatMessage({id:"num"}))
             .required(formatMessage({id: 'required'})),
     });
-}
+};
 
 
 export default ServiceSchema;

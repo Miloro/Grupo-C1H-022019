@@ -1,6 +1,6 @@
 import React from "react";
 import {injectIntl} from "react-intl";
-import {Button, InputNumber, Col, Row, Checkbox, DatePicker, TimePicker, Alert} from "antd";
+import {Button, InputNumber, Col, Row, Checkbox, DatePicker, TimePicker} from "antd";
 import {createOrder, isNotHoliday} from "../../api.jsx";
 import moment from "moment";
 

@@ -9,9 +9,9 @@ function ServiceShedulePicker({timetable, setFieldValue}) {
     const {formatMessage} = useIntl();
     const format = 'HH:mm';
 
-    function onChange(time, timeString, hourTime) {
+    const onChange = (time, timeString, hourTime) => {
         setFieldValue(hourTime, time);
-    }
+    };
 
     return (
         <Row gutter={[16, 16]}>
