@@ -1,20 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Layout, List, Pagination, Radio, Row} from "antd";
 import {useLocation} from "react-router-dom";
-import {useIntl} from "react-intl";
+import {FormattedMessage, useIntl} from "react-intl";
 import axios from "axios";
 import MenuItem from "./MenuItem";
-import MenuMap from "./MenuMap";
-import menu from "./mock-menu";
 
 const {Header, Content, Footer} = Layout;
 const {Group} = Radio;
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
+const useQuery = () => new URLSearchParams(useLocation().search);
 
-function Menus(props) {
+const Menus = () => {
     let query = useQuery();
     const {formatMessage} = useIntl();
 
@@ -28,9 +24,6 @@ function Menus(props) {
 
     const [results, setResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    const [selectedMenuMap, setSelectedMenuMap] = useState(menu);
-    const [isVisibleMenuMap, setIsVisibleMenuMap] = useState(false);
 
     useEffect(() => {
         const fetchMenus = async () => {
@@ -57,21 +50,12 @@ function Menus(props) {
         setPageCurrent(current);
     };
 
-    const onOpenMenuMap = (item) => {
-        setSelectedMenuMap(item);
-        setIsVisibleMenuMap(true);
-    };
-
-    const onCloseMenuMap = () => {
-      setSelectedMenuMap(menu);
-      setIsVisibleMenuMap(false);
-    };
-
     return (
         <Layout>
             <Header>
                 <Row type="flex" justify="space-around" align="middle">
                     <Col span={20}>
+                        <FormattedMessage id="orderBy"/>
                         <Group onChange={onOrderChange} name="orders" size="large" value={order}>
                             <Radio value="lowestPrice">{formatMessage({id: "lowestPrice"})}</Radio>
                             <Radio value="highestPrice">{formatMessage({id: "highestPrice"})}</Radio>
@@ -86,11 +70,10 @@ function Menus(props) {
                     itemLayout="vertical"
                     bordered={true}
                     dataSource={results}
-                    renderItem={(item) => (<MenuItem item={item} onOpenMap={onOpenMenuMap}/>)}
+                    renderItem={(item) => (<MenuItem item={item}/>)}
                     loading={isLoading}
                     style={{minHeight: "400px"}}
                 />
-                <MenuMap item={selectedMenuMap} visible={isVisibleMenuMap} onClose={onCloseMenuMap}/>
             </Content>
             <Footer>
                 <Pagination defaultPageSize={pageSize}
@@ -101,6 +84,6 @@ function Menus(props) {
         </Layout>
 
     );
-}
+};
 
 export default Menus;

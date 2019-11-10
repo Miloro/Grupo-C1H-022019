@@ -4,7 +4,6 @@ import './App.css';
 import Login from './routes/Login';
 import Home from './routes/home/Home';
 import Service from './routes/service/Service';
-import Buy from './routes/buy/Buy';
 import UnratedOrders from './routes/UnratedOrders';
 import Cart from './routes/Cart';
 import CreateMenu from './routes/CreateMenu';
@@ -16,21 +15,21 @@ import {Col, Layout, Menu, Row} from 'antd';
 import Background from "./resources/background.jpg";
 import MenuSearchInput from "./routes/menus/MenuSearchInput";
 import MenuMap from "./routes/menus/MenuMap";
+import Buy from "./routes/buy/Buy";
 const { Header, Content, Footer } = Layout;
 
 const menuProps = {
   mode: "horizontal",
-  defaultSelectedKeys: ['28'],
-  style: {lineHeight: '64px'},
+  defaultSelectedKeys: ['2'],
+  style: {lineHeight: '62px'},
 };
 
 const contentProps = {
   style: {
     backgroundImage: `url(${Background})`,
-    center : 0,
-    minHeight: '100%',
+    minHeight: '500px',
     height: '100%',
-    padding: '100px'
+    padding: '2%'
   }
 };
 
@@ -54,14 +53,19 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Layout style={{minHeight:"100vh"}}>
+        <Layout>
           <Header>
-            <Menu {...menuProps}>
-              <Menu.Item key="1">nav 1</Menu.Item>
-              <Menu.Item key="2">nav 2</Menu.Item>
-              <Menu.Item key="3">nav 3</Menu.Item>
-              <Menu.Item key="4">nav 4</Menu.Item>
-            </Menu>
+            <Row>
+              <Col span={8}>
+                <Menu {...menuProps}>
+                  <Menu.Item key="1">nav 1</Menu.Item>
+                  <Menu.Item key="2">nav 2</Menu.Item>
+                </Menu>
+              </Col>
+              <Col span={14} style={{ paddingTop: '1%' }}>
+                <MenuSearchInput/>
+              </Col>
+            </Row>
           </Header>
           <Content>
             <div {...contentProps}>
@@ -84,7 +88,7 @@ class App extends Component {
               </Row>
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center',  position: "sticky", bottom: "" }}>comidas muy ricas</Footer>
+          <Footer/>
         </Layout>
       </Router>
     );

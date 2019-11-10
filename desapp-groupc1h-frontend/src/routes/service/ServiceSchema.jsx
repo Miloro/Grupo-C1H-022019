@@ -1,12 +1,15 @@
 import * as Yup from 'yup';
 
-function ServiceSchema(formatMessage) {
+const ServiceSchema = formatMessage => {
     const regex = /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/;
 
     return Yup.object().shape({
         name: Yup.string()
             .min(2, formatMessage({id: 'string.min'}, {n: 2}))
             .max(30, formatMessage({id: 'string.max'}, {n: 30}))
+            .required(formatMessage({id: 'required'})),
+        logo: Yup.string()
+            .url(formatMessage({id:'invalidFormat'}))
             .required(formatMessage({id: 'required'})),
         description: Yup.string()
             .min(30, formatMessage({id: 'string.min'}, {n: 30}))
@@ -37,7 +40,7 @@ function ServiceSchema(formatMessage) {
             .typeError(formatMessage({id:"num"}))
             .required(formatMessage({id: 'required'})),
     });
-}
+};
 
 
 export default ServiceSchema;
