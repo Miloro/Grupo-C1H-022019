@@ -1,0 +1,50 @@
+﻿===============  RELEASE NOTES  ==================
+
+
+Viandas Ya
+Universidad De Quilmes
+Desarrollo de Aplicaciones
+
+
+Grupo H C1
+Integrantes:  Lisa Romero - Miguel Miloro
+
+
+---------------------------------------------------------------------
+TAG ENTREGA 2.0
+---------------------------------------------------------------------
+NEW FEATURES:
+
+
+BACKEND
+* Menu search and paging Strategy implemented.
+* Hibernate Mappings: Service Profile, Client Profile, Location, Menu, Order, Timetable, and more. 
+* Repositories: Menu, Service Profile, Order.
+* Services: Menu , Service Profile, Order, MailSender.
+* Creation of Service implemented.
+* Fake Data to test the application.
+* CRUD operations with Menu.
+
+
+FRONTEND:
+* i18n implemented.
+* Home Page
+* Search Menus Page
+* Create Service Page
+* Buy page
+
+
+NOTES:
+* Deposit or withdraw money
+* Validation time order (from < to)
+* Holidays not allowed (can be connected to the api holidays but not validated in the front)
+* User can’t create service with logo
+* Server errors handling in frontend not implemented yet.
+* Validation in backend not implemented yet.
+* CRUD operations with Service not implemented yet.
+
+
+
+
+KNOWN ISSUES:
+* Search by category not working

@@ -20,7 +20,7 @@
   "name": "Name",
   "description": "Description*",
   "website": "Website",
-  "phoneNumber": "Area code|Phone Number*",
+  "phoneNumber": "Area code | Phone Number*",
   "monday": "Monday",
   "tuesday": "Tuesday",
   "wednesday": "Wednesday",

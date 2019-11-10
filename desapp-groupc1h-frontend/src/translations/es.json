@@ -18,7 +18,7 @@
   "name": "Nombre",
   "description": "Descripción*",
   "website": "Pagina web",
-  "phoneNumber": "Codigo de area|Numero de telefono*",
+  "phoneNumber": "Codigo de area | Numero de telefono*",
   "monday": "Lunes",
   "tuesday": "Martes",
   "wednesday": "Miércoles",

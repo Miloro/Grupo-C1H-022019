@@ -6,7 +6,7 @@ const InputGroup = Input.Group;
 const {Search} = Input;
 const {Option} = Select;
 
-function MenuSearchInput() {
+const MenuSearchInput = () => {
     const {formatMessage} = useIntl();
     const [selection, setSelection] = useState('city');
     const widthStyleProp = (w) => ({style: {width: w}});
@@ -26,7 +26,7 @@ function MenuSearchInput() {
     return (
         <InputGroup compact size="large">
             <Select defaultValue="city" onSelect={onSelect} {...widthStyleProp('15%')}>
-                {["city", "name", "category"].map((s) => (
+                {["city", "name"].map((s) => (
                     <Option key={s} value={s}>
                         <FormattedMessage id={s}/>
                     </Option>
@@ -41,6 +41,6 @@ function MenuSearchInput() {
             />
         </InputGroup>
     );
-}
+};
 
 export default MenuSearchInput;

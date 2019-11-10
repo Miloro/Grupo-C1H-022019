@@ -1,11 +1,12 @@
 import React from 'react';
 import {Avatar, Button, List, Popover, Rate, Statistic, Table, Tag, Typography} from "antd";
 import {useIntl} from "react-intl";
+import MenuMap from "./MenuMap";
 const {Text, Paragraph} = Typography;
 const {Item} = List;
 const {Column} = Table;
 
-function MenuItem({item, onOpenMap}) {
+function MenuItem({item}) {
     const {formatMessage} = useIntl();
 
     function CategoryTags({categories}) {
@@ -58,8 +59,7 @@ function MenuItem({item, onOpenMap}) {
             actions={[
                 <Rate disabled defaultValue={item.score} style={{marginRight: 6}}/>,
                 <CategoryTags categories={item.categories}/>,
-                <Button size="large"  style={{marginLeft: 15}} onClick={() => onOpenMap(item)}>
-                    {formatMessage({id: "location"})}</Button>,
+                <MenuMap item={item}/>,
                 <Button size="large" type="danger">{formatMessage({id: "buy"})}</Button>,
             ]}
             extra={
