@@ -12,3 +12,6 @@ Aplicación de la materia Desarrollo de Aplicaciones de la UNQ por el Grupo H de
 
 ***Frontend***:
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://viandasya-grupoc1h.herokuapp.com/)
+
+## Metodologia
+Para hacer la aplicación seguimos la metodología ágil, utilizando una tabla de Trello, [link aquí](https://trello.com/b/ONZqxv4Q/viandasya).
