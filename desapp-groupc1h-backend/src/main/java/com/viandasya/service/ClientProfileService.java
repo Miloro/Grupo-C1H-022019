@@ -15,8 +15,14 @@ public class ClientProfileService {
     }
 
     @Transactional
-    public ClientProfile createClientProfile(ClientProfile clientProfile){
+    public ClientProfile create(ClientProfile clientProfile){
         return clientProfileRepository.save(clientProfile);
 
     }
+
+    @Transactional
+    public Iterable<ClientProfile> findAll() {
+        return clientProfileRepository.findAll();
+    }
+
 }
