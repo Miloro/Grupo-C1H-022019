@@ -1,5 +1,6 @@
 package com.viandasya.webservice;
 
+import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.service.ServiceProfileService;
 import com.viandasya.webservice.dtos.ServiceProfileDTO;
@@ -23,6 +24,16 @@ public class UserController {
     public long createService(@PathVariable Long userId, @RequestBody ServiceProfileDTO serviceProfileDTO) {
         ServiceProfile serviceProfile = convertToEntity(serviceProfileDTO);
         return serviceProfileService.createServiceProfile(userId, serviceProfile);
+    }
+
+    @PutMapping("/{userId}/service")
+    public Balance withdraw(@PathVariable Long userId, @RequestBody Balance amount){
+        return serviceProfileService.withdraw(userId,amount);
+    }
+
+    @PutMapping("/{userId}")
+    public Balance deposit(@PathVariable Long userId, @RequestBody Balance amount){
+        return serviceProfileService.deposit(userId,amount);
     }
 
     private ServiceProfile convertToEntity(@RequestBody ServiceProfileDTO serviceProfileDTO) {
