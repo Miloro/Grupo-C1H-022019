@@ -19,19 +19,25 @@ public class MenuController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("api/service/{id}/menu")
+    @PostMapping("service/{id}/menu")
     public MenuDTO addMenu(@PathVariable Long id, @RequestBody MenuDTO menuDTO){
         return convertToDto(menuService.createMenu(convertToEntity(menuDTO),id));
     }
 
-    @GetMapping("api/menu/{id}")
+    @GetMapping("menu/{id}")
     public MenuDTO getMenu(@PathVariable Long id){
         return convertToDto(menuService.getMenu(id));
     }
 
-    @PutMapping("api/menu/{id}")
+    @PutMapping("menu/{id}")
     public MenuDTO updateMenu(@PathVariable Long id, @RequestBody MenuDTO menuDTO){
         return convertToDto(menuService.updateMenu(convertToEntity(menuDTO),id));
+    }
+
+    @PostMapping("menus/search")
+    public Page<MenuPreviewDTO> search(@RequestBody SearchDTO searchDTO){
+        Page<Menu> pagedMenus = menuService.search(searchDTO);
+        return pagedMenus.map(menu -> modelMapper.map(menu, MenuPreviewDTO.class));
     }
 
     private MenuDTO convertToDto(Menu menu) {
@@ -44,12 +50,6 @@ public class MenuController {
         Menu menu = modelMapper.map(menuDTO, Menu.class);
         menu.addDeliveryInfo(menuDTO.getDeliveryInfoConverted());
         return menu;
-    }
-
-    @PostMapping("api/menus/search")
-    public Page<MenuPreviewDTO> search(@RequestBody SearchDTO searchDTO){
-        Page<Menu> pagedMenus = menuService.search(searchDTO);
-        return pagedMenus.map(menu -> modelMapper.map(menu, MenuPreviewDTO.class));
     }
 
 }
