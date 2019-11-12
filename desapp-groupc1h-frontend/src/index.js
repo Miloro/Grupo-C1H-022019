@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker'
-import { IntlProvider } from 'react-intl'
+import * as serviceWorker from './serviceWorker';
+import { IntlProvider } from 'react-intl';
+import {BrowserRouter as Router, Route} from "react-router-dom";
 
-import messagesEn from './translations/en.json'
-import messagesEs from './translations/es.json'
+import messagesEn from './translations/en.json';
+import messagesEs from './translations/es.json';
+import App from "./App";
 
 const messages = {
   'en': messagesEn,
@@ -17,7 +18,9 @@ const language = navigator.language.split(/[-_]/)[0]; // language without region
 
 ReactDOM.render(
   <IntlProvider locale={language} messages={messages[language]}>
-    <App />
+      <Router>
+          <Route exact path="/" component={App}/>
+      </Router>
   </IntlProvider>
   , document.getElementById('root'));
 

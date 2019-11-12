@@ -1,57 +1,33 @@
-import React from 'react'
-import { injectIntl} from 'react-intl'
-
-import FacebookLogin from 'react-facebook-login';
+import React from 'react';
 import GoogleLogin from 'react-google-login';
+import {Icon, Result} from 'antd';
 
-class LogIn  extends React.Component{
+const styleProps = {
+    style: {
+        fontSize: 50,
+        color: '#ffffff'
+    }
+};
 
-    render(){
-        const intl = this.props.intl;
-        const greet = intl.formatMessage({
-          id: 'Greet',
-          defaultMessage: 'welcome'
-        });
-        const loginMessage = intl.formatMessage({
-            id: 'LoginMessage',
-            defaultMessage: 'LOGIN WITH FACEBOOK OR GOOGLE'
-          });
+function Login() {
 
-        const responseFacebook = (response) => {
-            console.log(response);
-          };
-      
-        const responseGoogle = (response) => {
-          console.log(response);
-        };
+    const responseGoogle = (response) => {
+        console.log(response);
+    };
 
-        return(
-            <div className= "App" >
-                
-                <h1>{greet}</h1>
-
-                <h1>{loginMessage}</h1>
-
-                <FacebookLogin
-                appId="" //APP ID NOT CREATED YET
-                fields="name,email,picture"
-                callback={responseFacebook}
-                />
-                <br />
-                <br />
-                <GoogleLogin
-                clientId="913660069829-879slc80rd35np4hj0bj4596bf0k4iim.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
+    return (
+        <Result
+            icon={ <Icon type="home"  {...styleProps}/>}
+            title={<div {...styleProps}> Bienvenido! </div>}
+            extra={<GoogleLogin
+                clientId={process.env.REACT_APP_GOOGLE_API_CLIENT_ID}
                 buttonText="LOGIN WITH GOOGLE"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
-                />
-            </div>
-        )
-    }
+            />}
+        />
+    );
 
-                    
 }
-             
-LogIn = injectIntl(LogIn);
 
-export default LogIn;
+export default Login;
