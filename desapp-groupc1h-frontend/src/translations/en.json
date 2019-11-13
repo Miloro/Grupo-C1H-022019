@@ -50,5 +50,7 @@
   "ServiceOrders" : "service orders",
   "home" : "home",
   "Orders" : "orders",
-  "Required" : "required"
+  "Required" : "required",
+  "withdraw" : "Withdraw",
+  "deposit" : "Deposit"
 }

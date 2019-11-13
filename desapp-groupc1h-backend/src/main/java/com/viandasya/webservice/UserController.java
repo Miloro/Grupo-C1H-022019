@@ -31,7 +31,7 @@ public class UserController {
         return serviceProfileService.withdraw(userId,amount);
     }
 
-    @PutMapping("/{userId}")
+    @PutMapping("/{userId}/client")
     public Balance deposit(@PathVariable Long userId, @RequestBody Balance amount){
         return serviceProfileService.deposit(userId,amount);
     }

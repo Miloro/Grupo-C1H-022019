@@ -15,7 +15,7 @@ export function createOrder(object){
                     "to": object.date+ "T" + object.orderTimeTo
                     }
     };
-    return axios.post("api/menu/13/client/22/order",body).then(
+    return axios.post("api/menu/404/client/400/order",body).then(
         (res) => {
             if (res.status === 200){
                 console.log(res);
@@ -36,4 +36,36 @@ export function isNotHoliday(day, month, year){
         .catch((error) => {
             console.log(error);
         });
+}
+
+export function deposit(userId, amount){
+    const body = {
+        "amount" : amount
+    };
+    const res = axios.put("/api/user/"+userId+"/client", body).then(
+        res =>{
+            if (res.status ===200){
+                return res;
+            }
+        }
+    ).catch((error) => {
+        return error;
+    });
+    return res;
+}
+
+export function withdraw(userId, amount){
+    const body = {
+        "amount" : amount
+    };
+    const res = axios.put("/api/user/"+userId+"/service", body).then(
+        res =>{
+            if (res.status ===200){
+                return res;
+            }
+        }
+    ).catch((error) => {
+        return error;
+    });
+    return res;
 }

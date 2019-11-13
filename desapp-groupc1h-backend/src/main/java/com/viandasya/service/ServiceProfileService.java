@@ -34,10 +34,11 @@ public class ServiceProfileService {
         return user.getServiceProfile().getBalance();
     }
 
+    @Transactional
     public Balance deposit(Long userId, Balance amount) {
         User user = userRepository.findById(userId).get();
         user.getClientProfile().getBalance().deposit(amount.getAmount());
         userRepository.save(user);
-        return user.getServiceProfile().getBalance();
+        return user.getClientProfile().getBalance();
     }
 }
