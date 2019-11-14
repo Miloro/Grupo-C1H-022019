@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { IntlProvider } from 'react-intl';
-import {BrowserRouter as Router, Route} from "react-router-dom";
-
 import messagesEn from './translations/en.json';
 import messagesEs from './translations/es.json';
 import App from "./App";
@@ -18,9 +16,7 @@ const language = navigator.language.split(/[-_]/)[0]; // language without region
 
 ReactDOM.render(
   <IntlProvider locale={language} messages={messages[language]}>
-      <Router>
-          <Route exact path="/" component={App}/>
-      </Router>
+      <App/>
   </IntlProvider>
   , document.getElementById('root'));
 

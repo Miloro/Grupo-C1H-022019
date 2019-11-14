@@ -1,9 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import Login from "./routes/Login";
-import Home from "./routes/home/Home";
 import Background from "./resources/background.jpg";
 import {Col, Layout, Menu, Row, Typography} from "antd";
+import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
+import MenuMap from "./routes/menus/MenuMap";
+import Buy from "./routes/buy/Buy";
+import UnratedOrders from "./routes/UnratedOrders";
+import Cart from "./routes/Cart";
+import Orders from "./routes/Ordes";
+import CreateMenu from "./routes/CreateMenu";
+import Service from "./routes/service/Service";
+import Menus from "./routes/menus/Menus";
+import ServiceOrders from "./routes/ServiceOrders";
 const { Header, Content, Footer } = Layout;
 const {Title} = Typography;
 
@@ -38,25 +47,16 @@ const colProps = {
 
 const logoProps= {
     style:{
-        fontFamily: "Arial, Helvetica, sans-serif" ,
+        fontFamily: "Arial, Helvetica, sans-serif",
         marginTop: 5,
         fontColor: "#FF8C00"
     }
 };
 
 function App() {
-    const [userId, setUserId] = useState(1);
-
-    const CurrentPage = () => {
-        if (userId) {
-            return <Home/>
-        }
-        else {
-            return <Login/>
-        }
-    };
 
     return (
+        <Router>
         <Layout>
             <Header>
                 <Row>
@@ -77,7 +77,18 @@ function App() {
                 <div {...contentProps}>
                     <Row {...rowProps}>
                         <Col {...colProps}>
-                            <CurrentPage/>
+                            <Switch>
+                                <Route path="/map" component={MenuMap}/>
+                                <Route path="/buy" component={Buy}/>
+                                <Route path="/unrated-orderds" component={UnratedOrders}/>
+                                <Route path="/cart" component={Cart}/>
+                                <Route path="/orders" component={Orders}/>
+                                <Route path="/service/create-menu" component={CreateMenu}/>
+                                <Route path="/service" component={Service}/>
+                                <Route path="/menus/:query" component={Menus}/>
+                                <Route path="/service/orders" component={ServiceOrders}/>
+                                <Route exact path="/" component={Login}/>
+                            </Switch>
                         </Col>
                     </Row>
                     <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by
@@ -86,6 +97,7 @@ function App() {
             </Content>
             <Footer/>
         </Layout>
+        </Router>
     );
 
 }

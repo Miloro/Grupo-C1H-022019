@@ -21,8 +21,6 @@
     "react": "^16.9.0",
     "react-app-rewired": "^2.1.4",
     "react-dom": "^16.9.0",
-    "react-facebook-login": "latest",
-    "react-google-login": "latest",
     "react-iframe": "^1.8.0",
     "react-intl": "^3.4.0",
     "react-router-dom": "^5.1.2",
