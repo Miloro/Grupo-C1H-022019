@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Login from "./routes/Login";
 import Background from "./resources/background.jpg";
-import {Col, Layout, Menu, Row, Typography} from "antd";
+import {Col, Layout, Menu, Row, Spin, Typography} from "antd";
 import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
 import MenuMap from "./routes/menus/MenuMap";
 import Buy from "./routes/buy/Buy";
@@ -13,6 +13,8 @@ import CreateMenu from "./routes/CreateMenu";
 import Service from "./routes/service/Service";
 import Menus from "./routes/menus/Menus";
 import ServiceOrders from "./routes/ServiceOrders";
+import {useAuth0} from "./react-auth0-spa";
+import Home from "./routes/home/Home";
 const { Header, Content, Footer } = Layout;
 const {Title} = Typography;
 
@@ -54,6 +56,28 @@ const logoProps= {
 };
 
 function App() {
+    const { isAuthenticated, loading} = useAuth0();
+
+    const ShowIfNotLoading = () => {
+        if (loading) {
+            return <Spin size="large" spinning={loading}/>
+        } else {
+            return <Switch>
+                <Route path="/map" component={MenuMap}/>
+                <Route path="/buy" component={Buy}/>
+                <Route path="/unrated-orderds" component={UnratedOrders}/>
+                <Route path="/cart" component={Cart}/>
+                <Route path="/orders" component={Orders}/>
+                <Route path="/service/create-menu" component={CreateMenu}/>
+                <Route path="/service" component={Service}/>
+                <Route path="/menus/:query" component={Menus}/>
+                <Route path="/service/orders" component={ServiceOrders}/>
+                <Route exact path="/">
+                    {isAuthenticated ? <Home/> : <Login/> }
+                </Route>
+            </Switch>
+        }
+    };
 
     return (
         <Router>
@@ -77,18 +101,7 @@ function App() {
                 <div {...contentProps}>
                     <Row {...rowProps}>
                         <Col {...colProps}>
-                            <Switch>
-                                <Route path="/map" component={MenuMap}/>
-                                <Route path="/buy" component={Buy}/>
-                                <Route path="/unrated-orderds" component={UnratedOrders}/>
-                                <Route path="/cart" component={Cart}/>
-                                <Route path="/orders" component={Orders}/>
-                                <Route path="/service/create-menu" component={CreateMenu}/>
-                                <Route path="/service" component={Service}/>
-                                <Route path="/menus/:query" component={Menus}/>
-                                <Route path="/service/orders" component={ServiceOrders}/>
-                                <Route exact path="/" component={Login}/>
-                            </Switch>
+                            <ShowIfNotLoading/>
                         </Col>
                     </Row>
                     <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by
