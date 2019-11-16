@@ -54,7 +54,7 @@ public class DayTimeSlotDTO {
         this.checked = checked;
     }
 
-    public DayTimeSlot getDayTimeSlotDTOConverted() {
+    public DayTimeSlot convertDayTimeSlotDTO() {
         List<HoursTimeSlot> hoursTimeSlots = new ArrayList<>();
         hoursTimeSlots.add(new HoursTimeSlot(this.from, this.to));
         return new DayTimeSlot(this.day, hoursTimeSlots);

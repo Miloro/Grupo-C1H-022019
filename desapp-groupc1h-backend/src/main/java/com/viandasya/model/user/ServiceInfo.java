@@ -1,12 +1,16 @@
 package com.viandasya.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 public class ServiceInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private long id;
+
     private String name;
     private String logo;
     private String description;
@@ -15,6 +19,7 @@ public class ServiceInfo {
     private Integer phoneNumber;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private ServiceProfile serviceProfile;
 
     public ServiceInfo(String name, String logo, String description, String website, String eMail, Integer phoneNumber) {
