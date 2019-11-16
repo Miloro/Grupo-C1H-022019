@@ -1,28 +1,23 @@
 import React from 'react';
-import './App.css';
-import Login from "./routes/Login";
-import Background from "./resources/background.jpg";
-import {Col, Layout, Menu, Row, Spin, Typography} from "antd";
+import '../App.css';
+import Background from "../resources/background.jpg";
+import {Col, Layout, Row, Spin} from "antd";
 import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
-import MenuMap from "./routes/menus/MenuMap";
-import Buy from "./routes/buy/Buy";
-import UnratedOrders from "./routes/UnratedOrders";
-import Cart from "./routes/Cart";
-import Orders from "./routes/Ordes";
-import CreateMenu from "./routes/CreateMenu";
-import Service from "./routes/service/Service";
-import Menus from "./routes/menus/Menus";
-import ServiceOrders from "./routes/ServiceOrders";
-import {useAuth0} from "./react-auth0-spa";
-import Home from "./routes/home/Home";
+import NavBar from "./NavBar";
+import {useAuth0} from "../security/Auth0Provider";
+import Buy from "../routes/buy/Buy";
+import UnratedOrders from "../routes/UnratedOrders";
+import Cart from "../routes/Cart";
+import Orders from "../routes/Ordes";
+import CreateMenu from "../routes/CreateMenu";
+import Service from "../routes/service/Service";
+import Menus from "../routes/menus/Menus";
+import ServiceOrders from "../routes/ServiceOrders";
+import Profile from "../routes/Client/Profile";
+import Client from "../routes/Client/Client";
+import Login from "../routes/Login";
+import PrivateRoute from "../security/PrivateRoute";
 const { Header, Content, Footer } = Layout;
-const {Title} = Typography;
-
-const menuProps = {
-  mode: "horizontal",
-  defaultSelectedKeys: ['2'],
-  style: {lineHeight: '62px'},
-};
 
 const contentProps = {
     style: {
@@ -47,13 +42,6 @@ const colProps = {
     }
 };
 
-const logoProps= {
-    style:{
-        fontFamily: "Arial, Helvetica, sans-serif",
-        marginTop: 5,
-        fontColor: "#FF8C00"
-    }
-};
 
 function App() {
     const { isAuthenticated, loading} = useAuth0();
@@ -63,7 +51,6 @@ function App() {
             return <Spin size="large" spinning={loading}/>
         } else {
             return <Switch>
-                <Route path="/map" component={MenuMap}/>
                 <Route path="/buy" component={Buy}/>
                 <Route path="/unrated-orderds" component={UnratedOrders}/>
                 <Route path="/cart" component={Cart}/>
@@ -72,8 +59,9 @@ function App() {
                 <Route path="/service" component={Service}/>
                 <Route path="/menus/:query" component={Menus}/>
                 <Route path="/service/orders" component={ServiceOrders}/>
+                <PrivateRoute path="/profile" component={Profile}/>
                 <Route exact path="/">
-                    {isAuthenticated ? <Home/> : <Login/> }
+                    {isAuthenticated ? <Client/> : <Login/> }
                 </Route>
             </Switch>
         }
@@ -83,19 +71,7 @@ function App() {
         <Router>
         <Layout>
             <Header>
-                <Row>
-                    <Col span={6}>
-                        <div {...logoProps}>
-                            <Title > Viandas Ya</Title>
-                        </div>
-                    </Col>
-                    <Col span={8}>
-                        <Menu {...menuProps}>
-                            <Menu.Item key="1">nav 1</Menu.Item>
-                            <Menu.Item key="2">nav 2</Menu.Item>
-                        </Menu>
-                    </Col>
-                </Row>
+                <NavBar/>
             </Header>
             <Content>
                 <div {...contentProps}>
