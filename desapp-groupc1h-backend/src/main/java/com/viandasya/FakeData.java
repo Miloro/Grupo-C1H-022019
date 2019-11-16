@@ -101,9 +101,8 @@ public class FakeData implements ApplicationRunner {
         ClientProfile clientProfile1 = anyClientProfile()
                 .setName("Lisa")
                 .setLastName("Romero")
-                .setAdress("9 De Julio 500")
-                .setCity("Quilmes")
                 .setEmail("lisar.3467@gmail.com")
+                .setLocation(new Location("Condarco 430", "Wilde", -34.7048199, -58.3264779))
                 .setBalance(new Balance(new BigDecimal("2000")))
                 .createClientProfile();
 
@@ -175,9 +174,9 @@ public class FakeData implements ApplicationRunner {
         ClientProfile clientProfilea = anyClientProfile()
                 .setName("Miguel")
                 .setLastName("Miloro")
-                .setAdress("Av. La Madrid 2900")
-                .setCity("Quilmes")
                 .setEmail("miloromiguel@gmail.com")
+                .setLocation(new Location("Uruguay 2200", "Ezpeleta Oeste",
+                        -34.7597263, -58.2642824))
                 .setBalance(new Balance(new BigDecimal("500")))
                 .createClientProfile();
 
