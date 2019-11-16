@@ -1,5 +1,5 @@
-import React from 'react'
-import { injectIntl} from 'react-intl'
+import React from "react";
+import { injectIntl} from "react-intl";
 import {Button, Col, InputNumber, Row} from "antd";
 import {deposit, withdraw} from "../api.jsx";
 
@@ -16,12 +16,12 @@ class Balance  extends React.Component{
     render(){
         const intl = this.props.intl;
         const withdraw = intl.formatMessage({
-            id: 'withdraw',
-            defaultMessage: 'withdraw'
+            id: "withdraw",
+            defaultMessage: "withdraw"
         });
         const deposit = intl.formatMessage({
-            id: 'deposit',
-            defaultMessage: 'deposit'
+            id: "deposit",
+            defaultMessage: "deposit"
         });
         return(
             <div className= "App" >
@@ -47,15 +47,15 @@ class Balance  extends React.Component{
                 </Row>
                 <Button variant="primary" onClick={() => this.sendNewBalance()}>aceptar</Button>
             </div>
-        )
+        );
     }
 
     onChangeInputNumberDeposit(amountToDeposit) {
-        this.setState({...this.state, amountToDeposit: amountToDeposit});
+        this.setState({...this.state, amountToDeposit : amountToDeposit});
     }
 
     onChangeInputNumberWithdraw(amountToWithdraw) {
-        this.setState({...this.state, amountToWithdraw: amountToWithdraw});
+        this.setState({...this.state, amountToWithdraw : amountToWithdraw});
     }
 
     sendNewBalance() {

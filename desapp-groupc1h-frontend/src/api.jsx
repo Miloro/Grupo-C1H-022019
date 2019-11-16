@@ -42,7 +42,7 @@ export function deposit(userId, amount){
     const body = {
         "amount" : amount
     };
-    const res = axios.put("/api/user/"+userId+"/client", body).then(
+    return axios.put("/api/user/"+userId+"/client", body).then(
         res =>{
             if (res.status ===200){
                 return res;
@@ -51,15 +51,15 @@ export function deposit(userId, amount){
     ).catch((error) => {
         return error;
     });
-    return res;
+
 }
 
 export function withdraw(userId, amount){
     const body = {
         "amount" : amount
     };
-    const res = axios.put("/api/user/"+userId+"/service", body).then(
-        res =>{
+    return axios.put("/api/user/"+userId+"/service", body).then(
+        res => {
             if (res.status ===200){
                 return res;
             }
@@ -67,5 +67,4 @@ export function withdraw(userId, amount){
     ).catch((error) => {
         return error;
     });
-    return res;
 }
