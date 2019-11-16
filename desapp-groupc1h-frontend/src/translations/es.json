@@ -49,5 +49,7 @@
   "ServiceOrders" : "ordenes del servicio",
   "Home": "pagina principal",
   "Orders" : "ordenes",
-   "Required" : "requerido"
+   "Required" : "requerido",
+  "withdraw" : "Retirar",
+  "deposit" : "Depositar"
 }

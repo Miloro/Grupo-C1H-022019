@@ -12,6 +12,7 @@ import com.viandasya.model.timeslot.HoursTimeSlot;
 import com.viandasya.model.timeslot.TimeTable;
 import com.viandasya.model.user.*;
 import com.viandasya.persistence.MenuRepository;
+import com.viandasya.persistence.ServiceProfileRepository;
 import com.viandasya.persistence.UserRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -39,10 +40,12 @@ import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyService
 public class FakeData implements ApplicationRunner {
     private final UserRepository userRepository;
     private final MenuRepository menuRepository;
+    private final ServiceProfileRepository serviceProfileRepository;
 
-    public FakeData(UserRepository userRepository, MenuRepository menuRepository) {
+    public FakeData(UserRepository userRepository, MenuRepository menuRepository, ServiceProfileRepository serviceProfileRepository) {
         this.userRepository = userRepository;
         this.menuRepository = menuRepository;
+        this.serviceProfileRepository = serviceProfileRepository;
     }
 
     @Override
@@ -266,6 +269,9 @@ public class FakeData implements ApplicationRunner {
 
         new ArrayList<>(Arrays.asList(order1, order2, order3)).forEach(menuGreen::addOrder);
         new ArrayList<>(Arrays.asList(ordera, orderb, orderc)).forEach(menuPizza::addOrder);
+
+        serviceProfileRepository.save(serviceProfilea);
+        serviceProfileRepository.save(serviceProfile1);
 
         menuRepository.save(menuGreen);
         menuRepository.save(menuPizza);

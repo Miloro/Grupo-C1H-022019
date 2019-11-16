@@ -16,6 +16,7 @@ import Background from "./resources/background.jpg";
 import MenuSearchInput from "./routes/menus/MenuSearchInput";
 import MenuMap from "./routes/menus/MenuMap";
 import Buy from "./routes/buy/Buy";
+import Balance from "./routes/Balance"
 const { Header, Content, Footer } = Layout;
 
 const menuProps = {
@@ -83,6 +84,7 @@ class App extends Component {
                       <Route exact path="/menus/:query" component={Menus}/>
                       <Route exact path="/service/orders" component={ServiceOrders}/>
                       <Route exact path="/" component={Home}/>
+                      <Route exacr path="/balance" component = {Balance}/>
                     </Switch>
                   </Col>
               </Row>
