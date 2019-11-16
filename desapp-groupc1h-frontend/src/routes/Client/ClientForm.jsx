@@ -1,9 +1,12 @@
 import React from 'react';
 import {Formik} from "formik";
 import {Col, Row, Typography} from "antd";
-import {Form, Input, InputNumber} from "formik-antd";
+import {Form, Input, InputNumber, SubmitButton} from "formik-antd";
 import {FormattedMessage, useIntl} from "react-intl";
 import ClientSchema from "./ClientSchema";
+import AddressSearcher from "../service/serviceForm/AddressSearcher";
+import {useAuth0} from "../../security/Auth0Provider";
+import {post} from "../../api/API";
 const {Title} = Typography;
 const {Item} = Form;
 
@@ -18,20 +21,27 @@ const inputNumberProps = {
     style: {width: '100%'}
 };
 
-const ClientForm = props => {
+const ClientForm = () => {
     const {formatMessage} = useIntl();
+    const {getTokenSilently} = useAuth0();
+
     const initialValues = {
         name: "",
         lastName: "",
         email: "",
-        phoneNumber: null,
+        phoneNumber: undefined,
         query: "",
-        selected: {id: "", address: ""},
+        selected: {id: undefined, address: undefined},
+        location: undefined,
         suggestions: [],
     };
 
-    const onSubmit = () => {
-
+    const onSubmit = (values) => {
+        const {query, selected, suggestions, ...client} = values;
+        console.log(client);
+        // post(getTokenSilently, "/api/client", client, (response) => {
+        //     console.log(response.data);
+        // });
     };
 
     return (
@@ -61,6 +71,16 @@ const ClientForm = props => {
                             <Item name="phoneNumber">
                                 <InputNumber type="number" name="phoneNumber" {...inputNumberProps}
                                              placeholder={formatMessage({id:"phoneNumber"})}/>
+                            </Item>
+                            <Title level={4} className='padding-top-4 align-left'>
+                                <FormattedMessage id="location"/>*
+                            </Title>
+                            <AddressSearcher selected ={values.selected} suggestions={values.suggestions}
+                                             setFieldValue={setFieldValue}/>
+                            <Item name="SubmitButton">
+                                <SubmitButton size="large" >
+                                    <FormattedMessage id="create"/>
+                                </SubmitButton>
                             </Item>
                         </Form>
                     </Col>

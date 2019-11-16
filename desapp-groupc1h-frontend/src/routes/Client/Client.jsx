@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useAuth0} from "../../security/Auth0Provider";
-import {Button, Icon, Result} from "antd";
+import {Button, Col, Icon, Result, Row} from "antd";
 import {get} from "../../api/API";
 import ClientForm from "./ClientForm";
 
@@ -24,7 +24,11 @@ const Client = () => {
     });
 
     if (!clientId) {
-        return <ClientForm/>;
+        return <Row type="flex" justify="space-around" align="middle">
+            <Col span={20} style={{backgroundColor: "#ffffff"}}>
+                <ClientForm/>
+            </Col>
+        </Row>
     }
 
     return <Result

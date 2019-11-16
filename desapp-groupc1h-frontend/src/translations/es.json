@@ -15,6 +15,8 @@
   "service.info":"Información del Servicio*",
   "service.timetable": "Horarios y días de atención*",
   "location": "Ubicación",
+  "verified": "Verificar",
+  "location.verified": "La ubicación ha sido verificada correctamente!",
   "service.deliveryDistance": "Distancia maxima para hacer un pedido en Kms*",
   "create": "Crear",
   "name": "Nombre",

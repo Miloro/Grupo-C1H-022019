@@ -17,6 +17,8 @@
   "service.info":"Service Information*",
   "service.timetable": "Schedule*",
   "location": "Location",
+  "verified": "Verify",
+  "location.verified": "The location has been successfully verified!",
   "service.deliveryDistance": "Maximum distance to make a delivery in Kms*",
   "create": "Create",
   "name": "Name",

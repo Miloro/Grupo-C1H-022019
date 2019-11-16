@@ -12,7 +12,7 @@ const ClientSchema = formatMessage => {
             .min(2, formatMessage({id: 'string.min'}, {n: 2}))
             .max(30, formatMessage({id: 'string.max'}, {n: 30}))
             .required(formatMessage({id: 'required'})),
-        eMail: Yup.string()
+        email: Yup.string()
             .email(formatMessage({id: 'invalidFormat'}))
             .required(formatMessage({id: 'required'})),
         phoneNumber: Yup.number()
@@ -28,7 +28,9 @@ const ClientSchema = formatMessage => {
                 .required(),
             address: Yup.string()
                 .required(formatMessage({id: 'required'}))
-        })
+        }),
+        location: Yup.object()
+            .required("formatMessage({id: 'required'})")
     })
 
 };

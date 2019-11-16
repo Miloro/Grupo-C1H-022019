@@ -1,19 +1,26 @@
 import axios from "axios";
 
-const axiosRequest = async (axiosRequest, getTokenSilently, manageResponse) => {
+const axiosRequest = async (customAxios, url, data, getTokenSilently, then) => {
     const token = await getTokenSilently();
     try {
-        const response = await axiosRequest("/api/private", {
+        const response = await customAxios(url, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
+            },
+            ...data
         });
-        manageResponse(response);
+        then(response);
     } catch (error) {
         console.error(error);
     }
 };
 
-export function get(getTokenSilently, manageResponse) {return axiosRequest(axios.get, getTokenSilently, manageResponse)}
-export function post(getTokenSilently, manageResponse) {return axiosRequest(axios.post, getTokenSilently, manageResponse)}
-export function put(getTokenSilently, manageResponse) {return axiosRequest(axios.put, getTokenSilently, manageResponse)}
+export function get(getTokenSilently, url, then) {
+    return axiosRequest(axios.get, url, {}, getTokenSilently, then)
+}
+export function post(getTokenSilently, url, data, then) {
+    return axiosRequest(axios.post, url,{data: {...data}}, getTokenSilently, then)
+}
+export function put(getTokenSilently, url, data, then) {
+    return axiosRequest(axios.post, url,{data: {...data}}, getTokenSilently, then)
+}
