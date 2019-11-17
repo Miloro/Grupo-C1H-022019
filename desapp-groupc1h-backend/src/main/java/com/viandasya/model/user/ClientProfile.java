@@ -15,7 +15,7 @@ public class ClientProfile {
     private Location location;
     private Balance balance = new Balance(new BigDecimal("0"));
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "clientProfile", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private User user;
 
     public ClientProfile(String name, String lastName, String email, Integer phoneNumber, Location location, Balance balance) {
@@ -84,5 +84,9 @@ public class ClientProfile {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public long getId() {
+        return id;
     }
 }

@@ -13,7 +13,7 @@ import CreateMenu from "../routes/CreateMenu";
 import Service from "../routes/service/Service";
 import Menus from "../routes/menus/Menus";
 import ServiceOrders from "../routes/ServiceOrders";
-import Client from "../routes/Client/Client";
+import Client from "../routes/client/Client";
 import Login from "../routes/Login";
 
 const {Header, Content, Footer} = Layout;

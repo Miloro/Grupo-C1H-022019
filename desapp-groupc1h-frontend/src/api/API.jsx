@@ -1,26 +1,28 @@
 import axios from "axios";
 
-const axiosRequest = async (customAxios, url, data, getTokenSilently, then) => {
-    const token = await getTokenSilently();
+const axiosRequest = async (method, url, data, getTokenSilently, then) => {
     try {
-        const response = await customAxios(url, {
+        const token = await getTokenSilently();
+        const response = await axios({
+            method: method,
+            url: url,
+            ...data,
             headers: {
                 Authorization: `Bearer ${token}`
-            },
-            ...data
+            }
         });
         then(response);
     } catch (error) {
-        console.error(error);
+        console.error(JSON.stringify(error));
     }
 };
 
 export function get(getTokenSilently, url, then) {
-    return axiosRequest(axios.get, url, {}, getTokenSilently, then)
+    return axiosRequest("get", url, {}, getTokenSilently, then)
 }
 export function post(getTokenSilently, url, data, then) {
-    return axiosRequest(axios.post, url,{data: {...data}}, getTokenSilently, then)
+    return axiosRequest("post", url, {data: data}, getTokenSilently, then)
 }
 export function put(getTokenSilently, url, data, then) {
-    return axiosRequest(axios.post, url,{data: {...data}}, getTokenSilently, then)
+    return axiosRequest("put", url, {data: data}, getTokenSilently, then)
 }

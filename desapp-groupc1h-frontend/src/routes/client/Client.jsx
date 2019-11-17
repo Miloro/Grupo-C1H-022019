@@ -14,14 +14,14 @@ const styleProps = {
 const Client = () => {
     const {logout, loading, getTokenSilently} = useAuth0();
     const [clientId, setClientId] = useState(null);
-
-    useEffect(() => {
-        get(getTokenSilently,
-            (response) => (
-                setClientId(response.data)
-            ));
-
-    });
+    //
+    // useEffect(() => {
+    //     get(getTokenSilently,
+    //         (response) => (
+    //             setClientId(response.data)
+    //         ));
+    //
+    // });
 
     if (!clientId) {
         return <Row type="flex" justify="space-around" align="middle">

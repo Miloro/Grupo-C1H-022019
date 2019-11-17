@@ -38,10 +38,9 @@ const ClientForm = () => {
 
     const onSubmit = (values) => {
         const {query, selected, suggestions, ...client} = values;
-        console.log(client);
-        // post(getTokenSilently, "/api/client", client, (response) => {
-        //     console.log(response.data);
-        // });
+        post(getTokenSilently, "/api/client", client, (response) => {
+            console.log(response);
+        });
     };
 
     return (

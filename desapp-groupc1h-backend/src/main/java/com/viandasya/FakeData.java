@@ -12,7 +12,7 @@ import com.viandasya.model.timeslot.HoursTimeSlot;
 import com.viandasya.model.timeslot.TimeTable;
 import com.viandasya.model.user.*;
 import com.viandasya.persistence.MenuRepository;
-import com.viandasya.persistence.UserRepository;
+import com.viandasya.persistence.ClientProfileRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -37,11 +37,11 @@ import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyService
 
 @Component
 public class FakeData implements ApplicationRunner {
-    private final UserRepository userRepository;
+    private final ClientProfileRepository clientProfileRepository;
     private final MenuRepository menuRepository;
 
-    public FakeData(UserRepository userRepository, MenuRepository menuRepository) {
-        this.userRepository = userRepository;
+    public FakeData(ClientProfileRepository clientRepository, MenuRepository menuRepository) {
+        this.clientProfileRepository = clientRepository;
         this.menuRepository = menuRepository;
     }
 
@@ -184,9 +184,9 @@ public class FakeData implements ApplicationRunner {
         usera.addClientProfile(clientProfilea);
         usera.addServiceProfile(serviceProfilea);
 
-        User savedUser1 = userRepository.save(user1);
-        User savedUser2 = userRepository.save(user2);
-        User savedUsera = userRepository.save(usera);
+        ClientProfile savedClient1 = clientProfileRepository.save(clientProfile1);
+        ClientProfile savedClient2 = clientProfileRepository.save(user2.getClientProfile());
+        ClientProfile savedClient3 = clientProfileRepository.save(clientProfilea);
 
         ////////////////////////////   CREATING ORDERS   ////////////////////////////
 
@@ -198,7 +198,7 @@ public class FakeData implements ApplicationRunner {
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(3).plusHours(1)))
                 .setState(OrderState.PENDING)
-                .setClient(savedUser2.getClientProfile())
+                .setClient(savedClient2)
                 .createOrder();
 
         Order order2 = anyOrder()
@@ -208,7 +208,7 @@ public class FakeData implements ApplicationRunner {
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().plusDays(4), LocalDateTime.now().plusDays(4).plusHours(1)))
                 .setState(OrderState.PENDING)
-                .setClient(savedUser2.getClientProfile())
+                .setClient(savedClient2)
                 .createOrder();
 
         Order order3 = anyOrder()
@@ -218,7 +218,7 @@ public class FakeData implements ApplicationRunner {
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(7), LocalDateTime.now().minusDays(7).plusHours(1)))
                 .setState(OrderState.DELIVERED)
-                .setClient(savedUsera.getClientProfile())
+                .setClient(savedClient3)
                 .createOrder();
 
         Order ordera = anyOrder()
@@ -229,7 +229,7 @@ public class FakeData implements ApplicationRunner {
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().withHour(15),
                         LocalDateTime.now().minusDays(20).withHour(16)))
                 .setState(OrderState.CONFIRMED)
-                .setClient(savedUser1.getClientProfile())
+                .setClient(savedClient1)
                 .createOrder();
 
         Order orderb = anyOrder()
@@ -240,7 +240,7 @@ public class FakeData implements ApplicationRunner {
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(21).withHour(19),
                         LocalDateTime.now().minusDays(21).withHour(20)))
                 .setState(OrderState.DELIVERED)
-                .setClient(savedUsera.getClientProfile())
+                .setClient(savedClient3)
                 .createOrder();
 
         Order orderc = anyOrder()
@@ -251,7 +251,7 @@ public class FakeData implements ApplicationRunner {
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(10).withHour(14),
                         LocalDateTime.now().minusDays(21).withHour(15)))
                 .setState(OrderState.DELIVERED)
-                .setClient(savedUsera.getClientProfile())
+                .setClient(savedClient3)
                 .createOrder();
 
 

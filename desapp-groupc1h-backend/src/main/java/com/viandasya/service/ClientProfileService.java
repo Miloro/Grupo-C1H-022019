@@ -1,6 +1,7 @@
 package com.viandasya.service;
 
 import com.viandasya.model.user.ClientProfile;
+import com.viandasya.model.user.User;
 import com.viandasya.persistence.ClientProfileRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,10 @@ public class ClientProfileService {
     }
 
     @Transactional
-    public ClientProfile create(ClientProfile clientProfile){
-        return clientProfileRepository.save(clientProfile);
-
+    public Long create(ClientProfile clientProfile){
+        User user = new User();
+        user.addClientProfile(clientProfile);
+        return clientProfileRepository.save(clientProfile).getId();
     }
 
     @Transactional
