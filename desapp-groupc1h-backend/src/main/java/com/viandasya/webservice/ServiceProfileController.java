@@ -22,11 +22,11 @@ public class ServiceProfileController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("user/{userId}/service")
+    @PostMapping("user/{email}/service")
     @ResponseStatus(HttpStatus.CREATED)
-    public long create(@PathVariable Long userId, @RequestBody ServiceProfileDTO serviceProfileDTO) {
+    public long create(@PathVariable String email, @RequestBody ServiceProfileDTO serviceProfileDTO) {
         ServiceProfile serviceProfile = convertToEntity(serviceProfileDTO);
-        return serviceProfileService.create(userId, serviceProfile);
+        return serviceProfileService.create(email, serviceProfile);
     }
 
     @GetMapping("services")

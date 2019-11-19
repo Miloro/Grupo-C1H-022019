@@ -15,7 +15,7 @@ public class ClientProfile {
     private Location location;
     private Balance balance = new Balance(new BigDecimal("0"));
 
-    @OneToOne(mappedBy = "clientProfile", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
     public ClientProfile(String name, String lastName, String email, Integer phoneNumber, Location location, Balance balance) {

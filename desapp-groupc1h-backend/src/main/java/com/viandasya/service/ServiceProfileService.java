@@ -21,8 +21,8 @@ public class ServiceProfileService {
     }
 
     @Transactional
-    public long create(Long userId, ServiceProfile serviceProfile) {
-        User user = userRepository.findById(userId).get();
+    public long create(String email, ServiceProfile serviceProfile) {
+        User user = userRepository.findById(email).get();
         user.addServiceProfile(serviceProfile);
         return serviceProfileRepository.save(serviceProfile).getId();
     }

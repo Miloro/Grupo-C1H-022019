@@ -4,11 +4,11 @@ import javax.persistence.*;
 
 @Entity(name = "UserProfile")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @Id
+    private String email;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private ClientProfile clientProfile;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -35,4 +35,11 @@ public class User {
         serviceProfile.setUser(this);
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
