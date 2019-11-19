@@ -5,7 +5,7 @@ import {Form, Input, InputNumber, SubmitButton} from "formik-antd";
 import {FormattedMessage, useIntl} from "react-intl";
 import ClientSchema from "./ClientSchema";
 import AddressSearcher from "../service/serviceForm/AddressSearcher";
-import {useAuth0} from "../../security/Auth0Provider";
+import {useAuth0} from "../../providers/Auth0Provider";
 import {post} from "../../api/API";
 const {Title} = Typography;
 const {Item} = Form;

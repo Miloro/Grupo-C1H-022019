@@ -4,7 +4,7 @@ import Background from "../resources/background.jpg";
 import {Col, Icon, Layout, Result, Row, Spin} from "antd";
 import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
 import NavBar from "./NavBar";
-import {useAuth0} from "../security/Auth0Provider";
+import {useAuth0} from "../providers/Auth0Provider";
 import Buy from "../routes/buy/Buy";
 import UnratedOrders from "../routes/UnratedOrders";
 import Cart from "../routes/Cart";

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Icon, Result} from 'antd';
-import {useAuth0} from "../security/Auth0Provider";
+import {useAuth0} from "../providers/Auth0Provider";
 
 const styleProps = {
     style: {
@@ -11,7 +11,6 @@ const styleProps = {
 
 const Login = () => {
     const {loginWithRedirect, loading} = useAuth0();
-
 
     return <Result
         icon={<Icon type="home"  {...styleProps}/>}

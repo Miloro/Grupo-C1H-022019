@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useAuth0} from "../../security/Auth0Provider";
+import {useAuth0} from "../../providers/Auth0Provider";
 import {Button, Col, Icon, Result, Row} from "antd";
 import {get} from "../../api/API";
 import ClientForm from "./ClientForm";

@@ -5,8 +5,8 @@ import * as serviceWorker from './serviceWorker';
 import {IntlProvider} from 'react-intl';
 import messagesEn from './translations/en.json';
 import messagesEs from './translations/es.json';
-import App from "./app/App";
-import {Auth0Provider} from "./security/Auth0Provider";
+import {Auth0Provider} from "./providers/Auth0Provider";
+import App from "./components/App";
 
 const messages = {
     'en': messagesEn,
@@ -33,6 +33,7 @@ ReactDOM.render(
             domain={process.env.REACT_APP_DOMAIN}
             client_id={process.env.REACT_APP_CLIENT_ID}
             redirect_uri={window.location.origin}
+            audience={process.env.REACT_APP_AUDIENCE}
             onRedirectCallback={onRedirectCallback}
         >
             <App/>
