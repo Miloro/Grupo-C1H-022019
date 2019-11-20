@@ -2,8 +2,10 @@ package com.viandasya.model.builders.user;
 
 import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ClientProfile;
+import com.viandasya.model.user.Location;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 
@@ -47,21 +49,13 @@ public class ClientProfileBuilderTest {
     }
 
     @Test
-    public void testIsValidWhenICanCreateAClientProfileWithServiceClientProfileBuilder5() {
-        ClientProfile anyClientProfile  = anyClientProfile()
-                .setCity("city")
+    public void testSetLocationSetedInBuilderEqualsToTheOneGettedInClientProfile() {
+        Location location = Mockito.mock(Location.class);
+        ClientProfile clientProfile = anyClientProfile()
+                .setLocation(location)
                 .createClientProfile();
 
-        Assert.assertEquals(anyClientProfile.getCity(), "city");
-    }
-
-    @Test
-    public void testIsValidWhenICanCreateAClientProfileWithServiceClientProfileBuilder6() {
-        ClientProfile anyClientProfile  = anyClientProfile()
-                .setAdress("adress")
-                .createClientProfile();
-
-        Assert.assertEquals(anyClientProfile.getAdress(), "adress");
+        Assert.assertEquals(location, clientProfile.getLocation());
     }
 
     @Test

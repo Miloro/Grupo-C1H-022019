@@ -12,7 +12,6 @@ import com.viandasya.model.timeslot.HoursTimeSlot;
 import com.viandasya.model.timeslot.TimeTable;
 import com.viandasya.model.user.*;
 import com.viandasya.persistence.MenuRepository;
-import com.viandasya.persistence.ServiceProfileRepository;
 import com.viandasya.persistence.UserRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -40,12 +39,10 @@ import static com.viandasya.model.builders.user.ServiceProfileBuilder.anyService
 public class FakeData implements ApplicationRunner {
     private final UserRepository userRepository;
     private final MenuRepository menuRepository;
-    private final ServiceProfileRepository serviceProfileRepository;
 
-    public FakeData(UserRepository userRepository, MenuRepository menuRepository, ServiceProfileRepository serviceProfileRepository) {
+    public FakeData(UserRepository userRepository, MenuRepository menuRepository) {
         this.userRepository = userRepository;
         this.menuRepository = menuRepository;
-        this.serviceProfileRepository = serviceProfileRepository;
     }
 
     @Override
@@ -104,19 +101,20 @@ public class FakeData implements ApplicationRunner {
         ClientProfile clientProfile1 = anyClientProfile()
                 .setName("Lisa")
                 .setLastName("Romero")
-                .setAdress("9 De Julio 500")
-                .setCity("Quilmes")
                 .setEmail("lisar.3467@gmail.com")
+                .setLocation(new Location("Condarco 430", "Wilde", -34.7048199, -58.3264779))
                 .setBalance(new Balance(new BigDecimal("2000")))
                 .createClientProfile();
 
         User user1 = new User();
+        user1.setEmail("lisar.3467@gmail.com");
         user1.addClientProfile(clientProfile1);
         user1.addServiceProfile(serviceProfile1);
 
         //////////  USER 2  //////////
 
         User user2 = new User();
+        user2.setEmail("emailfalso@gmail.com");
         user2.addClientProfile(anyClientProfile().createClientProfile());
 
         //////////  USER A : SERVICE PROFILE WITH 2 MENUS  //////////
@@ -178,19 +176,20 @@ public class FakeData implements ApplicationRunner {
         ClientProfile clientProfilea = anyClientProfile()
                 .setName("Miguel")
                 .setLastName("Miloro")
-                .setAdress("Av. La Madrid 2900")
-                .setCity("Quilmes")
                 .setEmail("miloromiguel@gmail.com")
+                .setLocation(new Location("Uruguay 2200", "Ezpeleta Oeste",
+                        -34.7597263, -58.2642824))
                 .setBalance(new Balance(new BigDecimal("500")))
                 .createClientProfile();
 
         User usera = new User();
+        usera.setEmail("miloromiguel@gmail.com");
         usera.addClientProfile(clientProfilea);
         usera.addServiceProfile(serviceProfilea);
 
-        User savedUser1 = userRepository.save(user1);
-        User savedUser2 = userRepository.save(user2);
-        User savedUsera = userRepository.save(usera);
+        ClientProfile savedClient1 = userRepository.save(user1).getClientProfile();
+        ClientProfile savedClient2 = userRepository.save(user2).getClientProfile();
+        ClientProfile savedClienta = userRepository.save(usera).getClientProfile();
 
         ////////////////////////////   CREATING ORDERS   ////////////////////////////
 
@@ -202,7 +201,7 @@ public class FakeData implements ApplicationRunner {
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(3).plusHours(1)))
                 .setState(OrderState.PENDING)
-                .setClient(savedUser2.getClientProfile())
+                .setClient(savedClient2)
                 .createOrder();
 
         Order order2 = anyOrder()
@@ -212,7 +211,7 @@ public class FakeData implements ApplicationRunner {
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().plusDays(4), LocalDateTime.now().plusDays(4).plusHours(1)))
                 .setState(OrderState.PENDING)
-                .setClient(savedUser2.getClientProfile())
+                .setClient(savedClient2)
                 .createOrder();
 
         Order order3 = anyOrder()
@@ -222,7 +221,7 @@ public class FakeData implements ApplicationRunner {
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(7), LocalDateTime.now().minusDays(7).plusHours(1)))
                 .setState(OrderState.DELIVERED)
-                .setClient(savedUsera.getClientProfile())
+                .setClient(savedClienta)
                 .createOrder();
 
         Order ordera = anyOrder()
@@ -233,7 +232,7 @@ public class FakeData implements ApplicationRunner {
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().withHour(15),
                         LocalDateTime.now().minusDays(20).withHour(16)))
                 .setState(OrderState.CONFIRMED)
-                .setClient(savedUser1.getClientProfile())
+                .setClient(savedClient1)
                 .createOrder();
 
         Order orderb = anyOrder()
@@ -244,7 +243,7 @@ public class FakeData implements ApplicationRunner {
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(21).withHour(19),
                         LocalDateTime.now().minusDays(21).withHour(20)))
                 .setState(OrderState.DELIVERED)
-                .setClient(savedUsera.getClientProfile())
+                .setClient(savedClienta)
                 .createOrder();
 
         Order orderc = anyOrder()
@@ -255,7 +254,7 @@ public class FakeData implements ApplicationRunner {
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(10).withHour(14),
                         LocalDateTime.now().minusDays(21).withHour(15)))
                 .setState(OrderState.DELIVERED)
-                .setClient(savedUsera.getClientProfile())
+                .setClient(savedClienta)
                 .createOrder();
 
 
@@ -269,9 +268,6 @@ public class FakeData implements ApplicationRunner {
 
         new ArrayList<>(Arrays.asList(order1, order2, order3)).forEach(menuGreen::addOrder);
         new ArrayList<>(Arrays.asList(ordera, orderb, orderc)).forEach(menuPizza::addOrder);
-
-        serviceProfileRepository.save(serviceProfilea);
-        serviceProfileRepository.save(serviceProfile1);
 
         menuRepository.save(menuGreen);
         menuRepository.save(menuPizza);

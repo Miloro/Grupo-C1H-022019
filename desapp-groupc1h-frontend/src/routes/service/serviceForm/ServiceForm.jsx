@@ -5,9 +5,10 @@ import {Form, InputNumber, SubmitButton} from "formik-antd";
 import ServiceInfoInputs from "./ServiceInfoInputs";
 import ServiceShedulePicker from "./ServiceShedulePicker";
 import AddressSearcher from "./AddressSearcher";
-import axios from "axios";
 import ServiceSchema from "../ServiceSchema";
 import {FormattedMessage, useIntl} from "react-intl";
+import {useAuth0} from "../../../providers/Auth0Provider";
+import {post} from "../../../api/API";
 
 const {Item} = Form;
 const {Title} = Typography;
@@ -16,7 +17,7 @@ const {success} = Modal;
 
 const ServiceForm = ({userId, setService}) => {
     const {formatMessage} = useIntl();
-    const geocoderUrl = 'https://geocoder.api.here.com/6.2/geocode.json';
+    const {getTokenSilently} = useAuth0();
     const formLayout = {
         wrapperCol: {
             xs: {span: 24},
@@ -43,18 +44,11 @@ const ServiceForm = ({userId, setService}) => {
         phoneNumber: undefined,
         timetable: initialTimeTable(),
         query: '',
-        selected: {id: '', address: ''},
+        selected: {id: undefined, address: undefined},
+        location: undefined,
         suggestions: [],
         maxDistanceDeliveryInKms: undefined
     };
-
-    const hereMapsParams = id => ({
-        'params': {
-            'app_id': 'B3ZYLI1mKHNO6Qt871t6',
-            'app_code': 'xibhrih8Kcvp0bcijbEBqA',
-            'locationId': id
-        }
-    });
 
     const convertTimetable = timetable => {
         const converToString = (range) => (range === undefined ? undefined : range.format('HH:mm'));
@@ -66,7 +60,7 @@ const ServiceForm = ({userId, setService}) => {
         }));
     };
 
-    const createService = (values, location) => ({
+    const createService = (values) => ({
         serviceInfo: {
             name: values.name,
             logo: values.logo,
@@ -76,19 +70,9 @@ const ServiceForm = ({userId, setService}) => {
             phoneNumber: values.phoneNumber
         },
         timetable: convertTimetable(values.timetable),
-        location: location,
+        location: values.location,
         maxDistanceOfDeliveryInKms: values.maxDistanceDeliveryInKms
     });
-
-    const createLocation = response => {
-        const location = response.data.Response.View[0].Result[0].Location;
-        return {
-            address: `${location.Address.Street} ${location.Address.HouseNumber}`,
-            city: `${location.Address.City}`,
-            latitude: location.DisplayPosition.Latitude,
-            longitude: location.DisplayPosition.Longitude
-        };
-    };
 
     const createdServiceModal = () => {
         const modal = success({
@@ -100,13 +84,8 @@ const ServiceForm = ({userId, setService}) => {
     };
 
     const onSubmit = values => {
-        let service;
-        axios.get(geocoderUrl, hereMapsParams(values.selected.id))
-            .then((response) => {
-                const location = createLocation(response);
-                service = createService(values, location);
-                return axios.post(`/api/user/${userId}/service`, service);
-            }).then((response) => {
+        const service = createService(values);
+        post(getTokenSilently, `/api/user/${userId}/service`, service, (response) => {
             service.id = response.data;
             setService(service);
             createdServiceModal();
@@ -136,7 +115,7 @@ const ServiceForm = ({userId, setService}) => {
                     <Title level={4} className='padding-top-4 align-left'>
                         <FormattedMessage id="location"/>*
                     </Title>
-                    <AddressSearcher suggestions={values.suggestions} setFieldValue={setFieldValue}/>
+                    <AddressSearcher selected ={values.selected} suggestions={values.suggestions} setFieldValue={setFieldValue}/>
                     <Item name="maxDistanceDeliveryInKms">
                         <InputNumber type="number" name="maxDistanceDeliveryInKms" {...inputNumberProps}
                                      placeholder={formatMessage({id: "service.deliveryDistance"})}/>

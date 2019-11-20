@@ -2,6 +2,7 @@ package com.viandasya.webservice;
 
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.service.ClientProfileService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,9 +13,15 @@ public class ClientProfileController {
         this.clientProfileService = clientProfileService;
     }
 
-    @PostMapping("/client")
-    public ClientProfile create(ClientProfile clientProfile){
-        return clientProfileService.create(clientProfile);
+    @PostMapping("/client/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void create(@PathVariable String id, @RequestBody ClientProfile clientProfile){
+        clientProfileService.create(id, clientProfile);
+    }
+
+    @GetMapping("/client/{id}")
+    public boolean existsById(@PathVariable String id){
+        return clientProfileService.existsById(id);
     }
 
     @GetMapping("/clients")

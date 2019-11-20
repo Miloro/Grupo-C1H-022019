@@ -2,6 +2,7 @@ package com.viandasya.model.builders.user;
 
 import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ClientProfile;
+import com.viandasya.model.user.Location;
 
 import java.math.BigDecimal;
 
@@ -10,8 +11,8 @@ public class ClientProfileBuilder {
     private String lastName = "lastName";
     private String email = "email";
     private Integer phoneNumber = 12345;
-    private String city = "city";
-    private String adress = "adress";
+    private Location location= new Location("Calle 842 2602", "San Francisco Solano",
+            -34.7805449, -58.3151092);
     private Balance balance = new Balance(new BigDecimal("0"));
 
     public static ClientProfileBuilder anyClientProfile(){
@@ -38,13 +39,8 @@ public class ClientProfileBuilder {
         return this;
     }
 
-    public ClientProfileBuilder setCity(String city){
-        this.city = city;
-        return this;
-    }
-
-    public ClientProfileBuilder setAdress(String adress){
-        this.adress = adress;
+    public ClientProfileBuilder setLocation(Location location){
+        this.location = location;
         return this;
     }
 
@@ -54,6 +50,6 @@ public class ClientProfileBuilder {
     }
 
     public ClientProfile createClientProfile(){
-        return new ClientProfile(name, lastName, email, phoneNumber, city, adress, balance);
+        return new ClientProfile(name, lastName, email, phoneNumber, location, balance);
     }
 }

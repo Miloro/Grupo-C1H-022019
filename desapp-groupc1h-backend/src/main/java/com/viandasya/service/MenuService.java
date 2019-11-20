@@ -68,6 +68,8 @@ public class MenuService {
         this.pageMenusFunctions.put("city",(searchDTO ->
                 this.menuRepository.findByServiceProfileLocationCityContainsIgnoreCase(searchDTO.getFilterQuery(),
                         searchDTO.getPageRequest())));
+        this.pageMenusFunctions.put(null,(searchDTO ->
+                this.menuRepository.findAll(searchDTO.getPageRequest())));
 
     }
 }
