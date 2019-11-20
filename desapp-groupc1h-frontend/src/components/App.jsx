@@ -16,6 +16,7 @@ import ServiceOrders from "../routes/ServiceOrders";
 import Login from "../routes/Login";
 import Client from "../routes/client/Client";
 import PrivateRoute from "../routes/PrivateRoute";
+import Balance from "../routes/Balance";
 
 const {Header, Content, Footer} = Layout;
 
@@ -64,6 +65,7 @@ function App() {
                 <PrivateRoute path="/service" component={Service}/>
                 <PrivateRoute path="/menus/:query" component={Menus}/>
                 <PrivateRoute path="/service/orders" component={ServiceOrders}/>
+                <PrivateRoute path="/balance" component={Balance}/>
                 <Route exact path="/">
                     {isAuthenticated ? <Client/> : <Login/>}
                 </Route>

@@ -29,7 +29,7 @@ public class ServiceProfileService {
     }
 
     @Transactional
-    public Balance withdraw(long userId, Balance amount){
+    public Balance withdraw(String userId, Balance amount){
         User user = userRepository.findById(userId).get();
         user.getServiceProfile().getBalance().withdraw(amount.getAmount());
         userRepository.save(user);
@@ -37,7 +37,7 @@ public class ServiceProfileService {
     }
 
     @Transactional
-    public Balance deposit(Long userId, Balance amount) {
+    public Balance deposit(String userId, Balance amount) {
         User user = userRepository.findById(userId).get();
         user.getClientProfile().getBalance().deposit(amount.getAmount());
         userRepository.save(user);

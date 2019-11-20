@@ -56,12 +56,12 @@ public class ServiceProfileController {
     }
 
     @PutMapping("user/{userId}/service")
-    public Balance withdraw(@PathVariable Long userId, @RequestBody Balance amount){
+    public Balance withdraw(@PathVariable String userId, @RequestBody Balance amount){
         return serviceProfileService.withdraw(userId,amount);
     }
 
     @PutMapping("user/{userId}/client")
-    public Balance deposit(@PathVariable Long userId, @RequestBody Balance amount){
+    public Balance deposit(@PathVariable String userId, @RequestBody Balance amount){
         return serviceProfileService.deposit(userId,amount);
     }
 
