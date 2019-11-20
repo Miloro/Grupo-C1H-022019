@@ -1,12 +1,14 @@
 import React from 'react';
 import {Formik} from "formik";
-import {Col, Row, Typography} from "antd";
+import {Col, Row, Typography, notification} from "antd";
 import {Form, Input, InputNumber, SubmitButton} from "formik-antd";
 import {FormattedMessage, useIntl} from "react-intl";
 import ClientSchema from "./ClientSchema";
 import AddressSearcher from "../service/serviceForm/AddressSearcher";
 import {useAuth0} from "../../providers/Auth0Provider";
 import {post} from "../../api/API";
+import {setUserId, useUser} from "../../providers/UserProvider";
+
 const {Title} = Typography;
 const {Item} = Form;
 
@@ -21,14 +23,15 @@ const inputNumberProps = {
     style: {width: '100%'}
 };
 
-const ClientForm = () => {
+const Register = () => {
     const {formatMessage} = useIntl();
-    const {getTokenSilently} = useAuth0();
+    const {getTokenSilently, user} = useAuth0();
+    const [, dispatch] = useUser();
 
     const initialValues = {
-        name: "",
-        lastName: "",
-        email: "",
+        name: user.given_name,
+        lastName: user.family_name,
+        email: user.email,
         phoneNumber: undefined,
         query: "",
         selected: {id: undefined, address: undefined},
@@ -38,10 +41,14 @@ const ClientForm = () => {
 
     const onSubmit = (values) => {
         const {query, selected, suggestions, ...client} = values;
-        post(getTokenSilently, "/api/client", client, (response) => {
-            console.log(response);
-        });
-    };
+        post(getTokenSilently, `/api/client/${user.email}`, client,
+            () => {
+            dispatch(setUserId(user.email));
+            notification.success({
+                message: formatMessage({id:"welcomeTo"}),
+                description: formatMessage({id:"welcomeMessage"}),
+            })})
+        };
 
     return (
         <Formik
@@ -59,32 +66,33 @@ const ClientForm = () => {
                                 <FormattedMessage id="client.info"/>
                             </Title>
                             <Item name="name">
-                                <Input name="name" placeholder={`${formatMessage({id:"name"})}*`}/>
+                                <Input name="name" placeholder={`${formatMessage({id: "name"})}*`}/>
                             </Item>
                             <Item name="lastName">
-                                <Input name="lastName" placeholder={formatMessage({id:"lastName"})}/>
+                                <Input name="lastName" placeholder={formatMessage({id: "lastName"})}/>
                             </Item>
                             <Item name="email">
                                 <Input name="email" placeholder="Email*"/>
                             </Item>
                             <Item name="phoneNumber">
                                 <InputNumber type="number" name="phoneNumber" {...inputNumberProps}
-                                             placeholder={formatMessage({id:"phoneNumber"})}/>
+                                             placeholder={formatMessage({id: "phoneNumber"})}/>
                             </Item>
                             <Title level={4} className='padding-top-4 align-left'>
                                 <FormattedMessage id="location"/>*
                             </Title>
-                            <AddressSearcher selected ={values.selected} suggestions={values.suggestions}
+                            <AddressSearcher selected={values.selected} suggestions={values.suggestions}
                                              setFieldValue={setFieldValue}/>
                             <Item name="SubmitButton">
-                                <SubmitButton size="large" >
+                                <SubmitButton size="large">
                                     <FormattedMessage id="create"/>
                                 </SubmitButton>
                             </Item>
                         </Form>
                     </Col>
                 </Row>
-            )}/>);
+            )}/>
+    );
 };
 
-export default ClientForm;
+export default Register;

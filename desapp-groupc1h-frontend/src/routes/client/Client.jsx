@@ -1,43 +1,37 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useAuth0} from "../../providers/Auth0Provider";
-import {Button, Col, Icon, Result, Row} from "antd";
+import {Col, Row} from "antd";
 import {get} from "../../api/API";
-import ClientForm from "./ClientForm";
-
-const styleProps = {
-    style: {
-        fontSize: 50,
-        color: '#ffffff'
-    }
-};
+import Register from "./Register";
+import {setUserId, useUser} from "../../providers/UserProvider";
+import {Redirect} from "react-router-dom";
 
 const Client = () => {
-    const {logout, loading, getTokenSilently} = useAuth0();
-    const [clientId, setClientId] = useState(null);
-    //
-    // useEffect(() => {
-    //     get(getTokenSilently,
-    //         (response) => (
-    //             setClientId(response.data)
-    //         ));
-    //
-    // });
+    const {getTokenSilently, user} = useAuth0();
+    const [{id}, dispatch] = useUser();
 
-    if (!clientId) {
+    useEffect(() => {
+        console.log(user);
+        get(getTokenSilently,
+            `/api/client/${user.email}`,
+            (response) => {
+                if (response.data) {
+                    dispatch(setUserId(user.email));
+                }
+            });
+    }, []);
+
+    if (id) {
+        return <Redirect to="/menus/search"/>
+    }
+    else {
         return <Row type="flex" justify="space-around" align="middle">
             <Col span={20} style={{backgroundColor: "#ffffff"}}>
-                <ClientForm/>
+                <Register/>
             </Col>
-        </Row>
+        </Row>;
     }
 
-    return <Result
-        icon={<Icon type="home"  {...styleProps}/>}
-        title={<div {...styleProps}> Hasta Luego! </div>}
-        extra={!loading && <Button type="primary" size="large" onClick={() => logout()}>
-            Logout
-        </Button>}
-    />;
 };
 
 export default Client;

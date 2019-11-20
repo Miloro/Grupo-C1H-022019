@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
+import {Route} from "react-router-dom";
 import {useAuth0} from "../providers/Auth0Provider";
 
 const PrivateRoute = ({ component: Component, path, ...rest }) => {
@@ -9,13 +9,14 @@ const PrivateRoute = ({ component: Component, path, ...rest }) => {
         if (loading || isAuthenticated) {
             return;
         }
+        
         const fn = async () => {
             await loginWithRedirect({
                 appState: { targetUrl: path }
             });
         };
         fn();
-    }, [loading, isAuthenticated, loginWithRedirect, path]);
+    }, [loading, isAuthenticated, loginWithRedirect]);
 
     const render = props => isAuthenticated === true ? <Component {...props} /> : null;
 

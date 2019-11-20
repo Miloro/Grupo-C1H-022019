@@ -13,8 +13,9 @@ import CreateMenu from "../routes/CreateMenu";
 import Service from "../routes/service/Service";
 import Menus from "../routes/menus/Menus";
 import ServiceOrders from "../routes/ServiceOrders";
-import Client from "../routes/client/Client";
 import Login from "../routes/Login";
+import Client from "../routes/client/Client";
+import PrivateRoute from "../routes/PrivateRoute";
 
 const {Header, Content, Footer} = Layout;
 
@@ -55,14 +56,14 @@ function App() {
                 }/>
         } else {
             return <Switch>
-                <Route path="/buy" component={Buy}/>
-                <Route path="/unrated-orderds" component={UnratedOrders}/>
-                <Route path="/cart" component={Cart}/>
-                <Route path="/orders" component={Orders}/>
-                <Route path="/service/create-menu" component={CreateMenu}/>
-                <Route path="/service" component={Service}/>
-                <Route path="/menus/:query" component={Menus}/>
-                <Route path="/service/orders" component={ServiceOrders}/>
+                <PrivateRoute path="/buy" component={Buy}/>
+                <PrivateRoute path="/unrated-orderds" component={UnratedOrders}/>
+                <PrivateRoute path="/cart" component={Cart}/>
+                <PrivateRoute path="/orders" component={Orders}/>
+                <PrivateRoute path="/service/create-menu" component={CreateMenu}/>
+                <PrivateRoute path="/service" component={Service}/>
+                <PrivateRoute path="/menus/:query" component={Menus}/>
+                <PrivateRoute path="/service/orders" component={ServiceOrders}/>
                 <Route exact path="/">
                     {isAuthenticated ? <Client/> : <Login/>}
                 </Route>

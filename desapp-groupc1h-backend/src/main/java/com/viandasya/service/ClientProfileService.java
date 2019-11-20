@@ -32,4 +32,8 @@ public class ClientProfileService {
         return clientProfileRepository.findAll();
     }
 
+    @Transactional
+    public boolean existsById(String id) {
+        return userRepository.existsById(id);
+    }
 }

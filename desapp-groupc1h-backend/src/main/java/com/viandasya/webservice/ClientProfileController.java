@@ -19,6 +19,11 @@ public class ClientProfileController {
         clientProfileService.create(id, clientProfile);
     }
 
+    @GetMapping("/client/{id}")
+    public boolean existsById(@PathVariable String id){
+        return clientProfileService.existsById(id);
+    }
+
     @GetMapping("/clients")
     public Iterable<ClientProfile> findAll(){
         return clientProfileService.findAll();

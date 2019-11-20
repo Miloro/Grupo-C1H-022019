@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const axiosRequest = async (method, url, data, getTokenSilently, then) => {
+const axiosRequest = async (method, url, data, getTokenSilently, then,
+                            catchIt=(error) => (console.error(JSON.stringify(error)))) => {
     try {
         const token = await getTokenSilently();
         const response = await axios({
@@ -13,16 +14,16 @@ const axiosRequest = async (method, url, data, getTokenSilently, then) => {
         });
         then(response);
     } catch (error) {
-        console.error(JSON.stringify(error));
+        catchIt(error);
     }
 };
 
-export function get(getTokenSilently, url, then) {
-    return axiosRequest("get", url, {}, getTokenSilently, then)
+export function get(getTokenSilently, url, then, catchIt) {
+    return axiosRequest("get", url, {}, getTokenSilently, then, catchIt)
 }
-export function post(getTokenSilently, url, data, then) {
-    return axiosRequest("post", url, {data: data}, getTokenSilently, then)
+export function post(getTokenSilently, url, data, then, catchIt) {
+    return axiosRequest("post", url, {data: data}, getTokenSilently, then, catchIt)
 }
-export function put(getTokenSilently, url, data, then) {
-    return axiosRequest("put", url, {data: data}, getTokenSilently, then)
+export function put(getTokenSilently, url, data, then, catchIt) {
+    return axiosRequest("put", url, {data: data}, getTokenSilently, then, catchIt)
 }

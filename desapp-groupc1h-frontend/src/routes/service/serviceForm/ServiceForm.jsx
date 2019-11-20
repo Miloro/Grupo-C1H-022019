@@ -5,9 +5,10 @@ import {Form, InputNumber, SubmitButton} from "formik-antd";
 import ServiceInfoInputs from "./ServiceInfoInputs";
 import ServiceShedulePicker from "./ServiceShedulePicker";
 import AddressSearcher from "./AddressSearcher";
-import axios from "axios";
 import ServiceSchema from "../ServiceSchema";
 import {FormattedMessage, useIntl} from "react-intl";
+import {useAuth0} from "../../../providers/Auth0Provider";
+import {post} from "../../../api/API";
 
 const {Item} = Form;
 const {Title} = Typography;
@@ -16,6 +17,7 @@ const {success} = Modal;
 
 const ServiceForm = ({userId, setService}) => {
     const {formatMessage} = useIntl();
+    const {getTokenSilently} = useAuth0();
     const formLayout = {
         wrapperCol: {
             xs: {span: 24},
@@ -81,12 +83,13 @@ const ServiceForm = ({userId, setService}) => {
         }, 20 * 1000);
     };
 
-    const onSubmit =  async values => {
+    const onSubmit = values => {
         const service = createService(values);
-        const response = await axios.post(`/api/user/${userId}/service`, service);
-        service.id = response.data;
-        setService(service);
-        createdServiceModal();
+        post(getTokenSilently, `/api/user/${userId}/service`, service, (response) => {
+            service.id = response.data;
+            setService(service);
+            createdServiceModal();
+        });
     };
 
     return (

@@ -7,6 +7,7 @@ import messagesEn from './translations/en.json';
 import messagesEs from './translations/es.json';
 import {Auth0Provider} from "./providers/Auth0Provider";
 import App from "./components/App";
+import {UserProvider} from "./providers/UserProvider";
 
 const messages = {
     'en': messagesEn,
@@ -36,7 +37,9 @@ ReactDOM.render(
             audience={process.env.REACT_APP_AUDIENCE}
             onRedirectCallback={onRedirectCallback}
         >
-            <App/>
+            <UserProvider>
+                <App/>
+            </UserProvider>
         </Auth0Provider>
     </IntlProvider>
     , document.getElementById('root'));
