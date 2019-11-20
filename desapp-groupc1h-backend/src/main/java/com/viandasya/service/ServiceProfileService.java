@@ -1,5 +1,6 @@
 package com.viandasya.service;
 
+import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.model.user.User;
 import com.viandasya.persistence.ServiceProfileRepository;
@@ -28,6 +29,20 @@ public class ServiceProfileService {
     }
 
     @Transactional
+    public Balance withdraw(long userId, Balance amount){
+        User user = userRepository.findById(userId).get();
+        user.getServiceProfile().getBalance().withdraw(amount.getAmount());
+        userRepository.save(user);
+        return user.getServiceProfile().getBalance();
+    }
+
+    @Transactional
+    public Balance deposit(Long userId, Balance amount) {
+        User user = userRepository.findById(userId).get();
+        user.getClientProfile().getBalance().deposit(amount.getAmount());
+        userRepository.save(user);
+        return user.getClientProfile().getBalance();
+    }
     public Iterable<ServiceProfile> findAll() {
         return serviceProfileRepository.findAll();
     }
