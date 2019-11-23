@@ -19,7 +19,7 @@ const Client = () => {
                     dispatch(setUserId(user.email));
                 }
             });
-    }, []);
+    }, [dispatch, getTokenSilently, user]);
 
     if (id) {
         return <Redirect to="/menus/search"/>

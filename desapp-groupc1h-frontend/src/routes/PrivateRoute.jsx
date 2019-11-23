@@ -3,7 +3,7 @@ import {Route} from "react-router-dom";
 import {useAuth0} from "../providers/Auth0Provider";
 
 const PrivateRoute = ({ component: Component, path, ...rest }) => {
-    const { loading, isAuthenticated, loginWithRedirect} = useAuth0();
+    const { loading, isAuthenticated, loginWithRedirect, getTokenSilently} = useAuth0();
 
     useEffect(() => {
         if (loading || isAuthenticated) {
@@ -16,9 +16,9 @@ const PrivateRoute = ({ component: Component, path, ...rest }) => {
             });
         };
         fn();
-    }, [loading, isAuthenticated, loginWithRedirect]);
+    }, [path, loading, isAuthenticated, loginWithRedirect]);
 
-    const render = props => isAuthenticated === true ? <Component {...props} /> : null;
+    const render = props => isAuthenticated ? <Component getTokenSilently={getTokenSilently} {...props} /> : null;
 
     return <Route path={path} render={render} {...rest} />;
 };

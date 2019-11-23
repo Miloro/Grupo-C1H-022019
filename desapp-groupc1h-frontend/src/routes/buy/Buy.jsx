@@ -3,6 +3,7 @@ import {injectIntl} from "react-intl";
 import {Button, InputNumber, Col, Row, Checkbox, DatePicker, TimePicker} from "antd";
 import {createOrder, isNotHoliday} from "../../api.jsx";
 import moment from "moment";
+import "../../App.css"
 
 const format = "HH:mm";
 
@@ -17,7 +18,6 @@ class Buy extends React.Component {
         this.disabledDate = this.disabledDate.bind(this);
         this.state = {amount: 0, delivery: false, date: "", orderTimeFrom: "00:00", orderTimeTo: "00:00"};
         this.alert = React.createRef();
-
     }
 
 
@@ -91,7 +91,6 @@ class Buy extends React.Component {
             isNotHoliday(x._d.getDate(), x._d.getMonth(), 2019);
             this.setState({...this.state, date: dateString});
         }
-
     }
 
     onChangeTimePickerFrom(x, timeFrom) {
@@ -108,7 +107,7 @@ class Buy extends React.Component {
     }
 
     confirmOrder() {
-        createOrder(this.state);
+        createOrder(this.state,this.props.getTokenSilently);
     }
 
 }
