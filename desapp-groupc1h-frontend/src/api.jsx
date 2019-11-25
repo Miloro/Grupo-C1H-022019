@@ -2,11 +2,12 @@ import axios from "axios";
 import {post} from "./api/API";
 
 
+
 export function GetMenu(idMenu){
     return axios.get("api/menu/" + idMenu);
 }
 
-export function createOrder(object,token){
+export function createOrder(object,token,idMenu,idUser){
     const body = {
         "amount" : object.amount,
         "offers" : [],
@@ -18,7 +19,7 @@ export function createOrder(object,token){
                     }
     };
 
-    return post(token,"api/menu/11/client/9/order",body,(res) => {
+    return post(token,"api/menu/"+idMenu+"/client/"+idUser+"/order",body,(res) => {
         if (res.status === 200){
             console.log(res);
         }

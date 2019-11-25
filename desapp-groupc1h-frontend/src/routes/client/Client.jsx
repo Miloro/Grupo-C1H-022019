@@ -13,10 +13,11 @@ const Client = () => {
     useEffect(() => {
         console.log(user);
         get(getTokenSilently,
-            `/api/client/${user.email}`,
+            `/api/client/email/${user.email}`,
             (response) => {
                 if (response.data) {
-                    dispatch(setUserId(user.email));
+                    console.log(response.data)
+                    dispatch(setUserId(response.data.id));
                 }
             });
     }, [dispatch, getTokenSilently, user]);

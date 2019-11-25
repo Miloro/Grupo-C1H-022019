@@ -18,6 +18,8 @@ class Buy extends React.Component {
         this.disabledDate = this.disabledDate.bind(this);
         this.state = {amount: 0, delivery: false, date: "", orderTimeFrom: "00:00", orderTimeTo: "00:00"};
         this.alert = React.createRef();
+        console.log(this.props.location.state)
+        console.log(this.props.user.id);
     }
 
 
@@ -30,7 +32,7 @@ class Buy extends React.Component {
                         <h2>menu:</h2>
                     </Col>
                     <Col span={8}>
-                        <h2>Menu muy green y sin tacc!</h2>
+        <h2>{this.props.location.state.name}</h2>
                     </Col>
                 </Row>
 
@@ -107,7 +109,7 @@ class Buy extends React.Component {
     }
 
     confirmOrder() {
-        createOrder(this.state,this.props.getTokenSilently);
+        createOrder(this.state,this.props.getTokenSilently,this.props.location.state.id, this.props.user.id);
     }
 
 }
