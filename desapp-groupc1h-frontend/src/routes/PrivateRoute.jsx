@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import {Route} from "react-router-dom";
 import {useAuth0} from "../providers/Auth0Provider";
+import {useUser} from "../providers/UserProvider";
 
 const PrivateRoute = ({ component: Component, path, ...rest }) => {
-    const { loading, isAuthenticated, loginWithRedirect} = useAuth0();
+    const { loading, isAuthenticated, loginWithRedirect, getTokenSilently} = useAuth0();
+    const [user ,] = useUser();
 
     useEffect(() => {
         if (loading || isAuthenticated) {
@@ -16,9 +18,9 @@ const PrivateRoute = ({ component: Component, path, ...rest }) => {
             });
         };
         fn();
-    }, [loading, isAuthenticated, loginWithRedirect]);
+    }, [path, loading, isAuthenticated, loginWithRedirect]);
 
-    const render = props => isAuthenticated === true ? <Component {...props} /> : null;
+    const render = props => isAuthenticated ? <Component getTokenSilently={getTokenSilently} user= {user}{...props} /> : null;
 
     return <Route path={path} render={render} {...rest} />;
 };
