@@ -1,5 +1,6 @@
 package com.viandasya.webservice;
 
+import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.service.ServiceProfileService;
 import com.viandasya.webservice.dtos.ServiceProfileDTO;
@@ -22,11 +23,11 @@ public class ServiceProfileController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("user/{userId}/service")
+    @PostMapping("user/{email}/service")
     @ResponseStatus(HttpStatus.CREATED)
-    public long create(@PathVariable Long userId, @RequestBody ServiceProfileDTO serviceProfileDTO) {
+    public long create(@PathVariable String email, @RequestBody ServiceProfileDTO serviceProfileDTO) {
         ServiceProfile serviceProfile = convertToEntity(serviceProfileDTO);
-        return serviceProfileService.create(userId, serviceProfile);
+        return serviceProfileService.create(email, serviceProfile);
     }
 
     @GetMapping("services")
@@ -54,6 +55,16 @@ public class ServiceProfileController {
         }
     }
 
+    @PutMapping("user/{userId}/service")
+    public Balance withdraw(@PathVariable String userId, @RequestBody Balance amount){
+        return serviceProfileService.withdraw(userId,amount);
+    }
+
+    @PutMapping("user/{userId}/client")
+    public Balance deposit(@PathVariable String userId, @RequestBody Balance amount){
+        return serviceProfileService.deposit(userId,amount);
+    }
+
     private ServiceProfileDTO convertToDTO(ServiceProfile serviceProfile) {
         ServiceProfileDTO serviceProfileDTO = modelMapper.map(serviceProfile, ServiceProfileDTO.class);
         serviceProfileDTO.setTimeTable(serviceProfile.getTimetable());
@@ -65,5 +76,8 @@ public class ServiceProfileController {
         serviceProfile.setTimetable(serviceProfileDTO.convertTimeTable());
         return serviceProfile;
     }
+
+
+
 
 }

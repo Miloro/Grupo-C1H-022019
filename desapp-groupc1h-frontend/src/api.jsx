@@ -1,10 +1,13 @@
 import axios from "axios";
+import {post} from "./api/API";
+
+
 
 export function GetMenu(idMenu){
     return axios.get("api/menu/" + idMenu);
 }
 
-export function createOrder(object){
+export function createOrder(object,token,idMenu,idUser){
     const body = {
         "amount" : object.amount,
         "offers" : [],
@@ -15,19 +18,18 @@ export function createOrder(object){
                     "to": object.date+ "T" + object.orderTimeTo
                     }
     };
-    return axios.post("api/menu/13/client/22/order",body).then(
-        (res) => {
-            if (res.status === 200){
-                console.log(res);
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+
+    return post(token,"api/menu/"+idMenu+"/client/"+idUser+"/order",body,(res) => {
+        if (res.status === 200){
+            console.log(res);
+        }
+    },(error) => {
+        console.log(error);
+    });
 }
 
 export function isNotHoliday(day, month, year){
-    const res = axios.get("http://nolaborables.com.ar/api/v2/feriados/"+year+"?formato=mensual").then(
+    return axios.get("http://nolaborables.com.ar/api/v2/feriados/"+year+"?formato=mensual").then(
         res => {
             if (res.status === 200){
                 console.log(res.data[month][day] === undefined);
@@ -36,4 +38,35 @@ export function isNotHoliday(day, month, year){
         .catch((error) => {
             console.log(error);
         });
+}
+
+export function deposit(userId, amount){
+    const body = {
+        "amount" : amount
+    };
+    return axios.put("/api/user/"+userId+"/client", body).then(
+        res =>{
+            if (res.status ===200){
+                return res;
+            }
+        }
+    ).catch((error) => {
+        return error;
+    });
+
+}
+
+export function withdraw(userId, amount){
+    const body = {
+        "amount" : amount
+    };
+    return axios.put("/api/user/"+userId+"/service", body).then(
+        res => {
+            if (res.status ===200){
+                return res;
+            }
+        }
+    ).catch((error) => {
+        return error;
+    });
 }
