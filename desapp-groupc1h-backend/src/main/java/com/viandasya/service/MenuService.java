@@ -45,7 +45,7 @@ public class MenuService {
         menu.setDescription(convertToEntity.getDescription());
         menu.setCategories(convertToEntity.getCategories());
         menu.setValidity(convertToEntity.getValidity());
-        menu.setOffers(convertToEntity.getOffers());
+        //TODO add price handler;
         menu.setMaxAmountPerDay(convertToEntity.getMaxAmountPerDay());
         menu.setCookingTime(convertToEntity.getCookingTime());
         menuRepository.save(menu);

@@ -19,8 +19,8 @@ public class OfferBuilderTest {
 
     @Test
     public void testSetPriceSetedInBuilderEqualsToTheOneGettedInOffer() {
-        Offer offer = anyOffer().setPrice(new BigDecimal("200")).createOffer();
+        Offer offer = anyOffer().setPrice("200").createOffer();
 
-        Assert.assertEquals(new BigDecimal("200"), offer.getPrice());
+        Assert.assertEquals("200", offer.getPrice().toString());
     }
 }

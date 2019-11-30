@@ -79,15 +79,6 @@ public class MenuBuilderTest {
 
 
     @Test
-    public void testSetOffersSetedInBuilderEqualsToTheOneGettedInMenu() {
-        List<Offer> offers = new ArrayList<>();
-        offers.add(anyOffer().createOffer());
-        Menu menu = anyMenu().setOffers(offers).createMenu();
-
-        Assert.assertEquals(offers, menu.getOffers());
-    }
-
-    @Test
     public void testSetDeliveryInfoSetedInBuilderEqualsToTheOneGettedInMenu() {
         DeliveryInfo deliveryInfo = Mockito.mock(DeliveryInfo.class);
         Menu menu = anyMenu().setDeliveryInfo(deliveryInfo).createMenu();

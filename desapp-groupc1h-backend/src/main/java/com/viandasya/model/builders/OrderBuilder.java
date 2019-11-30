@@ -19,7 +19,7 @@ import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
 public class OrderBuilder {
     private Integer amount = 1234;
     private List<Offer> offers = Collections.singletonList(anyOffer().setMinAmount(30)
-            .setPrice(new BigDecimal("1")).createOffer());
+            .setPrice("1").createOffer());
     private Integer score = 2;
     private OrderState state = OrderState.CONFIRMED;
     private DateTimeSlot orderDate = anyDateTimeSlot().createDateTimeSlot();

@@ -5,8 +5,8 @@ import com.viandasya.model.menu.Offer;
 import java.math.BigDecimal;
 
 public class OfferBuilder {
-    private Integer minAmount;
-    private BigDecimal price;
+    private Integer minAmount = 12;
+    private String price = "200";
 
     public static OfferBuilder anyOffer() {
         return new OfferBuilder();
@@ -17,12 +17,12 @@ public class OfferBuilder {
         return this;
     }
 
-    public OfferBuilder setPrice(BigDecimal price) {
+    public OfferBuilder setPrice(String price) {
         this.price = price;
         return this;
     }
 
     public Offer createOffer() {
-        return new Offer(minAmount, price);
+        return new Offer(minAmount, new BigDecimal(price));
     }
 }

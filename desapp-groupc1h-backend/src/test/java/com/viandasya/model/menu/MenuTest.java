@@ -39,18 +39,13 @@ public class MenuTest {
     }
 
     @Test
-    public void testCurrentPriceMenuWith10OrderCountReturn100() {
-        List<Offer> offers = new ArrayList<>();
-        offers.add(anyOffer().setPrice(new BigDecimal("175")).setMinAmount(25).createOffer());
-        offers.add(anyOffer().setPrice(new BigDecimal("180")).setMinAmount(20).createOffer());
-        offers.add(anyOffer().setPrice(new BigDecimal("200")).setMinAmount(0).createOffer());
+    public void testGetCurrentOfferReturnCurrentOfferFromPriceHandler() {
+        PriceHandler mockPriceHandler = Mockito.mock(PriceHandler.class);
+        Mockito.when(mockPriceHandler.getCurrent()).thenReturn(Mockito.mock(Offer.class));
 
-        Menu menu = anyMenu()
-                .setOrders(Arrays.asList(anyOrder().setAmount(10).createOrder(),
-                        anyOrder().setAmount(11).createOrder()))
-                .setOffers(offers).createMenu();
+        Menu menu = anyMenu().setPriceHandler(mockPriceHandler).createMenu();
 
-        Assert.assertEquals(new BigDecimal("180"), menu.getCurrentOffer().getPrice());
+        Assert.assertEquals(mockPriceHandler.getCurrent(), menu.getCurrentOffer());
     }
 
 }
