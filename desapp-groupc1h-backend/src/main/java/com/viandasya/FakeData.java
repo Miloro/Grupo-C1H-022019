@@ -194,8 +194,7 @@ public class FakeData implements ApplicationRunner {
 
         Order order1 = anyOrder()
                 .setAmount(5)
-                .setOffers(new ArrayList<>(Collections.singletonList(
-                        new Offer(20, new BigDecimal("180.5")))))
+                .setOffer(new Offer(20, new BigDecimal("180.5")))
                 .setScore(null)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(3).plusHours(1)))
@@ -205,7 +204,7 @@ public class FakeData implements ApplicationRunner {
 
         Order order2 = anyOrder()
                 .setAmount(6)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(0, new BigDecimal("200")))))
+                .setOffer(new Offer(0, new BigDecimal("200")))
                 .setScore(null)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().plusDays(4), LocalDateTime.now().plusDays(4).plusHours(1)))
@@ -215,7 +214,7 @@ public class FakeData implements ApplicationRunner {
 
         Order order3 = anyOrder()
                 .setAmount(11)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(0, new BigDecimal("200")))))
+                .setOffer(new Offer(0, new BigDecimal("200")))
                 .setScore(4)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(7), LocalDateTime.now().minusDays(7).plusHours(1)))
@@ -225,7 +224,7 @@ public class FakeData implements ApplicationRunner {
 
         Order ordera = anyOrder()
                 .setAmount(35)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(30, new BigDecimal("202.10")))))
+                .setOffer(new Offer(30, new BigDecimal("202.10")))
                 .setScore(null)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().withHour(15),
@@ -236,7 +235,7 @@ public class FakeData implements ApplicationRunner {
 
         Order orderb = anyOrder()
                 .setAmount(33)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(30, new BigDecimal("202.10")))))
+                .setOffer(new Offer(30, new BigDecimal("202.10")))
                 .setScore(2)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(21).withHour(19),
@@ -247,7 +246,7 @@ public class FakeData implements ApplicationRunner {
 
         Order orderc = anyOrder()
                 .setAmount(21)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(30, new BigDecimal("202.10")))))
+                .setOffer(new Offer(30, new BigDecimal("202.10")))
                 .setScore(5)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(10).withHour(14),

@@ -85,16 +85,12 @@ public class OrderBuilderTest {
     }
 
     @Test
-    public void testSetOffersSetedInBuilderEqualsToTheOneGettedInOrder() {
-        List<Offer> offers = new ArrayList<>();
-        offers.add(Mockito.mock(Offer.class));
-        offers.add(Mockito.mock(Offer.class));
-        Order order = anyOrder().setOffers(offers).createOrder();
+    public void testSetOfferSetedInBuilderEqualsToTheOneGettedInOrder() {
+        Offer offer = Mockito.mock(Offer.class);
+        Order order = anyOrder().setOffer(offer).createOrder();
 
-        Assert.assertEquals(offers, order.getOffers());
+        Assert.assertEquals(offer, order.getOffer());
     }
-
-
 }
 
 
