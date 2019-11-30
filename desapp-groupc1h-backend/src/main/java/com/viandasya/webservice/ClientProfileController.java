@@ -1,8 +1,11 @@
 package com.viandasya.webservice;
 
+import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ClientProfile;
+import com.viandasya.model.user.User;
 import com.viandasya.service.ClientProfileService;
 import com.viandasya.webservice.dtos.ClientProfileDTO;
+import com.viandasya.webservice.dtos.UserDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,11 +32,16 @@ public class ClientProfileController {
         return clientProfileService.existsById(id);
     }
 
-    @GetMapping("/client/email/{email}")
-    public ClientProfileDTO getUser(@PathVariable String email){
+    @GetMapping("/user/email/{email}")
+    public UserDTO getUser(@PathVariable String email){
         return clientProfileService.getUserbyEmail(email)
                 .map(this::convertToDTO)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @PutMapping("user/{userId}/client")
+    public Balance deposit(@PathVariable String userId, @RequestBody Balance amount){
+        return clientProfileService.deposit(userId,amount);
     }
 
 
@@ -42,9 +50,9 @@ public class ClientProfileController {
         return clientProfileService.findAll();
     }
 
-    private ClientProfileDTO convertToDTO(ClientProfile serviceProfile) {
-        ClientProfileDTO ClientProfileDTO = modelMapper.map(serviceProfile, ClientProfileDTO.class);
-        return ClientProfileDTO;
+    private UserDTO convertToDTO(User user) {
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+        return userDTO;
     }
 
 }

@@ -8,6 +8,7 @@ import "../../App.css"
 const format = "HH:mm";
 
 class Buy extends React.Component {
+
     constructor(props) {
         super(props);
         this.onChangeInputNumber = this.onChangeInputNumber.bind(this);
@@ -18,12 +19,11 @@ class Buy extends React.Component {
         this.disabledDate = this.disabledDate.bind(this);
         this.state = {amount: 0, delivery: false, date: "", orderTimeFrom: "00:00", orderTimeTo: "00:00"};
         this.alert = React.createRef();
-        console.log(this.props.location.state)
-        console.log(this.props.user.id);
+        console.log( this.props.user)
     }
 
-
     render() {
+        const {formatMessage} = this.props.intl;
         return (
             <div className="App">
                 <Row gutter={1} type="flex" justify="center" align="top">
@@ -59,7 +59,7 @@ class Buy extends React.Component {
                         <h2>dia:</h2>
                     </Col>
                     <Col span={8}>
-                        <DatePicker disabledDate={this.disabledDate} onChange={this.onChangeDatePicker}/>
+                        <DatePicker disabledDate={this.disabledDate} onChange={this.onChangeDatePicker} format={formatMessage({id:"dateFormat"})}/>
                     </Col>
                 </Row>
                 <Row gutter={1} type="flex" justify="center" align="top">
@@ -88,10 +88,11 @@ class Buy extends React.Component {
         this.setState({...this.state, delivery: isDelivert.target.checked});
     }
 
-    onChangeDatePicker(x, dateString) {
+    onChangeDatePicker(x) {
         if (x != null) {
+            var date = x._d.toISOString().split('T')[0];
             isNotHoliday(x._d.getDate(), x._d.getMonth(), 2019);
-            this.setState({...this.state, date: dateString});
+            this.setState({...this.state, date: date});
         }
     }
 
@@ -109,7 +110,7 @@ class Buy extends React.Component {
     }
 
     confirmOrder() {
-        createOrder(this.state,this.props.getTokenSilently,this.props.location.state.id, this.props.user.id);
+        createOrder(this.state,this.props.getTokenSilently,this.props.location.state.id, this.props.user.id.email);
     }
 
 }

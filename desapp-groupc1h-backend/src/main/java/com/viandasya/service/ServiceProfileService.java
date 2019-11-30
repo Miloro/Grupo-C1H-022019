@@ -36,13 +36,7 @@ public class ServiceProfileService {
         return user.getServiceProfile().getBalance();
     }
 
-    @Transactional
-    public Balance deposit(String userId, Balance amount) {
-        User user = userRepository.findById(userId).get();
-        user.getClientProfile().getBalance().deposit(amount.getAmount());
-        userRepository.save(user);
-        return user.getClientProfile().getBalance();
-    }
+
     public Iterable<ServiceProfile> findAll() {
         return serviceProfileRepository.findAll();
     }

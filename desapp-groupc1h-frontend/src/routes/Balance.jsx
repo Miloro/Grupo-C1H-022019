@@ -10,7 +10,6 @@ class Balance  extends React.Component{
         this.onChangeInputNumberWithdraw = this.onChangeInputNumberWithdraw.bind(this);
         this.state = {amountToDeposit: 0, amountToWithdraw: 0};
         this.alert = React.createRef();
-
     }
 
     render(){
@@ -42,7 +41,8 @@ class Balance  extends React.Component{
                     </Col>
                     <Col span={8}>
                         <InputNumber defaultValue={0} size={"large"} min={0}
-                                     onChange={this.onChangeInputNumberWithdraw}/>
+                                     onChange={this.onChangeInputNumberWithdraw}
+                                     disabled={true}/>
                     </Col>
                 </Row>
                 <Button variant="primary" onClick={() => this.sendNewBalance()}>aceptar</Button>
@@ -59,8 +59,10 @@ class Balance  extends React.Component{
     }
 
     sendNewBalance() {
-        deposit(399,this.state.amountToDeposit);
-        withdraw(399,this.state.amountToWithdraw);
+        deposit(this.props.user.id.email,this.state.amountToDeposit,this.props.getTokenSilently);
+        if(this.state.amountToWithdraw){
+            withdraw(this.props.user.id.email,this.state.amountToWithdraw,this.props.getTokenSilently);
+        }
     }
 
 
