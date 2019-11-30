@@ -101,13 +101,13 @@ public class FakeData implements ApplicationRunner {
         ClientProfile clientProfile1 = anyClientProfile()
                 .setName("Lisa")
                 .setLastName("Romero")
-                .setEmail("lisar.3467@gmail.com")
+                .setEmail("lisarmailfalso@gmail.com")
                 .setLocation(new Location("Condarco 430", "Wilde", -34.7048199, -58.3264779))
                 .setBalance(new Balance(new BigDecimal("2000")))
                 .createClientProfile();
 
         User user1 = new User();
-        user1.setEmail("lisar.3467@gmail.com");
+        user1.setEmail("lisarmailfalso@gmail.com");
         user1.addClientProfile(clientProfile1);
         user1.addServiceProfile(serviceProfile1);
 

@@ -62,5 +62,7 @@
   "Orders" : "orders",
   "Required" : "required",
   "withdraw" : "Withdraw",
-  "deposit" : "Deposit"
+  "deposit" : "Deposit",
+  "balance" : "Balance",
+  "dateFormat" : "YYYY-MM-DD"
 }
