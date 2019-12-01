@@ -24,11 +24,14 @@ public class PriceHandlerBuilderTest {
 
     @Test
     public void testSetOffersSetedInBuilderEqualsToTheOneGettedInPriceHandler() {
+        Offer current = Mockito.mock(Offer.class);
         List<Offer> offers = new ArrayList<>();
         offers.add(Mockito.mock(Offer.class));
         offers.add(Mockito.mock(Offer.class));
 
-        PriceHandler priceHandler = anyPriceHandler().setOffers(offers).createPriceHandler();
+        PriceHandler priceHandler = anyPriceHandler().setCurrent(current)
+                .setOffers(offers).createPriceHandler();
+        offers.add(current);
 
         Assert.assertEquals(offers, priceHandler.getOffers());
     }

@@ -1,10 +1,14 @@
 package com.viandasya.webservice.dtos;
 
 import com.viandasya.model.menu.Category;
+import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Offer;
+import com.viandasya.model.menu.PriceHandler;
 import com.viandasya.model.user.Location;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuPreviewDTO {
@@ -14,7 +18,7 @@ public class MenuPreviewDTO {
     private Double score;
     private List<Category> categories;
     private BigDecimal price;
-    private List<Offer> offers;
+    private List<Offer> offers = new ArrayList<>();
     private String serviceLogo;
     private String serviceName;
     private Double serviceScore;
@@ -63,20 +67,12 @@ public class MenuPreviewDTO {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public void setServiceScore(Double serviceScore) {
-        this.serviceScore = serviceScore;
-    }
-
     public List<Offer> getOffers() {
         return offers;
     }
 
-    public void setOffers(List<Offer> offers) {
-        this.offers = offers;
+    public void setServiceScore(Double serviceScore) {
+        this.serviceScore = serviceScore;
     }
 
     public String getServiceName() {
@@ -110,4 +106,10 @@ public class MenuPreviewDTO {
     public void setServiceLogo(String serviceLogo) {
         this.serviceLogo = serviceLogo;
     }
+
+    public void setPriceHandler(PriceHandler priceHandler) {
+        this.price = priceHandler.getCurrent().getPrice();
+        this.offers.addAll(priceHandler.getOffers());
+    }
+
 }

@@ -273,11 +273,12 @@ public class FakeData implements ApplicationRunner {
 
     private static PriceHandler createPriceHandler(String price, String minPrice1,
                                                    String minPrice2, Integer min1, Integer min2) {
+        Offer current = anyOffer().setPrice(price).setMinAmount(0).createOffer();
         List<Offer> offers = new ArrayList<>();
         offers.add(anyOffer().setPrice(minPrice1).setMinAmount(min1).createOffer());
         offers.add(anyOffer().setPrice(minPrice2).setMinAmount(min2).createOffer());
         return anyPriceHandler()
-                .setCurrent(anyOffer().setPrice(price).setMinAmount(0).createOffer())
+                .setCurrent(current)
                 .setOffers(offers)
                 .createPriceHandler();
     }

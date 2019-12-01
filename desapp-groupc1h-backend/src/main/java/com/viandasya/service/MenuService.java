@@ -4,12 +4,16 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.ServiceProfileRepository;
+import com.viandasya.persistence.MenuOrderCountDTO;
 import com.viandasya.webservice.dtos.SearchDTO;
 import org.springframework.data.domain.Page;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -45,11 +49,23 @@ public class MenuService {
         menu.setDescription(convertToEntity.getDescription());
         menu.setCategories(convertToEntity.getCategories());
         menu.setValidity(convertToEntity.getValidity());
-        //TODO add price handler;
+        menu.setPriceHandler(convertToEntity.getPriceHandler());
         menu.setMaxAmountPerDay(convertToEntity.getMaxAmountPerDay());
         menu.setCookingTime(convertToEntity.getCookingTime());
         menuRepository.save(menu);
         return menuRepository.findById(id).get();
+    }
+
+    @Scheduled(cron = "0 0 */5 * * *")
+    @Transactional
+    public void updateMenuPrice() {
+        List<Menu> menusToUpdate = new ArrayList<>();
+        for (MenuOrderCountDTO menuOrderCountDTO : this.menuRepository.findAllAsToUpdateMenuDTO()) {
+            boolean isUpdated = menuOrderCountDTO.getMenu().getPriceHandler()
+                    .updateCurrent(menuOrderCountDTO.getOrderCount());
+            if (isUpdated) menusToUpdate.add(menuOrderCountDTO.getMenu());
+        }
+        this.menuRepository.saveAll(menusToUpdate);
     }
 
     @Transactional

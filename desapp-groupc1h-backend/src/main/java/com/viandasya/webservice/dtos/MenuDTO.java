@@ -3,6 +3,7 @@ package com.viandasya.webservice.dtos;
 import com.viandasya.model.menu.Category;
 import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Offer;
+import com.viandasya.model.menu.PriceHandler;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.TimeTable;
 
@@ -10,12 +11,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class MenuDTO {
+    //TODO agregar price handler
     private String name;
     private String description;
     private List<Category> categories;
     private DateTimeSlot validity;
-
-    // deliveryInfo;
     private TimeTable deliveryInfoTimetable;
     private BigDecimal deliveryInfoPrice;
     private Integer deliveryInfoAverageTime;

@@ -31,6 +31,7 @@ public class PriceHandlerBuilder {
     public PriceHandler createPriceHandler() {
         PriceHandler priceHandler = new PriceHandler(current);
         offers.forEach(priceHandler::addOffer);
+        priceHandler.addOffer(current);
         return priceHandler;
     }
 
