@@ -5,6 +5,7 @@ import {useUser} from "../../providers/UserProvider";
 import {Col, Row} from "antd";
 
 function Service() {
+    const userId = "miloromiguel@gmail.com";
     const [service, setService] = useState(null);
     const [{id}, ] = useUser();
 
@@ -12,7 +13,7 @@ function Service() {
         
         <Row type="flex" justify="space-around" align="middle">
             <Col span={20} style={{backgroundColor: "#ffffff"}}>
-                {!service && <ServiceForm userId={id.email} setService={setService}/>}
+                {id.serviceProfileEmail === null && <ServiceForm userId={id.email} setService={setService}/>}
             </Col>
         </Row>
 
