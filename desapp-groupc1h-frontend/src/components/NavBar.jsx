@@ -45,6 +45,10 @@ const NavBar = () => {
                         <FormattedMessage id="balance"/>
                     </Button>}
                     {(!loading) && isAuthenticated && id &&
+                    <Button type="primary" onClick={() => history.push("/service")}>
+                        <FormattedMessage id="Service"/>
+                    </Button>}
+                    {(!loading) && isAuthenticated && id &&
                     <Button type="primary" onClick={() => logout()}>
                         <FormattedMessage id="logout"/>
                     </Button>}
