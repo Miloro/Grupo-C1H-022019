@@ -6,14 +6,14 @@ import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.ServiceProfileRepository;
 import com.viandasya.persistence.MenuOrderCountDTO;
 import com.viandasya.webservice.dtos.SearchDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -23,6 +23,8 @@ public class MenuService {
     private final MenuRepository menuRepository;
     private final ServiceProfileRepository serviceProfileRepository;
     private Map<String, Function<SearchDTO,Page<Menu>>> pageMenusFunctions;
+    private final static Logger logger = LoggerFactory.getLogger(MenuService.class);
+
 
     public MenuService(MenuRepository menuRepository, ServiceProfileRepository servicerepository) {
         this.menuRepository = menuRepository;
@@ -59,13 +61,15 @@ public class MenuService {
     @Scheduled(cron = "0 0 */5 * * *")
     @Transactional
     public void updateMenuPrice() {
-        List<Menu> menusToUpdate = new ArrayList<>();
+        logger.info("Beginning update of menu prices....");
         for (MenuOrderCountDTO menuOrderCountDTO : this.menuRepository.findAllAsToUpdateMenuDTO()) {
             boolean isUpdated = menuOrderCountDTO.getMenu().getPriceHandler()
                     .updateCurrent(menuOrderCountDTO.getOrderCount());
-            if (isUpdated) menusToUpdate.add(menuOrderCountDTO.getMenu());
+            if (isUpdated) {
+                this.menuRepository.save(menuOrderCountDTO.getMenu());
+            }
         }
-        this.menuRepository.saveAll(menusToUpdate);
+        logger.info("Price update successfull");
     }
 
     @Transactional

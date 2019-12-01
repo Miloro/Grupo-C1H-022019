@@ -119,7 +119,7 @@ public class FakeData implements ApplicationRunner {
         //////////  USER A : SERVICE PROFILE WITH 2 MENUS  //////////
 
         Menu menua = anyMenu()
-                .setPriceHandler(createPriceHandler("399.99","350", "202.10", 50, 80))
+                .setPriceHandler(createPriceHandler("399.99","350", "202.10", 41, 80))
                 .setDeliveryInfo(
                         new DeliveryInfo(createTimetableFromToOnWeekdays(LocalTime.of(14,0),
                                 LocalTime.of(18,0)),
@@ -193,7 +193,7 @@ public class FakeData implements ApplicationRunner {
         ////////////////////////////   CREATING ORDERS   ////////////////////////////
 
         Order order1 = anyOrder()
-                .setAmount(5)
+                .setAmount(20)
                 .setOffer(new Offer(20, new BigDecimal("180.5")))
                 .setScore(null)
                 .setIsDelivery(false)
@@ -203,7 +203,7 @@ public class FakeData implements ApplicationRunner {
                 .createOrder();
 
         Order order2 = anyOrder()
-                .setAmount(6)
+                .setAmount(10)
                 .setOffer(new Offer(0, new BigDecimal("200")))
                 .setScore(null)
                 .setIsDelivery(true)

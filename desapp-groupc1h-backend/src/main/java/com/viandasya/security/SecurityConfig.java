@@ -33,11 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated()
-//                .mvcMatchers("/api/public").permitAll()
-//                .mvcMatchers("/api/private").authenticated()
-//                .mvcMatchers("/api/private-other").authenticated()
-//                .mvcMatchers("api/private-scoped").hasAuthority("SCOPE_read:messages")
+        http.authorizeRequests()
+                .mvcMatchers("/menus/price").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer().jwt();
     }
