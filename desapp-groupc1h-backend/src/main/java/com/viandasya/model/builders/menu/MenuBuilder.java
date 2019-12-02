@@ -3,14 +3,14 @@ package com.viandasya.model.builders.menu;
 import com.viandasya.model.menu.Category;
 import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Menu;
-import com.viandasya.model.menu.Offer;
+import com.viandasya.model.menu.PriceHandler;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.DateTimeSlot;
 
 import java.math.BigDecimal;
 import java.util.*;
 
-import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
+import static com.viandasya.model.builders.menu.PriceHandlerBuilder.anyPriceHandler;
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
 import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTable;
 
@@ -18,11 +18,10 @@ public class MenuBuilder {
     private String name = "Combo Vegetariano";
     private String description = "Es una ensalada de lechuga, tomate y huevo";
     private List<Category> categories = Collections.singletonList(Category.GREEN);
+    private PriceHandler priceHandler = anyPriceHandler().createPriceHandler();
     private DateTimeSlot validity = anyDateTimeSlot().createDateTimeSlot();
     private DeliveryInfo deliveryInfo = new DeliveryInfo(anyTimeTable().createTimeTable(),
             new BigDecimal("20"), 60);
-    private List<Offer> offers = Arrays.asList(anyOffer().setPrice(new BigDecimal("200")).createOffer(),
-            anyOffer().createOffer());
     private Integer maxAmountPerDay = 33;
     private List<Order> orders = new ArrayList<>();
     private Integer cookingTime = 15;
@@ -51,16 +50,15 @@ public class MenuBuilder {
         return this;
     }
 
+    public MenuBuilder setPriceHandler(PriceHandler priceHandler) {
+        this.priceHandler = priceHandler;
+        return this;
+    }
+
     public MenuBuilder setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
         return this;
     }
-
-    public MenuBuilder setOffers(List<Offer> offers) {
-        this.offers = offers;
-        return this;
-    }
-
 
     public MenuBuilder setMaxAmountPerDay(Integer maxAmountPerDay) {
         this.maxAmountPerDay = maxAmountPerDay;
@@ -79,10 +77,9 @@ public class MenuBuilder {
 
     public Menu createMenu() {
         Random random = new Random();
-        Menu menu = new Menu(name, description, categories, validity, offers, maxAmountPerDay, cookingTime);
+        Menu menu = new Menu(name, description, categories, validity, priceHandler, maxAmountPerDay, cookingTime);
         menu.addDeliveryInfo(deliveryInfo);
         orders.forEach(menu::addOrder);
-        menu.setPrice(random.nextInt(300));
         menu.setScore(random.nextInt(5));
         return menu;
     }

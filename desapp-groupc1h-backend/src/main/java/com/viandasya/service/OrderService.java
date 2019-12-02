@@ -37,8 +37,8 @@ public class OrderService {
         System.out.println(clientProfile);
         menu.addOrder(order);
         order.setClient(clientProfile);
-        order.getOffers().add(menu.getCurrentOffer());
-        BigDecimal price = order.getCurrentPrice();
+        order.setOffer(menu.getCurrentOffer());
+        BigDecimal price = order.getOffer().getPrice();
         clientProfile.getBalance().withdraw(price);
         ServiceProfile serviceProfile = menu.getServiceProfile();
         serviceProfile.getBalance().deposit(price);

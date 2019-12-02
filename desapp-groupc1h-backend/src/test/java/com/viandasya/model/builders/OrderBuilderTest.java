@@ -12,8 +12,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.viandasya.model.builders.OrderBuilder.anyOrder;
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.*;
@@ -85,16 +83,12 @@ public class OrderBuilderTest {
     }
 
     @Test
-    public void testSetOffersSetedInBuilderEqualsToTheOneGettedInOrder() {
-        List<Offer> offers = new ArrayList<>();
-        offers.add(Mockito.mock(Offer.class));
-        offers.add(Mockito.mock(Offer.class));
-        Order order = anyOrder().setOffers(offers).createOrder();
+    public void testSetOfferSetedInBuilderEqualsToTheOneGettedInOrder() {
+        Offer offer = Mockito.mock(Offer.class);
+        Order order = anyOrder().setOffer(offer).createOrder();
 
-        Assert.assertEquals(offers, order.getOffers());
+        Assert.assertEquals(offer, order.getOffer());
     }
-
-
 }
 
 

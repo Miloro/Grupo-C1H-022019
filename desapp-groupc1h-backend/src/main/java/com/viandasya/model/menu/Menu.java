@@ -17,7 +17,6 @@ public class Menu {
 
     private String name;
     private String description;
-    private Integer price;
     private Integer score;
 
     @ElementCollection
@@ -28,8 +27,7 @@ public class Menu {
     @OneToOne(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private DeliveryInfo deliveryInfo;
 
-    @ElementCollection
-    private List<Offer> offers = new ArrayList<>();
+    private PriceHandler priceHandler;
 
     private Integer maxAmountPerDay;
 
@@ -41,12 +39,12 @@ public class Menu {
     @ManyToOne
     private ServiceProfile serviceProfile;
 
-    public Menu(String name, String description, List<Category> categories, DateTimeSlot validity, List<Offer> offers, Integer maxAmountPerDay, Integer cookingTime) {
+    public Menu(String name, String description, List<Category> categories, DateTimeSlot validity, PriceHandler priceHandler, Integer maxAmountPerDay, Integer cookingTime) {
         this.name = name;
         this.description = description;
         this.categories = categories;
         this.validity = validity;
-        this.offers = offers;
+        this.priceHandler = priceHandler;
         this.maxAmountPerDay = maxAmountPerDay;
         this.cookingTime = cookingTime;
     }
@@ -95,14 +93,6 @@ public class Menu {
         this.deliveryInfo = deliveryInfo;
     }
 
-    public List<Offer> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(List<Offer> offers) {
-        this.offers = offers;
-    }
-
     public Integer getMaxAmountPerDay() {
         return maxAmountPerDay;
     }
@@ -140,22 +130,12 @@ public class Menu {
         return this.validity.isValidDate(LocalDateTime.now());
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public Offer getCurrentOffer() {
-        int orderCount = this.getOrderCount();
-        return this.offers.stream().filter(o -> orderCount >= o.getMinAmount()).findFirst().get();
+        return this.priceHandler.getCurrent();
     }
 
     private int getOrderCount() {
         return this.orders.stream().mapToInt(Order::getAmount).sum();
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
     }
 
     public Integer getScore() {
@@ -168,5 +148,13 @@ public class Menu {
 
     public long getId() {
         return id;
+    }
+
+    public PriceHandler getPriceHandler() {
+        return priceHandler;
+    }
+
+    public void setPriceHandler(PriceHandler priceHandler) {
+        this.priceHandler = priceHandler;
     }
 }

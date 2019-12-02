@@ -10,12 +10,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class MenuDTO {
+    //TODO agregar price handler
     private String name;
     private String description;
     private List<Category> categories;
     private DateTimeSlot validity;
-
-    // deliveryInfo;
     private TimeTable deliveryInfoTimetable;
     private BigDecimal deliveryInfoPrice;
     private Integer deliveryInfoAverageTime;
