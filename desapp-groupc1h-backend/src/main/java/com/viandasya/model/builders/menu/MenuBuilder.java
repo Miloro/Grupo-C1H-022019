@@ -7,7 +7,6 @@ import com.viandasya.model.timeslot.DateTimeSlot;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 import static com.viandasya.model.builders.menu.PriceHandlerBuilder.anyPriceHandler;
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
 import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTable;

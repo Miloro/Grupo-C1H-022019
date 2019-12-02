@@ -3,7 +3,6 @@ package com.viandasya.webservice.dtos;
 import com.viandasya.model.menu.Category;
 import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Offer;
-import com.viandasya.model.menu.PriceHandler;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.timeslot.TimeTable;
 

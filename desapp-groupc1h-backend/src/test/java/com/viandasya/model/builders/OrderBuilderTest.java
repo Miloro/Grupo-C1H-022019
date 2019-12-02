@@ -12,8 +12,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.viandasya.model.builders.OrderBuilder.anyOrder;
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.*;

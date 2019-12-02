@@ -1,13 +1,11 @@
 package com.viandasya.webservice.dtos;
 
 import com.viandasya.model.menu.Category;
-import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.menu.PriceHandler;
 import com.viandasya.model.user.Location;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

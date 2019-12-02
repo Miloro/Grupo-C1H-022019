@@ -3,7 +3,6 @@ package com.viandasya.model.builders.menu;
 import com.viandasya.model.menu.Category;
 import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Menu;
-import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
 import org.junit.Test;
 
@@ -12,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
-import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 
 import com.viandasya.model.timeslot.DateTimeSlot;
 import org.junit.Assert;

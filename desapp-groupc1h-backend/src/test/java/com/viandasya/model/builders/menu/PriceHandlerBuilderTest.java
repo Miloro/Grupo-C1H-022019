@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.viandasya.model.builders.menu.PriceHandlerBuilder.anyPriceHandler;
-import static org.junit.Assert.*;
 
 public class PriceHandlerBuilderTest {
 

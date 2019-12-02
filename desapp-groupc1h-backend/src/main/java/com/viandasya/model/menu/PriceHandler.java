@@ -2,7 +2,6 @@ package com.viandasya.model.menu;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
-import javax.persistence.OrderBy;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

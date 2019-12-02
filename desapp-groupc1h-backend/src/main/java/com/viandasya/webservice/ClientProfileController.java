@@ -43,8 +43,7 @@ public class ClientProfileController {
     }
 
     private ClientProfileDTO convertToDTO(ClientProfile serviceProfile) {
-        ClientProfileDTO ClientProfileDTO = modelMapper.map(serviceProfile, ClientProfileDTO.class);
-        return ClientProfileDTO;
+        return modelMapper.map(serviceProfile, ClientProfileDTO.class);
     }
 
 }

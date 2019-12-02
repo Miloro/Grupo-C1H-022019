@@ -4,8 +4,6 @@ import com.viandasya.model.menu.Offer;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
 import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 
 public class OfferBuilderTest {
