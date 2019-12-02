@@ -1,6 +1,10 @@
 package com.viandasya;
 
-import com.viandasya.model.menu.*;
+import com.viandasya.model.menu.Category;
+import com.viandasya.model.menu.DeliveryInfo;
+import com.viandasya.model.menu.Menu;
+import com.viandasya.model.menu.Offer;
+import com.viandasya.model.menu.PriceHandler;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
 import com.viandasya.model.timeslot.DateTimeSlot;
