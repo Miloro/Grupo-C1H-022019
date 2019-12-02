@@ -176,14 +176,14 @@ public class FakeData implements ApplicationRunner {
         ClientProfile clientProfilea = anyClientProfile()
                 .setName("Miguel")
                 .setLastName("Miloro")
-                .setEmail("pepito@gmail.com")
+                .setEmail("mailfalso241@gmail.com")
                 .setLocation(new Location("Uruguay 2200", "Ezpeleta Oeste",
                         -34.7597263, -58.2642824))
                 .setBalance(new Balance(new BigDecimal("500")))
                 .createClientProfile();
 
         User usera = new User();
-        usera.setEmail("pepito@gmail.com");
+        usera.setEmail("mailfalso241@gmail.com");
         usera.addClientProfile(clientProfilea);
         usera.addServiceProfile(serviceProfilea);
 
@@ -242,7 +242,7 @@ public class FakeData implements ApplicationRunner {
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(21).withHour(19),
                         LocalDateTime.now().minusDays(21).withHour(20)))
-                .setState(OrderState.DELIVERED)
+                .setState(OrderState.PENDING)
                 .setClient(savedClienta)
                 .createOrder();
 
