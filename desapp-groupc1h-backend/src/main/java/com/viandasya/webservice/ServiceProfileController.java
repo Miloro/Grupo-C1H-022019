@@ -60,11 +60,6 @@ public class ServiceProfileController {
         return serviceProfileService.withdraw(userId,amount);
     }
 
-    @PutMapping("user/{userId}/client")
-    public Balance deposit(@PathVariable String userId, @RequestBody Balance amount){
-        return serviceProfileService.deposit(userId,amount);
-    }
-
     private ServiceProfileDTO convertToDTO(ServiceProfile serviceProfile) {
         ServiceProfileDTO serviceProfileDTO = modelMapper.map(serviceProfile, ServiceProfileDTO.class);
         serviceProfileDTO.setTimeTable(serviceProfile.getTimetable());
