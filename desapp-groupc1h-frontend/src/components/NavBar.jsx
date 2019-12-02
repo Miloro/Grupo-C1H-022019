@@ -4,8 +4,10 @@ import MenuSearchInput from "../routes/menus/MenuSearchInput";
 import {useAuth0} from "../providers/Auth0Provider";
 import {useUser} from "../providers/UserProvider";
 import {FormattedMessage} from "react-intl";
+import { useHistory } from "react-router-dom";
 
 const {Title} = Typography;
+
 
 const menuProps = {
     mode: "horizontal",
@@ -24,6 +26,7 @@ const logoProps = {
 const NavBar = () => {
     const {isAuthenticated, loading, logout} = useAuth0();
     const [{id}, ] = useUser();
+    let history = useHistory();
 
     return <Row>
         <Col span={5}>
@@ -36,9 +39,11 @@ const NavBar = () => {
         </Col>
         <Col span={7}>
             <Menu {...menuProps}>
-                <Menu.Item key="1">nav 1</Menu.Item>
-                <Menu.Item key="2">nav 2</Menu.Item>
                 <Menu.Item key="3">
+                {(!loading) && isAuthenticated && id &&
+                    <Button type="primary" onClick={() => history.push("/balance")}>
+                        <FormattedMessage id="balance"/>
+                    </Button>}
                     {(!loading) && isAuthenticated && id &&
                     <Button type="primary" onClick={() => logout()}>
                         <FormattedMessage id="logout"/>

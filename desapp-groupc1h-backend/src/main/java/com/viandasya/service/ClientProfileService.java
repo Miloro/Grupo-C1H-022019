@@ -1,5 +1,6 @@
 package com.viandasya.service;
 
+import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.user.User;
 import com.viandasya.persistence.ClientProfileRepository;
@@ -38,7 +39,15 @@ public class ClientProfileService {
         return userRepository.existsById(id);
     }
 
-    public Optional<ClientProfile> getUserbyEmail(String email) {
-        return clientProfileRepository.findByEmail(email);
+    public Optional<User> getUserbyEmail(String email) {
+        return  userRepository.findById(email);
+    }
+
+    @Transactional
+    public Balance deposit(String userId, Balance amount) {
+        User user = userRepository.findById(userId).get();
+        user.getClientProfile().getBalance().deposit(amount.getAmount());
+        userRepository.save(user);
+        return user.getClientProfile().getBalance();
     }
 }
