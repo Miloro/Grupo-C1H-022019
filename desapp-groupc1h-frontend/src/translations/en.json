@@ -19,7 +19,7 @@
   "client.create": "Registration",
   "client.info": "Information",
   "service.create": "Create Service",
-  "service.info":"Service Information*",
+  "info":"Information*",
   "service.timetable": "Schedule*",
   "location": "Location",
   "verified": "Verify",
@@ -64,5 +64,9 @@
   "withdraw" : "Withdraw",
   "deposit" : "Deposit",
   "balance" : "Balance",
-  "dateFormat" : "YYYY-MM-DD"
+  "dateFormat" : "YYYY-MM-DD",
+  "menu.create": "Create Menu",
+  "menu.select.categories": "Select at least one category",
+  "menu.deliveryPrice": "Delivery price*",
+  "menu.averageDeliveryTime": "Average delivery time (in minutes)"
 }

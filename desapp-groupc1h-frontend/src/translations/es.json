@@ -17,7 +17,7 @@
   "client.create": "Registro",
   "client.info": "Información",
   "service.create": "Crear Servicio",
-  "service.info":"Información del Servicio*",
+  "info":"Información*",
   "service.timetable": "Horarios y días de atención*",
   "location": "Ubicación",
   "verified": "Verificar",
@@ -63,5 +63,8 @@
   "withdraw" : "Retirar",
   "deposit" : "Depositar",
   "balance" : "Saldo",
-  "dateFormat" : "DD/MM/YYYY"
+  "dateFormat" : "DD/MM/YYYY",
+  "menu.select.categories": "Seleccione minimo una categoria",
+  "menu.deliveryPrice": "Valor de delivery*",
+  "menu.averageDeliveryTime": "Tiempo promedio de delivery (en minutos)"
 }

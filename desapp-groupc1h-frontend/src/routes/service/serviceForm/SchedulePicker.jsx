@@ -5,7 +5,7 @@ import {useIntl} from "react-intl";
 const {Item} = Form;
 
 
-function ServiceShedulePicker({timetable, setFieldValue}) {
+function SchedulePicker({timetable, setFieldValue}) {
     const {formatMessage} = useIntl();
     const format = 'HH:mm';
 
@@ -43,4 +43,4 @@ function ServiceShedulePicker({timetable, setFieldValue}) {
 }
 
 
-export default ServiceShedulePicker;
+export default SchedulePicker;
