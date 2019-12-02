@@ -19,7 +19,7 @@ public class CronTasksService {
         this.mailSenderService = mailSenderService;
     }
 
-    @Scheduled(cron = "1 * * * * *")
+    @Scheduled(cron = "0 0 * * * *")
     public void acceptOrders() {
         List<Order> orderPending = this.orderService.getOrdersPending(OrderState.PENDING);
 
