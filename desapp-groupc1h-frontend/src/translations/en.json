@@ -13,7 +13,8 @@
   "string.min": "Field must be at least {n} characters long",
   "string.max": "Field must be more than {n} characters long",
   "num": "Field must be a number",
-  "num.min": "Field must be less than {n}",
+  "num.min": "Field must be more than {n}",
+  "num.max": "Field must be less than {n}",
   "invalidFormat": "Field is not in a valid format",
   "required": "Field is required",
   "client.create": "Registration",
@@ -66,7 +67,14 @@
   "balance" : "Balance",
   "dateFormat" : "YYYY-MM-DD",
   "menu.create": "Create Menu",
-  "menu.select.categories": "Select at least one category",
-  "menu.deliveryPrice": "Delivery price*",
-  "menu.averageDeliveryTime": "Average delivery time (in minutes)"
+  "categories": "Select categories",
+  "delivery": "Delivery Information",
+  "deliveryPrice": "Delivery price*",
+  "averageDeliveryTime": "Average delivery time (in minutes)*",
+  "minOneSelected": "Select al least one category",
+  "decimalSeparator": ".",
+  "startDate": "Start date",
+  "endDate": "End date",
+  "validityPeriod": "Validity period",
+  "add": "Add"
 }

@@ -111,7 +111,7 @@ const ServiceForm = ({userId, setService}) => {
                     <Title level={4} className='padding-top-4 align-left'>
                         <FormattedMessage id="service.timetable"/>
                     </Title>
-                    <SchedulePicker timetable={values.timetable} setFieldValue={setFieldValue}/>
+                    <SchedulePicker timetableName="timetable" timetable={values.timetable} setFieldValue={setFieldValue}/>
                     <Title level={4} className='padding-top-4 align-left'>
                         <FormattedMessage id="location"/>*
                     </Title>

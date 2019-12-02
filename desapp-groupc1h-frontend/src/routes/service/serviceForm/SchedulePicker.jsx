@@ -5,7 +5,7 @@ import {useIntl} from "react-intl";
 const {Item} = Form;
 
 
-function SchedulePicker({timetable, setFieldValue}) {
+function SchedulePicker({timetableName, timetable, setFieldValue}) {
     const {formatMessage} = useIntl();
     const format = 'HH:mm';
 
@@ -18,12 +18,12 @@ function SchedulePicker({timetable, setFieldValue}) {
             {timetable.map((slot, index) =>
             <div key={slot.day}>
                 <Col span={4}>
-                    <Item name={`timetable[${index}].checked`}>
-                        <Checkbox name={`timetable[${index}].checked`}>{formatMessage({id: slot.day})}</Checkbox>
+                    <Item name={`${timetableName}[${index}].checked`}>
+                        <Checkbox name={`${timetableName}[${index}].checked`}>{formatMessage({id: slot.day})}</Checkbox>
                     </Item>
                 </Col>
                 {['from', 'to'].map((range) => {
-                    const hourTime = `timetable[${index}].${range}`;
+                    const hourTime = `${timetableName}[${index}].${range}`;
                     return <Col span={4} key={range}>
                         <Item name={hourTime}>
                             <TimePicker name={hourTime}

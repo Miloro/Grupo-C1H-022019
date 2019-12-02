@@ -9,7 +9,7 @@ import Buy from "../routes/buy/Buy";
 import UnratedOrders from "../routes/UnratedOrders";
 import Cart from "../routes/Cart";
 import Orders from "../routes/Ordes";
-import MenuForm from "../routes/create-menu/MenuForm";
+import MenuForm from "../routes/menu/MenuForm";
 import Service from "../routes/service/Service";
 import Menus from "../routes/menus/Menus";
 import ServiceOrders from "../routes/ServiceOrders";
@@ -63,7 +63,7 @@ function App() {
                         <PrivateRoute path="/unrated-orderds" component={UnratedOrders}/>
                         <PrivateRoute path="/cart" component={Cart}/>
                         <PrivateRoute path="/orders" component={Orders}/>
-                        <PrivateRoute path="/service/create-menu" component={MenuForm}/>
+                        <Route path="/service/menu" component={MenuForm}/>
                         <PrivateRoute path="/service" component={Service}/>
                         <PrivateRoute path="/menus/:query" component={Menus}/>
                         <PrivateRoute path="/service/orders" component={ServiceOrders}/>

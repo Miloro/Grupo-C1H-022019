@@ -4,7 +4,7 @@ public enum Category {
     PIZZA,
     BEER,
     HAMBURGER,
-    SHSHI,
+    SUSHI,
     EMPANADAS,
     GREEN,
     VEGAN
