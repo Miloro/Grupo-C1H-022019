@@ -4,7 +4,6 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.user.ServiceProfile;
-import com.viandasya.persistence.ClientProfileRepository;
 import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.OrderRepository;
 import com.viandasya.persistence.UserRepository;

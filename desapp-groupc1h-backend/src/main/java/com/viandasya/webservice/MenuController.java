@@ -2,6 +2,7 @@ package com.viandasya.webservice;
 
 import com.viandasya.model.menu.Menu;
 import com.viandasya.service.MenuService;
+import com.viandasya.webservice.dtos.CreateMenuDTO;
 import com.viandasya.webservice.dtos.MenuDTO;
 import com.viandasya.webservice.dtos.MenuPreviewDTO;
 import com.viandasya.webservice.dtos.SearchDTO;
@@ -20,8 +21,9 @@ public class MenuController {
     }
 
     @PostMapping("service/{id}/menu")
-    public MenuDTO addMenu(@PathVariable Long id, @RequestBody MenuDTO menuDTO){
-        return convertToDto(menuService.createMenu(convertToEntity(menuDTO),id));
+    public void addMenu(@PathVariable Long id, @RequestBody CreateMenuDTO createMenuDTO){
+        Menu menu = modelMapper.map(createMenuDTO, Menu.class);
+        this.menuService.createMenu(menu, id);
     }
 
     @GetMapping("menu/{id}")
