@@ -71,10 +71,15 @@
   "delivery": "Delivery Information",
   "deliveryPrice": "Delivery price*",
   "averageDeliveryTime": "Average delivery time (in minutes)*",
-  "minOneSelected": "Select al least one category",
+  "minOneSelected": "Select at least one category",
+  "minTwoCreated": "Create at least two offers",
   "decimalSeparator": ".",
   "startDate": "Start date",
   "endDate": "End date",
   "validityPeriod": "Validity period",
-  "add": "Add"
+  "add": "Add",
+  "offer": "Offer",
+  "offerDisclaimer": "Must be a minimum of two offers per menu. Maximum value of a menu is $1000. First offer has a minimum amount of orders between 10 and 70 to apply the new price, the second one, between 40 and 150 and the following ones starting from 100. An offer must have a price lower and a minimum amount higher than the previous one.",
+  "delete": "Delete",
+  "maxAmountPerDay": "Maximum sales per day*"
 }

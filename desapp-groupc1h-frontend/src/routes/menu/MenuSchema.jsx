@@ -1,8 +1,7 @@
 import * as Yup from 'yup';
 
-const MenuSchema = formatMessage => {
-
-    return Yup.object().shape({
+const MenuSchema = formatMessage =>
+    Yup.object().shape({
         name: Yup.string()
             .min(2, formatMessage({id: 'string.min'}, {n: 2}))
             .max(30, formatMessage({id: 'string.max'}, {n: 30}))
@@ -22,8 +21,15 @@ const MenuSchema = formatMessage => {
                 .typeError(formatMessage({id: 'required'}))
                 .min(5, formatMessage({id: 'num.min'}, {n: 5}))
                 .max(120, formatMessage({id: 'num.max'}, {n: 120}))
-        })
+        }),
+        price: Yup.number()
+            .typeError(formatMessage({id: 'required'}))
+            .max(1000, formatMessage({id: 'num.max'}, {n: 1000})),
+        maxAmountPerDay: Yup.number()
+            .typeError(formatMessage({id: 'required'})),
+        offers: Yup.object().shape({
+            ls: Yup.array().min(2, formatMessage({id: 'minTwoCreated'}))
+        }),
     });
-};
 
 export default MenuSchema;

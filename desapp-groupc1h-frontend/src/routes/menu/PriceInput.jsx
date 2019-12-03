@@ -11,6 +11,7 @@ function PriceInput({name}) {
     return (
         <InputNumber name={name} {...inputNumberProps}
                      decimalSeparator={formatMessage({id: "decimalSeparator"})}
+                     min={0}
                      formatter={value => `$${value}`}
                      parser={value => value.replace("$", "")}/>
     );
