@@ -1,28 +1,30 @@
 import React from 'react';
-import {Col, Row, Typography, Button, Table} from "antd";
-import {Form, Input, InputNumber, Select, DatePicker, SubmitButton} from "formik-antd";
+import {Col, Row, Typography, Button, message as notification, Modal} from "antd";
+import {Form, Input, Select, DatePicker, SubmitButton} from "formik-antd";
 import {Formik} from "formik";
 import {FormattedMessage, useIntl} from "react-intl";
-import MenuSchema from "./MenuSchema";
-import SchedulePicker from "../service/serviceForm/SchedulePicker";
+import MenuSchema from "../MenuSchema";
 import moment from "moment";
 import PriceInput from "./PriceInput";
-import {post} from "../../api/API";
-import {useAuth0} from "../../providers/Auth0Provider";
+import {post} from "../../../api/API";
+import {useAuth0} from "../../../providers/Auth0Provider";
+import {useHistory} from "react-router-dom";
+import {useUser} from "../../../providers/UserProvider";
+import OffersTable from "./OffersTable";
+import NumberInput from "../../../components/NumberInput";
+import DeliveryInfoInputs from "./DeliveryInfoInputs";
 
 const {Item} = Form;
-const {Title, Paragraph} = Typography;
+const {Title} = Typography;
 const {RangePicker} = DatePicker;
 const {Option} = Select;
-const {Column} = Table;
-
-const inputNumberProps = {
-    style: {width: '100%'}
-};
+const {success} = Modal;
 
 const MenuForm = () => {
         const {formatMessage} = useIntl();
         const {getTokenSilently} = useAuth0();
+        let history = useHistory();
+        const [{serviceId},] = useUser();
         const formLayout = {
             wrapperCol: {
                 xs: {span: 24},
@@ -38,6 +40,7 @@ const MenuForm = () => {
             description: "",
             categories: [],
             validity: [null, null],
+            cookingTime: null,
             deliveryInfo: {
                 price: null,
                 averageTime: null,
@@ -53,11 +56,77 @@ const MenuForm = () => {
             maxAmountPerDay: null
         };
 
-        const onSubmit = ({offers, ...menu}) => {
-            const menuDTO = {...menu, offers: offers.ls.map(
-                offer => {const {key,...offerDTO} = offer; return offerDTO})};
+        const initialValues1 = {
+            name: "Omellete naturista",
+            description: "reducido en grasa y para niños de todas las edades y actividades",
+            categories: ["Green", "Vegan"],
+            validity: [moment().add(4, "days"), moment().add(4, "days")],
+            cookingTime: 30,
+            deliveryInfo: {
+                price: 12.5,
+                averageTime: 30,
+                timetable:
+                    [{
+                        "day": "monday",
+                        "checked": true,
+                        "from": "2019-12-03T23:45:12.000Z",
+                        "to": "2019-12-04T02:45:12.000Z"
+                    }, {"day": "tuesday", "checked": false, "from": null, "to": null}, {
+                        "day": "wednesday",
+                        "checked": true,
+                        "from": "2019-12-03T20:45:12.000Z",
+                        "to": "2019-12-04T00:45:12.000Z"
+                    }, {
+                        "day": "thursday",
+                        "checked": true,
+                        "from": "2019-12-03T12:30:12.000Z",
+                        "to": "2019-12-03T19:30:12.000Z"
+                    }, {"day": "friday", "checked": false, "from": null, "to": null}, {
+                        "day": "saturday",
+                        "checked": false,
+                        "from": null,
+                        "to": null
+                    }, {"day": "sunday", "checked": false, "from": null, "to": null}]
+            },
+            price: 200.35,
+            maxAmountPerDay: 12,
+            offers: {
+                key: 3,
+                price: null,
+                minAmount: null,
+                ls: [{key: 0, price: 185.99, minAmount: 15}, {key: 1, price: 170, minAmount: 43}, {
+                    key: 2,
+                    price: 145.99,
+                    minAmount: 110
+                }]
+            }
+        };
+
+        const onSubmit = ({offers, ...menu}, {setSubmitting}) => {
+            const menuDTO = {
+                ...menu, offers: offers.ls.map(offer => {const {key, ...offerDTO} = offer;return offerDTO})};
             console.log(JSON.stringify(menuDTO));
-            // post(getTokenSilently, "/api/service/{id}/menu", menuDTO, (response) => console.log(response.data));
+            post(getTokenSilently, `/api/service/${serviceId}/menu`, menuDTO,
+                () => {
+                    history.push("/menus/search");
+                    const modal = success({
+                        content: formatMessage({id: "createdMenu"}),
+                    });
+                    setTimeout(() => {
+                        modal.destroy();
+                    }, 20 * 1000);
+                },
+                (apiError) => {
+                    try {
+                        setSubmitting(false);
+                        const {status, error, message} = apiError.response.data;
+                        const apiErrorMessage = `Status ${status} ${error}: ${formatMessage({id: message})}`;
+                        notification.error(apiErrorMessage);
+                    } catch (error1) {
+                        console.log(error1)
+                    }
+                }
+            );
         };
 
         const disabledDate = (current) => {
@@ -83,7 +152,7 @@ const MenuForm = () => {
 
         return (
             <Formik
-                initialValues={initialValues}
+                initialValues={initialValues1}
                 validationSchema={MenuSchema(formatMessage)}
                 onSubmit={onSubmit}
                 component={({values, setFieldValue}) =>
@@ -103,6 +172,10 @@ const MenuForm = () => {
                                     <Item name="description">
                                         <Input.TextArea rows={6} name="description"
                                                         placeholder={formatMessage({id: "description"})}/>
+                                    </Item>
+                                    <Item name="cookingTime">
+                                        <NumberInput name="cookingTime"
+                                                     placeholder={formatMessage({id: "cookingTime"})}/>
                                     </Item>
                                     <Item name="categories">
                                         <Select name="categories"
@@ -126,19 +199,8 @@ const MenuForm = () => {
                                             placeholder={[formatMessage({id: "startDate"}), formatMessage({id: "endDate"})]}
                                         />
                                     </Item>
-                                    <Title level={4} className='align-left'>
-                                        <FormattedMessage id="delivery"/>
-                                    </Title>
-                                    <Item name="deliveryInfo.price" label={formatMessage({id: "deliveryPrice"})}>
-                                        <PriceInput name="deliveryInfo.price"/>
-                                    </Item>
-                                    <SchedulePicker timetableName="deliveryInfo.timetable"
-                                                    timetable={values.deliveryInfo.timetable}
-                                                    setFieldValue={setFieldValue}/>
-                                    <Item name="deliveryInfo.averageTime">
-                                        <InputNumber type="number" name="deliveryInfo.averageTime" {...inputNumberProps}
-                                                     placeholder={formatMessage({id: "averageDeliveryTime"})}/>
-                                    </Item>
+                                    <DeliveryInfoInputs setFieldValue={setFieldValue}
+                                                        timetable={values.deliveryInfo.timetable}/>
                                     <Title level={4} className='align-left'>
                                         <FormattedMessage id="price"/>
                                     </Title>
@@ -146,45 +208,13 @@ const MenuForm = () => {
                                         <PriceInput name="price"/>
                                     </Item>
                                     <Item name="maxAmountPerDay">
-                                        <InputNumber type="number"
-                                                     name="maxAmountPerDay"  {...inputNumberProps}
+                                        <NumberInput name="maxAmountPerDay"
                                                      placeholder={formatMessage({id: "maxAmountPerDay"})}/>
                                     </Item>
-                                    <Title level={4} className='align-left'>
-                                        <FormattedMessage id="offer"/>
-                                    </Title>
-                                    <Paragraph>
-                                        <FormattedMessage id="offerDisclaimer"/>
-                                    </Paragraph>
-                                    <Row gutter={[16, 16]}>
-                                        <Col span={10}>
-                                            <Item name="offers.price">
-                                                <PriceInput name="offers.price"/>
-                                            </Item>
-                                        </Col>
-                                        <Col span={10}>
-                                            <Item name="offers.minAmount">
-                                                <InputNumber type="number"
-                                                             name="offers.minAmount" {...inputNumberProps}
-                                                             placeholder={formatMessage({id: "minAmount"})}/>
-                                            </Item>
-                                        </Col>
-                                        <Col span={4}>
-                                            <Button type="primary" onClick={() => addOffer(values.offers, setFieldValue)}
-                                                    disabled={!(values.offers.price && values.offers.minAmount)}>
-                                                <FormattedMessage id="add"/>
-                                            </Button>
-                                        </Col>
-                                        <Col span={24}>
-                                            <Table dataSource={values.offers.ls} pagination={false}>
-                                                <Column title={formatMessage({id: "price"})} dataIndex="price" key="price"/>
-                                                <Column title={formatMessage({id: "minAmount"})} dataIndex="minAmount"
-                                                        key="minAmount"/>
-                                                <Column title={formatMessage({id: "delete"})} dataIndex="delete"
-                                                        render={(text, record) => deleteOfferButton(record, values.offers.ls, setFieldValue)}/>
-                                            </Table>
-                                        </Col>
-                                    </Row>
+                                    <OffersTable offers={values.offers}
+                                                 addOffer={() => addOffer(values.offers, setFieldValue)}
+                                                 deleteOfferButton={(text, record) => deleteOfferButton(record, values.offers.ls, setFieldValue)}
+                                    />
                                     <Item name="SubmitButton">
                                         <SubmitButton size="large">
                                             <FormattedMessage id="create"/>

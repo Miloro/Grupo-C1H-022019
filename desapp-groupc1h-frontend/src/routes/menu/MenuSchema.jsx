@@ -12,6 +12,8 @@ const MenuSchema = formatMessage =>
             .required(formatMessage({id: 'required'})),
         categories: Yup.array()
             .min(1, formatMessage({id: 'minOneSelected'})),
+        cookingTime: Yup.number()
+            .typeError(formatMessage({id: 'required'})),
         deliveryInfo: Yup.object().shape({
             price: Yup.number()
                 .typeError(formatMessage({id: 'required'}))

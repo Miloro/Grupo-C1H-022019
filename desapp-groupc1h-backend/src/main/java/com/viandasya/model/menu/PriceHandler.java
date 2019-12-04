@@ -43,11 +43,7 @@ public class PriceHandler {
         boolean areValid = true;
         offers.sort(Comparator.comparingInt(Offer::getMinAmount));
         for (int i = 1; i < offers.size(); i++) {
-            if (i == 1) {
-                areValid = offers.get(i).isPriceLessThan(current);
-            } else {
-                areValid = areValid && offers.get(i).isPriceLessThan(offers.get(i - 1));
-            }
+            areValid = areValid && offers.get(i).isPriceLessThan(offers.get(i - 1));
         }
         if (!areValid) throw new InvalidOffersException();
     }

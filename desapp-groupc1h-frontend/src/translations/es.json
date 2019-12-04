@@ -80,5 +80,10 @@
   "offer": "Oferta",
   "offerDisclaimer": "Debe haber un mínimo de 2 ofertas por menú. El valor máximo de un menú es $1000.\nLa primera oferta debe tener una cantidad mínima de pedidos de entre 10 y 70 para aplicar el nuevo precio, la segunda entre 40 y 150 y las siguientes a partir de 100. Una oferta debe tener un precio menor y una cantidad mínima mayor que su anterior.",
   "delete": "Borrar",
-  "maxAmountPerDay": "Cantidad máxima de ventas por dia*"
+  "maxAmountPerDay": "Cantidad máxima de ventas por dia*",
+  "login_required": "Debe iniciar sesion",
+  "invalidOffers": "Las ofertas creadas no son validas",
+  "max20ValidMenus": "Alcanzo la cantidad maxima de 20 menus validos, es imposible crear uno nuevo",
+  "createdMenu": "Se ha creado exitosamente el menu!",
+  "cookingTime": "Tiempo promedio que tarda preparar un menu (en minutos)*"
 }
