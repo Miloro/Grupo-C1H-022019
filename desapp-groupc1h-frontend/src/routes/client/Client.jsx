@@ -10,7 +10,6 @@ const Client = () => {
     const [{id}, dispatch] = useUser();
 
     useEffect(() => {
-        console.log(user);
         get(getTokenSilently,
             `/api/user/email/${user.email}`,
             (response) => {

@@ -2,6 +2,7 @@ package com.viandasya.service;
 
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.order.Order;
+import com.viandasya.model.order.OrderState;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.persistence.MenuRepository;
@@ -31,9 +32,6 @@ public class OrderService {
     public Order createOrder(Order order, long idMenu, String idUser){
         ClientProfile clientProfile = this.userRepository.findById(idUser).get().getClientProfile();
         Menu menu = this.menuRepository.findById(idMenu).get();
-        System.out.println(order);
-        System.out.println(menu);
-        System.out.println(clientProfile);
         menu.addOrder(order);
         order.setClient(clientProfile);
         order.setOffer(menu.getCurrentOffer());
@@ -49,5 +47,19 @@ public class OrderService {
         }
 
         return orderRepository.save(order);
+    }
+
+    @Transactional
+    public Iterable<Order> getAllOrders(){
+        return this.orderRepository.findAll();
+    }
+
+    @Transactional
+    public void acceptOrders(){
+        orderRepository.acceptOrders(OrderState.PENDING, OrderState.CONFIRMED);
+    }
+
+    public void save(Order order) {
+        orderRepository.save(order);
     }
 }
