@@ -3,6 +3,7 @@ package com.viandasya.model.builders.menu;
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.menu.PriceHandler;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,8 +31,9 @@ public class PriceHandlerBuilder {
 
     public PriceHandler createPriceHandler() {
         PriceHandler priceHandler = new PriceHandler(current);
-        offers.forEach(priceHandler::addOffer);
-        priceHandler.addOffer(current);
+        List<Offer> offers = new ArrayList<>(this.offers);
+        offers.add(current);
+        priceHandler.setOffers(offers);
         return priceHandler;
     }
 

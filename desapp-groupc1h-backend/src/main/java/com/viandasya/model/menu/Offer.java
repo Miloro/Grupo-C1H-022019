@@ -47,4 +47,7 @@ public class Offer {
         return Objects.hash(getMinAmount(), getPrice());
     }
 
+    public boolean isPriceLessThan(Offer offer) {
+        return price.compareTo(offer.getPrice()) < 0;
+    }
 }

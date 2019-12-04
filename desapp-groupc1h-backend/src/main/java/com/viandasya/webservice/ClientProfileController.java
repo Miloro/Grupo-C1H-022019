@@ -4,7 +4,6 @@ import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.user.User;
 import com.viandasya.service.ClientProfileService;
-import com.viandasya.webservice.dtos.ClientProfileDTO;
 import com.viandasya.webservice.dtos.UserDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;

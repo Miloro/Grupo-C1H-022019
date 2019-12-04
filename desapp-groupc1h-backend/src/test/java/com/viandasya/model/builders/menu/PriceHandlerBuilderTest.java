@@ -4,34 +4,33 @@ import com.viandasya.model.menu.Offer;
 import com.viandasya.model.menu.PriceHandler;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mockito;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
 import static com.viandasya.model.builders.menu.PriceHandlerBuilder.anyPriceHandler;
 
 public class PriceHandlerBuilderTest {
 
     @Test
     public void testSetCurrentSetedInBuilderEqualsToTheOneGettedInPriceHandler() {
-        Offer mockOffer = Mockito.mock(Offer.class);
-        PriceHandler priceHandler = anyPriceHandler().setCurrent(mockOffer).createPriceHandler();
+        Offer current = anyOffer().setPrice("200").setMinAmount(0).createOffer();
+        PriceHandler priceHandler = anyPriceHandler().setCurrent(current).createPriceHandler();
 
-        Assert.assertEquals(mockOffer, priceHandler.getCurrent());
+        Assert.assertEquals(current, priceHandler.getCurrent());
     }
 
     @Test
     public void testSetOffersSetedInBuilderEqualsToTheOneGettedInPriceHandler() {
-        Offer current = Mockito.mock(Offer.class);
+        Offer current = anyOffer().setPrice("200").setMinAmount(0).createOffer();
         List<Offer> offers = new ArrayList<>();
-        offers.add(Mockito.mock(Offer.class));
-        offers.add(Mockito.mock(Offer.class));
+        offers.add(anyOffer().setPrice("140").setMinAmount(20).createOffer());
+        offers.add(anyOffer().setPrice("100").setMinAmount(30).createOffer());
 
-        PriceHandler priceHandler = anyPriceHandler().setCurrent(current)
-                .setOffers(offers).createPriceHandler();
+        PriceHandler priceHandler = anyPriceHandler().setCurrent(current).setOffers(offers).createPriceHandler();
         offers.add(current);
 
-        Assert.assertEquals(offers, priceHandler.getOffers());
+        Assert.assertTrue(priceHandler.getOffers().containsAll(offers));
     }
+
 }

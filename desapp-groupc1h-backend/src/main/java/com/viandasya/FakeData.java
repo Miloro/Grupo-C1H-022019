@@ -85,7 +85,7 @@ public class FakeData implements ApplicationRunner {
                         .setTo(LocalDateTime.now().plusDays(15))
                         .createDateTimeSlot()
                 )
-                .setCategories(new ArrayList<>(Arrays.asList(Category.EMPANADAS, Category.BEER, Category.SHSHI)))
+                .setCategories(new ArrayList<>(Arrays.asList(Category.EMPANADAS, Category.BEER, Category.SUSHI)))
                 .setName("Menu con empanadas de pollo y carne, y tabla de sushi")
                 .setDescription("Exquisitos sabores que harán de tus almuerzos y cenas momentos únicos.")
                 .setCookingTime(40)
