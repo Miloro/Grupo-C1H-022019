@@ -3,7 +3,7 @@ import {Col, Modal, Row, Typography} from "antd";
 import {Formik} from "formik";
 import {Form, InputNumber, SubmitButton} from "formik-antd";
 import ServiceInfoInputs from "./ServiceInfoInputs";
-import ServiceShedulePicker from "./ServiceShedulePicker";
+import SchedulePicker from "./SchedulePicker";
 import AddressSearcher from "./AddressSearcher";
 import ServiceSchema from "../ServiceSchema";
 import {FormattedMessage, useIntl} from "react-intl";
@@ -105,13 +105,13 @@ const ServiceForm = ({userId, setService}) => {
                         <FormattedMessage id="service.create"/>
                     </Title>
                     <Title level={4} className='align-left'>
-                        <FormattedMessage id="service.info"/>
+                        <FormattedMessage id="info"/>
                     </Title>
                     <ServiceInfoInputs logo={values.logo}/>
                     <Title level={4} className='padding-top-4 align-left'>
                         <FormattedMessage id="service.timetable"/>
                     </Title>
-                    <ServiceShedulePicker timetable={values.timetable} setFieldValue={setFieldValue}/>
+                    <SchedulePicker timetableName="timetable" timetable={values.timetable} setFieldValue={setFieldValue}/>
                     <Title level={4} className='padding-top-4 align-left'>
                         <FormattedMessage id="location"/>*
                     </Title>

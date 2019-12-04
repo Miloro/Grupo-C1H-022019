@@ -9,15 +9,8 @@ function Service() {
     const [service, setService] = useState(null);
     const [{id}, ] = useUser();
 
-    return (
-        
-        <Row type="flex" justify="space-around" align="middle">
-            <Col span={20} style={{backgroundColor: "#ffffff"}}>
-                {id.serviceProfileEmail === null && <ServiceForm userId={id.email} setService={setService}/>}
-            </Col>
-        </Row>
 
-    );
+    return (!service && <ServiceForm userId={userId} setService={setService}/>);
 
 }
 

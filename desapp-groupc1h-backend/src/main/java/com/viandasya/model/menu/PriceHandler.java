@@ -1,5 +1,7 @@
 package com.viandasya.model.menu;
 
+import com.viandasya.exceptions.InvalidOffersException;
+
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import java.util.ArrayList;
@@ -32,8 +34,18 @@ public class PriceHandler {
         return offers;
     }
 
-    public void addOffer(Offer offer) {
-        this.offers.add(offer);
+    public void setOffers(List<Offer> offers) {
+        this.validateOffers(offers);
+        this.offers = offers;
+    }
+
+    private void validateOffers(List<Offer> offers) {
+        boolean areValid = true;
+        offers.sort(Comparator.comparingInt(Offer::getMinAmount));
+        for (int i = 1; i < offers.size(); i++) {
+            areValid = areValid && offers.get(i).isPriceLessThan(offers.get(i - 1));
+        }
+        if (!areValid) throw new InvalidOffersException();
     }
 
     public boolean updateCurrent(int orderCount) {
@@ -41,10 +53,10 @@ public class PriceHandler {
                 .filter(offer -> offer.getMinAmount() <= orderCount)
                 .max(Comparator.comparing(Offer::getMinAmount))
                 .map(offer -> {
-                        if (!current.equals(offer)) {
-                            this.current = offer;
-                        }
-                        return !current.equals(offer);
+                    if (!current.equals(offer)) {
+                        this.current = offer;
+                    }
+                    return !current.equals(offer);
                 }).get();
     }
 

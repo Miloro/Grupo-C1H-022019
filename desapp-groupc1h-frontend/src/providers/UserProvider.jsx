@@ -1,6 +1,6 @@
 import React, {createContext, useContext, useReducer} from "react";
 
-const initialState = {id: null, clientId: null};
+const initialState = {id: null, clientId: null, serviceId: 2};
 
 const SET_USER_ID = "SET_USER_ID";
 

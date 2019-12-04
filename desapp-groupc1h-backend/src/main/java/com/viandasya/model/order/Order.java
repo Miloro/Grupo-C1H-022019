@@ -6,6 +6,7 @@ import com.viandasya.model.user.ClientProfile;
 import com.viandasya.model.menu.Menu;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity(name = "order_info")
@@ -111,6 +112,12 @@ public class Order {
 
     public void setOffer(Offer offer) {
         this.offer = offer;
+    }
+
+    public BigDecimal calculatePrice() {
+        BigDecimal price = offer.getPrice().multiply(new BigDecimal(amount));
+        if (delivery) return price.add(menu.getDeliveryInfo().getPrice());
+        else return price;
     }
 
     public LocalDateTime averageTime(){

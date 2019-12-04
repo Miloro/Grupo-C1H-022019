@@ -6,7 +6,7 @@ import {FormattedMessage} from "react-intl";
 const styleProps = {
     style: {
         fontSize: 50,
-        color: '#ffffff'
+        color: '#FF8C00'
     }
 };
 

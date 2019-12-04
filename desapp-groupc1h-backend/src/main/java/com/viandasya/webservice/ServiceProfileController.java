@@ -72,7 +72,4 @@ public class ServiceProfileController {
         return serviceProfile;
     }
 
-
-
-
 }
