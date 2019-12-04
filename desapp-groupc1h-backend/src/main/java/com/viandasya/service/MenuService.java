@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -53,6 +54,11 @@ public class MenuService {
     }
 
     @Transactional
+    public List<Menu> getAllMenus(){
+        return this.menuRepository.findAll();
+    }
+
+    @Transactional
     public Page<Menu> search(SearchDTO searchDTO) {
         return this.pageMenusFunctions.get(searchDTO.getFilterField()).apply(searchDTO);
     }
@@ -72,4 +78,6 @@ public class MenuService {
                 this.menuRepository.findAll(searchDTO.getPageRequest())));
 
     }
+
+
 }

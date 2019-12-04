@@ -51,7 +51,7 @@ public class OrderService {
     }
 
     @Transactional
-    public List<Order> getOrdersPending(OrderState state){
+    public List<Order> getOrdersByState(OrderState state){
         return this.orderRepository.findAllByOrState(state);
     }
 
