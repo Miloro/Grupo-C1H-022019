@@ -1,6 +1,5 @@
 package com.viandasya.webservice;
 
-import com.viandasya.exceptions.InvalidOffersException;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.service.MenuService;
 import com.viandasya.webservice.dtos.CreateMenuDTO;

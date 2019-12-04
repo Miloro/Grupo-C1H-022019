@@ -56,52 +56,6 @@ const MenuForm = () => {
             maxAmountPerDay: null
         };
 
-        const initialValues1 = {
-            name: "Omellete naturista",
-            description: "reducido en grasa y para niños de todas las edades y actividades",
-            categories: ["Green", "Vegan"],
-            validity: [moment().add(4, "days"), moment().add(4, "days")],
-            cookingTime: 30,
-            deliveryInfo: {
-                price: 12.5,
-                averageTime: 30,
-                timetable:
-                    [{
-                        "day": "monday",
-                        "checked": true,
-                        "from": "2019-12-03T23:45:12.000Z",
-                        "to": "2019-12-04T02:45:12.000Z"
-                    }, {"day": "tuesday", "checked": false, "from": null, "to": null}, {
-                        "day": "wednesday",
-                        "checked": true,
-                        "from": "2019-12-03T20:45:12.000Z",
-                        "to": "2019-12-04T00:45:12.000Z"
-                    }, {
-                        "day": "thursday",
-                        "checked": true,
-                        "from": "2019-12-03T12:30:12.000Z",
-                        "to": "2019-12-03T19:30:12.000Z"
-                    }, {"day": "friday", "checked": false, "from": null, "to": null}, {
-                        "day": "saturday",
-                        "checked": false,
-                        "from": null,
-                        "to": null
-                    }, {"day": "sunday", "checked": false, "from": null, "to": null}]
-            },
-            price: 200.35,
-            maxAmountPerDay: 12,
-            offers: {
-                key: 3,
-                price: null,
-                minAmount: null,
-                ls: [{key: 0, price: 185.99, minAmount: 15}, {key: 1, price: 170, minAmount: 43}, {
-                    key: 2,
-                    price: 145.99,
-                    minAmount: 110
-                }]
-            }
-        };
-
         const onSubmit = ({offers, ...menu}, {setSubmitting}) => {
             const menuDTO = {
                 ...menu, offers: offers.ls.map(offer => {const {key, ...offerDTO} = offer;return offerDTO})};
@@ -152,7 +106,7 @@ const MenuForm = () => {
 
         return (
             <Formik
-                initialValues={initialValues1}
+                initialValues={initialValues}
                 validationSchema={MenuSchema(formatMessage)}
                 onSubmit={onSubmit}
                 component={({values, setFieldValue}) =>
