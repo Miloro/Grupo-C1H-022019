@@ -21,7 +21,7 @@ public class MenuController {
     }
 
     @PostMapping("service/{id}/menu")
-    public void addMenu(@PathVariable Long id, @RequestBody CreateMenuDTO createMenuDTO){
+    public void create(@PathVariable Long id, @RequestBody CreateMenuDTO createMenuDTO){
         Menu menu = modelMapper.map(createMenuDTO, Menu.class);
         this.menuService.createMenu(menu, id);
     }

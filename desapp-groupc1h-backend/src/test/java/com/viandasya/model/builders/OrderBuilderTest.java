@@ -89,6 +89,7 @@ public class OrderBuilderTest {
 
         Assert.assertEquals(offer, order.getOffer());
     }
+
 }
 
 

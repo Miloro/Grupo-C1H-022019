@@ -5,7 +5,7 @@ import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.ServiceProfileRepository;
 import com.viandasya.persistence.MenuOrderCountDTO;
 import com.viandasya.webservice.dtos.SearchDTO;
-import com.viandasya.webservice.exceptions.Maximum20ValidMenusException;
+import com.viandasya.exceptions.Maximum20ValidMenusException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -33,7 +33,7 @@ public class MenuService {
     }
 
     @Transactional
-    public void createMenu(Menu menu, Long serviceId) {
+    public void createMenu(Menu menu, Long serviceId) throws RuntimeException {
         this.serviceProfileRepository.findById(serviceId).ifPresent(serviceProfile -> {
             if (serviceProfile.has20ValidMenus()) {
                 throw new Maximum20ValidMenusException();
