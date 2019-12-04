@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class ClientProfileBuilder {
     private String name = "name";
     private String lastName = "lastName";
-    private String email = "emailfaalso@gmail.com";
+    private String email = "emailfalso@gmail.com";
     private Integer phoneNumber = 12345;
     private Location location= new Location("Calle 842 2602", "San Francisco Solano",
             -34.7805449, -58.3151092);

@@ -58,4 +58,8 @@ public class OrderService {
     public void acceptOrders(){
         orderRepository.acceptOrders(OrderState.PENDING, OrderState.CONFIRMED);
     }
+
+    public void save(Order order) {
+        orderRepository.save(order);
+    }
 }
