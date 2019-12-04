@@ -1,50 +1,67 @@
 package com.viandasya.service;
 
-import com.viandasya.model.menu.Menu;
+
 import com.viandasya.model.menu.Offer;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
+
 import com.viandasya.model.user.Balance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.List;
+
 
 @Service
 public class CronTasksService {
     private final OrderService orderService;
-    private final MenuService menuService;
-    private final ClientProfileService clientProfileService;
     private final MailSenderService mailSenderService;
+    private final ClientProfileService clientProfileService;
 
     @Autowired
-    public CronTasksService(OrderService orderService, MenuService menuService, ClientProfileService clientProfileService, MailSenderService mailSenderService) {
+    public CronTasksService(OrderService orderService, MailSenderService mailSenderService, ClientProfileService clientProfileService) {
         this.orderService = orderService;
-        this.menuService = menuService;
-        this.clientProfileService = clientProfileService;
         this.mailSenderService = mailSenderService;
+        this.clientProfileService = clientProfileService;
     }
 
-    @Scheduled(cron = "0 0 0 * * *")
+    @Transactional
+    @Scheduled(cron = "0 0 * * * *")
     public void acceptOrders() {
-        List<Order> orderPending = this.orderService.getOrdersByState(OrderState.PENDING);
-        for (Order order : orderPending) {
-            String receiver = order.getClient().getEmail();
-            String body     = "su orden con el menu: "+ order.getMenu().getName() +" y la cantidad: " + order.getAmount()+ "fue aceptada";
-            String subject  = "orden aceptada";
-            this.sendMailTo(receiver,body,subject);
-        }
+        Iterable<Order> orders = this.orderService.getAllOrders();
+        for (Order order : orders){
+            if(order.getState() == OrderState.PENDING){
+                /*
+                String receiver = order.getClient().getEmail();
+                String body     = "Su orden con el menu: "+ order.getMenu().getName() +" y la cantidad: " + order.getAmount()+ "fue aceptada";
+                String subject  = "orden aceptada";
+                this.sendMailTo(receiver,body,subject);
 
-        orderService.acceptOrders();
-
-        List<Menu> menus = this.menuService.getAllMenus();
-
-        for (Menu menu:menus){
-            if(this.currentPriceOfTheMenuMhange(menu)){
-                this.updatePriceAndNotifyUsers(menu);
+                 */
             }
+            if(order.getState() == OrderState.CONFIRMED){
+                this.updatePrice(order);
+            }
+        }
+        orderService.acceptOrders();
+        System.out.println("cron corrio completo");
+    }
+
+    private void updatePrice(Order order) {
+        Offer orderOffer =  order.getOffer();
+        Offer menuCurrentOffer = order.getMenu().getPriceHandler().getCurrent();
+        if(orderOffer.getPrice().compareTo(menuCurrentOffer.getPrice()) > 0){
+           order.setOffer(menuCurrentOffer);
+           Balance change = new Balance(orderOffer.getPrice().subtract(menuCurrentOffer.getPrice()).multiply(new BigDecimal(order.getAmount())));
+           this.clientProfileService.deposit(order.getClient().getEmail(),change);
+           /*
+           sendMailTo(order.getClient().getEmail(),
+                   "El Menu que compro, bajo de precio y se le retorno a su cuenta la suma de: $" + change.getAmount().intValueExact(),
+                   "Bajo el precio");
+
+            */
         }
     }
 
@@ -53,25 +70,6 @@ public class CronTasksService {
             mailSenderService.sendEmail(receiver ,body ,subject);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    private boolean currentPriceOfTheMenuMhange(Menu menu){
-        BigDecimal oldPrice = new BigDecimal(menu.getPrice());
-        return menu.getCurrentOffer().getPrice().compareTo(oldPrice) != 0 ;
-    }
-
-    private void updatePriceAndNotifyUsers(Menu menu){
-        Offer newOffer = menu.getCurrentOffer();
-        menu.setPrice(newOffer.getPrice().intValueExact());
-        for(Order order : menu.getOrders()){
-            BigDecimal oldOffer = order.getCurrentPrice();
-            Balance moneyToReturn = new Balance(oldOffer.subtract(newOffer.getPrice()));
-            clientProfileService.deposit(order.getClient().getEmail(),moneyToReturn);
-            order.getOffers().add(newOffer);
-            this.sendMailTo(order.getClient().getEmail(),
-                      "el precio de su menu bajo, haciendo que recupere la suma de " + oldOffer.subtract(newOffer.getPrice()).intValueExact(),
-                     "Bajo el precio");
         }
     }
 

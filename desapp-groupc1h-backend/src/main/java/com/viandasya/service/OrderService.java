@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 public class OrderService {
@@ -51,8 +50,8 @@ public class OrderService {
     }
 
     @Transactional
-    public List<Order> getOrdersByState(OrderState state){
-        return this.orderRepository.findAllByOrState(state);
+    public Iterable<Order> getAllOrders(){
+        return this.orderRepository.findAll();
     }
 
     @Transactional
