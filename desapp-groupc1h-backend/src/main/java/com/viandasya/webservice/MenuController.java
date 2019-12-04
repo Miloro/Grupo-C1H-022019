@@ -40,6 +40,11 @@ public class MenuController {
         return pagedMenus.map(menu -> modelMapper.map(menu, MenuPreviewDTO.class));
     }
 
+    @GetMapping("menus/price")
+    public void updatePrice() {
+        this.menuService.updateMenuPrice();
+    }
+
     private MenuDTO convertToDto(Menu menu) {
         MenuDTO menuDTO = modelMapper.map(menu, MenuDTO.class);
         menuDTO.setDeliveryInfo(menu.getDeliveryInfo());

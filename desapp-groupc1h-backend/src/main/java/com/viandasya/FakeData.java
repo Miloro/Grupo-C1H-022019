@@ -4,6 +4,7 @@ import com.viandasya.model.menu.Category;
 import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.menu.Offer;
+import com.viandasya.model.menu.PriceHandler;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
 import com.viandasya.model.timeslot.DateTimeSlot;
@@ -29,6 +30,8 @@ import java.util.List;
 
 import static com.viandasya.model.builders.OrderBuilder.anyOrder;
 import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
+import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
+import static com.viandasya.model.builders.menu.PriceHandlerBuilder.anyPriceHandler;
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
 import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTable;
 import static com.viandasya.model.builders.user.ClientProfileBuilder.anyClientProfile;
@@ -53,7 +56,7 @@ public class FakeData implements ApplicationRunner {
         //////////  USER 1 : SERVICE PROFILE WITH 2 MENUS  //////////
 
         Menu menu1 = anyMenu()
-                .setOffers(create3OffersWith("200","180.5", "140", 20, 40))
+                .setPriceHandler(createPriceHandler("200","180.5", "140", 20, 40))
                 .setDeliveryInfo(
                         new DeliveryInfo(createTimetableFromToOnWeekdays(LocalTime.of(9,30),
                                 LocalTime.of(17,30)),
@@ -71,7 +74,7 @@ public class FakeData implements ApplicationRunner {
                 .createMenu();
 
         Menu menu2 = anyMenu()
-                .setOffers(create3OffersWith("299.99","220.4", "210", 25, 50))
+                .setPriceHandler(createPriceHandler("299.99","220.4", "210", 25, 50))
                 .setDeliveryInfo(
                         new DeliveryInfo(createTimetableFromToOnWeekdays(LocalTime.of(12,30),
                                 LocalTime.of(20,30)),
@@ -120,7 +123,7 @@ public class FakeData implements ApplicationRunner {
         //////////  USER A : SERVICE PROFILE WITH 2 MENUS  //////////
 
         Menu menua = anyMenu()
-                .setOffers(create3OffersWith("399.99","350", "202.10", 50, 80))
+                .setPriceHandler(createPriceHandler("399.99","350", "202.10", 41, 80))
                 .setDeliveryInfo(
                         new DeliveryInfo(createTimetableFromToOnWeekdays(LocalTime.of(14,0),
                                 LocalTime.of(18,0)),
@@ -138,7 +141,7 @@ public class FakeData implements ApplicationRunner {
                 .createMenu();
 
         Menu menub = anyMenu()
-                .setOffers(create3OffersWith("303.14","290.12", "250", 40, 53))
+                .setPriceHandler(createPriceHandler("303.14","290.12", "250", 40, 53))
                 .setDeliveryInfo(
                         new DeliveryInfo(createTimetableFromToOnWeekdays(LocalTime.of(20,0),
                                 LocalTime.of(20,30)),
@@ -194,9 +197,8 @@ public class FakeData implements ApplicationRunner {
         ////////////////////////////   CREATING ORDERS   ////////////////////////////
 
         Order order1 = anyOrder()
-                .setAmount(5)
-                .setOffers(new ArrayList<>(Collections.singletonList(
-                        new Offer(20, new BigDecimal("180.5")))))
+                .setAmount(20)
+                .setOffer(new Offer(20, new BigDecimal("180.5")))
                 .setScore(null)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(3).plusHours(1)))
@@ -205,8 +207,8 @@ public class FakeData implements ApplicationRunner {
                 .createOrder();
 
         Order order2 = anyOrder()
-                .setAmount(6)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(0, new BigDecimal("200")))))
+                .setAmount(10)
+                .setOffer(new Offer(0, new BigDecimal("200")))
                 .setScore(null)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().plusDays(4), LocalDateTime.now().plusDays(4).plusHours(1)))
@@ -216,7 +218,7 @@ public class FakeData implements ApplicationRunner {
 
         Order order3 = anyOrder()
                 .setAmount(11)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(0, new BigDecimal("200")))))
+                .setOffer(new Offer(0, new BigDecimal("200")))
                 .setScore(4)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(7), LocalDateTime.now().minusDays(7).plusHours(1)))
@@ -226,7 +228,7 @@ public class FakeData implements ApplicationRunner {
 
         Order ordera = anyOrder()
                 .setAmount(35)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(30, new BigDecimal("202.10")))))
+                .setOffer(new Offer(30, new BigDecimal("202.10")))
                 .setScore(null)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().withHour(15),
@@ -237,7 +239,7 @@ public class FakeData implements ApplicationRunner {
 
         Order orderb = anyOrder()
                 .setAmount(33)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(30, new BigDecimal("202.10")))))
+                .setOffer(new Offer(30, new BigDecimal("202.10")))
                 .setScore(2)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(21).withHour(19),
@@ -248,7 +250,7 @@ public class FakeData implements ApplicationRunner {
 
         Order orderc = anyOrder()
                 .setAmount(21)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(30, new BigDecimal("202.10")))))
+                .setOffer(new Offer(30, new BigDecimal("202.10")))
                 .setScore(5)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(10).withHour(14),
@@ -273,13 +275,16 @@ public class FakeData implements ApplicationRunner {
         menuRepository.save(menuPizza);
     }
 
-    private static List<Offer> create3OffersWith(String price, String minPrice1,
-                                                 String minPrice2, Integer min1, Integer min2) {
+    private static PriceHandler createPriceHandler(String price, String minPrice1,
+                                                   String minPrice2, Integer min1, Integer min2) {
+        Offer current = anyOffer().setPrice(price).setMinAmount(0).createOffer();
         List<Offer> offers = new ArrayList<>();
-        offers.add(new Offer( 0, new BigDecimal(price)));
-        offers.add(new Offer( min1, new BigDecimal(minPrice1)));
-        offers.add(new Offer( min2, new BigDecimal(minPrice2)));
-        return offers;
+        offers.add(anyOffer().setPrice(minPrice1).setMinAmount(min1).createOffer());
+        offers.add(anyOffer().setPrice(minPrice2).setMinAmount(min2).createOffer());
+        return anyPriceHandler()
+                .setCurrent(current)
+                .setOffers(offers)
+                .createPriceHandler();
     }
 
     private static TimeTable createTimetableFromToOnWeekdays(LocalTime from, LocalTime to) {

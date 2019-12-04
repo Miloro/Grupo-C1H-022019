@@ -44,15 +44,13 @@ public class ClientProfileController {
         return clientProfileService.deposit(userId,amount);
     }
 
-
     @GetMapping("/clients")
     public Iterable<ClientProfile> findAll(){
         return clientProfileService.findAll();
     }
 
     private UserDTO convertToDTO(User user) {
-        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
-        return userDTO;
+        return modelMapper.map(user, UserDTO.class);
     }
 
 }
