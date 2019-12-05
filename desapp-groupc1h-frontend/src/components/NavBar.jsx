@@ -5,6 +5,7 @@ import {useUser} from "../providers/UserProvider";
 import {useHistory} from "react-router-dom";
 import MenuOption from "./MenuOption";
 import {useIntl} from "react-intl";
+import {useAuth0} from "../providers/Auth0Provider";
 
 const {Title} = Typography;
 const {Item, SubMenu} = Menu;
@@ -26,6 +27,7 @@ const logoProps = {
 const NavBar = () => {
     const {formatMessage} = useIntl();
     const [{id, serviceId},] = useUser();
+    const {isAuthenticated} = useAuth0();
     let history = useHistory();
 
     return <Row>
@@ -34,9 +36,10 @@ const NavBar = () => {
                 <Title level={2}> Viandas Ya</Title>
             </div>
         </Col>
+        {isAuthenticated &&
         <Col span={10} style={{paddingTop: '1%'}}>
             <MenuSearchInput/>
-        </Col>
+        </Col>}
         <Col span={10}>
             {id &&
             <Menu {...menuProps}>

@@ -46,7 +46,7 @@ const Register = () => {
             dispatch(setUserId(user.email));
             notification.success({
                 message: formatMessage({id:"welcomeTo"}),
-                description: formatMessage({id:"welcomeMessage"}),
+                description: formatMessage({id:"registeredMessage"}),
             })})
         };
 

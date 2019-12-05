@@ -43,51 +43,44 @@ const colProps = {
     }
 };
 
+const loadingProps = {
+    style : {
+        fontSize: 150,
+        color: "#ffffff",
+        textAlign: "center"
+    }
+};
+
 
 function App() {
     const {isAuthenticated, loading} = useAuth0();
 
-    const ShowIfNotLoading = () => {
-        if (loading) {
-            return <Result
-                icon={<Spin indicator={
-                    <Icon type="smile" style={{fontSize: 150, color: "#ffffff", textAlign: "center"}} spin/>
-                }
-                />
-                }/>
-        } else {
-            return <Row type="flex" justify="space-around" align="middle">
-                <Col span={20} style={{backgroundColor: "#ffffff"}}>
-                    <Switch>
-                        <PrivateRoute path="/buy" component={Buy}/>
-                        <PrivateRoute path="/unrated-orderds" component={UnratedOrders}/>
-                        <PrivateRoute path="/cart" component={Cart}/>
-                        <PrivateRoute path="/orders" component={Orders}/>
-                        <PrivateRoute path="/service/menu" component={MenuForm}/>
-                        <PrivateRoute path="/service" component={Service}/>
-                        <PrivateRoute path="/menus/:query" component={Menus}/>
-                        <PrivateRoute path="/service/orders" component={ServiceOrders}/>
-                        <PrivateRoute path="/balance" component={Balance}/>
-                        <Route exact path="/">
-                            {isAuthenticated ? <Client/> : <Login/>}
-                        </Route>
-                    </Switch>
-                </Col>
-            </Row>
-        }
-    };
-
     return (
         <Router>
             <Layout>
-                <Header style={{padding: "0 2px 2px 0"}}>
+                <Header style={{padding: "0 10px 0 10px"}}>
                     <NavBar/>
                 </Header>
                 <Content>
                     <div {...contentProps}>
                         <Row {...rowProps}>
                             <Col {...colProps}>
-                                <ShowIfNotLoading/>
+                                {loading ?
+                                    <Result icon={<Spin indicator={<Icon type="smile" {...loadingProps} spin/>}/>}/>:
+                                    <Switch>
+                                        <PrivateRoute path="/buy" component={Buy}/>
+                                        <PrivateRoute path="/unrated-orderds" component={UnratedOrders}/>
+                                        <PrivateRoute path="/cart" component={Cart}/>
+                                        <PrivateRoute path="/orders" component={Orders}/>
+                                        <PrivateRoute path="/service/menu" component={MenuForm}/>
+                                        <PrivateRoute path="/service" component={Service}/>
+                                        <PrivateRoute path="/menus/:query" component={Menus}/>
+                                        <PrivateRoute path="/service/orders" component={ServiceOrders}/>
+                                        <PrivateRoute path="/balance" component={Balance}/>
+                                        <Route exact path="/">
+                                            {isAuthenticated ? <Client/> : <Login/>}
+                                        </Route>
+                                    </Switch>}
                             </Col>
                         </Row>
                         <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by

@@ -6,7 +6,7 @@ import {FormattedMessage} from "react-intl";
 const styleProps = {
     style: {
         fontSize: 50,
-        color: '#FF8C00'
+        color: '#ffffff'
     }
 };
 
@@ -14,10 +14,11 @@ const Login = () => {
     const {loginWithRedirect, loading} = useAuth0();
 
     return <Result
-        icon={<Icon type="home"  {...styleProps}/>}
-        title={<div {...styleProps}> <FormattedMessage id="welcome"/> </div>}
-        extra={!loading && <Button type="primary" size="large" onClick={() => loginWithRedirect({})}>
-            Login
+        icon={<Icon type="home" {...styleProps}/>}
+        title={<div {...styleProps}><FormattedMessage id="welcomeMessage"/></div>}
+        extra={!loading &&
+        <Button size="large" onClick={() => loginWithRedirect({})}>
+            <FormattedMessage id="login"/>
         </Button>}
     />;
 
