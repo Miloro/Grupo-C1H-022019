@@ -80,7 +80,7 @@ function App() {
     return (
         <Router>
             <Layout>
-                <Header>
+                <Header style={{padding: "0 2px 2px 0"}}>
                     <NavBar/>
                 </Header>
                 <Content>
