@@ -22,11 +22,11 @@ public class ClientProfileService {
     }
 
     @Transactional
-    public void create(String id, ClientProfile clientProfile){
+    public Long create(String id, ClientProfile clientProfile){
         User user = new User();
         user.setEmail(id);
         user.addClientProfile(clientProfile);
-        userRepository.save(user);
+        return  userRepository.save(user).getClientProfile().getId();
     }
 
     @Transactional

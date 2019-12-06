@@ -59,8 +59,10 @@ class Balance  extends React.Component{
     }
 
     sendNewBalance() {
+        // noinspection JSUnresolvedVariable
         deposit(this.props.user.id.email,this.state.amountToDeposit,this.props.getTokenSilently);
         if(this.state.amountToWithdraw){
+            // noinspection JSUnresolvedVariable
             withdraw(this.props.user.id.email,this.state.amountToWithdraw,this.props.getTokenSilently);
         }
     }

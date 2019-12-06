@@ -9,7 +9,7 @@ const {Column} = Table;
 
 function MenuItem({item}) {
     const {formatMessage} = useIntl();
-    let history = useHistory()
+    let history = useHistory();
     function CategoryTags({categories}) {
         return categories.map((category) => (
             <Tag key={category} color="#FF8C00">{category}</Tag>
@@ -57,6 +57,7 @@ function MenuItem({item}) {
     }
 
 
+    // noinspection JSUnresolvedVariable,JSUnresolvedVariable
     return (
         <Item
             key={item.id}

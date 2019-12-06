@@ -19,8 +19,8 @@ export function createOrder(object,token,idMenu,userId){
                     }
     };
 
-    console.log(body)
-    console.log("api/menu/"+idMenu+"/user/"+userId+"/order")
+    console.log(body);
+    console.log("api/menu/"+idMenu+"/user/"+userId+"/order");
     return post(token,"api/menu/"+idMenu+"/user/"+userId+"/order",body,(res) => {
         if (res.status === 200){
             console.log(res);
@@ -48,6 +48,7 @@ export function deposit(userId, amount, token){
     };
     return put(token,"/api/user/"+userId+"/client", body).then(
         res => {
+            // noinspection JSUnresolvedVariable
             if (res.status ===200){
                 return res;
             }
@@ -64,6 +65,7 @@ export function withdraw(userId, amount,token){
     };
     return put(token,"/api/user/"+userId+"/service", body).then(
         res => {
+            // noinspection JSUnresolvedVariable
             if (res.status ===200){
                 return res;
             }

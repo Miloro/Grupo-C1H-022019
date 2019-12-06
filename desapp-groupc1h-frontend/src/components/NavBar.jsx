@@ -1,13 +1,14 @@
 import React from 'react';
-import {Button, Col, Menu, Row, Typography} from "antd";
+import {Col, Icon, Menu, Row, Tooltip, Typography} from "antd";
 import MenuSearchInput from "../routes/menus/MenuSearchInput";
-import {useAuth0} from "../providers/Auth0Provider";
 import {useUser} from "../providers/UserProvider";
-import {FormattedMessage} from "react-intl";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
+import MenuOption from "./MenuOption";
+import {useIntl} from "react-intl";
+import {useAuth0} from "../providers/Auth0Provider";
 
 const {Title} = Typography;
-
+const {Item, SubMenu} = Menu;
 
 const menuProps = {
     mode: "horizontal",
@@ -23,38 +24,52 @@ const logoProps = {
     }
 };
 
+const iconProps = {style: {fontSize: 20}};
+
 const NavBar = () => {
-    const {isAuthenticated, loading, logout} = useAuth0();
-    const [{id}, ] = useUser();
+    const {formatMessage} = useIntl();
+    const {clientId, serviceId} = useUser();
+    const {logout} = useAuth0();
     let history = useHistory();
 
     return <Row>
-        <Col span={5}>
+        <Col span={4}>
             <div {...logoProps}>
-                <Title> Viandas Ya</Title>
+                <Title level={2}> Viandas Ya</Title>
             </div>
         </Col>
-        <Col span={12} style={{paddingTop: '1%'}}>
+        {clientId &&
+        <Col span={10} style={{paddingTop: '1%'}}>
             <MenuSearchInput/>
-        </Col>
-        <Col span={7}>
+        </Col>}
+        {clientId &&
+        <Col span={10}>
             <Menu {...menuProps}>
-                <Menu.Item key="3">
-                {(!loading) && isAuthenticated && id &&
-                    <Button type="primary" onClick={() => history.push("/balance")}>
-                        <FormattedMessage id="balance"/>
-                    </Button>}
-                    {(!loading) && isAuthenticated && id &&
-                    <Button type="primary" onClick={() => history.push("/service")}>
-                        <FormattedMessage id="Service"/>
-                    </Button>}
-                    {(!loading) && isAuthenticated && id &&
-                    <Button type="primary" onClick={() => logout()}>
-                        <FormattedMessage id="logout"/>
-                    </Button>}
-                </Menu.Item>
+                <Item key="1" onClick={() => history.push("/")}>
+                    <Icon {...iconProps} type="home"/>
+                </Item>
+                <SubMenu title={<MenuOption icon="user" name={formatMessage({id:"profile"})}/>}>
+                    <Item key="2"><MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/></Item>
+                    <Item key="3"><MenuOption icon="star" name={formatMessage({id:"rateOrders"})}/></Item>
+                    <Item key="4"><MenuOption icon="form" name={formatMessage({id:"updateProfile"})}/></Item>
+                </SubMenu>
+                {serviceId?
+                <SubMenu title={<MenuOption icon="shop" name={formatMessage({id:"Service"})}/>}>
+                    <Item key="5"><MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/></Item>
+                    <Item key="6"><MenuOption icon="setting" name={formatMessage({id:"myMenus"})}/></Item>
+                    <Item key="7" onClick={() => history.push("/service/menu")}>
+                        <MenuOption icon="form" name={formatMessage({id:"CreateMenu"})}/>
+                    </Item>
+                </SubMenu>:
+                    <Item key="10" onClick={() => history.push("/service")}>
+                        <MenuOption icon="shop" name={formatMessage({id:"service.create"})}/>
+                    </Item>}
+                <Item key="8"><Tooltip title={formatMessage({id:"wallet"})}><Icon {...iconProps} type="dollar"/></Tooltip></Item>
+                <Item key="9" onClick={() => logout()}>
+                    <Tooltip title={formatMessage({id:"logout"})}><Icon {...iconProps} type="logout"/></Tooltip>
+                </Item>
             </Menu>
-        </Col>
+        </Col>}
     </Row>
 };
 

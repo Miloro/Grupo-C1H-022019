@@ -90,7 +90,8 @@ class Buy extends React.Component {
 
     onChangeDatePicker(x) {
         if (x != null) {
-            var date = x._d.toISOString().split('T')[0];
+            const date = x._d.toISOString().split('T')[0];
+            // noinspection JSUnresolvedVariable,JSUnresolvedVariable
             isNotHoliday(x._d.getDate(), x._d.getMonth(), 2019);
             this.setState({...this.state, date: date});
         }
@@ -110,6 +111,7 @@ class Buy extends React.Component {
     }
 
     confirmOrder() {
+        // noinspection JSUnresolvedVariable
         createOrder(this.state,this.props.getTokenSilently,this.props.location.state.id, this.props.user.id.email);
     }
 

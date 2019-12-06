@@ -1,15 +1,15 @@
 import React from 'react';
 import {Formik} from "formik";
-import {Col, Row, Typography, notification} from "antd";
+import {Col, Row, Typography} from "antd";
 import {Form, Input, InputNumber, SubmitButton} from "formik-antd";
 import {FormattedMessage, useIntl} from "react-intl";
 import ClientSchema from "./ClientSchema";
 import AddressSearcher from "../service/serviceForm/AddressSearcher";
 import {useAuth0} from "../../providers/Auth0Provider";
-import {post} from "../../api/API";
-import {setUserId, useUser} from "../../providers/UserProvider";
+import {useAPI} from "../../providers/ApiProvider";
+import {useUser} from "../../providers/UserProvider";
 
-const {Title} = Typography;
+const {Title, Paragraph} = Typography;
 const {Item} = Form;
 
 const formLayout = {
@@ -23,32 +23,29 @@ const inputNumberProps = {
     style: {width: '100%'}
 };
 
-const Register = () => {
+const ClientForm = () => {
     const {formatMessage} = useIntl();
-    const {getTokenSilently, user} = useAuth0();
-    const [, dispatch] = useUser();
+    const {user} = useAuth0();
+    const {postClient} = useAPI();
+    const {setClientId} = useUser();
 
     const initialValues = {
         name: user.given_name,
         lastName: user.family_name,
         email: user.email,
-        phoneNumber: undefined,
+        phoneNumber: null,
         query: "",
-        selected: {id: undefined, address: undefined},
-        location: undefined,
+        selected: {id: null, address: null},
+        location: null,
         suggestions: [],
     };
 
     const onSubmit = (values) => {
         const {query, selected, suggestions, ...client} = values;
-        post(getTokenSilently, `/api/client/${user.email}`, client,
-            () => {
-            dispatch(setUserId(user.email));
-            notification.success({
-                message: formatMessage({id:"welcomeTo"}),
-                description: formatMessage({id:"welcomeMessage"}),
-            })})
-        };
+        postClient(client, (response) => {
+            setClientId(response.data);
+        });
+    };
 
     return (
         <Formik
@@ -56,12 +53,13 @@ const Register = () => {
             validationSchema={ClientSchema(formatMessage)}
             onSubmit={onSubmit}
             component={({values, setFieldValue}) => (
-                <Row type="flex" justify="space-around" align="middle">
+                <Row type="flex" justify="space-around" align="middle" style={{backgroundColor: "#ffffff"}}>
                     <Col span={20}>
                         <Form {...formLayout}>
-                            <Title level={2} className='padding-botton-5 align-left'>
+                            <Title level={2} className='align-left'>
                                 <FormattedMessage id="client.create"/>
                             </Title>
+                            <Paragraph><FormattedMessage id="client.create.description"/></Paragraph>
                             <Title level={4} className='align-left'>
                                 <FormattedMessage id="client.info"/>
                             </Title>
@@ -95,4 +93,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default ClientForm;

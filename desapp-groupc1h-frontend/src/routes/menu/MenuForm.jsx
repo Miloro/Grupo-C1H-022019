@@ -3,16 +3,15 @@ import {Col, Row, Typography, Button, message as notification, Modal} from "antd
 import {Form, Input, Select, DatePicker, SubmitButton} from "formik-antd";
 import {Formik} from "formik";
 import {FormattedMessage, useIntl} from "react-intl";
-import MenuSchema from "../MenuSchema";
+import MenuSchema from "./MenuSchema";
 import moment from "moment";
 import PriceInput from "./PriceInput";
-import {post} from "../../../api/API";
-import {useAuth0} from "../../../providers/Auth0Provider";
 import {useHistory} from "react-router-dom";
-import {useUser} from "../../../providers/UserProvider";
 import OffersTable from "./OffersTable";
-import NumberInput from "../../../components/NumberInput";
+import NumberInput from "../../components/NumberInput";
 import DeliveryInfoInputs from "./DeliveryInfoInputs";
+import {useAPI} from "../../providers/ApiProvider";
+import {useUser} from "../../providers/UserProvider";
 
 const {Item} = Form;
 const {Title} = Typography;
@@ -22,9 +21,10 @@ const {success} = Modal;
 
 const MenuForm = () => {
         const {formatMessage} = useIntl();
-        const {getTokenSilently} = useAuth0();
         let history = useHistory();
-        const [{serviceId},] = useUser();
+        const {postMenu} = useAPI();
+        const {serviceId} = useUser();
+
         const formLayout = {
             wrapperCol: {
                 xs: {span: 24},
@@ -58,11 +58,13 @@ const MenuForm = () => {
 
         const onSubmit = ({offers, ...menu}, {setSubmitting}) => {
             const menuDTO = {
-                ...menu, offers: offers.ls.map(offer => {const {key, ...offerDTO} = offer;return offerDTO})};
-            console.log(JSON.stringify(menuDTO));
-            post(getTokenSilently, `/api/service/${serviceId}/menu`, menuDTO,
-                () => {
-                    history.push("/menus/search");
+                ...menu, offers: offers.ls.map(offer => {
+                    const {key, ...offerDTO} = offer;
+                    return offerDTO
+                })
+            };
+            postMenu(serviceId, menuDTO, () => {
+                    history.push("/service");
                     const modal = success({
                         content: formatMessage({id: "createdMenu"}),
                     });

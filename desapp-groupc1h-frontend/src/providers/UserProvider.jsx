@@ -1,33 +1,40 @@
-import React, {createContext, useContext, useReducer} from "react";
-
-const initialState = {id: null, clientId: null, serviceId: 2};
-
-const SET_USER_ID = "SET_USER_ID";
-
-export const setUserId = userId => ({type: SET_USER_ID, payload: {userId}});
-
-const handlers = {
-    [SET_USER_ID]: (state, {payload}) => ({
-        ...state,
-        id: payload.userId
-    })
-};
-
-const reducer = (state, action) => {
-    return handlers[action.type](state, action);
-};
+import React, {createContext, useContext, useEffect, useState} from "react";
+import {useAuth0} from "./Auth0Provider";
+import {useAPI} from "./ApiProvider";
 
 export const UserContext = createContext();
-
-export const UserProvider = ({children}) => (
-    <UserContext.Provider
-        value={useReducer(reducer, initialState)}
-        children={children}
-    />
-);
-
 export const useUser = () => useContext(UserContext);
 
+export const UserProvider = ({children}) => {
+    const {loading, isAuthenticated, user} = useAuth0();
+    const {get} = useAPI();
+    const [id, setId] = useState(null);
+    const [clientId, setClientId] = useState(null);
+    const [serviceId, setServiceId] = useState(null);
 
+    useEffect(() => {
+        const fetchUser = () => {
+            if (!loading && isAuthenticated) {
+                get(`/api/user/${user.email}`,
+                    (response) => {
+                        if (response.data) {
+                            const {clientProfile, serviceProfile} = response.data;
+                            setClientId(clientProfile.id);
+                            if (serviceProfile) setServiceId(serviceProfile.id);
+                            setId(user.email);
+                        }
+                    })
+            }
+        };
+        fetchUser();
+    }, [get, isAuthenticated, loading, user]);
+
+    return (
+        <UserContext.Provider
+            value={{id, clientId, serviceId, setServiceId, setClientId}}
+            children={children}
+        />
+    );
+};
 
 

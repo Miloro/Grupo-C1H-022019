@@ -9,6 +9,7 @@ const {Item} = Form;
 function AddressSearcher({selected, suggestions, setFieldValue}) {
     const {formatMessage} = useIntl();
 
+    // noinspection JSUnresolvedVariable,JSUnresolvedVariable
     const createSuggestion = (address, locationId) => ({
         id: locationId, address:
             `${address.street} ${address.houseNumber}, ${address.city}, ${address.state}`
@@ -17,6 +18,7 @@ function AddressSearcher({selected, suggestions, setFieldValue}) {
     const onSearch = query => {
         if (query.length > 10) {
             fetchSuggestions(query, (response) => {
+                // noinspection JSUnresolvedVariable
                 const suggestions = response.data.suggestions
                     .filter((s) => s.matchLevel === 'houseNumber')
                     .map((s) => (createSuggestion(s.address, s.locationId)));

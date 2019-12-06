@@ -12,7 +12,6 @@ const MenuSearchInput = () => {
     const widthStyleProp = (w) => ({style: {width: w}});
     let history = useHistory();
 
-
     const onSelect = selection => {
         setSelection(selection);
     };
@@ -24,7 +23,7 @@ const MenuSearchInput = () => {
     };
 
     return (
-        <InputGroup compact size="large">
+        <InputGroup compact>
             <Select defaultValue="city" onSelect={onSelect} {...widthStyleProp('15%')}>
                 {["city", "name"].map((s) => (
                     <Option key={s} value={s}>
@@ -34,7 +33,6 @@ const MenuSearchInput = () => {
             </Select>
             <Search
                 placeholder={formatMessage({id: "searchMenu"})}
-                size="large"
                 {...widthStyleProp('70%')}
                 onSearch={onSearch}
                 enterButton
