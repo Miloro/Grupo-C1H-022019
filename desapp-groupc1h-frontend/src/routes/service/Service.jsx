@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import "./Service.css";
 import ServiceForm from "./serviceForm/ServiceForm";
 import {useUser} from "../../providers/UserProvider";
-import {Col, Row} from "antd";
 
 function Service() {
     const userId = "miloromiguel@gmail.com";

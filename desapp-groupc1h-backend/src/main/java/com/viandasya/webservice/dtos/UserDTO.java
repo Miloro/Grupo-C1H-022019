@@ -1,44 +1,15 @@
 package com.viandasya.webservice.dtos;
 
-public class UserDTO {
+public interface UserDTO {
+    ServiceId getServiceProfile();
+    ClientId getClientProfile();
 
-    private String email;
-
-    private String clientProfileName;
-
-    private String serviceProfileEmail;
-
-    public UserDTO() {
+    interface ServiceId {
+        long getId();
     }
 
-    public UserDTO(String email, String clientProfileName, String serviceProfileEmail) {
-        this.email = email;
-        this.clientProfileName = clientProfileName;
-        this.serviceProfileEmail = serviceProfileEmail;
+    interface ClientId {
+        long getId();
     }
 
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getClientProfileName() {
-        return clientProfileName;
-    }
-
-    public void setClientProfileName(String clientProfileName) {
-        this.clientProfileName = clientProfileName;
-    }
-
-    public String getServiceProfileEmail() {
-        return serviceProfileEmail;
-    }
-
-    public void setServiceProfileEmail(String serviceProfileEmail) {
-        this.serviceProfileEmail = serviceProfileEmail;
-    }
 }

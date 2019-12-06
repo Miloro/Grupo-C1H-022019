@@ -110,7 +110,7 @@ public class FakeData implements ApplicationRunner {
                 .createClientProfile();
 
         User user1 = new User();
-        user1.setEmail("lisarmailfalso@gmail.com");
+        user1.setEmail("lisar.3467@gmail.com");
         user1.addClientProfile(clientProfile1);
         user1.addServiceProfile(serviceProfile1);
 

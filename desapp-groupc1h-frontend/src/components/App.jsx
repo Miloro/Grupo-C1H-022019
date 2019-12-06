@@ -13,8 +13,7 @@ import MenuForm from "../routes/menu/form/MenuForm";
 import Service from "../routes/service/Service";
 import Menus from "../routes/menus/Menus";
 import ServiceOrders from "../routes/ServiceOrders";
-import Login from "../routes/Login";
-import Client from "../routes/client/Client";
+import Home from "../routes/home/Home";
 import PrivateRoute from "../routes/PrivateRoute";
 import Balance from "../routes/Balance";
 
@@ -53,7 +52,7 @@ const loadingProps = {
 
 
 function App() {
-    const {isAuthenticated, loading} = useAuth0();
+    const {loading} = useAuth0();
 
     return (
         <Router>
@@ -77,9 +76,7 @@ function App() {
                                         <PrivateRoute path="/menus/:query" component={Menus}/>
                                         <PrivateRoute path="/service/orders" component={ServiceOrders}/>
                                         <PrivateRoute path="/balance" component={Balance}/>
-                                        <Route exact path="/">
-                                            {isAuthenticated ? <Client/> : <Login/>}
-                                        </Route>
+                                        <Route exact path="/" component={Home}/>
                                     </Switch>}
                             </Col>
                         </Row>
