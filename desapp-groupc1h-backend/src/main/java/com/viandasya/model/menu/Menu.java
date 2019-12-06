@@ -1,6 +1,7 @@
 package com.viandasya.model.menu;
 
 import com.viandasya.model.order.Order;
+import com.viandasya.model.order.OrderState;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ServiceProfile;
 
@@ -17,7 +18,7 @@ public class Menu {
 
     private String name;
     private String description;
-    private Integer score;
+    private Double score;
 
     @ElementCollection
     private List<Category> categories = new ArrayList<>();
@@ -138,11 +139,11 @@ public class Menu {
         return this.orders.stream().mapToInt(Order::getAmount).sum();
     }
 
-    public Integer getScore() {
+    public Double getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 
@@ -157,4 +158,23 @@ public class Menu {
     public void setPriceHandler(PriceHandler priceHandler) {
         this.priceHandler = priceHandler;
     }
+
+    public boolean updateScore() {
+        int orderCount = 0;
+        Double newScore = null;
+        boolean isUpdated = false;
+        for (Order order: this.orders)
+            if (order.getState() == OrderState.CONFIRMED) {
+                orderCount = orderCount + 1;
+                if (newScore == null) newScore = order.getScore().doubleValue();
+                else newScore += order.getScore();
+            }
+        if (orderCount >= 20) {
+            isUpdated = this.score == null || this.score.compareTo(newScore) != 0;
+            newScore = newScore / orderCount;
+            this.score = newScore;
+        }
+        return isUpdated;
+    }
+
 }

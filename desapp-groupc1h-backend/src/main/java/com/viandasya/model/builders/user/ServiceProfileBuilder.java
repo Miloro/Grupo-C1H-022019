@@ -53,7 +53,6 @@ public class ServiceProfileBuilder {
         ServiceProfile serviceProfile = new ServiceProfile(serviceInfo, timetable,
                 location, maxDistanceOfDeliveryInKms);
         serviceProfile.setBalance(new Balance(new BigDecimal(balance)));
-        serviceProfile.setScore(new Random().nextInt(5));
         return serviceProfile;
     }
 }

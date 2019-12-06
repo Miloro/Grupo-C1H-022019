@@ -1,42 +1,65 @@
 package com.viandasya.service;
 
+import com.viandasya.model.menu.Menu;
 import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.model.user.User;
 import com.viandasya.persistence.ServiceProfileRepository;
 import com.viandasya.persistence.UserRepository;
 import com.viandasya.webservice.dtos.ServiceProfileDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ServiceProfileService {
     private final UserRepository userRepository;
     private final ServiceProfileRepository serviceProfileRepository;
+    private final MailSenderService mailSenderService;
 
-    public ServiceProfileService(UserRepository userRepository, ServiceProfileRepository serviceProfileRepository) {
+    public ServiceProfileService(UserRepository userRepository, ServiceProfileRepository serviceProfileRepository, MailSenderService mailSenderService) {
         this.userRepository = userRepository;
         this.serviceProfileRepository = serviceProfileRepository;
+        this.mailSenderService = mailSenderService;
     }
 
     @Transactional
     public long create(String email, ServiceProfile serviceProfile) {
-        User user = userRepository.findById(email).get();
-        user.addServiceProfile(serviceProfile);
-        return serviceProfileRepository.save(serviceProfile).getId();
+        return userRepository.findById(email).map(user -> {
+            user.addServiceProfile(serviceProfile);
+            return serviceProfileRepository.save(serviceProfile).getId();
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Transactional
-    public Balance withdraw(String userId, Balance amount){
+    public Balance withdraw(String userId, Balance amount) {
         User user = userRepository.findById(userId).get();
         user.getServiceProfile().getBalance().withdraw(amount.getAmount());
         userRepository.save(user);
         return user.getServiceProfile().getBalance();
     }
 
+    @Transactional
+    @Scheduled(cron = "0 0 12 * * ?")
+    public void updateScores() {
+        this.serviceProfileRepository.findAll().forEach(serviceProfile -> {
+            List<Menu> menusDischarged = serviceProfile.updateScore();
+            menusDischarged.forEach(menu ->
+                    this.mailSenderService.sendMenuDischargedMessage(menu,
+                            serviceProfile.getServiceInfo().geteMail()));
+            if (serviceProfile.isDischarged()) {
+                this.mailSenderService.sendServiceProfileDischargedMessage(serviceProfile.getServiceInfo());
+            }
+            this.serviceProfileRepository.save(serviceProfile);
+        });
+    }
 
+    @Transactional
     public Iterable<ServiceProfile> findAll() {
         return serviceProfileRepository.findAll();
     }

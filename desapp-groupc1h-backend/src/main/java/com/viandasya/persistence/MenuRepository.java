@@ -20,5 +20,4 @@ public interface MenuRepository extends JpaRepository<Menu, Long> {
 
     @Query(value = "SELECT m as menu, sum(o.amount) as orderCount FROM Menu m JOIN m.orders o GROUP BY m")
     List<MenuOrderCountDTO> findAllAsToUpdateMenuDTO();
-
 }

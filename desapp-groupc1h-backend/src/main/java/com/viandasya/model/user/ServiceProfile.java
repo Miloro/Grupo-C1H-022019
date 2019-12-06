@@ -1,6 +1,7 @@
 package com.viandasya.model.user;
 
 import com.viandasya.model.menu.Menu;
+import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.TimeTable;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class ServiceProfile {
 
     private double maxDistanceOfDeliveryInKms;
 
-    private Integer score;
+    private Double score;
 
     public ServiceProfile(ServiceInfo serviceInfo, TimeTable timetable,
                           Location location, double maxDistanceOfDeliveryInKms) {
@@ -102,6 +103,18 @@ public class ServiceProfile {
         this.maxDistanceOfDeliveryInKms = maxDistanceOfDeliveryInKms;
     }
 
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+    public String userEmail() {
+        return user.getEmail();
+    }
+
     public void addMenu(Menu menu) {
         menu.setServiceProfile(this);
         this.menus.add(menu);
@@ -111,15 +124,23 @@ public class ServiceProfile {
         return this.menus.stream().filter(Menu::isValid).count() == 20;
     }
 
-    public Integer getScore() {
-        return score;
+    public List<Menu> updateScore() {
+        List<Menu> updatedMenus = new ArrayList<>();
+        int menuCount = 0;
+        Double newScore = null;
+        for (Menu menu: this.menus) {
+            if (menu.updateScore()) updatedMenus.add(menu);
+            if (menu.getScore() != null) {
+                if (newScore == null) newScore = menu.getScore();
+                else newScore += menu.getScore();
+                menuCount = menuCount + 1;
+            }
+        }
+        if (newScore != null) this.score = newScore / menuCount;
+        return updatedMenus;
     }
 
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public String userEmail() {
-        return user.getEmail();
+    public boolean isDischarged() {
+        return this.score == null || this.score.compareTo(2.0) >= 0;
     }
 }

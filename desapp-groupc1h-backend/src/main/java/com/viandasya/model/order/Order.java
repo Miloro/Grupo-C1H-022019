@@ -26,10 +26,10 @@ public class Order {
     private DateTimeSlot orderDate;
     private Boolean delivery;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Menu menu;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private ClientProfile client;
 

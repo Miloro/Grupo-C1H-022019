@@ -241,7 +241,7 @@ public class FakeData implements ApplicationRunner {
         Order ordera = anyOrder()
                 .setAmount(35)
                 .setOffer(new Offer(30, new BigDecimal("202.10")))
-                .setScore(null)
+                .setScore(5)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().withHour(15),
                         LocalDateTime.now().minusDays(20).withHour(16)))
@@ -279,12 +279,18 @@ public class FakeData implements ApplicationRunner {
         Menu menuPizza = menus.stream()
                 .filter(menu -> menu.getName().equals("Pizza especial con jamon, muzarrella y morron"))
                 .findFirst().get();
+        Menu menuCumpleanios = menus.stream()
+                .filter(menu -> menu.getName().equals("Menu para cumpleaños"))
+                .findFirst().get();
+
 
         new ArrayList<>(Arrays.asList(order1, order2, order3, order4)).forEach(menuGreen::addOrder);
         new ArrayList<>(Arrays.asList(ordera, orderb, orderc)).forEach(menuPizza::addOrder);
+        create20ConfirmedOrders(savedClienta).forEach(menuCumpleanios::addOrder);
 
         menuRepository.save(menuGreen);
         menuRepository.save(menuPizza);
+        menuRepository.save(menuCumpleanios);
     }
 
     private static PriceHandler createPriceHandler(String price, String minPrice1,
@@ -307,6 +313,23 @@ public class FakeData implements ApplicationRunner {
                 new ArrayList<>(Collections.singletonList(new HoursTimeSlot(from, to))))));
 
         return anyTimeTable().setDayTimeSlots(dayTimeSlots).createTimeTable();
+    }
+
+    private static List<Order> create20ConfirmedOrders(ClientProfile client) {
+        List<Order> orders = new ArrayList<>();
+        Arrays.asList(4,3,5,4,5,1,4,5,2,1,3,4,5,2,4,3,1,5,3,4,2).forEach(integer -> {
+            Order order = anyOrder()
+                    .setAmount(10)
+                    .setOffer(new Offer(0, new BigDecimal("200")))
+                    .setScore(integer)
+                    .setIsDelivery(true)
+                    .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(4), LocalDateTime.now().minusDays(4).plusHours(1)))
+                    .setState(OrderState.CONFIRMED)
+                    .setClient(client)
+                    .createOrder();
+            orders.add(order);
+        });
+        return orders;
     }
 
 }
