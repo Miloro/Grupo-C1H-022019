@@ -3,18 +3,15 @@ package com.viandasya.webservice;
 import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ClientProfile;
 import com.viandasya.service.ClientProfileService;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ClientProfileController {
     private final  ClientProfileService clientProfileService;
-    private final ModelMapper modelMapper;
 
-    public ClientProfileController(ClientProfileService clientProfileService, ModelMapper modelMapper) {
+    public ClientProfileController(ClientProfileService clientProfileService) {
         this.clientProfileService = clientProfileService;
-        this.modelMapper = modelMapper;
     }
 
     @PostMapping("user/{id}")

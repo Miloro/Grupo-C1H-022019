@@ -8,13 +8,13 @@ const styleProps = (size)  => ({
     }
 });
 
-const HomeResult = ({title, extra}) => (
+const DefaultResult = ({icon, title, extra}) => (
     <Result
-        icon={<Icon type="home" {...styleProps(50)}/>}
+        icon={<Icon type={icon} {...styleProps(50)}/>}
         title={<div {...styleProps(50)}>{title}</div>}
         extra={<div {...styleProps(25)}>{extra}</div>}
         style={{backgroundColor: "#ffffff"}}
     />
 );
 
-export default HomeResult;
+export default DefaultResult;

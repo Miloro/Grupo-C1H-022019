@@ -3,7 +3,7 @@ import {useAuth0} from "../../providers/Auth0Provider";
 import {useUser} from "../../providers/UserProvider";
 import ClientForm from "./ClientForm";
 import {FormattedMessage} from "react-intl";
-import HomeResult from "./HomeResult";
+import DefaultResult from "./DefaultResult";
 import {Button} from "antd";
 
 const Home = () => {
@@ -11,7 +11,8 @@ const Home = () => {
     const {clientId} = useUser();
 
     return !(isAuthenticated || clientId) ?
-        <HomeResult
+        <DefaultResult
+            icon={"home"}
             title={<FormattedMessage id="visitorMessage"/>}
             extra={!loading && <Button size="large" onClick={() => loginWithRedirect({})}>
                 <FormattedMessage id="login"/>
@@ -19,7 +20,8 @@ const Home = () => {
         /> :
         isAuthenticated && !clientId ?
             <ClientForm/> :
-            <HomeResult
+            <DefaultResult
+                icon={"home"}
                 title={<FormattedMessage id="welcomeTitle"/>}
                 extra={<FormattedMessage id="welcomeMessage"/>}
             />;

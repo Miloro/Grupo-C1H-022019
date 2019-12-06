@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Modal, Row, Typography} from "antd";
+import {Col, Row, Typography} from "antd";
 import {Formik} from "formik";
 import {Form, InputNumber, SubmitButton} from "formik-antd";
 import ServiceInfoInputs from "./ServiceInfoInputs";
@@ -7,17 +7,17 @@ import SchedulePicker from "./SchedulePicker";
 import AddressSearcher from "./AddressSearcher";
 import ServiceSchema from "../ServiceSchema";
 import {FormattedMessage, useIntl} from "react-intl";
-import {useAuth0} from "../../../providers/Auth0Provider";
-import {post} from "../../../api/API";
+import {useAPI} from "../../../providers/ApiProvider";
+import {useUser} from "../../../providers/UserProvider";
 
 const {Item} = Form;
 const {Title} = Typography;
-const {success} = Modal;
 
-
-const ServiceForm = ({userId, setService}) => {
+const ServiceForm = () => {
     const {formatMessage} = useIntl();
-    const {getTokenSilently} = useAuth0();
+    const {postService} = useAPI();
+    const {setServiceId} = useUser();
+
     const formLayout = {
         wrapperCol: {
             xs: {span: 24},
@@ -74,21 +74,10 @@ const ServiceForm = ({userId, setService}) => {
         maxDistanceOfDeliveryInKms: values.maxDistanceDeliveryInKms
     });
 
-    const createdServiceModal = () => {
-        const modal = success({
-            content: formatMessage({id: "createdService"}),
-        });
-        setTimeout(() => {
-            modal.destroy();
-        }, 20 * 1000);
-    };
-
     const onSubmit = values => {
         const service = createService(values);
-        post(getTokenSilently, `/api/user/${userId}/service`, service, (response) => {
-            service.id = response.data;
-            setService(service);
-            createdServiceModal();
+        postService(service, (response) => {
+            setServiceId(response.data);
         });
     };
 

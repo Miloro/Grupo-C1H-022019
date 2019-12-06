@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {Route, Switch, useHistory} from "react-router-dom";
+import {Route, useHistory} from "react-router-dom";
 import {useAuth0} from "../providers/Auth0Provider";
 import {Col, Row} from "antd";
 import {useUser} from "../providers/UserProvider";

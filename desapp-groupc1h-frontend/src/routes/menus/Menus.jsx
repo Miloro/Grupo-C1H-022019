@@ -3,8 +3,7 @@ import {Col, Layout, List, Pagination, Radio, Row} from "antd";
 import {useLocation} from "react-router-dom";
 import {FormattedMessage, useIntl} from "react-intl";
 import MenuItem from "./MenuItem";
-import {useAuth0} from "../../providers/Auth0Provider";
-import {post} from "../../api/API";
+import {useAPI} from "../../providers/ApiProvider";
 const {Header, Content, Footer} = Layout;
 const {Group} = Radio;
 
@@ -13,7 +12,7 @@ const useQuery = () => new URLSearchParams(useLocation().search);
 const Menus = () => {
     let query = useQuery();
     const {formatMessage} = useIntl();
-    const {getTokenSilently} = useAuth0();
+    const {searchMenus} = useAPI();
 
     const [order, setOrder] = useState(null);
     const filterField = query.get("field");
@@ -33,15 +32,16 @@ const Menus = () => {
                 filterField: filterField, filterQuery: filterQuery, order: order,
                 pageCurrent: pageCurrent, pageSize: pageSize
             };
-            post(getTokenSilently, "/api/menus/search", searchDTO,(response) => {
+            searchMenus(searchDTO, (response) => {
                 setResults(response.data.content);
+                // noinspection JSUnresolvedVariable
                 setPageTotal(response.data.totalElements);
                 setIsLoading(false);
             });
         };
         fetchMenus();
         window.scrollTo(0, 0);
-    }, [filterField, filterQuery, getTokenSilently, order, pageCurrent]);
+    }, [filterField, filterQuery, order, pageCurrent]);
 
     const onOrderChange = e => {
         setOrder(e.target.value);

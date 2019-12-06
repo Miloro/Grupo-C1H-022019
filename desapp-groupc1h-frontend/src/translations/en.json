@@ -26,6 +26,8 @@
   "client.create": "Registration",
   "client.create.description": "There is only one step remaining, complete your profile and you are ready to go.",
   "client.info": "Information",
+  "serviceTitle":"My service",
+  "serviceMessage":"Your service has been successfully created! Now you can create your own take aways.",
   "service.create": "Create Service",
   "info":"Information*",
   "service.timetable": "Schedule*",

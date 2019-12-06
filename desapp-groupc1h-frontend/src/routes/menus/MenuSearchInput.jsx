@@ -12,7 +12,6 @@ const MenuSearchInput = () => {
     const widthStyleProp = (w) => ({style: {width: w}});
     let history = useHistory();
 
-
     const onSelect = selection => {
         setSelection(selection);
     };

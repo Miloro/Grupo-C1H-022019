@@ -14,7 +14,9 @@ const hereMapsParams = (data) => (
 );
 
 const createLocation = response => {
+    // noinspection JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable
     const location = response.data.Response.View[0].Result[0].Location;
+    // noinspection JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable,JSUnresolvedVariable
     return {
         address: `${location.Address.Street} ${location.Address.HouseNumber}`,
         city: `${location.Address.City}`,

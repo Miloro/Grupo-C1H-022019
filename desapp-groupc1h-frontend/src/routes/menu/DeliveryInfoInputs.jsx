@@ -1,10 +1,10 @@
 import React from 'react';
 import {FormattedMessage, useIntl} from "react-intl";
 import PriceInput from "./PriceInput";
-import SchedulePicker from "../../service/serviceForm/SchedulePicker";
+import SchedulePicker from "../service/serviceForm/SchedulePicker";
 import {Form} from "formik-antd";
 import {Typography} from "antd";
-import NumberInput from "../../../components/NumberInput";
+import NumberInput from "../../components/NumberInput";
 
 const {Item} = Form;
 const {Title} = Typography;

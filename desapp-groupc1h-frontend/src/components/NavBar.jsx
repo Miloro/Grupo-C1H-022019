@@ -24,6 +24,8 @@ const logoProps = {
     }
 };
 
+const iconProps = {style: {fontSize: 20}};
+
 const NavBar = () => {
     const {formatMessage} = useIntl();
     const {clientId, serviceId} = useUser();
@@ -43,7 +45,9 @@ const NavBar = () => {
         {clientId &&
         <Col span={10}>
             <Menu {...menuProps}>
-                <Item key="1"><Icon type="home"/></Item>
+                <Item key="1" onClick={() => history.push("/")}>
+                    <Icon {...iconProps} type="home"/>
+                </Item>
                 <SubMenu title={<MenuOption icon="user" name={formatMessage({id:"profile"})}/>}>
                     <Item key="2"><MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/></Item>
                     <Item key="3"><MenuOption icon="star" name={formatMessage({id:"rateOrders"})}/></Item>
@@ -53,12 +57,16 @@ const NavBar = () => {
                 <SubMenu title={<MenuOption icon="shop" name={formatMessage({id:"Service"})}/>}>
                     <Item key="5"><MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/></Item>
                     <Item key="6"><MenuOption icon="setting" name={formatMessage({id:"myMenus"})}/></Item>
-                    <Item key="7"><MenuOption icon="form" name={formatMessage({id:"CreateMenu"})}/></Item>
+                    <Item key="7" onClick={() => history.push("/service/menu")}>
+                        <MenuOption icon="form" name={formatMessage({id:"CreateMenu"})}/>
+                    </Item>
                 </SubMenu>:
-                    <Item key="10"><MenuOption icon="shop" name={formatMessage({id:"service.create"})}/></Item>}
-                <Item key="8"><Tooltip title={formatMessage({id:"wallet"})}><Icon type="dollar"/></Tooltip></Item>
+                    <Item key="10" onClick={() => history.push("/service")}>
+                        <MenuOption icon="shop" name={formatMessage({id:"service.create"})}/>
+                    </Item>}
+                <Item key="8"><Tooltip title={formatMessage({id:"wallet"})}><Icon {...iconProps} type="dollar"/></Tooltip></Item>
                 <Item key="9" onClick={() => logout()}>
-                    <Tooltip title={formatMessage({id:"logout"})}><Icon type="logout"/></Tooltip>
+                    <Tooltip title={formatMessage({id:"logout"})}><Icon {...iconProps} type="logout"/></Tooltip>
                 </Item>
             </Menu>
         </Col>}

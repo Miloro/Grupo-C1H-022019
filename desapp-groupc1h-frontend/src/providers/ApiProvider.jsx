@@ -1,12 +1,13 @@
 import React, {useContext} from "react";
 import axios from "axios";
-import {Auth0Context, useAuth0} from "./Auth0Provider";
+import {useAuth0} from "./Auth0Provider";
 
 export const ApiContext = React.createContext();
 export const useAPI = () => useContext(ApiContext);
 
 export const ApiProvider = ({children}) => {
     const {getTokenSilently, user} = useAuth0();
+
 
     const axiosRequest = async (method, url, data, then,
                                 catchIt = (error) => (console.error(JSON.stringify(error)))) => {
@@ -42,7 +43,21 @@ export const ApiProvider = ({children}) => {
         post(`/api/user/${user.email}`, client, then, catchIt)
     };
 
-    return (<ApiContext.Provider value={{get, post, put, postClient}}>
+    const postService = (service, then, catchIt) => {
+        post(`/api/user/${user.email}/service`, service, then, catchIt)
+    };
+
+    const postMenu = (serviceId, menu, then, catchIt) => {
+        post(`/api/service/${serviceId}/menu`, menu, then, catchIt)
+    };
+
+    const searchMenus = (search, then, catchIt) => {
+        post("/api/menus/search", search, then, catchIt)
+    };
+
+
+    return (<ApiContext.Provider
+        value={{get, post, put, postClient, postService, postMenu, searchMenus}}>
         {children}
     </ApiContext.Provider>);
 };

@@ -27,7 +27,7 @@ const ClientForm = () => {
     const {formatMessage} = useIntl();
     const {user} = useAuth0();
     const {postClient} = useAPI();
-    const {setClientId, clientId} = useUser();
+    const {setClientId} = useUser();
 
     const initialValues = {
         name: user.given_name,

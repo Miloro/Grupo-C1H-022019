@@ -23,6 +23,8 @@
   "client.create": "Registro",
   "client.create.description": "Solo queda un paso, completa tus datos y comienza a navegar.",
   "client.info": "Información",
+  "serviceTitle":"Mi servicio",
+  "serviceMessage":"Tu servicio ha sido creado con exito! Ahora puedes crear tus propias viandas.",
   "service.create": "Crear Servicio",
   "info":"Información*",
   "service.timetable": "Horarios y días de atención*",
