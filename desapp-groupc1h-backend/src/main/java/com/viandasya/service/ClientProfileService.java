@@ -8,7 +8,6 @@ import com.viandasya.persistence.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Service
 public class ClientProfileService {

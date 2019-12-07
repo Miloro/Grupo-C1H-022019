@@ -4,7 +4,6 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.model.user.User;
-import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.ServiceProfileRepository;
 import com.viandasya.persistence.UserRepository;
 import com.viandasya.webservice.dtos.ServiceProfileDTO;
