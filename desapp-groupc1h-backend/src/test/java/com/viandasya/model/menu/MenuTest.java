@@ -58,8 +58,8 @@ public class MenuTest {
         });
 
         Menu menu = anyMenu().setOrders(mockOrders).createMenu();
+        menu.updateScore();
 
-        Assert.assertTrue(menu.updateScore());
         Assert.assertEquals(3.4, menu.getScore(), 0);
     }
 
@@ -74,8 +74,8 @@ public class MenuTest {
         });
 
         Menu menu = anyMenu().setOrders(mockOrders).createMenu();
+        menu.updateScore();
 
-        Assert.assertFalse(menu.updateScore());
         Assert.assertNull(menu.getScore());
     }
 }

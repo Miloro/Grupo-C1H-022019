@@ -124,12 +124,10 @@ public class ServiceProfile {
         return this.menus.stream().filter(Menu::isValid).count() == 20;
     }
 
-    public List<Menu> updateScore() {
-        List<Menu> updatedMenus = new ArrayList<>();
+    public void updateScore() {
         int menuCount = 0;
         Double newScore = null;
         for (Menu menu: this.menus) {
-            if (menu.updateScore()) updatedMenus.add(menu);
             if (menu.getScore() != null) {
                 if (newScore == null) newScore = menu.getScore();
                 else newScore += menu.getScore();
@@ -137,7 +135,6 @@ public class ServiceProfile {
             }
         }
         if (newScore != null) this.score = newScore / menuCount;
-        return updatedMenus;
     }
 
     public boolean isDischarged() {

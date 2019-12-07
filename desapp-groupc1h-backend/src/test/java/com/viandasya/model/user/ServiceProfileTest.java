@@ -64,17 +64,14 @@ public class ServiceProfileTest {
         Arrays.asList(4.23,3.12,5.5,4.10,5.5,1.5,4.25,5.75,2.12,1.4,
                 3.1,4.5,5.5,2.8,4.3,3.5,1.0,5.0,3.0,4.0).forEach(aDouble -> {
             Menu mockMenu = Mockito.mock(Menu.class);
-            Mockito.when(mockMenu.updateScore()).thenReturn(true);
             Mockito.when(mockMenu.getScore()).thenReturn(aDouble);
             mockMenus.add(mockMenu);
         });
 
         ServiceProfile serviceProfile = anyServiceProfile().createServiceProfile();
         mockMenus.forEach(serviceProfile::addMenu);
-        List<Menu> menus = serviceProfile.updateScore();
 
         Assert.assertEquals(3.7, serviceProfile.getScore(), 0.1);
-        Assert.assertTrue(menus.containsAll(mockMenus));
     }
 
 }

@@ -159,10 +159,9 @@ public class Menu {
         this.priceHandler = priceHandler;
     }
 
-    public boolean updateScore() {
+    public void updateScore() {
         int orderCount = 0;
         Double newScore = null;
-        boolean isUpdated = false;
         for (Order order: this.orders)
             if (order.getState() == OrderState.CONFIRMED) {
                 orderCount = orderCount + 1;
@@ -170,11 +169,9 @@ public class Menu {
                 else newScore += order.getScore();
             }
         if (orderCount >= 20) {
-            isUpdated = this.score == null || this.score.compareTo(newScore) != 0;
             newScore = newScore / orderCount;
             this.score = newScore;
         }
-        return isUpdated;
     }
 
 }

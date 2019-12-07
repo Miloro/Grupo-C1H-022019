@@ -4,6 +4,7 @@ import com.viandasya.model.menu.Menu;
 import com.viandasya.model.user.Balance;
 import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.model.user.User;
+import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.ServiceProfileRepository;
 import com.viandasya.persistence.UserRepository;
 import com.viandasya.webservice.dtos.ServiceProfileDTO;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,11 +21,13 @@ public class ServiceProfileService {
     private final UserRepository userRepository;
     private final ServiceProfileRepository serviceProfileRepository;
     private final MailSenderService mailSenderService;
+    private final MenuRepository menuRepository;
 
-    public ServiceProfileService(UserRepository userRepository, ServiceProfileRepository serviceProfileRepository, MailSenderService mailSenderService) {
+    public ServiceProfileService(UserRepository userRepository, ServiceProfileRepository serviceProfileRepository, MailSenderService mailSenderService, MenuRepository menuRepository) {
         this.userRepository = userRepository;
         this.serviceProfileRepository = serviceProfileRepository;
         this.mailSenderService = mailSenderService;
+        this.menuRepository = menuRepository;
     }
 
     @Transactional
@@ -47,15 +49,18 @@ public class ServiceProfileService {
     @Transactional
     @Scheduled(cron = "0 0 12 * * ?")
     public void updateScores() {
-        this.serviceProfileRepository.findAll().forEach(serviceProfile -> {
-            List<Menu> menusDischarged = serviceProfile.updateScore();
-            menusDischarged.forEach(menu ->
-                    this.mailSenderService.sendMenuDischargedMessage(menu,
-                            serviceProfile.getServiceInfo().geteMail()));
-            if (serviceProfile.isDischarged()) {
+        this.menuRepository.findAllWithConfirmedOrders().forEach(menu -> {
+            menu.updateScore();
+            if (menu.getScore() != null && menu.getScore() < 2) {
+               this.mailSenderService.sendMenuDischargedMessage(menu,
+                       menu.getServiceProfile().getServiceInfo().geteMail());
+            }
+        });
+        this.serviceProfileRepository.findAllWithFetchedMenus().forEach(serviceProfile -> {
+            serviceProfile.updateScore();
+            if (serviceProfile.getScore() != null && serviceProfile.getScore() < 2) {
                 this.mailSenderService.sendServiceProfileDischargedMessage(serviceProfile.getServiceInfo());
             }
-            this.serviceProfileRepository.save(serviceProfile);
         });
     }
 

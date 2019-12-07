@@ -13,4 +13,7 @@ import java.util.List;
 @Repository
 public interface ServiceProfileRepository extends CrudRepository<ServiceProfile, Long> {
 
+    @Query("select s from ServiceProfile s join fetch s.menus")
+    List<ServiceProfile> findAllWithFetchedMenus();
+
 }

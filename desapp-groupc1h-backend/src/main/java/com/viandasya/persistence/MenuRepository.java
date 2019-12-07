@@ -20,4 +20,8 @@ public interface MenuRepository extends JpaRepository<Menu, Long> {
 
     @Query(value = "SELECT m as menu, sum(o.amount) as orderCount FROM Menu m JOIN m.orders o GROUP BY m")
     List<MenuOrderCountDTO> findAllAsToUpdateMenuDTO();
+
+    @Query("SELECT m from Menu m join fetch m.orders os " +
+            "where os.state = com.viandasya.model.order.OrderState.CONFIRMED and os.size > 20")
+    List<Menu> findAllWithConfirmedOrders();
 }
