@@ -68,7 +68,7 @@ function App() {
                                     <Result icon={<Spin indicator={<Icon type="smile" {...loadingProps} spin/>}/>}/>:
                                     <Switch>
                                         <PrivateRoute path="/buy" component={Buy}/>
-                                        <PrivateRoute path="/unrated-orderds" component={UnratedOrders}/>
+                                        <PrivateRoute path="/unrated-orders" component={UnratedOrders}/>
                                         <PrivateRoute path="/cart" component={Cart}/>
                                         <PrivateRoute path="/orders" component={Orders}/>
                                         <PrivateRoute path="/service/menu" component={MenuForm}/>

@@ -50,7 +50,9 @@ const NavBar = () => {
                 </Item>
                 <SubMenu title={<MenuOption icon="user" name={formatMessage({id:"profile"})}/>}>
                     <Item key="2"><MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/></Item>
-                    <Item key="3"><MenuOption icon="star" name={formatMessage({id:"rateOrders"})}/></Item>
+                    <Item key="3" onClick={() => history.push("/unrated-orders")}>>
+                        <MenuOption icon="star" name={formatMessage({id:"rateOrders"})}/>
+                    </Item>
                     <Item key="4"><MenuOption icon="form" name={formatMessage({id:"updateProfile"})}/></Item>
                 </SubMenu>
                 {serviceId?

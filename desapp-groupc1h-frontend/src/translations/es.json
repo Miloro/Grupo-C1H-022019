@@ -7,6 +7,7 @@
   "Service": "Servicio",
   "updateProfile": "Actualizar perfil",
   "rateOrders": "Puntuar pedidos",
+  "rateOrders.subtitle": "{count, plural, =0 {No tienes ordenes por puntuar. Sigue asi!} one {Tienes # orden por puntuar. Recuerda que si tienes ordenes sin calificar, no puedes comprar mas viandas!} other {Tienes # ordenes por puntuar. Recuerda que si tienes ordenes sin calificar, no puedes comprar mas viandas!}}",
   "profile": "Mi perfil",
   "welcome": "Bienvenido",
   "login": "Iniciar Sesión",
@@ -92,5 +93,11 @@
   "invalidOffers": "Las ofertas creadas no son validas",
   "max20ValidMenus": "Alcanzo la cantidad maxima de 20 viandas validos, es imposible crear uno nuevo",
   "createdMenu": "Se ha creado exitosamente la vianda!",
-  "cookingTime": "Tiempo promedio que tarda preparar una vianda (en minutos)*"
+  "cookingTime": "Tiempo promedio que tarda preparar una vianda (en minutos)*",
+  "amount": "Amount",
+  "totalPrice": "Total price",
+  "orderDate": "Fecha aproximada de recibo",
+  "orderDateFormat": "DD-MM-YYYY HH:mm",
+  "confirm": "Confirmar",
+  "successRatingOrder": "Felicitaciones! has puntuado con {n, plural, one {# estrella} other {# estrellas}} a la orden con la vianda {takeout}"
 }
