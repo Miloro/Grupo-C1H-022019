@@ -3,7 +3,7 @@ package com.viandasya.service;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.ServiceProfileRepository;
-import com.viandasya.persistence.MenuOrderCountDTO;
+import com.viandasya.webservice.dtos.MenuOrderCountDTO;
 import com.viandasya.webservice.dtos.SearchDTO;
 import com.viandasya.exceptions.Maximum20ValidMenusException;
 import org.slf4j.Logger;

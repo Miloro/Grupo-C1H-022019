@@ -39,10 +39,6 @@ public class ClientProfileService {
         return userRepository.existsById(id);
     }
 
-    public Optional<User> getUserbyEmail(String email) {
-        return  userRepository.findById(email);
-    }
-
     @Transactional
     public Balance deposit(String userId, Balance amount) {
         User user = userRepository.findById(userId).get();

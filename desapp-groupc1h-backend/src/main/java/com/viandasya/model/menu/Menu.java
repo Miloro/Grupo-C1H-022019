@@ -111,11 +111,11 @@ public class Menu {
         this.orders.add(order);
     }
 
-    public Integer getCookingTime(){
+    public Integer getCookingTime() {
         return cookingTime;
     }
 
-    public void setCookingTime(Integer cookingTime){
+    public void setCookingTime(Integer cookingTime) {
         this.cookingTime = cookingTime;
     }
 
@@ -159,19 +159,25 @@ public class Menu {
         this.priceHandler = priceHandler;
     }
 
-    public void updateScore() {
+    public boolean updateScore() {
         int orderCount = 0;
         Double newScore = null;
+        boolean isUpdated = false;
         for (Order order: this.orders)
-            if (order.getState() == OrderState.CONFIRMED) {
+            if (order.getState() == OrderState.DELIVERED && order.getScore() != null) {
                 orderCount = orderCount + 1;
                 if (newScore == null) newScore = order.getScore().doubleValue();
-                else newScore += order.getScore();
+                else newScore += order.getScore().doubleValue();
             }
         if (orderCount >= 20) {
+            isUpdated = this.score == null || this.score.compareTo(newScore) != 0;
             newScore = newScore / orderCount;
             this.score = newScore;
         }
+        return isUpdated;
     }
 
+    public boolean isDischarged() {
+        return this.score != null && this.score.compareTo(2.0) >= 0;
+    }
 }

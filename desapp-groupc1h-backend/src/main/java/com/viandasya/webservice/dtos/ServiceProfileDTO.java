@@ -21,7 +21,7 @@ public class ServiceProfileDTO {
     private Location location;
     private double maxDistanceOfDeliveryInKms;
     @JsonIgnore
-    private List<DayOfWeek> daysOfWeeks = Arrays.asList(DayOfWeek.MONDAY,
+    private final List<DayOfWeek> daysOfWeeks = Arrays.asList(DayOfWeek.MONDAY,
             DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY,
             DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY);
 

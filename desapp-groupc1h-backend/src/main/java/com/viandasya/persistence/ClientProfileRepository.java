@@ -9,5 +9,4 @@ import java.util.Optional;
 @Repository
 public interface ClientProfileRepository extends CrudRepository<ClientProfile, Long> {
 
-    Optional<ClientProfile> findByEmail(String email);
 }

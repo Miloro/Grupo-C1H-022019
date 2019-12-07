@@ -52,7 +52,7 @@ public class MenuTest {
         List<Order> mockOrders = new ArrayList<>();
         Arrays.asList(4,3,5,4,5,1,4,5,2,1,3,4,5,2,4,3,1,5,3,4).forEach(integer -> {
             Order mockOrder = Mockito.mock(Order.class);
-            Mockito.when(mockOrder.getState()).thenReturn(OrderState.CONFIRMED);
+            Mockito.when(mockOrder.getState()).thenReturn(OrderState.DELIVERED);
             Mockito.when(mockOrder.getScore()).thenReturn(integer);
             mockOrders.add(mockOrder);
         });
@@ -68,7 +68,7 @@ public class MenuTest {
         List<Order> mockOrders = new ArrayList<>();
         Arrays.asList(4,3,5,4,5,1,4,5,2,1,3,4,5,2,4,3,1).forEach(integer -> {
             Order mockOrder = Mockito.mock(Order.class);
-            Mockito.when(mockOrder.getState()).thenReturn(OrderState.CONFIRMED);
+            Mockito.when(mockOrder.getState()).thenReturn(OrderState.DELIVERED);
             Mockito.when(mockOrder.getScore()).thenReturn(integer);
             mockOrders.add(mockOrder);
         });

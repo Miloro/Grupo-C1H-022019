@@ -7,7 +7,6 @@ import com.viandasya.model.user.ServiceInfo;
 import com.viandasya.model.user.ServiceProfile;
 
 import java.math.BigDecimal;
-import java.util.Random;
 
 import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTable;
 import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInfo;

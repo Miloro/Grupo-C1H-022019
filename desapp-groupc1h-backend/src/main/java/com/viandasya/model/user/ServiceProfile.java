@@ -1,7 +1,6 @@
 package com.viandasya.model.user;
 
 import com.viandasya.model.menu.Menu;
-import com.viandasya.model.order.Order;
 import com.viandasya.model.timeslot.TimeTable;
 
 import javax.persistence.*;
@@ -124,10 +123,12 @@ public class ServiceProfile {
         return this.menus.stream().filter(Menu::isValid).count() == 20;
     }
 
-    public void updateScore() {
+    public List<Menu> updateScore() {
+        List<Menu> updatedMenus = new ArrayList<>();
         int menuCount = 0;
         Double newScore = null;
         for (Menu menu: this.menus) {
+            if (menu.updateScore()) updatedMenus.add(menu);
             if (menu.getScore() != null) {
                 if (newScore == null) newScore = menu.getScore();
                 else newScore += menu.getScore();
@@ -135,9 +136,10 @@ public class ServiceProfile {
             }
         }
         if (newScore != null) this.score = newScore / menuCount;
+        return updatedMenus;
     }
 
     public boolean isDischarged() {
-        return this.score == null || this.score.compareTo(2.0) >= 0;
+        return this.score != null && this.score.compareTo(2.0) >= 0;
     }
 }
