@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -61,6 +62,7 @@ public class OrderService {
         orderRepository.acceptOrders(OrderState.PENDING, OrderState.CONFIRMED);
     }
 
+    @Transactional
     public void save(Order order) {
         orderRepository.save(order);
     }
@@ -71,4 +73,13 @@ public class OrderService {
         this.orderRepository.setOrdersAsDelivered(LocalDateTime.now());
     }
 
+    @Transactional
+    public List<Order> findUnratedOrders(Long id) {
+        return orderRepository.findUnratedOrdersByClientId(id);
+    }
+
+    @Transactional
+    public void updateScoreByIdById(Integer score, Long id) {
+        this.orderRepository.updateScoreById(score, id);
+    }
 }

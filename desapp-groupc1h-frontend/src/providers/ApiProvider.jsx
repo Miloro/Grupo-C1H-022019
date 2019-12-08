@@ -55,9 +55,12 @@ export const ApiProvider = ({children}) => {
         post("/api/menus/search", search, then, catchIt)
     };
 
+    const getUnratedOrders = (then, catchIt) => {
+        get("/api/orders/unrated", then, catchIt)
+    };
 
     return (<ApiContext.Provider
-        value={{get, post, put, postClient, postService, postMenu, searchMenus}}>
+        value={{get, post, put, postClient, postService, postMenu, searchMenus, getUnratedOrders}}>
         {children}
     </ApiContext.Provider>);
 };

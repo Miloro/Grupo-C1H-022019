@@ -48,6 +48,7 @@ public class FakeData implements ApplicationRunner {
         this.menuRepository = menuRepository;
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Override
     @Transactional
     public void run(ApplicationArguments args) {
@@ -221,7 +222,7 @@ public class FakeData implements ApplicationRunner {
         Order order3 = anyOrder()
                 .setAmount(11)
                 .setOffer(new Offer(0, new BigDecimal("399.99")))
-                .setScore(4)
+                .setScore(null)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(7), LocalDateTime.now().minusDays(7).plusHours(1)))
                 .setState(OrderState.DELIVERED)
@@ -231,7 +232,7 @@ public class FakeData implements ApplicationRunner {
         Order order4 = anyOrder()
                 .setAmount(1)
                 .setOffer(new Offer(0, new BigDecimal("399.99")))
-                .setScore(1)
+                .setScore(null)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(7), LocalDateTime.now().minusDays(7).plusHours(1)))
                 .setState(OrderState.CONFIRMED)
@@ -241,7 +242,7 @@ public class FakeData implements ApplicationRunner {
         Order ordera = anyOrder()
                 .setAmount(35)
                 .setOffer(new Offer(30, new BigDecimal("202.10")))
-                .setScore(5)
+                .setScore(null)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().withHour(15),
                         LocalDateTime.now().minusDays(20).withHour(16)))
@@ -252,7 +253,7 @@ public class FakeData implements ApplicationRunner {
         Order orderb = anyOrder()
                 .setAmount(33)
                 .setOffer(new Offer(30, new BigDecimal("202.10")))
-                .setScore(2)
+                .setScore(null)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(21).withHour(19),
                         LocalDateTime.now().minusDays(21).withHour(20)))
@@ -263,7 +264,7 @@ public class FakeData implements ApplicationRunner {
         Order orderc = anyOrder()
                 .setAmount(21)
                 .setOffer(new Offer(30, new BigDecimal("202.10")))
-                .setScore(5)
+                .setScore(null)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(10).withHour(14),
                         LocalDateTime.now().minusDays(21).withHour(15)))
@@ -286,7 +287,7 @@ public class FakeData implements ApplicationRunner {
 
         new ArrayList<>(Arrays.asList(order1, order2, order3, order4)).forEach(menuGreen::addOrder);
         new ArrayList<>(Arrays.asList(ordera, orderb, orderc)).forEach(menuPizza::addOrder);
-        create20ConfirmedOrders(savedClienta).forEach(menuCumpleanios::addOrder);
+        create20DeliveredOrders(savedClient1).forEach(menuCumpleanios::addOrder);
 
         menuRepository.save(menuGreen);
         menuRepository.save(menuPizza);
@@ -315,16 +316,16 @@ public class FakeData implements ApplicationRunner {
         return anyTimeTable().setDayTimeSlots(dayTimeSlots).createTimeTable();
     }
 
-    private static List<Order> create20ConfirmedOrders(ClientProfile client) {
+    private static List<Order> create20DeliveredOrders(ClientProfile client) {
         List<Order> orders = new ArrayList<>();
-        Arrays.asList(4,3,5,4,5,1,4,5,2,1,3,4,5,2,4,3,1,5,3,4,2).forEach(integer -> {
+        Arrays.asList(4,null,5,4,null,1,4,5,null,1,3,4,null,2,4,3,1,null,3,4,2,4,null,3,5,1,4,3,2,4,5).forEach(integer -> {
             Order order = anyOrder()
                     .setAmount(10)
                     .setOffer(new Offer(0, new BigDecimal("200")))
                     .setScore(integer)
                     .setIsDelivery(true)
                     .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(4), LocalDateTime.now().minusDays(4).plusHours(1)))
-                    .setState(OrderState.CONFIRMED)
+                    .setState(OrderState.DELIVERED)
                     .setClient(client)
                     .createOrder();
             orders.add(order);

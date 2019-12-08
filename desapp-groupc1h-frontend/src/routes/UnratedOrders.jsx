@@ -8,7 +8,7 @@ const {Text} = Typography;
 const UnratedOrders = () => {
     const [dataSource, setDataSource] = useState([]);
     const {formatMessage} = useIntl();
-    const {put,getUnratedOrders} = useAPI();
+    const {put, getUnratedOrders} = useAPI();
 
     useEffect(() => {
         getUnratedOrders(({data}) => {
@@ -27,14 +27,14 @@ const UnratedOrders = () => {
         setDataSource(newDataSource);
     };
 
-    function rateOrder({id, name, score}) {
+    const rateOrder = ({id, name, score}) => {
         put(`/api/order/${id}/score`, score, () => {
             const newDataSource = dataSource.filter(order => order.id !== id);
             setDataSource(newDataSource);
             message.success(formatMessage({id:"successRatingOrder"}, {n:score, takeout:name}));
         });
 
-    }
+    };
 
     // noinspection JSUnresolvedVariable
     return (
