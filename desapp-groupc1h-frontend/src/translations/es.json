@@ -85,7 +85,7 @@
   "validityPeriod": "Vigente desde y hasta",
   "add": "Agregar",
   "offer": "Oferta",
-  "offerDisclaimer": "Debe haber un mínimo de 2 ofertas por vianda. El valor máximo de una vianda es $1000.\nLa primera oferta debe tener una cantidad mínima de pedidos de entre 10 y 70 para aplicar el nuevo precio, la segunda entre 40 y 150 y las siguientes a partir de 100. Una oferta debe tener un precio menor y una cantidad mínima mayor que su anterior.",
+  "offerDisclaimer": "Debe haber un mínimo de 2 ofertas por vianda. El valor máximo de una vianda es $1000. La primera oferta debe tener una cantidad mínima de pedidos de entre 10 y 70 para aplicar el nuevo precio, la segunda entre 40 y 150 y las siguientes a partir de 100. Una oferta debe tener un precio menor y una cantidad mínima mayor que su anterior.",
   "delete": "Borrar",
   "maxAmountPerDay": "Cantidad máxima de ventas por dia*",
   "login_required": "Debe iniciar sesion",
@@ -95,8 +95,8 @@
   "cookingTime": "Tiempo promedio que tarda preparar una vianda (en minutos)*",
   "amount": "Amount",
   "totalPrice": "Precio total",
-  "orderDate": "Fecha aproximada de recibo",
+  "orderDate": "Fecha aprox. de entrega",
   "orderDateFormat": "DD-MM-YYYY HH:mm",
   "confirm": "Confirmar",
-  "successRatingOrder": "Felicitaciones! has puntuado con {n, plural, one {# estrella} other {# estrellas}} a la pedido con la vianda {takeout}"
+  "successRatingOrder": "Felicitaciones! has puntuado con {n, plural, one {# estrella} other {# estrellas}} al pedido con la vianda {takeout}"
 }

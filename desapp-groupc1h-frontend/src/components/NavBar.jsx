@@ -42,15 +42,14 @@ const NavBar = () => {
         <Col span={10} style={{paddingTop: '1%'}}>
             <MenuSearchInput/>
         </Col>}
-        {clientId &&
         <Col span={10}>
             <Menu {...menuProps}>
-                <Item key="1" onClick={() => history.push("/")}>
+                <Item hidden={!clientId} key="1" onClick={() => history.push("/")}>
                     <Icon {...iconProps} type="home"/>
                 </Item>
-                <SubMenu title={<MenuOption icon="user" name={formatMessage({id:"profile"})}/>}>
+                <SubMenu hidden={!clientId} title={<MenuOption icon="user" name={formatMessage({id:"profile"})}/>}>
                     <Item key="2"><MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/></Item>
-                    <Item key="3" onClick={() => history.push("/unrated-orders")}>>
+                    <Item key="3" onClick={() => history.push("/unrated-orders")}>
                         <MenuOption icon="star" name={formatMessage({id:"rateOrders"})}/>
                     </Item>
                     <Item key="4"><MenuOption icon="form" name={formatMessage({id:"updateProfile"})}/></Item>
@@ -63,15 +62,15 @@ const NavBar = () => {
                         <MenuOption icon="form" name={formatMessage({id:"CreateMenu"})}/>
                     </Item>
                 </SubMenu>:
-                    <Item key="10" onClick={() => history.push("/service")}>
+                    <Item hidden={!clientId} key="10" onClick={() => history.push("/service")}>
                         <MenuOption icon="shop" name={formatMessage({id:"service.create"})}/>
                     </Item>}
-                <Item key="8"><Tooltip title={formatMessage({id:"wallet"})}><Icon {...iconProps} type="dollar"/></Tooltip></Item>
+                <Item hidden={!clientId} key="8"><Tooltip title={formatMessage({id:"wallet"})}><Icon {...iconProps} type="dollar"/></Tooltip></Item>
                 <Item key="9" onClick={() => logout()}>
                     <Tooltip title={formatMessage({id:"logout"})}><Icon {...iconProps} type="logout"/></Tooltip>
                 </Item>
             </Menu>
-        </Col>}
+        </Col>
     </Row>
 };
 

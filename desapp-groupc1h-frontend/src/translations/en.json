@@ -97,7 +97,7 @@
   "cookingTime": "Average time to prepare the take away (in minutes)*",
   "amount": "Amount",
   "totalPrice": "Total price",
-  "orderDate": "Approximate date of delivery",
+  "orderDate": "Approx. date of delivery",
   "orderDateFormat": "YYYY-MM-DD HH:mm",
   "confirm": "Confirm",
   "successRatingOrder": "You successfully rated {n, plural, one {star} other {# stars}} to order with take out {takeout}"

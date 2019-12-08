@@ -55,12 +55,16 @@ export const ApiProvider = ({children}) => {
         post("/api/menus/search", search, then, catchIt)
     };
 
-    const getUnratedOrders = (then, catchIt) => {
-        get("/api/orders/unrated", then, catchIt)
+    const getUnratedOrders = (clientId, then, catchIt) => {
+        get(`/api/client/${clientId}/orders/unrated`, then, catchIt)
+    };
+
+    const updateScore = (orderId, score, then, catchIt) => {
+        put(`/api/order/${orderId}/score`,{score: score}, then, catchIt)
     };
 
     return (<ApiContext.Provider
-        value={{get, post, put, postClient, postService, postMenu, searchMenus, getUnratedOrders}}>
+        value={{get, post, put, postClient, postService, postMenu, searchMenus, getUnratedOrders, updateScore}}>
         {children}
     </ApiContext.Provider>);
 };

@@ -19,7 +19,7 @@ const PrivateRoute = ({ component: Component, path, ...rest }) => {
             fn();
         }}
         if(!loading && isAuthenticated && !clientId) {
-            history.push("/user");
+            history.push("/");
         }
     }, [path, loading, isAuthenticated, loginWithRedirect, clientId, history]);
 

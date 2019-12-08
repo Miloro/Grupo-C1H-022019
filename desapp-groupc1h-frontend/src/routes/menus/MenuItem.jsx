@@ -7,34 +7,15 @@ const {Text, Paragraph} = Typography;
 const {Item} = List;
 const {Column} = Table;
 
-function MenuItem({item}) {
+const MenuItem = ({item}) => {
     const {formatMessage} = useIntl();
     let history = useHistory();
-    function CategoryTags({categories}) {
-        return categories.map((category) => (
-            <Tag key={category} color="#FF8C00">{category}</Tag>
-        ))
 
+    const CategoryTags = ({categories}) => categories.map((category) => (
+        <Tag key={category} color="#FF8C00">{category}</Tag>
+    ));
 
-    }
-
-
-    function Prices({price, offers}) {
-        return <div>
-            <Statistic
-                title={formatMessage({id: "price"})}
-                prefix="$"
-                value={price}
-                valueStyle={{fontSize: 45}}
-            />
-            <br/>
-            <Popover placement="left" content={<OffersTable offers={offers}/>} trigger="click">
-                <Button>{formatMessage({id: "offers"})}!</Button>
-            </Popover>
-        </div>
-    }
-
-    function OffersTable({offers}) {
+    const OffersTable = ({offers}) => {
         const data = offers.map((offer, index) =>(
             {key: index, ...offer}
         ));
@@ -43,9 +24,22 @@ function MenuItem({item}) {
             <Column title={formatMessage({id: "price"})} dataIndex="price" key="price" />
             <Column title={formatMessage({id: "minAmount"})} dataIndex="minAmount" key="minAmount"/>
         </Table>;
-    }
+    };
 
-    function Location({serviceLocation, serviceName}) {
+    const Prices = ({price, offers}) => <div>
+        <Statistic
+            title={formatMessage({id: "price"})}
+            prefix="$"
+            value={price}
+            valueStyle={{fontSize: 45}}
+        />
+        <br/>
+        <Popover placement="left" content={<OffersTable offers={offers}/>} trigger="click">
+            <Button>{formatMessage({id: "offers"})}!</Button>
+        </Popover>
+    </div>;
+
+    const Location = ({serviceLocation, serviceName}) => {
         const location = `${serviceLocation.address}, ${serviceLocation.city}`;
         return <div>
             <span>
@@ -54,7 +48,7 @@ function MenuItem({item}) {
             </span>
             <Paragraph underline>{location}</Paragraph>
         </div>
-    }
+    };
 
 
     // noinspection JSUnresolvedVariable,JSUnresolvedVariable
@@ -79,6 +73,6 @@ function MenuItem({item}) {
             {item.description}
         </Item>
     );
-}
+};
 
 export default MenuItem;

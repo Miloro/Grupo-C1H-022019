@@ -2,18 +2,23 @@ import React, {useEffect, useState} from 'react';
 import {Button, Col, Descriptions, List, PageHeader, Rate, Row, Statistic, Typography, message} from "antd";
 import {useAPI} from "../providers/ApiProvider";
 import {useIntl, FormattedMessage} from "react-intl";
+import {useUser} from "../providers/UserProvider";
+import moment from "moment";
 
 const {Text} = Typography;
 
 const UnratedOrders = () => {
     const [dataSource, setDataSource] = useState([]);
+    const {clientId} = useUser();
     const {formatMessage} = useIntl();
-    const {put, getUnratedOrders} = useAPI();
+    const {getUnratedOrders, updateScore} = useAPI();
 
     useEffect(() => {
-        getUnratedOrders(({data}) => {
-            setDataSource(data.map(order =>({score:null, ...order})))
+        getUnratedOrders(clientId, ({data}) => {
+            const unratedOrders = data.map(order =>({score:null, ...order}));
+            setDataSource(unratedOrders);
         })
+        // eslint-disable-next-line
     },[]);
 
     const onRateChange = (value, id) => {
@@ -28,13 +33,15 @@ const UnratedOrders = () => {
     };
 
     const rateOrder = ({id, name, score}) => {
-        put(`/api/order/${id}/score`, score, () => {
+        updateScore(id, score, () => {
             const newDataSource = dataSource.filter(order => order.id !== id);
             setDataSource(newDataSource);
-            message.success(formatMessage({id:"successRatingOrder"}, {n:score, takeout:name}));
+            message.success(formatMessage({id:"successRatingOrder"}, {n:score, takeout:name}), 10);
         });
-
     };
+
+    const formatDate = (dateString) => moment(dateString, "YYYY-MM-DD[T]HH:mm:ss")
+        .format(formatMessage({id: "orderDateFormat"}));
 
     // noinspection JSUnresolvedVariable
     return (
@@ -59,7 +66,7 @@ const UnratedOrders = () => {
                     ]}
                 >
                     <List.Item.Meta
-                            title={<Text type="warning">{item.name}</Text>}
+                            title={<Text type="warning">{item.menuName}</Text>}
                             description={
                                 <Descriptions size="small">
                                     <Descriptions.Item label={formatMessage({id: "amount"})}>
@@ -77,8 +84,8 @@ const UnratedOrders = () => {
                         />
                         <div>
                             {`${formatMessage({id:"orderDate"})}: 
-                            ${item.orderDate[0].format(formatMessage({id:"orderDateFormat"}))}-
-                            ${item.orderDate[1].format(formatMessage({id:"orderDateFormat"}))}`}
+                            ${formatDate(item.orderDate[0])}-
+                            ${formatDate(item.orderDate[1])}`}
                         </div>
                 </List.Item>
             )}

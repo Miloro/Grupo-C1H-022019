@@ -2,6 +2,7 @@ package com.viandasya.webservice;
 
 import com.viandasya.model.order.Order;
 import com.viandasya.service.OrderService;
+import com.viandasya.webservice.dtos.ScoreDTO;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,8 +24,8 @@ public class OrderController {
     }
 
     @PutMapping("order/{id}/score")
-    public void updateScore(@PathVariable Long id, @RequestParam Integer scores) {
-        this.orderService.updateScoreByIdById(scores, id);
+    public void updateScore(@PathVariable Long id, @RequestBody ScoreDTO scoreDTO) {
+        this.orderService.updateScoreByIdById(scoreDTO.getScore(), id);
     }
 
 }
