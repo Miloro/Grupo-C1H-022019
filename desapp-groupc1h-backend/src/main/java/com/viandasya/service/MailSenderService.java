@@ -2,6 +2,8 @@ package com.viandasya.service;
 
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.user.ServiceInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -13,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 @Component
 public class MailSenderService {
     private final JavaMailSender sender;
+    private final static Logger logger = LoggerFactory.getLogger(MailSenderService.class);
 
     @Autowired
     public MailSenderService(JavaMailSender mailSender) {
@@ -20,18 +23,19 @@ public class MailSenderService {
     }
 
     public void sendEmail(String receiver, String body, String subject) {
-        MimeMessage message = sender.createMimeMessage();
-
-        MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
+            MimeMessage message = sender.createMimeMessage();
+
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+
             helper.setTo(receiver);
             helper.setText(body);
             helper.setSubject(subject);
+            sender.send(message);
 
         } catch (MessagingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
-        sender.send(message);
     }
 
     public void sendMenuDischargedMessage(Menu menu, String serviceProfileEmail) {
