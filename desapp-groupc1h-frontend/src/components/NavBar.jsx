@@ -42,36 +42,37 @@ const NavBar = () => {
         <Col span={10} style={{paddingTop: '1%'}}>
             <MenuSearchInput/>
         </Col>}
-        <Col span={10}>
-            <Menu {...menuProps}>
-                <Item hidden={!clientId} key="1" onClick={() => history.push("/")}>
-                    <Icon {...iconProps} type="home"/>
-                </Item>
-                <SubMenu hidden={!clientId} title={<MenuOption icon="user" name={formatMessage({id:"profile"})}/>}>
-                    <Item key="2"><MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/></Item>
-                    <Item key="3" onClick={() => history.push("/unrated-orders")}>
-                        <MenuOption icon="star" name={formatMessage({id:"rateOrders"})}/>
+        {clientId &&
+            <Col span={10}>
+                <Menu {...menuProps}>
+                    <Item key="1" onClick={() => history.push("/")}>
+                        <Icon {...iconProps} type="home"/>
                     </Item>
-                    <Item key="4"><MenuOption icon="form" name={formatMessage({id:"updateProfile"})}/></Item>
-                </SubMenu>
-                {serviceId?
-                <SubMenu title={<MenuOption icon="shop" name={formatMessage({id:"Service"})}/>}>
-                    <Item key="5"><MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/></Item>
-                    <Item key="6"><MenuOption icon="setting" name={formatMessage({id:"myMenus"})}/></Item>
-                    <Item key="7" onClick={() => history.push("/service/menu")}>
-                        <MenuOption icon="form" name={formatMessage({id:"CreateMenu"})}/>
+                    <SubMenu title={<MenuOption icon="user" name={formatMessage({id:"profile"})}/>}>
+                        <Item key="2"><MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/></Item>
+                        <Item key="3" onClick={() => history.push("/unrated-orders")}>
+                            <MenuOption icon="star" name={formatMessage({id:"rateOrders"})}/>
+                        </Item>
+                        <Item key="4"><MenuOption icon="form" name={formatMessage({id:"updateProfile"})}/></Item>
+                    </SubMenu>
+                    {serviceId?
+                        <SubMenu title={<MenuOption icon="shop" name={formatMessage({id:"Service"})}/>}>
+                            <Item key="5"><MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/></Item>
+                            <Item key="6"><MenuOption icon="setting" name={formatMessage({id:"myMenus"})}/></Item>
+                            <Item key="7" onClick={() => history.push("/service/menu")}>
+                                <MenuOption icon="form" name={formatMessage({id:"CreateMenu"})}/>
+                            </Item>
+                        </SubMenu>:
+                        <Item key="10" onClick={() => history.push("/service")}>
+                            <MenuOption icon="shop" name={formatMessage({id:"service.create"})}/>
+                        </Item>}
+                    <Item key="8"><Tooltip title={formatMessage({id:"wallet"})}><Icon {...iconProps} type="dollar"/></Tooltip></Item>
+                    <Item key="9" onClick={() => logout()}>
+                        <Tooltip title={formatMessage({id:"logout"})}><Icon {...iconProps} type="logout"/></Tooltip>
                     </Item>
-                </SubMenu>:
-                    <Item hidden={!clientId} key="10" onClick={() => history.push("/service")}>
-                        <MenuOption icon="shop" name={formatMessage({id:"service.create"})}/>
-                    </Item>}
-                <Item hidden={!clientId} key="8"><Tooltip title={formatMessage({id:"wallet"})}><Icon {...iconProps} type="dollar"/></Tooltip></Item>
-                <Item key="9" onClick={() => logout()}>
-                    <Tooltip title={formatMessage({id:"logout"})}><Icon {...iconProps} type="logout"/></Tooltip>
-                </Item>
-            </Menu>
-        </Col>
-    </Row>
+                </Menu>
+            </Col>}
+            </Row>
 };
 
 export default NavBar;
