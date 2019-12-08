@@ -6,6 +6,8 @@ import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
 
 import com.viandasya.model.user.Balance;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ public class CronTasksService {
     private final MailSenderService mailSenderService;
     private final ClientProfileService clientProfileService;
     private final ServiceProfileService serviceProfileService;
+    private Logger logger = LogManager.getLogger(CronTasksService.class);
 
     @Autowired
     public CronTasksService(OrderService orderService, MailSenderService mailSenderService, ClientProfileService clientProfileService, ServiceProfileService serviceProfileService) {
@@ -46,7 +49,6 @@ public class CronTasksService {
             }
         }
         orderService.acceptOrders();
-        System.out.println("cron corrio completo");
     }
 
     private void updatePrice(Order order) {
@@ -70,7 +72,7 @@ public class CronTasksService {
         try {
             mailSenderService.sendEmail(receiver ,body ,subject);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 

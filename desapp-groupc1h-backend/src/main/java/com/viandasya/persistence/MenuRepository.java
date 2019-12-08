@@ -1,6 +1,7 @@
 package com.viandasya.persistence;
 
 import com.viandasya.model.menu.Menu;
+import com.viandasya.persistence.dto.MenuOrderCountDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

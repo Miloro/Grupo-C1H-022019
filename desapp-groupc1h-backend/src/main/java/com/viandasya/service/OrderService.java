@@ -8,6 +8,8 @@ import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.OrderRepository;
 import com.viandasya.persistence.UserRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,6 +22,7 @@ public class OrderService {
     private final UserRepository userRepository;
     private final MenuRepository menuRepository;
     private final MailSenderService mailSenderService;
+    private Logger logger = LogManager.getLogger(OrderService.class);
 
     public OrderService(OrderRepository orderRepository, UserRepository userRepository, MenuRepository menuRepository, MailSenderService mailSenderService) {
         this.orderRepository = orderRepository;
@@ -43,7 +46,7 @@ public class OrderService {
         try {
             mailSenderService.sendEmail(serviceProfile.userEmail(),"El usuario compro el menu","Orden nueva" );
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
 
         return orderRepository.save(order);

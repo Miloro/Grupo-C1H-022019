@@ -1,4 +1,4 @@
-package com.viandasya.persistence;
+package com.viandasya.persistence.dto;
 
 import com.viandasya.model.menu.Menu;
 
