@@ -140,6 +140,6 @@ public class ServiceProfile {
     }
 
     public boolean isDischarged() {
-        return this.score != null && this.score.compareTo(2.0) >= 0;
+        return this.score == null || this.score.compareTo(2.0) >= 0;
     }
 }

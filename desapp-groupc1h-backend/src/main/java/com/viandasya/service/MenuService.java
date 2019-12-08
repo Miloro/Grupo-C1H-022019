@@ -90,18 +90,14 @@ public class MenuService {
     private void setPageMenusFunctions() {
         this.pageMenusFunctions = new HashMap<>();
         this.pageMenusFunctions.put("name", (searchDTO ->
-                this.menuRepository.findByNameContainingIgnoreCase(searchDTO.getFilterQuery(),
-                        searchDTO.getPageRequest())));
-        this.pageMenusFunctions.put("category", (searchDTO ->
-                this.menuRepository.findByCategoriesContains(searchDTO.getFilterQuery(),
+                this.menuRepository.findByNameContainingIgnoreCaseAndScoreGreaterThanEqualOrScoreNull(searchDTO.getFilterQuery(), 2.0,
                         searchDTO.getPageRequest())));
         this.pageMenusFunctions.put("city", (searchDTO ->
-                this.menuRepository.findByServiceProfileLocationCityContainsIgnoreCase(searchDTO.getFilterQuery(),
+                this.menuRepository.findByServiceProfileLocationCityContainsIgnoreCaseAndScoreGreaterThanEqualOrScoreNull(searchDTO.getFilterQuery(), 2.0,
                         searchDTO.getPageRequest())));
         this.pageMenusFunctions.put(null, (searchDTO ->
-                this.menuRepository.findAll(searchDTO.getPageRequest())));
+                this.menuRepository.findByScoreGreaterThanEqualOrScoreNull(2.0, searchDTO.getPageRequest())));
 
     }
-
 
 }

@@ -50,12 +50,12 @@ public class ServiceProfileService {
         this.serviceProfileRepository.findAll().forEach(serviceProfile -> {
             List<Menu> updatedMenus = serviceProfile.updateScore();
             updatedMenus.forEach(menu -> {
-                if (menu.isDischarged()) {
+                if (!menu.isDischarged()) {
                     this.mailSenderService.sendMenuDischargedMessage(menu,
                             serviceProfile.getServiceInfo().geteMail());
                 }
             });
-            if (serviceProfile.isDischarged()) {
+            if (!serviceProfile.isDischarged()) {
                 this.mailSenderService.sendServiceProfileDischargedMessage(serviceProfile.getServiceInfo());
             }
             this.serviceProfileRepository.save(serviceProfile);

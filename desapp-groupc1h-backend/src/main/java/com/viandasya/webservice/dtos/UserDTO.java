@@ -6,6 +6,10 @@ public interface UserDTO {
 
     interface ServiceId {
         long getId();
+        Double getScore();
+        default boolean getIsDischarged() {
+            return getScore() == null || getScore() >= 2.0;
+        }
     }
 
     interface ClientId {

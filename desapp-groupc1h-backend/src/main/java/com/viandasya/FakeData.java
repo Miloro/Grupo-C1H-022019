@@ -100,8 +100,6 @@ public class FakeData implements ApplicationRunner {
                 .createServiceProfile();
         new ArrayList<>(Arrays.asList(menu1, menu2)).forEach(serviceProfile1::addMenu);
 
-
-
         ClientProfile clientProfile1 = anyClientProfile()
                 .setName("Lisa")
                 .setLastName("Romero")
