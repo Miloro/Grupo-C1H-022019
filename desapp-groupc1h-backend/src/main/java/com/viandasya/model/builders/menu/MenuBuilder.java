@@ -76,11 +76,9 @@ public class MenuBuilder {
     }
 
     public Menu createMenu() {
-        Random random = new Random();
         Menu menu = new Menu(name, description, categories, validity, priceHandler, maxAmountPerDay, cookingTime);
         menu.addDeliveryInfo(deliveryInfo);
         orders.forEach(menu::addOrder);
-        menu.setScore(random.nextInt(5));
         return menu;
     }
 }

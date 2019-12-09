@@ -7,7 +7,6 @@ import com.viandasya.model.user.ServiceInfo;
 import com.viandasya.model.user.ServiceProfile;
 
 import java.math.BigDecimal;
-import java.util.Random;
 
 import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTable;
 import static com.viandasya.model.builders.user.ServiceInfoBuilder.anyServiceInfo;
@@ -53,7 +52,6 @@ public class ServiceProfileBuilder {
         ServiceProfile serviceProfile = new ServiceProfile(serviceInfo, timetable,
                 location, maxDistanceOfDeliveryInKms);
         serviceProfile.setBalance(new Balance(new BigDecimal(balance)));
-        serviceProfile.setScore(new Random().nextInt(5));
         return serviceProfile;
     }
 }

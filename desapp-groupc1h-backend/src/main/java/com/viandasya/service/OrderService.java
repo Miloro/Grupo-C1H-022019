@@ -8,12 +8,15 @@ import com.viandasya.model.user.ServiceProfile;
 import com.viandasya.persistence.MenuRepository;
 import com.viandasya.persistence.OrderRepository;
 import com.viandasya.persistence.UserRepository;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -62,7 +65,24 @@ public class OrderService {
         orderRepository.acceptOrders(OrderState.PENDING, OrderState.CONFIRMED);
     }
 
+    @Transactional
     public void save(Order order) {
         orderRepository.save(order);
+    }
+
+    @Transactional
+    @Scheduled(cron = "0 0 1 * * ?")
+    public void setAsDeliveredOrders() {
+        this.orderRepository.setOrdersAsDelivered(LocalDateTime.now());
+    }
+
+    @Transactional
+    public List<Order> findUnratedOrders(Long id) {
+        return orderRepository.findUnratedOrdersByClientId(id);
+    }
+
+    @Transactional
+    public void updateScoreByIdById(Integer score, Long id) {
+        this.orderRepository.updateScoreById(score, id);
     }
 }

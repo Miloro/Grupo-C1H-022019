@@ -45,6 +45,11 @@ public class ServiceProfileController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("services/score")
+    public void updateScores() {
+        this.serviceProfileService.updateScores();
+    }
+
     @PutMapping("service/{id}")
     public void update(@PathVariable Long id, @RequestBody ServiceProfileDTO serviceProfileDTO) {
         Optional<ServiceProfile> serviceProfileToUpdate = serviceProfileService.findById(id);

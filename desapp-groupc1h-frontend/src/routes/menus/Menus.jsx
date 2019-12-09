@@ -41,7 +41,7 @@ const Menus = () => {
         };
         fetchMenus();
         window.scrollTo(0, 0);
-    }, [filterField, filterQuery, order, pageCurrent]);
+    }, [searchMenus, filterField, filterQuery, order, pageCurrent]);
 
     const onOrderChange = e => {
         setOrder(e.target.value);

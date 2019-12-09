@@ -1,5 +1,7 @@
 package com.viandasya.model.menu;
 
+import com.viandasya.model.order.Order;
+import com.viandasya.model.order.OrderState;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,6 +9,9 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
 
@@ -42,4 +47,35 @@ public class MenuTest {
         Assert.assertEquals(mockPriceHandler.getCurrent(), menu.getCurrentOffer());
     }
 
+    @Test
+    public void testUpdateScoreIfMenuHasMoreThan20ConfirmedOrdersTheScoreIsUpdatedAndThenReturnsIfItWasUpdated() {
+        List<Order> mockOrders = new ArrayList<>();
+        Arrays.asList(4,3,5,4,5,1,4,5,2,1,3,4,5,2,4,3,1,5,3,4).forEach(integer -> {
+            Order mockOrder = Mockito.mock(Order.class);
+            Mockito.when(mockOrder.getState()).thenReturn(OrderState.DELIVERED);
+            Mockito.when(mockOrder.getScore()).thenReturn(integer);
+            mockOrders.add(mockOrder);
+        });
+
+        Menu menu = anyMenu().setOrders(mockOrders).createMenu();
+        menu.updateScore();
+
+        Assert.assertEquals(3.4, menu.getScore(), 0);
+    }
+
+    @Test
+    public void testUpdateScoreIfMenuHasLessThan20ConfirmedOrdersTheScoreIsNotUpdatedAndReturns0() {
+        List<Order> mockOrders = new ArrayList<>();
+        Arrays.asList(4,3,5,4,5,1,4,5,2,1,3,4,5,2,4,3,1).forEach(integer -> {
+            Order mockOrder = Mockito.mock(Order.class);
+            Mockito.when(mockOrder.getState()).thenReturn(OrderState.DELIVERED);
+            Mockito.when(mockOrder.getScore()).thenReturn(integer);
+            mockOrders.add(mockOrder);
+        });
+
+        Menu menu = anyMenu().setOrders(mockOrders).createMenu();
+        menu.updateScore();
+
+        Assert.assertNull(menu.getScore());
+    }
 }
