@@ -78,11 +78,6 @@ public class MenuService {
     }
 
     @Transactional
-    public List<Menu> getAllMenus(){
-        return this.menuRepository.findAll();
-    }
-
-    @Transactional
     public Page<Menu> search(SearchDTO searchDTO) {
         return this.pageMenusFunctions.get(searchDTO.getFilterField()).apply(searchDTO);
     }
@@ -90,13 +85,13 @@ public class MenuService {
     private void setPageMenusFunctions() {
         this.pageMenusFunctions = new HashMap<>();
         this.pageMenusFunctions.put("name", (searchDTO ->
-                this.menuRepository.findByNameContainingIgnoreCaseAndScoreGreaterThanEqualOrScoreNull(searchDTO.getFilterQuery(), 2.0,
+                this.menuRepository.findByNameContainingIgnoreCase(searchDTO.getFilterQuery(),
                         searchDTO.getPageRequest())));
         this.pageMenusFunctions.put("city", (searchDTO ->
-                this.menuRepository.findByServiceProfileLocationCityContainsIgnoreCaseAndScoreGreaterThanEqualOrScoreNull(searchDTO.getFilterQuery(), 2.0,
+                this.menuRepository.findByServiceProfileLocationCityContainsIgnoreCase(searchDTO.getFilterQuery(),
                         searchDTO.getPageRequest())));
         this.pageMenusFunctions.put(null, (searchDTO ->
-                this.menuRepository.findByScoreGreaterThanEqualOrScoreNull(2.0, searchDTO.getPageRequest())));
+                this.menuRepository.findAll(searchDTO.getPageRequest())));
 
     }
 

@@ -139,7 +139,4 @@ public class ServiceProfile {
         return updatedMenus;
     }
 
-    public boolean isDischarged() {
-        return this.score == null || this.score.compareTo(2.0) >= 0;
-    }
 }

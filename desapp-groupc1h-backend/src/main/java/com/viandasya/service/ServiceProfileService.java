@@ -55,9 +55,6 @@ public class ServiceProfileService {
                             serviceProfile.getServiceInfo().geteMail());
                 }
             });
-            if (!serviceProfile.isDischarged()) {
-                this.mailSenderService.sendServiceProfileDischargedMessage(serviceProfile.getServiceInfo());
-            }
             this.serviceProfileRepository.save(serviceProfile);
         });
     }

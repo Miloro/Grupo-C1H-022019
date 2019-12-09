@@ -4,6 +4,7 @@ import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ServiceProfile;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Where(clause = "score is null or score >= 2")
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
