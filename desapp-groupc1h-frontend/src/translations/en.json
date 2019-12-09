@@ -1,6 +1,6 @@
 {
   "visitorMessage": "Any take away you want, in one place",
-  "welcomeTitle": "Welcome to Viandas Ya",
+  "welcomeTitle": "Welcome {name} to Viandas Ya",
   "welcomeMessage": "Thanks for sign in to our website! You are now able to search take aways, view and score your orders, manage your wallet, update your profile and more. Also you can create your own service and start selling your take aways!",
   "wallet": "Wallet",
   "myMenus": "My take aways",
