@@ -11,6 +11,7 @@ export const UserProvider = ({children}) => {
     const [id, setId] = useState(null);
     const [clientId, setClientId] = useState(null);
     const [serviceId, setServiceId] = useState(null);
+    const [userLoading, setUserLoading] = useState(true);
 
     useEffect(() => {
         const fetchUser = () => {
@@ -22,8 +23,9 @@ export const UserProvider = ({children}) => {
                             setClientId(clientProfile.id);
                             if (serviceProfile) setServiceId(serviceProfile.id);
                             setId(user.email);
+                            setUserLoading(false);
                         }
-                    })
+                    }, () => setUserLoading(false))
             }
         };
         fetchUser();
@@ -31,7 +33,7 @@ export const UserProvider = ({children}) => {
 
     return (
         <UserContext.Provider
-            value={{id, clientId, serviceId, setServiceId, setClientId}}
+            value={{id, clientId, serviceId, userLoading, setServiceId, setClientId}}
             children={children}
         />
     );

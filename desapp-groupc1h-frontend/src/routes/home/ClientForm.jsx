@@ -27,7 +27,7 @@ const ClientForm = () => {
     const {formatMessage} = useIntl();
     const {user} = useAuth0();
     const {postClient} = useAPI();
-    const {setClientId} = useUser();
+    const {setClientId, userLoading} = useUser();
 
     const initialValues = {
         name: user.given_name,
@@ -48,6 +48,7 @@ const ClientForm = () => {
     };
 
     return (
+        !userLoading &&
         <Formik
             initialValues={initialValues}
             validationSchema={ClientSchema(formatMessage)}
