@@ -47,14 +47,4 @@ public class MailSenderService {
         this.sendEmail(serviceProfileEmail, body, subject);
     }
 
-    public void sendServiceProfileDischargedMessage(ServiceInfo serviceInfo) {
-        String body = "Hola, del equipo de Viandas Ya te comunicamos que tu perfil de servicio " +
-                serviceInfo.getName() +
-                " con descripcion:"  + serviceInfo.getDescription() +
-                ", tiene menos de 2 estrellas." +
-                " Por lo tanto su perfil de servicio sera dado de baja hasta nuevo aviso. Disculpe las molestias.";
-        String subject = "Perfil de servicio "+ serviceInfo.getName() +" dado de baja";
-        this.sendEmail(serviceInfo.geteMail(), body, subject);
-    }
-
 }
