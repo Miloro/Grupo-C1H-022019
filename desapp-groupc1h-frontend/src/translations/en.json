@@ -100,5 +100,6 @@
   "orderDate": "Approx. date of delivery",
   "orderDateFormat": "YYYY-MM-DD HH:mm",
   "confirm": "Confirm",
-  "successRatingOrder": "You successfully rated {n, plural, one {star} other {# stars}} to order with take out {takeout}"
+  "successRatingOrder": "You successfully rated {n, plural, one {star} other {# stars}} to order with take out {takeout}",
+  "historicalOrders": "historical orders"
 }

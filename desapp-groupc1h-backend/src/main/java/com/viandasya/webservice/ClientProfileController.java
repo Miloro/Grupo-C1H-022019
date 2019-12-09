@@ -46,6 +46,16 @@ public class ClientProfileController {
         });
     }
 
+    @GetMapping("historicalOrders/client/{id}")
+    public Stream<UnratedOrderDTO> findHistoricalOrders(@PathVariable Long id){
+        List<Order> orders =  orderService.findHistoricalOrders(id);
+        return orders.stream().map(order -> {
+            UnratedOrderDTO unratedOrderDTO = modelMapper.map(order, UnratedOrderDTO.class);
+            unratedOrderDTO.setTotalPrice(order.calculatePrice());
+            return unratedOrderDTO;
+        });
+    }
+
     @PutMapping("user/{userId}/client")
     public Balance deposit(@PathVariable String userId, @RequestBody Balance amount){
         return clientProfileService.deposit(userId,amount);

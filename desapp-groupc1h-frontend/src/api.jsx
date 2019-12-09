@@ -1,5 +1,5 @@
 import axios from "axios";
-import {post,put} from "./api/API";
+import {post,put,get} from "./api/API";
 
 
 
@@ -73,4 +73,16 @@ export function withdraw(userId, amount,token){
     ).catch((error) => {
         return error;
     });
+}
+
+export function getOrdersUser(userId,token){
+    return get(token, "/api/historicalOrders/client/"+ userId).then(
+        res => {
+            if (res.status === 200){
+                return(res.toString());
+            }
+        })
+        .catch((error) => {
+            return(error);
+        });
 }

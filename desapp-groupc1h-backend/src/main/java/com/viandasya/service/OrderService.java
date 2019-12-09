@@ -85,4 +85,9 @@ public class OrderService {
     public void updateScoreByIdById(Integer score, Long id) {
         this.orderRepository.updateScoreById(score, id);
     }
+
+    @Transactional
+    public List<Order> findHistoricalOrders(Long idClient){
+        return this.orderRepository.findOrderByClient_Id(idClient);
+    }
 }
