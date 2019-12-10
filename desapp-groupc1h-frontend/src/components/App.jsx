@@ -8,7 +8,7 @@ import {useAuth0} from "../providers/Auth0Provider";
 import Buy from "../routes/buy/Buy";
 import UnratedOrders from "../routes/UnratedOrders";
 import Cart from "../routes/Cart";
-import Orders from "../routes/Ordes";
+import Orders from "../routes/orders/Ordes";
 import MenuForm from "../routes/menu/MenuForm";
 import Service from "../routes/service/Service";
 import Menus from "../routes/menus/Menus";

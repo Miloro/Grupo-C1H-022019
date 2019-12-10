@@ -53,6 +53,9 @@ const NavBar = () => {
                         <Item key="3" onClick={() => history.push("/unrated-orders")}>
                             <MenuOption icon="star" name={formatMessage({id:"rateOrders"})}/>
                         </Item>
+                        <Item key="11" onClick={() => history.push("/orders")}>
+                            <MenuOption icon="history" name={formatMessage({id:"historicalOrders"})}/>
+                        </Item>
                     </SubMenu>
                     {serviceId?
                         <SubMenu title={<MenuOption icon="shop" name={formatMessage({id:"Service"})}/>}>
@@ -63,7 +66,10 @@ const NavBar = () => {
                         <Item key="10" onClick={() => history.push("/service")}>
                             <MenuOption icon="shop" name={formatMessage({id:"service.create"})}/>
                         </Item>}
-                    <Item key="8"><Tooltip title={formatMessage({id:"wallet"})}><Icon {...iconProps} type="dollar"/></Tooltip></Item>
+                    <Item key="8" onClick={() => history.push("/balance")} >
+                        <Tooltip title={formatMessage({id:"wallet"})}>
+                        <Icon {...iconProps} type="dollar"/></Tooltip>
+                    </Item>
                     <Item key="9" onClick={() => logout()}>
                         <Tooltip title={formatMessage({id:"logout"})}><Icon {...iconProps} type="logout"/></Tooltip>
                     </Item>

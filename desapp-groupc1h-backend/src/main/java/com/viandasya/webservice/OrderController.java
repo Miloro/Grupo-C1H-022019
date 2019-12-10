@@ -3,7 +3,10 @@ package com.viandasya.webservice;
 import com.viandasya.model.order.Order;
 import com.viandasya.service.OrderService;
 import com.viandasya.webservice.dtos.ScoreDTO;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class OrderController {
@@ -27,5 +30,4 @@ public class OrderController {
     public void updateScore(@PathVariable Long id, @RequestBody ScoreDTO scoreDTO) {
         this.orderService.updateScoreByIdById(scoreDTO.getScore(), id);
     }
-
 }
