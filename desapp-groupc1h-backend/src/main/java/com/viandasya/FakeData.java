@@ -4,6 +4,7 @@ import com.viandasya.model.menu.Category;
 import com.viandasya.model.menu.DeliveryInfo;
 import com.viandasya.model.menu.Menu;
 import com.viandasya.model.menu.Offer;
+import com.viandasya.model.menu.PriceHandler;
 import com.viandasya.model.order.Order;
 import com.viandasya.model.order.OrderState;
 import com.viandasya.model.timeslot.DateTimeSlot;
@@ -29,6 +30,8 @@ import java.util.List;
 
 import static com.viandasya.model.builders.OrderBuilder.anyOrder;
 import static com.viandasya.model.builders.menu.MenuBuilder.anyMenu;
+import static com.viandasya.model.builders.menu.OfferBuilder.anyOffer;
+import static com.viandasya.model.builders.menu.PriceHandlerBuilder.anyPriceHandler;
 import static com.viandasya.model.builders.timeslot.DateTimeSlotBuilder.anyDateTimeSlot;
 import static com.viandasya.model.builders.timeslot.TimeTableBuilder.anyTimeTable;
 import static com.viandasya.model.builders.user.ClientProfileBuilder.anyClientProfile;
@@ -45,6 +48,7 @@ public class FakeData implements ApplicationRunner {
         this.menuRepository = menuRepository;
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Override
     @Transactional
     public void run(ApplicationArguments args) {
@@ -53,7 +57,7 @@ public class FakeData implements ApplicationRunner {
         //////////  USER 1 : SERVICE PROFILE WITH 2 MENUS  //////////
 
         Menu menu1 = anyMenu()
-                .setOffers(create3OffersWith("200","180.5", "140", 20, 40))
+                .setPriceHandler(createPriceHandler("200","180.5", "140", 10, 40))
                 .setDeliveryInfo(
                         new DeliveryInfo(createTimetableFromToOnWeekdays(LocalTime.of(9,30),
                                 LocalTime.of(17,30)),
@@ -71,7 +75,7 @@ public class FakeData implements ApplicationRunner {
                 .createMenu();
 
         Menu menu2 = anyMenu()
-                .setOffers(create3OffersWith("299.99","220.4", "210", 25, 50))
+                .setPriceHandler(createPriceHandler("299.99","220.4", "210", 25, 50))
                 .setDeliveryInfo(
                         new DeliveryInfo(createTimetableFromToOnWeekdays(LocalTime.of(12,30),
                                 LocalTime.of(20,30)),
@@ -82,11 +86,12 @@ public class FakeData implements ApplicationRunner {
                         .setTo(LocalDateTime.now().plusDays(15))
                         .createDateTimeSlot()
                 )
-                .setCategories(new ArrayList<>(Arrays.asList(Category.EMPANADAS, Category.BEER, Category.SHSHI)))
+                .setCategories(new ArrayList<>(Arrays.asList(Category.EMPANADAS, Category.BEER, Category.SUSHI)))
                 .setName("Menu con empanadas de pollo y carne, y tabla de sushi")
                 .setDescription("Exquisitos sabores que harán de tus almuerzos y cenas momentos únicos.")
                 .setCookingTime(40)
                 .createMenu();
+        menu2.setScore(1.3);
 
         ServiceProfile serviceProfile1 = anyServiceProfile()
                 .setBalance("20")
@@ -96,30 +101,29 @@ public class FakeData implements ApplicationRunner {
                 .createServiceProfile();
         new ArrayList<>(Arrays.asList(menu1, menu2)).forEach(serviceProfile1::addMenu);
 
-
-
         ClientProfile clientProfile1 = anyClientProfile()
                 .setName("Lisa")
                 .setLastName("Romero")
-                .setAdress("9 De Julio 500")
-                .setCity("Quilmes")
-                .setEmail("lisar.3467@gmail.com")
+                .setEmail("lisarmailfalso@gmail.com")
+                .setLocation(new Location("Condarco 430", "Wilde", -34.7048199, -58.3264779))
                 .setBalance(new Balance(new BigDecimal("2000")))
                 .createClientProfile();
 
         User user1 = new User();
+        user1.setEmail("lisar.3467@gmail.com");
         user1.addClientProfile(clientProfile1);
         user1.addServiceProfile(serviceProfile1);
 
         //////////  USER 2  //////////
 
         User user2 = new User();
+        user2.setEmail("emailfalso@gmail.com");
         user2.addClientProfile(anyClientProfile().createClientProfile());
 
         //////////  USER A : SERVICE PROFILE WITH 2 MENUS  //////////
 
         Menu menua = anyMenu()
-                .setOffers(create3OffersWith("399.99","350", "202.10", 50, 80))
+                .setPriceHandler(createPriceHandler("399.99","350", "202.10", 41, 80))
                 .setDeliveryInfo(
                         new DeliveryInfo(createTimetableFromToOnWeekdays(LocalTime.of(14,0),
                                 LocalTime.of(18,0)),
@@ -136,8 +140,10 @@ public class FakeData implements ApplicationRunner {
                 .setCookingTime(17)
                 .createMenu();
 
+        menua.getPriceHandler().updateCurrent(41);
+
         Menu menub = anyMenu()
-                .setOffers(create3OffersWith("303.14","290.12", "250", 40, 53))
+                .setPriceHandler(createPriceHandler("303.14","290.12", "250", 40, 53))
                 .setDeliveryInfo(
                         new DeliveryInfo(createTimetableFromToOnWeekdays(LocalTime.of(20,0),
                                 LocalTime.of(20,30)),
@@ -162,7 +168,7 @@ public class FakeData implements ApplicationRunner {
                                 .setEMail("arandanos.viandas.quilmes@gmail.com")
                                 .setDescription("A veces, los sentimientos son difíciles de explicar," +
                                         " y qué sentimiento más fuerte que nuestro amor por la comida")
-                                .setPhoneNumber(1143238310)
+                                .setPhoneNumber("1143238310")
                                 .createServiceInfo()
                 )
                 .setBalance("300")
@@ -171,88 +177,99 @@ public class FakeData implements ApplicationRunner {
                 .setMaxDistanceOfDeliveryInKms(10)
                 .createServiceProfile();
         new ArrayList<>(Arrays.asList(menua, menub)).forEach(serviceProfilea::addMenu);
+        serviceProfilea.setScore(4.5);
 
         ClientProfile clientProfilea = anyClientProfile()
                 .setName("Miguel")
                 .setLastName("Miloro")
-                .setAdress("Av. La Madrid 2900")
-                .setCity("Quilmes")
                 .setEmail("miloromiguel@gmail.com")
+                .setLocation(new Location("Uruguay 2200", "Ezpeleta Oeste",
+                        -34.7597263, -58.2642824))
                 .setBalance(new Balance(new BigDecimal("500")))
                 .createClientProfile();
 
         User usera = new User();
+        usera.setEmail("miloromiguel@gmail.com");
         usera.addClientProfile(clientProfilea);
         usera.addServiceProfile(serviceProfilea);
 
-        User savedUser1 = userRepository.save(user1);
-        User savedUser2 = userRepository.save(user2);
-        User savedUsera = userRepository.save(usera);
+        ClientProfile savedClient1 = userRepository.save(user1).getClientProfile();
+        ClientProfile savedClient2 = userRepository.save(user2).getClientProfile();
+        ClientProfile savedClienta = userRepository.save(usera).getClientProfile();
 
         ////////////////////////////   CREATING ORDERS   ////////////////////////////
 
         Order order1 = anyOrder()
-                .setAmount(5)
-                .setOffers(new ArrayList<>(Collections.singletonList(
-                        new Offer(20, new BigDecimal("180.5")))))
+                .setAmount(20)
+                .setOffer(new Offer(20, new BigDecimal("399.99")))
                 .setScore(null)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().plusDays(3), LocalDateTime.now().plusDays(3).plusHours(1)))
                 .setState(OrderState.PENDING)
-                .setClient(savedUser2.getClientProfile())
+                .setClient(savedClient2)
                 .createOrder();
 
         Order order2 = anyOrder()
-                .setAmount(6)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(0, new BigDecimal("200")))))
+                .setAmount(10)
+                .setOffer(new Offer(0, new BigDecimal("399.99")))
                 .setScore(null)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().plusDays(4), LocalDateTime.now().plusDays(4).plusHours(1)))
                 .setState(OrderState.PENDING)
-                .setClient(savedUser2.getClientProfile())
+                .setClient(savedClient2)
                 .createOrder();
 
         Order order3 = anyOrder()
                 .setAmount(11)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(0, new BigDecimal("200")))))
-                .setScore(4)
+                .setOffer(new Offer(0, new BigDecimal("399.99")))
+                .setScore(null)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(7), LocalDateTime.now().minusDays(7).plusHours(1)))
                 .setState(OrderState.DELIVERED)
-                .setClient(savedUsera.getClientProfile())
+                .setClient(savedClienta)
+                .createOrder();
+
+        Order order4 = anyOrder()
+                .setAmount(1)
+                .setOffer(new Offer(0, new BigDecimal("399.99")))
+                .setScore(null)
+                .setIsDelivery(false)
+                .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(7), LocalDateTime.now().minusDays(7).plusHours(1)))
+                .setState(OrderState.CONFIRMED)
+                .setClient(savedClienta)
                 .createOrder();
 
         Order ordera = anyOrder()
                 .setAmount(35)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(30, new BigDecimal("202.10")))))
+                .setOffer(new Offer(30, new BigDecimal("202.10")))
                 .setScore(null)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().withHour(15),
                         LocalDateTime.now().minusDays(20).withHour(16)))
                 .setState(OrderState.CONFIRMED)
-                .setClient(savedUser1.getClientProfile())
+                .setClient(savedClient1)
                 .createOrder();
 
         Order orderb = anyOrder()
                 .setAmount(33)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(30, new BigDecimal("202.10")))))
-                .setScore(2)
+                .setOffer(new Offer(30, new BigDecimal("202.10")))
+                .setScore(null)
                 .setIsDelivery(true)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(21).withHour(19),
                         LocalDateTime.now().minusDays(21).withHour(20)))
-                .setState(OrderState.DELIVERED)
-                .setClient(savedUsera.getClientProfile())
+                .setState(OrderState.PENDING)
+                .setClient(savedClienta)
                 .createOrder();
 
         Order orderc = anyOrder()
                 .setAmount(21)
-                .setOffers(new ArrayList<>(Collections.singletonList(new Offer(30, new BigDecimal("202.10")))))
-                .setScore(5)
+                .setOffer(new Offer(30, new BigDecimal("202.10")))
+                .setScore(null)
                 .setIsDelivery(false)
                 .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(10).withHour(14),
                         LocalDateTime.now().minusDays(21).withHour(15)))
                 .setState(OrderState.DELIVERED)
-                .setClient(savedUsera.getClientProfile())
+                .setClient(savedClienta)
                 .createOrder();
 
 
@@ -263,21 +280,30 @@ public class FakeData implements ApplicationRunner {
         Menu menuPizza = menus.stream()
                 .filter(menu -> menu.getName().equals("Pizza especial con jamon, muzarrella y morron"))
                 .findFirst().get();
+        Menu menuCumpleanios = menus.stream()
+                .filter(menu -> menu.getName().equals("Menu para cumpleaños"))
+                .findFirst().get();
 
-        new ArrayList<>(Arrays.asList(order1, order2, order3)).forEach(menuGreen::addOrder);
+
+        new ArrayList<>(Arrays.asList(order1, order2, order3, order4)).forEach(menuGreen::addOrder);
         new ArrayList<>(Arrays.asList(ordera, orderb, orderc)).forEach(menuPizza::addOrder);
+        create20DeliveredOrders(savedClient1).forEach(menuCumpleanios::addOrder);
 
         menuRepository.save(menuGreen);
         menuRepository.save(menuPizza);
+        menuRepository.save(menuCumpleanios);
     }
 
-    private static List<Offer> create3OffersWith(String price, String minPrice1,
-                                                 String minPrice2, Integer min1, Integer min2) {
+    private static PriceHandler createPriceHandler(String price, String minPrice1,
+                                                   String minPrice2, Integer min1, Integer min2) {
+        Offer current = anyOffer().setPrice(price).setMinAmount(0).createOffer();
         List<Offer> offers = new ArrayList<>();
-        offers.add(new Offer( 0, new BigDecimal(price)));
-        offers.add(new Offer( min1, new BigDecimal(minPrice1)));
-        offers.add(new Offer( min2, new BigDecimal(minPrice2)));
-        return offers;
+        offers.add(anyOffer().setPrice(minPrice1).setMinAmount(min1).createOffer());
+        offers.add(anyOffer().setPrice(minPrice2).setMinAmount(min2).createOffer());
+        return anyPriceHandler()
+                .setCurrent(current)
+                .setOffers(offers)
+                .createPriceHandler();
     }
 
     private static TimeTable createTimetableFromToOnWeekdays(LocalTime from, LocalTime to) {
@@ -288,6 +314,23 @@ public class FakeData implements ApplicationRunner {
                 new ArrayList<>(Collections.singletonList(new HoursTimeSlot(from, to))))));
 
         return anyTimeTable().setDayTimeSlots(dayTimeSlots).createTimeTable();
+    }
+
+    private static List<Order> create20DeliveredOrders(ClientProfile client) {
+        List<Order> orders = new ArrayList<>();
+        Arrays.asList(4,null,5,4,null,1,4,5,null,1,3,4,null,2,4,3,1,null,3,4,2,4,null,3,5,1,4,3,2,4,5).forEach(integer -> {
+            Order order = anyOrder()
+                    .setAmount(10)
+                    .setOffer(new Offer(0, new BigDecimal("200")))
+                    .setScore(integer)
+                    .setIsDelivery(true)
+                    .setOrderDate(new DateTimeSlot(LocalDateTime.now().minusDays(4), LocalDateTime.now().minusDays(4).plusHours(1)))
+                    .setState(OrderState.DELIVERED)
+                    .setClient(client)
+                    .createOrder();
+            orders.add(order);
+        });
+        return orders;
     }
 
 }

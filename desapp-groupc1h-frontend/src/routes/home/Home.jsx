@@ -1,28 +1,35 @@
-import React from 'react'
-import { injectIntl} from 'react-intl'
+import React from 'react';
+import {useAuth0} from "../../providers/Auth0Provider";
+import {useUser} from "../../providers/UserProvider";
+import ClientForm from "./ClientForm";
+import {FormattedMessage} from "react-intl";
+import DefaultResult from "./DefaultResult";
+import {Button} from "antd";
 
-class Home  extends React.Component{
+const Home = () => {
+    const {isAuthenticated, loading, loginWithRedirect, user} = useAuth0();
+    const {clientId} = useUser();
 
-    render(){
-        const intl = this.props.intl;
-        const greet = intl.formatMessage({
-          id: 'Greet',
-          defaultMessage: 'hello'
-        });
-        const home = intl.formatMessage({
-            id: 'Home',
-            defaultMessage: 'home'
-          });
-        return(
-            <div className= "App" >
-                <h1>{greet}</h1>
-                <h1>{home}</h1>
-            </div>
-        )
-    }
+    const capitalize = (s) => {
+        if (typeof s !== 'string') return '';
+        return s.charAt(0).toUpperCase() + s.slice(1)
+    };
 
-}
-
-Home = injectIntl(Home);
+    return !(isAuthenticated || clientId) ?
+        <DefaultResult
+            icon={"home"}
+            title={<FormattedMessage id="visitorMessage"/>}
+            extra={!loading && <Button size="large" onClick={() => loginWithRedirect({})}>
+                <FormattedMessage id="login"/>
+            </Button>}
+        /> :
+        isAuthenticated && !clientId ?
+            <ClientForm/> :
+            <DefaultResult
+                icon={"home"}
+                title={<FormattedMessage id="welcomeTitle" values={{name: capitalize(user.given_name)}}/>}
+                extra={<FormattedMessage id="welcomeMessage"/>}
+            />;
+};
 
 export default Home;

@@ -1,31 +1,37 @@
 package com.viandasya.model.user;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 
 @Entity
 public class ClientProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @NotBlank(message = "required")
     private String name;
+    @NotBlank(message = "required")
     private String lastName;
+    @Email(message = "invalidFormat")
     private String email;
-    private Integer phoneNumber;
-    private String city;
-    private String adress;
-    private Balance balance;
+    @Pattern(regexp = "^\\d{8,20}$", message = "invalidFormat")
+    private String phoneNumber;
+    private Location location;
+    private Balance balance = new Balance(new BigDecimal("0"));
 
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
 
-
-    public ClientProfile(String name, String lastName, String email, Integer phoneNumber, String city, String adress, Balance balance) {
+    public ClientProfile(String name, String lastName, String email, String phoneNumber, Location location, Balance balance) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.city = city;
-        this.adress = adress;
+        this.location = location;
         this.balance = balance;
     }
 
@@ -56,28 +62,12 @@ public class ClientProfile {
         this.email = email;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
     }
 
     public Balance getBalance() {
@@ -94,5 +84,17 @@ public class ClientProfile {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public long getId() {
+        return id;
     }
 }

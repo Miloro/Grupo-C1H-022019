@@ -1,22 +1,23 @@
 import React from 'react';
-import {Col, Modal, Row, Typography} from "antd";
+import {Col, Row, Typography} from "antd";
 import {Formik} from "formik";
 import {Form, InputNumber, SubmitButton} from "formik-antd";
 import ServiceInfoInputs from "./ServiceInfoInputs";
-import ServiceShedulePicker from "./ServiceShedulePicker";
+import SchedulePicker from "./SchedulePicker";
 import AddressSearcher from "./AddressSearcher";
-import axios from "axios";
 import ServiceSchema from "../ServiceSchema";
 import {FormattedMessage, useIntl} from "react-intl";
+import {useAPI} from "../../../providers/ApiProvider";
+import {useUser} from "../../../providers/UserProvider";
 
 const {Item} = Form;
 const {Title} = Typography;
-const {success} = Modal;
 
-
-const ServiceForm = ({userId, setService}) => {
+const ServiceForm = () => {
     const {formatMessage} = useIntl();
-    const geocoderUrl = 'https://geocoder.api.here.com/6.2/geocode.json';
+    const {postService} = useAPI();
+    const {setServiceId} = useUser();
+
     const formLayout = {
         wrapperCol: {
             xs: {span: 24},
@@ -43,18 +44,11 @@ const ServiceForm = ({userId, setService}) => {
         phoneNumber: undefined,
         timetable: initialTimeTable(),
         query: '',
-        selected: {id: '', address: ''},
+        selected: {id: undefined, address: undefined},
+        location: undefined,
         suggestions: [],
         maxDistanceDeliveryInKms: undefined
     };
-
-    const hereMapsParams = id => ({
-        'params': {
-            'app_id': 'B3ZYLI1mKHNO6Qt871t6',
-            'app_code': 'xibhrih8Kcvp0bcijbEBqA',
-            'locationId': id
-        }
-    });
 
     const convertTimetable = timetable => {
         const converToString = (range) => (range === undefined ? undefined : range.format('HH:mm'));
@@ -66,7 +60,7 @@ const ServiceForm = ({userId, setService}) => {
         }));
     };
 
-    const createService = (values, location) => ({
+    const createService = (values) => ({
         serviceInfo: {
             name: values.name,
             logo: values.logo,
@@ -76,40 +70,14 @@ const ServiceForm = ({userId, setService}) => {
             phoneNumber: values.phoneNumber
         },
         timetable: convertTimetable(values.timetable),
-        location: location,
+        location: values.location,
         maxDistanceOfDeliveryInKms: values.maxDistanceDeliveryInKms
     });
 
-    const createLocation = response => {
-        const location = response.data.Response.View[0].Result[0].Location;
-        return {
-            address: `${location.Address.Street} ${location.Address.HouseNumber}`,
-            city: `${location.Address.City}`,
-            latitude: location.DisplayPosition.Latitude,
-            longitude: location.DisplayPosition.Longitude
-        };
-    };
-
-    const createdServiceModal = () => {
-        const modal = success({
-            content: formatMessage({id: "createdService"}),
-        });
-        setTimeout(() => {
-            modal.destroy();
-        }, 20 * 1000);
-    };
-
     const onSubmit = values => {
-        let service;
-        axios.get(geocoderUrl, hereMapsParams(values.selected.id))
-            .then((response) => {
-                const location = createLocation(response);
-                service = createService(values, location);
-                return axios.post(`/api/user/${userId}/service`, service);
-            }).then((response) => {
-            service.id = response.data;
-            setService(service);
-            createdServiceModal();
+        const service = createService(values);
+        postService(service, (response) => {
+            setServiceId(response.data);
         });
     };
 
@@ -126,17 +94,17 @@ const ServiceForm = ({userId, setService}) => {
                         <FormattedMessage id="service.create"/>
                     </Title>
                     <Title level={4} className='align-left'>
-                        <FormattedMessage id="service.info"/>
+                        <FormattedMessage id="info"/>
                     </Title>
                     <ServiceInfoInputs logo={values.logo}/>
                     <Title level={4} className='padding-top-4 align-left'>
                         <FormattedMessage id="service.timetable"/>
                     </Title>
-                    <ServiceShedulePicker timetable={values.timetable} setFieldValue={setFieldValue}/>
+                    <SchedulePicker timetableName="timetable" timetable={values.timetable} setFieldValue={setFieldValue}/>
                     <Title level={4} className='padding-top-4 align-left'>
                         <FormattedMessage id="location"/>*
                     </Title>
-                    <AddressSearcher suggestions={values.suggestions} setFieldValue={setFieldValue}/>
+                    <AddressSearcher selected ={values.selected} suggestions={values.suggestions} setFieldValue={setFieldValue}/>
                     <Item name="maxDistanceDeliveryInKms">
                         <InputNumber type="number" name="maxDistanceDeliveryInKms" {...inputNumberProps}
                                      placeholder={formatMessage({id: "service.deliveryDistance"})}/>

@@ -8,9 +8,6 @@ import com.viandasya.model.menu.Menu;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 @Entity(name = "order_info")
 public class Order {
@@ -20,8 +17,7 @@ public class Order {
 
     private Integer amount;
 
-    @ElementCollection
-    private List<Offer> offers = new ArrayList<>();
+    private Offer offer;
     private Integer score;
 
     @Enumerated(value = EnumType.STRING)
@@ -37,9 +33,9 @@ public class Order {
     @JoinColumn(name = "client_id")
     private ClientProfile client;
 
-    public Order(Integer amount, List<Offer> offers, Integer score, OrderState state, DateTimeSlot orderDate, Boolean delivery, Menu menu, ClientProfile client) {
+    public Order(Integer amount, Offer offer, Integer score, OrderState state, DateTimeSlot orderDate, Boolean delivery, Menu menu, ClientProfile client) {
         this.amount = amount;
-        this.offers = offers;
+        this.offer = offer;
         this.score = score;
         this.state = state;
         this.orderDate = orderDate;
@@ -60,14 +56,6 @@ public class Order {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
-    }
-
-    public List<Offer> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(List<Offer> offers) {
-        this.offers = offers;
     }
 
     public Integer getScore() {
@@ -118,9 +106,18 @@ public class Order {
         this.client = client;
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public BigDecimal getCurrentPrice(){
-        return (this.offers.stream().min(Comparator.comparing(Offer::getPrice)).get().getPrice()).multiply(BigDecimal.valueOf(amount));
+    public Offer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
+    }
+
+    public BigDecimal calculatePrice() {
+        BigDecimal price = offer.getPrice().multiply(new BigDecimal(amount));
+        if (delivery) return price.add(menu.getDeliveryInfo().getPrice());
+        else return price;
     }
 
     public LocalDateTime averageTime(){
@@ -131,4 +128,5 @@ public class Order {
             return this.orderDate.getFrom().plusSeconds(this.menu.getCookingTime());
         }
     }
+
 }

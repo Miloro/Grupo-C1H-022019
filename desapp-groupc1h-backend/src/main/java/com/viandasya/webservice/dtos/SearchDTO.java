@@ -32,8 +32,8 @@ public class SearchDTO {
 
     private void setPageRequestsFunction() {
         this.pageRequestsFunction = new HashMap<>();
-        this.addPageRequestFunction("lowestPrice", Sort.Direction.ASC, "price");
-        this.addPageRequestFunction("highestPrice", Sort.Direction.DESC, "price");
+        this.addPageRequestFunction("lowestPrice", Sort.Direction.ASC, "priceHandler.current.price");
+        this.addPageRequestFunction("highestPrice", Sort.Direction.DESC, "priceHandler.current.price");
         this.addPageRequestFunction("lowestScore", Sort.Direction.ASC, "score");
         this.addPageRequestFunction("highestScore", Sort.Direction.DESC, "score");
         pageRequestsFunction.put(null, PageRequest::of);

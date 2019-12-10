@@ -56,10 +56,10 @@ public class ServiceInfoBuilderTest {
     @Test
     public void testIsValidWhenICanCreateAServiceInfoWithServiceInfoBuilder7() {
         ServiceInfo anyServiceInfo = anyServiceInfo()
-                .setPhoneNumber(42501324)
+                .setPhoneNumber("1123451289")
                 .createServiceInfo();
 
-        Assert.assertEquals(anyServiceInfo.getPhoneNumber(), 42501324,0);
+        Assert.assertEquals(anyServiceInfo.getPhoneNumber(), "1123451289");
     }
 
 }

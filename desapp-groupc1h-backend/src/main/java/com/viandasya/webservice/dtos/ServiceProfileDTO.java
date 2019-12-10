@@ -21,7 +21,7 @@ public class ServiceProfileDTO {
     private Location location;
     private double maxDistanceOfDeliveryInKms;
     @JsonIgnore
-    private List<DayOfWeek> daysOfWeeks = Arrays.asList(DayOfWeek.MONDAY,
+    private final List<DayOfWeek> daysOfWeeks = Arrays.asList(DayOfWeek.MONDAY,
             DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY,
             DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY);
 
@@ -68,10 +68,10 @@ public class ServiceProfileDTO {
         this.timetable = timetable;
     }
 
-    public TimeTable getTimeTableConverted() {
+    public TimeTable convertTimeTable() {
         List<DayTimeSlot> dayTimeSlots = timetable.stream()
                 .filter(DayTimeSlotDTO::isChecked)
-                .map(DayTimeSlotDTO::getDayTimeSlotDTOConverted)
+                .map(DayTimeSlotDTO::convertDayTimeSlotDTO)
                 .collect(Collectors.toList());
         return anyTimeTable().setDayTimeSlots(dayTimeSlots)
                 .createTimeTable();
@@ -79,11 +79,11 @@ public class ServiceProfileDTO {
 
     public void setTimeTable(TimeTable timeTable) {
         List<DayTimeSlotDTO> dayTimeSlotDTOs = new ArrayList<>();
-        daysOfWeeks.forEach(day -> dayTimeSlotDTOs.add(this.getDayTimeSlotConverted(day, timeTable)));
+        daysOfWeeks.forEach(day -> dayTimeSlotDTOs.add(this.convertDayTimeSlot(day, timeTable)));
         this.timetable = dayTimeSlotDTOs;
     }
 
-    private DayTimeSlotDTO getDayTimeSlotConverted(DayOfWeek day, TimeTable timeTable) {
+    private DayTimeSlotDTO convertDayTimeSlot(DayOfWeek day, TimeTable timeTable) {
         return timeTable.getDayTimeSlots().stream()
                 .filter(dayTimeSlot -> dayTimeSlot.getDay().equals(day))
                 .map(dayTimeSlot -> {

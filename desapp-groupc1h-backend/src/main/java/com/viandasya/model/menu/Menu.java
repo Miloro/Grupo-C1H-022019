@@ -1,8 +1,10 @@
 package com.viandasya.model.menu;
 
 import com.viandasya.model.order.Order;
+import com.viandasya.model.order.OrderState;
 import com.viandasya.model.timeslot.DateTimeSlot;
 import com.viandasya.model.user.ServiceProfile;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Where(clause = "score is null or score >= 2")
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,8 +20,7 @@ public class Menu {
 
     private String name;
     private String description;
-    private Integer price;
-    private Integer score;
+    private Double score;
 
     @ElementCollection
     private List<Category> categories = new ArrayList<>();
@@ -28,8 +30,7 @@ public class Menu {
     @OneToOne(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private DeliveryInfo deliveryInfo;
 
-    @ElementCollection
-    private List<Offer> offers = new ArrayList<>();
+    private PriceHandler priceHandler;
 
     private Integer maxAmountPerDay;
 
@@ -41,12 +42,12 @@ public class Menu {
     @ManyToOne
     private ServiceProfile serviceProfile;
 
-    public Menu(String name, String description, List<Category> categories, DateTimeSlot validity, List<Offer> offers, Integer maxAmountPerDay, Integer cookingTime) {
+    public Menu(String name, String description, List<Category> categories, DateTimeSlot validity, PriceHandler priceHandler, Integer maxAmountPerDay, Integer cookingTime) {
         this.name = name;
         this.description = description;
         this.categories = categories;
         this.validity = validity;
-        this.offers = offers;
+        this.priceHandler = priceHandler;
         this.maxAmountPerDay = maxAmountPerDay;
         this.cookingTime = cookingTime;
     }
@@ -95,14 +96,6 @@ public class Menu {
         this.deliveryInfo = deliveryInfo;
     }
 
-    public List<Offer> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(List<Offer> offers) {
-        this.offers = offers;
-    }
-
     public Integer getMaxAmountPerDay() {
         return maxAmountPerDay;
     }
@@ -120,11 +113,11 @@ public class Menu {
         this.orders.add(order);
     }
 
-    public Integer getCookingTime(){
+    public Integer getCookingTime() {
         return cookingTime;
     }
 
-    public void setCookingTime(Integer cookingTime){
+    public void setCookingTime(Integer cookingTime) {
         this.cookingTime = cookingTime;
     }
 
@@ -140,33 +133,53 @@ public class Menu {
         return this.validity.isValidDate(LocalDateTime.now());
     }
 
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public Offer getCurrentOffer() {
-        int orderCount = this.getOrderCount();
-        return this.offers.stream().filter(o -> orderCount >= o.getMinAmount()).findFirst().get();
+        return this.priceHandler.getCurrent();
     }
 
     private int getOrderCount() {
         return this.orders.stream().mapToInt(Order::getAmount).sum();
     }
 
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getScore() {
+    public Double getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 
     public long getId() {
         return id;
+    }
+
+    public PriceHandler getPriceHandler() {
+        return priceHandler;
+    }
+
+    public void setPriceHandler(PriceHandler priceHandler) {
+        this.priceHandler = priceHandler;
+    }
+
+    public boolean updateScore() {
+        int orderCount = 0;
+        Double newScore = null;
+        boolean isUpdated = false;
+        for (Order order: this.orders)
+            if (order.getState() == OrderState.DELIVERED && order.getScore() != null) {
+                orderCount = orderCount + 1;
+                if (newScore == null) newScore = order.getScore().doubleValue();
+                else newScore += order.getScore().doubleValue();
+            }
+        if (orderCount >= 15) {
+            isUpdated = this.score == null || this.score.compareTo(newScore) != 0;
+            newScore = newScore / orderCount;
+            this.score = newScore;
+        }
+        return isUpdated;
+    }
+
+    public boolean isDischarged() {
+        return this.score == null || this.score.compareTo(2.0) >= 0;
     }
 }

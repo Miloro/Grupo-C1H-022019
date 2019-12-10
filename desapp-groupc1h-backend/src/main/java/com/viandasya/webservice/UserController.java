@@ -1,34 +1,22 @@
 package com.viandasya.webservice;
 
-import com.viandasya.model.user.ServiceProfile;
-import com.viandasya.service.ServiceProfileService;
-import com.viandasya.webservice.dtos.ServiceProfileDTO;
-import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import com.viandasya.service.UserService;
+import com.viandasya.webservice.dtos.UserDTO;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/user")
 public class UserController {
-    private final ServiceProfileService serviceProfileService;
-    private final ModelMapper modelMapper;
+    private final UserService userService;
 
-    public UserController(ServiceProfileService serviceProfileService, ModelMapper modelMapper) {
-        this.serviceProfileService = serviceProfileService;
-        this.modelMapper = modelMapper;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @PostMapping("/{userId}/service")
-    @ResponseStatus(HttpStatus.CREATED)
-    public long createService(@PathVariable Long userId, @RequestBody ServiceProfileDTO serviceProfileDTO) {
-        ServiceProfile serviceProfile = convertToEntity(serviceProfileDTO);
-        return serviceProfileService.createServiceProfile(userId, serviceProfile);
-    }
-
-    private ServiceProfile convertToEntity(@RequestBody ServiceProfileDTO serviceProfileDTO) {
-        ServiceProfile serviceProfile = modelMapper.map(serviceProfileDTO, ServiceProfile.class);
-        serviceProfile.setTimetable(serviceProfileDTO.getTimeTableConverted());
-        return serviceProfile;
+    @GetMapping("user/{id}")
+    public UserDTO findById(@PathVariable String id) {
+        return this.userService.findById(id);
     }
 
 }
