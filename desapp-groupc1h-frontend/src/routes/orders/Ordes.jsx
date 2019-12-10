@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect,useState} from 'react';
 
 import {useUser} from "../../providers/UserProvider";
 import {useIntl} from "react-intl";
@@ -10,16 +10,14 @@ const Orders= () => {
     const {formatMessage} = useIntl();
     const {clientId} = useUser();
     const {getTokenSilently} = useAuth0();
+    const [order, setOrder] = useState([]);
 
+    useEffect(() => {
+            getOrdersUser(clientId, getTokenSilently,setOrder);
+        },
+        [clientId, getTokenSilently]);
 
-const ordenes = getOrders(clientId,getTokenSilently).then(res => {return res});
-
-const ordenestest = [{"id":19,"amount":1,"menuName":"Menu muy green y sin tacc!","orderDate":["2019-12-02T14:35:54.877","2019-12-02T15:35:54.877"],"totalPrice":399.99}
-                    ,{"id":21,"amount":33,"menuName":"Pizza especial con jamon, muzarrella y morron","orderDate":["2019-11-18T19:35:54.877","2019-11-18T20:35:54.878"],"totalPrice":6719.80}
-                    ,{"id":18,"amount":11,"menuName":"Menu muy green y sin tacc!","orderDate":["2019-12-02T14:35:54.877","2019-12-02T15:35:54.877"],"totalPrice":4399.89}
-                    ,{"id":22,"amount":21,"menuName":"Pizza especial con jamon, muzarrella y morron","orderDate":["2019-11-29T14:35:54.878","2019-11-18T15:35:54.878"],"totalPrice":4244.10}]
-
-    const listItems = ordenestest.map((order) =>
+    const listItems = order.map((order) =>
         <Col>
             <Card title={order.menuName} >
                 <p>{formatMessage({id:"amount"})} = {order.amount}</p>
@@ -35,11 +33,6 @@ const ordenestest = [{"id":19,"amount":1,"menuName":"Menu muy green y sin tacc!"
             </Row>
         </div>
     );
-}
-
-function getOrders(clientId,tokenSilently){
-   return getOrdersUser(clientId,tokenSilently);
-}
-
+};
 
 export default Orders;
