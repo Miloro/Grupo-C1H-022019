@@ -30,7 +30,7 @@ class Buy extends React.Component {
                 <Row gutter={1} type="flex" justify="center" align="top">
 
                     <Col span={8}>
-                        <h2>menu:</h2>
+                        <h2>{formatMessage({id:"menu"})}:</h2>
                     </Col>
                     <Col span={8}>
         <h2>{this.props.location.state.name}</h2>
@@ -40,7 +40,7 @@ class Buy extends React.Component {
                 <Row gutter={1} type="flex" justify="center" align="top">
 
                     <Col span={8}>
-                        <h2>cantidad:</h2>
+                        <h2>{formatMessage({id:"amount"})}:</h2>
                     </Col>
                     <Col span={8}>
                         <InputNumber defaultValue={1} size={"large"} min={1} max={100}
@@ -49,7 +49,7 @@ class Buy extends React.Component {
                 </Row>
                 <Row gutter={1} type="flex" justify="center" align="top">
                     <Col span={8}>
-                        <h2>delivery:</h2>
+                        <h2>{formatMessage({id:"isDelivery"})}:</h2>
                     </Col>
                     <Col span={8}>
                         <Checkbox onChange={this.onChangeCheckBox}/>
@@ -57,7 +57,7 @@ class Buy extends React.Component {
                 </Row>
                 <Row gutter={1} type="flex" justify="center" align="top">
                     <Col span={8}>
-                        <h2>dia:</h2>
+                        <h2>{formatMessage({id:"day"})}:</h2>
                     </Col>
                     <Col span={8}>
                         <DatePicker disabledDate={this.disabledDate} onChange={this.onChangeDatePicker} format={formatMessage({id:"dateFormat"})}/>
@@ -65,7 +65,7 @@ class Buy extends React.Component {
                 </Row>
                 <Row gutter={1} type="flex" justify="center" align="top">
                     <Col span={8}>
-                        <h2>rango:</h2>
+                        <h2>{formatMessage({id:"hour"})}:</h2>
                     </Col>
                     <Col span={4}>
                         <TimePicker minuteStep={15} onChange={this.onChangeTimePickerFrom}
@@ -76,7 +76,7 @@ class Buy extends React.Component {
                                     defaultValue={moment("00:00", format)} format={format}/>
                     </Col>
                 </Row>
-                <Button variant="primary" onClick={() => this.confirmOrder(formatMessage({id:"successfulOrder"}))}>aceptar</Button>
+                <Button variant="primary" onClick={() => this.confirmOrder(formatMessage({id:"successfulOrder"}))}>{formatMessage({id:"toAccept"})}</Button>
             </div>
         );
     }

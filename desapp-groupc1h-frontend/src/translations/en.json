@@ -95,7 +95,6 @@
   "max20ValidMenus": "You have reached the maximum amount of 20 valid take aways, impossible to create a new one",
   "createdMenu": "Take away created successfully!",
   "cookingTime": "Average time to prepare the take away (in minutes)*",
-  "amount": "Amount",
   "totalPrice": "Total price",
   "orderDate": "Approx. date of delivery",
   "orderDateFormat": "YYYY-MM-DD HH:mm",
@@ -104,5 +103,10 @@
   "historicalOrders": "historical orders",
   "successful" : "the transfer has been successful",
   "toAccept" : "to Accept",
-  "successfulOrder" : "the purchase was a success"
+  "successfulOrder" : "the purchase was a success",
+  "menu":"menu",
+  "amount": "amount",
+  "isDelivery": "delivery",
+  "day": "day",
+  "hour": "hour"
 }

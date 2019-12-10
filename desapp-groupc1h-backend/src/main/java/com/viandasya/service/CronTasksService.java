@@ -33,7 +33,7 @@ public class CronTasksService {
     }
 
     @Transactional
-    @Scheduled(cron = "0 0 * * * *")
+    @Scheduled(cron = "${cron.time}")
     public void acceptOrders() {
         Iterable<Order> orders = this.orderService.getAllOrders();
         for (Order order : orders){
@@ -61,7 +61,7 @@ public class CronTasksService {
            clientProfileService.deposit(order.getClient().getEmail(), change);
            serviceProfileService.withdraw(order.getMenu().getServiceProfile().userEmail(), change);
            sendMailTo(order.getClient().getEmail(),
-                   "El Menu que compro, bajo de precio y se le retorno a su cuenta la suma de: $" + change.getAmount().intValueExact(),
+                   "El Menu que compro, bajo de precio y se le retorno a su cuenta la suma de: $" + change.getAmount().toString(),
                    "Bajo el precio");
 
 
