@@ -49,12 +49,11 @@ const NavBar = () => {
                         <Icon {...iconProps} type="home"/>
                     </Item>
                     <SubMenu title={<MenuOption icon="user" name={formatMessage({id:"profile"})}/>}>
-                        <Item key="2"><MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/></Item>
+                        <Item key="2" onClick={() => history.push("/orders")}>
+                            <MenuOption icon="shopping" name={formatMessage({id:"Orders"})}/>
+                            </Item>
                         <Item key="3" onClick={() => history.push("/unrated-orders")}>
                             <MenuOption icon="star" name={formatMessage({id:"rateOrders"})}/>
-                        </Item>
-                        <Item key="11" onClick={() => history.push("/orders")}>
-                            <MenuOption icon="history" name={formatMessage({id:"historicalOrders"})}/>
                         </Item>
                     </SubMenu>
                     {serviceId?

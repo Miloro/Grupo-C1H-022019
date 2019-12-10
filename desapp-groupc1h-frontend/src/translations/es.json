@@ -106,6 +106,7 @@
   "amount": "cantidad",
   "isDelivery": "delivery",
   "day": "dia",
-  "hour": "hora"
+  "hour": "hora",
+  "noScore": "Sin puntuación"
 
 }

@@ -75,12 +75,12 @@ export function withdraw(userId, amount,token){
     });
 }
 
-export function getOrdersUser(userId, token, setPerro) {
+export function getOrdersUser(userId, token, set) {
     return get(token,
         "/api/historicalOrders/client/" + userId,
         res => {
             if (res.status === 200) {
-                setPerro(res.data);
+                set(res.data);
             }
         }
     )
