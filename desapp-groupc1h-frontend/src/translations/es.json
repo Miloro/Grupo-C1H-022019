@@ -93,7 +93,6 @@
   "max20ValidMenus": "Alcanzo la cantidad maxima de 20 viandas validos, es imposible crear uno nuevo",
   "createdMenu": "Se ha creado exitosamente la vianda!",
   "cookingTime": "Tiempo promedio que tarda preparar una vianda (en minutos)*",
-  "amount": "cantidad",
   "totalPrice": "Precio total",
   "orderDate": "Fecha aprox. de entrega",
   "orderDateFormat": "DD-MM-YYYY HH:mm",
@@ -102,5 +101,11 @@
   "historicalOrders": "Pedidios historicos",
   "successful" : "la transferencia fue un exito",
   "toAccept" : "aceptar",
-  "successfulOrder" : "la compra fue un exito"
+  "successfulOrder" : "la compra fue un exito",
+  "menu":"menu",
+  "amount": "cantidad",
+  "isDelivery": "delivery",
+  "day": "dia",
+  "hour": "hora"
+
 }
