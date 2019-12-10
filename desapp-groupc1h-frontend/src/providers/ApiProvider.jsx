@@ -13,13 +13,22 @@ export const ApiProvider = ({children}) => {
     const {formatMessage} = useIntl();
 
     const defaultCatchBlock = ({response}) => {
+        let message = `Status ${response.status}`;
+        let descriptionTitle = response.statusText;
         let errors = {};
+        console.log(JSON.stringify(response));
         if (response.status === 400) errors = response.data;
+        if (response.status === 412) errors = {"Service": "max20ValidMenus"};
+        if (response.status === 418) {
+            errors = {"offers": "invalidOffers"};
+            message = "Status 400";
+            descriptionTitle = "Bad Request";
+        }
         return notification.error({
             duration: 0,
-            message: `Status ${response.status}`,
+            message: message,
             description: <div>
-                <Paragraph>{response.statusText}</Paragraph>
+                <Paragraph>{descriptionTitle}</Paragraph>
                 {Object.entries(errors)
                     .map(([field, message], index) =>
                         (<Paragraph key={index}>
