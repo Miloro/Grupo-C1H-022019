@@ -40,11 +40,11 @@ const ClientForm = () => {
         suggestions: [],
     };
 
-    const onSubmit = (values) => {
-        const {query, selected, suggestions, ...client} = values;
-        postClient(client, (response) => {
+    const onSubmit = ({query, selected, suggestions, phoneNumber, ...client}, {setSubmitting}) => {
+        const parsed = phoneNumber.toString();
+        postClient({phoneNumber: parsed, ...client}, (response) => {
             setClientId(response.data);
-        });
+        }, () => setSubmitting(false));
     };
 
     return (

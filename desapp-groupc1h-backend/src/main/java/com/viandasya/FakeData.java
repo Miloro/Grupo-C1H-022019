@@ -168,7 +168,7 @@ public class FakeData implements ApplicationRunner {
                                 .setEMail("arandanos.viandas.quilmes@gmail.com")
                                 .setDescription("A veces, los sentimientos son difíciles de explicar," +
                                         " y qué sentimiento más fuerte que nuestro amor por la comida")
-                                .setPhoneNumber(1143238310)
+                                .setPhoneNumber("1143238310")
                                 .createServiceInfo()
                 )
                 .setBalance("300")
@@ -177,6 +177,7 @@ public class FakeData implements ApplicationRunner {
                 .setMaxDistanceOfDeliveryInKms(10)
                 .createServiceProfile();
         new ArrayList<>(Arrays.asList(menua, menub)).forEach(serviceProfilea::addMenu);
+        serviceProfilea.setScore(4.5);
 
         ClientProfile clientProfilea = anyClientProfile()
                 .setName("Miguel")

@@ -23,8 +23,8 @@ export const UserProvider = ({children}) => {
                             setClientId(clientProfile.id);
                             if (serviceProfile) setServiceId(serviceProfile.id);
                             setId(user.email);
-                            setUserLoading(false);
                         }
+                        setUserLoading(false);
                     }, () => setUserLoading(false))
             }
         };
