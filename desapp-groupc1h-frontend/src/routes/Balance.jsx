@@ -35,18 +35,17 @@ const Balance= () => {
                                  onChange={monto => {wit = monto}}/>
                 </Col>
             </Row>
-            <Button variant="primary" onClick={() => sendNewBalance(user.email, dep, wit, getTokenSilently, history)} >aceptar</Button>
+            <Button variant="primary" onClick={() => sendNewBalance(user.email, dep, wit, getTokenSilently, history,formatMessage)} > {formatMessage({id:"toAccept"})}  </Button>
         </div>
     );
 };
 
-function sendNewBalance(emailUser, amountDeposit, amountWithdraw, token, history) {
+function sendNewBalance(emailUser, amountDeposit, amountWithdraw, token, history,formatMessage) {
     deposit(emailUser, amountDeposit, token);
     withdraw(emailUser, amountWithdraw, token);
     notification.open({
         message: 'ok',
-        description:
-            'la transferencia fue un exito',
+        description:formatMessage({id:"successful"}),
         icon: <Icon type="smile" style={{ color: '#108ee9' }} />,
     });
     history.push("/")

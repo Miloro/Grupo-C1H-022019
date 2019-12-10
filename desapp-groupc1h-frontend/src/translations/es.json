@@ -99,5 +99,8 @@
   "orderDateFormat": "DD-MM-YYYY HH:mm",
   "confirm": "Confirmar",
   "successRatingOrder": "Felicitaciones! has puntuado con {n, plural, one {# estrella} other {# estrellas}} al pedido con la vianda {takeout}",
-  "historicalOrders": "Pedidios historicos"
+  "historicalOrders": "Pedidios historicos",
+  "successful" : "la transferencia fue un exito",
+  "toAccept" : "aceptar",
+  "successfulOrder" : "la compra fue un exito"
 }

@@ -101,5 +101,8 @@
   "orderDateFormat": "YYYY-MM-DD HH:mm",
   "confirm": "Confirm",
   "successRatingOrder": "You successfully rated {n, plural, one {star} other {# stars}} to order with take out {takeout}",
-  "historicalOrders": "historical orders"
+  "historicalOrders": "historical orders",
+  "successful" : "the transfer has been successful",
+  "toAccept" : "to Accept",
+  "successfulOrder" : "the purchase was a success"
 }
