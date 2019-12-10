@@ -5,7 +5,7 @@ import {Col, Row} from "antd";
 import {useUser} from "../providers/UserProvider";
 
 const PrivateRoute = ({ component: Component, path, ...rest }) => {
-    const { loading, isAuthenticated, loginWithRedirect, getTokenSilently} = useAuth0();
+    const { loading, isAuthenticated, loginWithRedirect, getTokenSilently,user} = useAuth0();
     const {clientId} = useUser();
     let history = useHistory();
 
@@ -27,7 +27,7 @@ const PrivateRoute = ({ component: Component, path, ...rest }) => {
         return isAuthenticated && clientId ?
             <Row type="flex" justify="space-around" align="middle">
                 <Col span={20} style={{backgroundColor: "#ffffff"}}>
-                <Component getTokenSilently={getTokenSilently}/>
+                <Component getTokenSilently={getTokenSilently} user={user}/>
                 </Col>
             </Row>
              : null;

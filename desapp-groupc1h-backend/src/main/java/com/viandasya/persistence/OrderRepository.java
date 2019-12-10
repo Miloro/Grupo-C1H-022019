@@ -26,7 +26,10 @@ public interface OrderRepository  extends CrudRepository<Order, Long> {
 
     @Query("from order_info o where o.client.id=?1 and o.state = " +
             "com.viandasya.model.order.OrderState.DELIVERED and o.score is null")
+
     List<Order> findUnratedOrdersByClientId(Long id);
+
+    List<Order> findOrderByClient_Id(Long id);
 
     @Modifying
     @Query("update order_info o set o.score= ?1 where o.id =?2")

@@ -59,7 +59,10 @@ const MenuItem = ({item}) => {
                 <Rate disabled defaultValue={item.score} style={{marginRight: 6}}/>,
                 <CategoryTags categories={item.categories}/>,
                 <MenuMap item={item}/>,
-                <Button size="large" type="danger" onClick={() => history.push("/buy",item)}>{formatMessage({id: "buy"})} </Button>,
+                <Button size="large" type="danger" onClick={() => history.push({
+                    pathname: '/buy',
+                    state: item
+                })}>{formatMessage({id: "buy"})} </Button>,
             ]}
             extra={
                 <Prices price={item.price} offers={item.offers}/>

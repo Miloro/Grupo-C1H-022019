@@ -1,5 +1,5 @@
 import axios from "axios";
-import {post,put} from "./api/API";
+import {post,put,get} from "./api/API";
 
 
 
@@ -73,4 +73,15 @@ export function withdraw(userId, amount,token){
     ).catch((error) => {
         return error;
     });
+}
+
+export function getOrdersUser(userId, token, setPerro) {
+    return get(token,
+        "/api/historicalOrders/client/" + userId,
+        res => {
+            if (res.status === 200) {
+                setPerro(res.data);
+            }
+        }
+    )
 }

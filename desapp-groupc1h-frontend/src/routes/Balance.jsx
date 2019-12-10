@@ -1,75 +1,54 @@
 import React from "react";
-import { injectIntl} from "react-intl";
-import {Button, Col, InputNumber, Row} from "antd";
+import {useIntl} from "react-intl";
+import {Button, Col, InputNumber, Row,  notification, Icon} from "antd";
 import {deposit, withdraw} from "../api.jsx";
-
-class Balance  extends React.Component{
-    constructor(props) {
-        super(props);
-        this.onChangeInputNumberDeposit = this.onChangeInputNumberDeposit.bind(this);
-        this.onChangeInputNumberWithdraw = this.onChangeInputNumberWithdraw.bind(this);
-        this.state = {amountToDeposit: 0, amountToWithdraw: 0};
-        this.alert = React.createRef();
-    }
-
-    render(){
-        const intl = this.props.intl;
-        const withdraw = intl.formatMessage({
-            id: "withdraw",
-            defaultMessage: "withdraw"
-        });
-        const deposit = intl.formatMessage({
-            id: "deposit",
-            defaultMessage: "deposit"
-        });
-        return(
-            <div className= "App" >
-                <Row gutter={1} type="flex" justify="center" align="top">
-
-                    <Col span={8}>
-                        <h2>{deposit}</h2>
-                    </Col>
-                    <Col span={8}>
-                        <InputNumber defaultValue={0} size={"large"} min={0}
-                                     onChange={this.onChangeInputNumberDeposit}/>
-                    </Col>
-                </Row>
-                <Row gutter={1} type="flex" justify="center" align="top">
-
-                    <Col span={8}>
-                        <h2>{withdraw}</h2>
-                    </Col>
-                    <Col span={8}>
-                        <InputNumber defaultValue={0} size={"large"} min={0}
-                                     onChange={this.onChangeInputNumberWithdraw}
-                                     disabled={true}/>
-                    </Col>
-                </Row>
-                <Button variant="primary" onClick={() => this.sendNewBalance()}>aceptar</Button>
-            </div>
-        );
-    }
-
-    onChangeInputNumberDeposit(amountToDeposit) {
-        this.setState({...this.state, amountToDeposit : amountToDeposit});
-    }
-
-    onChangeInputNumberWithdraw(amountToWithdraw) {
-        this.setState({...this.state, amountToWithdraw : amountToWithdraw});
-    }
-
-    sendNewBalance() {
-        // noinspection JSUnresolvedVariable
-        deposit(this.props.user.id.email,this.state.amountToDeposit,this.props.getTokenSilently);
-        if(this.state.amountToWithdraw){
-            // noinspection JSUnresolvedVariable
-            withdraw(this.props.user.id.email,this.state.amountToWithdraw,this.props.getTokenSilently);
-        }
-    }
+import {useAuth0} from "../providers/Auth0Provider";
+import {useHistory} from "react-router-dom";
 
 
+const Balance= () => {
+    const {formatMessage} = useIntl();
+    const {getTokenSilently, user} = useAuth0();
+    let history = useHistory();
+    var dep = 0;
+    var wit = 0;
+
+    return (
+        <div className= "App" >
+            <Row gutter={1} type="flex" justify="center" align="top">
+
+                <Col span={8}>
+                    <h2>{formatMessage({id: "deposit"})}</h2>
+                </Col>
+                <Col span={8}>
+                    <InputNumber defaultValue={0} size={"large"} min={0}
+                                 onChange={monto => {dep = monto}}/>
+                </Col>
+            </Row>
+            <Row gutter={1} type="flex" justify="center" align="top">
+
+                <Col span={8}>
+                    <h2>{formatMessage({id: "withdraw"})}</h2>
+                </Col>
+                <Col span={8}>
+                    <InputNumber defaultValue={0} size={"large"} min={0}
+                                 onChange={monto => {wit = monto}}/>
+                </Col>
+            </Row>
+            <Button variant="primary" onClick={() => sendNewBalance(user.email, dep, wit, getTokenSilently, history,formatMessage)} > {formatMessage({id:"toAccept"})}  </Button>
+        </div>
+    );
+};
+
+function sendNewBalance(emailUser, amountDeposit, amountWithdraw, token, history,formatMessage) {
+    deposit(emailUser, amountDeposit, token);
+    withdraw(emailUser, amountWithdraw, token);
+    notification.open({
+        message: 'ok',
+        description:formatMessage({id:"successful"}),
+        icon: <Icon type="smile" style={{ color: '#108ee9' }} />,
+    });
+    history.push("/")
 }
-
-Balance = injectIntl(Balance);
 
 export default Balance;
