@@ -1,10 +1,13 @@
 package com.viandasya.model.user;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotBlank;
 
 @Embeddable
 public class Location {
+    @NotBlank(message = "required")
     private String address;
+    @NotBlank(message = "required")
     private String city;
     private double latitude;
     private double longitude;

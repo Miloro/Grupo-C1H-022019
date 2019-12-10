@@ -171,7 +171,7 @@ public class Menu {
                 if (newScore == null) newScore = order.getScore().doubleValue();
                 else newScore += order.getScore().doubleValue();
             }
-        if (orderCount >= 20) {
+        if (orderCount >= 15) {
             isUpdated = this.score == null || this.score.compareTo(newScore) != 0;
             newScore = newScore / orderCount;
             this.score = newScore;
@@ -180,6 +180,6 @@ public class Menu {
     }
 
     public boolean isDischarged() {
-        return this.score != null && this.score.compareTo(2.0) >= 0;
+        return this.score == null || this.score.compareTo(2.0) >= 0;
     }
 }

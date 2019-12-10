@@ -42,10 +42,10 @@ public class ClientProfileBuilderTest {
     @Test
     public void testIsValidWhenICanCreateAClientProfileWithServiceClientProfileBuilder4() {
         ClientProfile anyClientProfile  = anyClientProfile()
-                .setPhoneNumber(12345)
+                .setPhoneNumber("4123784510")
                 .createClientProfile();
 
-        Assert.assertEquals(anyClientProfile.getPhoneNumber(), 12345,0);
+        Assert.assertEquals(anyClientProfile.getPhoneNumber(), "4123784510");
     }
 
     @Test

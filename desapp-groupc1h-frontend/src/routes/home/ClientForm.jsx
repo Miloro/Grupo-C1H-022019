@@ -27,7 +27,7 @@ const ClientForm = () => {
     const {formatMessage} = useIntl();
     const {user} = useAuth0();
     const {postClient} = useAPI();
-    const {setClientId} = useUser();
+    const {setClientId, userLoading} = useUser();
 
     const initialValues = {
         name: user.given_name,
@@ -40,14 +40,15 @@ const ClientForm = () => {
         suggestions: [],
     };
 
-    const onSubmit = (values) => {
-        const {query, selected, suggestions, ...client} = values;
-        postClient(client, (response) => {
+    const onSubmit = ({query, selected, suggestions, phoneNumber, ...client}, {setSubmitting}) => {
+        const parsed = phoneNumber.toString();
+        postClient({phoneNumber: parsed, ...client}, (response) => {
             setClientId(response.data);
-        });
+        }, () => setSubmitting(false));
     };
 
     return (
+        !userLoading &&
         <Formik
             initialValues={initialValues}
             validationSchema={ClientSchema(formatMessage)}

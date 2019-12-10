@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -27,7 +28,7 @@ public class ClientProfileController {
 
     @PostMapping("user/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@PathVariable String id, @RequestBody ClientProfile clientProfile){
+    public Long create(@PathVariable String id, @Valid @RequestBody ClientProfile clientProfile){
         return this.clientProfileService.create(id,clientProfile);
     }
 

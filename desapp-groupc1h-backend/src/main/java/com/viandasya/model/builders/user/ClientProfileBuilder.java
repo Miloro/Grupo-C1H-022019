@@ -10,7 +10,7 @@ public class ClientProfileBuilder {
     private String name = "name";
     private String lastName = "lastName";
     private String email = "emailfalso@gmail.com";
-    private Integer phoneNumber = 12345;
+    private String phoneNumber = "541142233145";
     private Location location= new Location("Calle 842 2602", "San Francisco Solano",
             -34.7805449, -58.3151092);
     private Balance balance = new Balance(new BigDecimal("0"));
@@ -34,7 +34,7 @@ public class ClientProfileBuilder {
         return this;
     }
 
-    public ClientProfileBuilder setPhoneNumber(Integer phoneNumber){
+    public ClientProfileBuilder setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
         return this;
     }

@@ -16,13 +16,13 @@ public class ServiceInfo {
     private String description;
     private String website;
     private String eMail;
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private ServiceProfile serviceProfile;
 
-    public ServiceInfo(String name, String logo, String description, String website, String eMail, Integer phoneNumber) {
+    public ServiceInfo(String name, String logo, String description, String website, String eMail, String phoneNumber) {
         this.name = name;
         this.logo = logo;
         this.description = description;
@@ -74,11 +74,11 @@ public class ServiceInfo {
         this.eMail = eMail;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

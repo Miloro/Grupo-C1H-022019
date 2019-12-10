@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Row, Typography, Button, message as notification, Modal} from "antd";
+import {Col, Row, Typography, Button, Modal} from "antd";
 import {Form, Input, Select, DatePicker, SubmitButton} from "formik-antd";
 import {Formik} from "formik";
 import {FormattedMessage, useIntl} from "react-intl";
@@ -72,17 +72,7 @@ const MenuForm = () => {
                         modal.destroy();
                     }, 20 * 1000);
                 },
-                (apiError) => {
-                    try {
-                        setSubmitting(false);
-                        const {status, error, message} = apiError.response.data;
-                        const apiErrorMessage = `Status ${status} ${error}: ${formatMessage({id: message})}`;
-                        notification.error(apiErrorMessage);
-                    } catch (error1) {
-                        console.log(error1)
-                    }
-                }
-            );
+                () => setSubmitting(false));
         };
 
         const disabledDate = (current) => {

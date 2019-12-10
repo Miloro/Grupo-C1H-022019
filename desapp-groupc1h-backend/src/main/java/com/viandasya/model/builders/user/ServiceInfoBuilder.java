@@ -9,7 +9,7 @@ public class ServiceInfoBuilder {
     private String description = "Proveemos hamburguesas y papas fritas";
     private String website = "www.rodeoquilmes.com.ar";
     private String eMail = "rodeoquilmes01@gmail.com";
-    private Integer phoneNumber = 42501324;
+    private String phoneNumber = "1142501324";
 
     public static ServiceInfoBuilder anyServiceInfo() {
         return new ServiceInfoBuilder();
@@ -40,7 +40,7 @@ public class ServiceInfoBuilder {
         return this;
     }
 
-    public ServiceInfoBuilder setPhoneNumber(Integer phoneNumber){
+    public ServiceInfoBuilder setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
         return this;
     }
