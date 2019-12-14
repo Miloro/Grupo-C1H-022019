@@ -31,7 +31,7 @@ public class CronTasksService {
         this.clientProfileService = clientProfileService;
         this.serviceProfileService = serviceProfileService;
     }
-
+   
     @Scheduled(cron = "${cron.time}")
     @Transactional
     public void acceptOrders() {
@@ -42,7 +42,6 @@ public class CronTasksService {
                 String body     = "Su orden con el menu: "+ order.getMenu().getName() +" y la cantidad: " + order.getAmount()+ "fue aceptada";
                 String subject  = "orden aceptada";
                 this.sendMailTo(receiver,body,subject);
-
             }
             if(order.getState() == OrderState.CONFIRMED){
                 this.updatePrice(order);

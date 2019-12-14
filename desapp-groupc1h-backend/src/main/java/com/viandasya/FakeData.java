@@ -91,6 +91,7 @@ public class FakeData implements ApplicationRunner {
                 .setDescription("Exquisitos sabores que harán de tus almuerzos y cenas momentos únicos.")
                 .setCookingTime(40)
                 .createMenu();
+        menu2.setScore(1.3);
 
         ServiceProfile serviceProfile1 = anyServiceProfile()
                 .setBalance("20")
