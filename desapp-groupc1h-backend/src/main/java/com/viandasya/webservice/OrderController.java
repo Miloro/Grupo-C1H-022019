@@ -39,8 +39,4 @@ public class OrderController {
         this.cronTasksService.acceptOrders();
     }
 
-    @PutMapping("order/{id}/score")
-    public void updateScore(@PathVariable Long id, @RequestBody ScoreDTO scoreDTO) {
-        this.orderService.updateScoreByIdById(scoreDTO.getScore(), id);
-    }
 }
