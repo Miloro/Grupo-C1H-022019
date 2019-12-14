@@ -104,7 +104,7 @@ public class FakeData implements ApplicationRunner {
         ClientProfile clientProfile1 = anyClientProfile()
                 .setName("Lisa")
                 .setLastName("Romero")
-                .setEmail("lisarmailfalso@gmail.com")
+                .setEmail("lisar.3467@gmail.com")
                 .setLocation(new Location("Condarco 430", "Wilde", -34.7048199, -58.3264779))
                 .setBalance(new Balance(new BigDecimal("2000")))
                 .createClientProfile();
@@ -117,7 +117,7 @@ public class FakeData implements ApplicationRunner {
         //////////  USER 2  //////////
 
         User user2 = new User();
-        user2.setEmail("emailfalso@gmail.com");
+        user2.setEmail("ViandasYaGHC1@gmail.com");
         user2.addClientProfile(anyClientProfile().createClientProfile());
 
         //////////  USER A : SERVICE PROFILE WITH 2 MENUS  //////////
@@ -271,7 +271,6 @@ public class FakeData implements ApplicationRunner {
                 .setState(OrderState.DELIVERED)
                 .setClient(savedClienta)
                 .createOrder();
-
 
         List<Menu> menus = menuRepository.findAll();
         Menu menuGreen = menus.stream()

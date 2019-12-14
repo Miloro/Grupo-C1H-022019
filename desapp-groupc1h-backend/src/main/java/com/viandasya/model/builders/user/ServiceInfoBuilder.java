@@ -8,7 +8,7 @@ public class ServiceInfoBuilder {
     private String logo = "https://codeclerks.com/pics/677-1wfYPM1479834803.jpg";
     private String description = "Proveemos hamburguesas y papas fritas";
     private String website = "www.rodeoquilmes.com.ar";
-    private String eMail = "rodeoquilmes01@gmail.com";
+    private String eMail = "miloromiguel@gmail.com";
     private String phoneNumber = "1142501324";
 
     public static ServiceInfoBuilder anyServiceInfo() {
