@@ -18,7 +18,7 @@ const Menus = () => {
     const filterField = query.get("field");
     const filterQuery = query.get("q");
 
-    const pageSize = 20;
+    const pageSize = 2;
     const [pageCurrent, setPageCurrent] = useState(1);
     const [pageTotal, setPageTotal] = useState(null);
 

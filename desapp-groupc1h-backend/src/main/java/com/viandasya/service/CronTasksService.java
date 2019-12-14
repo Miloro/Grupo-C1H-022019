@@ -32,8 +32,8 @@ public class CronTasksService {
         this.serviceProfileService = serviceProfileService;
     }
 
-    @Transactional
     @Scheduled(cron = "${cron.time}")
+    @Transactional
     public void acceptOrders() {
         Iterable<Order> orders = this.orderService.getAllOrders();
         for (Order order : orders){
