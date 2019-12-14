@@ -11,40 +11,43 @@ Integrantes:  Lisa Romero - Miguel Miloro
 
 
 ---------------------------------------------------------------------
-TAG ENTREGA 2.0
+TAG ENTREGA 3.0
 ---------------------------------------------------------------------
 NEW FEATURES:
 
 
 BACKEND
-* Menu search and paging Strategy implemented.
-* Hibernate Mappings: Service Profile, Client Profile, Location, Menu, Order, Timetable, and more. 
-* Repositories: Menu, Service Profile, Order.
-* Services: Menu , Service Profile, Order, MailSender.
-* Creation of Service implemented.
-* Fake Data to test the application.
-* CRUD operations with Menu.
-
+* Creation of Menu implemented.
+* Creation of Client Profile implemented.
+* Confirmation of orders strategy implemented.
+* Deposit and withdraw money from the profiles account implemented.
+* Arquitecture test implemented.
+* Authorize only login users to make api requests implemented.
+* Logging implemented.
+* Strategy of rating an order implemented.
+* View historical orders of a client profile implemented.
+* Email service implemented.
+* Validation of Client Profile implemented.
 
 FRONTEND:
-* i18n implemented.
-* Home Page
-* Search Menus Page
-* Create Service Page
-* Buy page
+* Navegation and Private Routes.
+* Auth0 Login Logic.
+* Create Menu Page.
+* Create Client Page.
+* Withdraw and Deposit Page.
+* Rate Orders Page.
+* View Historical Orders Page.
+* I18n formatted dates and numbers.
 
 
 NOTES:
-* Deposit or withdraw money
-* Validation time order (from < to)
-* Holidays not allowed (can be connected to the api holidays but not validated in the front)
-* User can’t create service with logo
-* Server errors handling in frontend not implemented yet.
-* Validation in backend not implemented yet.
-* CRUD operations with Service not implemented yet.
-
-
+* Responsive Web Design not implemented.
+* View Historical orders of service profile not implemented.
+* Discharged a Service Profile not implemented.
+* I18n formatted currency not implemented.
 
 
 KNOWN ISSUES:
-* Search by category not working
+* User can have negative balance.
+* User can buy a menu without balance.
+* No redirect with auth0 to private routes.
